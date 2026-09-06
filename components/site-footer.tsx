@@ -9,11 +9,11 @@ const LEGAL = [
   { href: "/community-guidelines", label: "Community guidelines" },
 ] as const;
 
-// ponytail: placeholder social handles; point at real pages once they exist.
+// Only accounts that exist are rendered; add the Instagram and TikTok URLs here once those pages are live.
 const SOCIAL = [
-  { href: "https://facebook.com/phriend.ph", label: "Facebook" },
-  { href: "https://instagram.com/phriend.ph", label: "Instagram" },
-  { href: "https://tiktok.com/@phriend.ph", label: "TikTok" },
+  { href: "https://facebook.com/phriendapp", label: "Facebook" },
+  { href: "", label: "Instagram" },
+  { href: "", label: "TikTok" },
 ] as const;
 
 const link = "rounded-md text-[15px] font-semibold text-body transition-colors hover:text-brand-text";
@@ -65,7 +65,7 @@ export function SiteFooter() {
             <h2 id="footer-social" className="text-sm font-extrabold uppercase tracking-wider text-ink">
               Follow
             </h2>
-            {SOCIAL.map((n) => (
+            {SOCIAL.filter((s) => s.href).map((n) => (
               <a key={n.href} href={n.href} rel="noreferrer" className={link}>
                 {n.label}
               </a>

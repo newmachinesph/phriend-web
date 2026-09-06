@@ -70,6 +70,9 @@ export function SiteFooter() {
                 {n.label}
               </a>
             ))}
+            <Link href="/press" className={link}>
+              Press
+            </Link>
           </nav>
         </div>
 

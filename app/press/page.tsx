@@ -7,14 +7,14 @@ import { Logo } from "@/components/site-header";
 import { APP_URL, CONTACT_EMAIL, SITE_URL } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Press",
+  title: "Press kit",
   description:
     "Phriend press kit: boilerplate, fast facts, logo downloads, brand colors, product images, safety stance, quotable lines and media contact.",
   alternates: { canonical: "/press" },
 };
 
 const BOILERPLATE =
-  "Phriend is a Philippine app for hiring a verified local friend by the hour for legit activities: food trips, city tours, events, tutoring, hospital or errand buddies, and more. Members are 18 and older, ID-verified through Didit, meet in public places only, and pay 50% in cash on arrival and 50% after the meetup. Phriend is a platform only and is not a party to the meetups. It launched in 2026 in the Philippines. The company site is phriend.app and the app runs in the browser at web.phriend.app.";
+  "Phriend is a Philippine app for hiring a verified local friend by the hour for legit activities: food trips, city tours, events, tutoring, hospital or errand buddies, and more. Members are 18 and older, ID-verified through Didit, meet in public places only, and pay 50% upfront, 50% after: cash in person on a first meetup, e-wallet only once they already trust each other. Phriend is a platform only and is not a party to the meetups. It launched in 2026 in the Philippines. The company site is phriend.app and the app runs in the browser at web.phriend.app.";
 
 const FACTS: { label: string; value: string }[] = [
   { label: "Founded", value: "2026" },

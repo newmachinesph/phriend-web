@@ -6,7 +6,7 @@ import { CONTACT_EMAIL, LAST_UPDATED } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Terms of Use",
   description:
-    "The terms for using Phriend: a platform for adults in the Philippines to find paid-by-the-hour, platonic company and legit side gigs. Phriend is not a party to member agreements.",
+    "Terms for using Phriend, a platform for adults in the Philippines to arrange paid-by-the-hour, platonic company. Not a party to any meetup or payment.",
   alternates: { canonical: "/terms" },
 };
 

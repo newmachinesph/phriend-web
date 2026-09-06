@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -6,6 +7,8 @@ import {
   Utensils, Wallet, type LucideIcon,
 } from "lucide-react";
 import { APP_URL, POST_URL } from "@/lib/site";
+
+export const metadata: Metadata = { alternates: { canonical: "/" } };
 
 const TRUST: { icon: LucideIcon; label: string }[] = [
   { icon: BadgeCheck, label: "ID-verified members" },
@@ -23,7 +26,7 @@ const CLIENT_STEPS: { icon: LucideIcon; title: string; text: string }[] = [
 const PHRIEND_STEPS: { icon: LucideIcon; title: string; text: string }[] = [
   { icon: BadgeCheck, title: "Verify", text: "Confirm you are 18+ with a quick ID check through Didit. Verified profiles get the badge and more bookings." },
   { icon: PenLine, title: "Profile", text: "Write what you offer, add photos, set your city and your rate per hour. Your Phriend profile stays live for 30 days and renews in one tap." },
-  { icon: Wallet, title: "Earn", text: "Clients message you, you agree on the plan, and you get paid directly. Phriend takes no cut." },
+  { icon: Wallet, title: "Earn", text: "Clients message you, you agree on the plan, and you get paid directly. Phriend takes no cut, for now." },
 ];
 
 const ACTIVITIES: { icon: LucideIcon; label: string; slug: string }[] = [
@@ -81,6 +84,12 @@ const FAQ: { q: string; a: string }[] = [
     a: "No. Phriend runs in the browser at web.phriend.app on any phone. Add it to your home screen and it works like an app, with chat and notifications.",
   },
 ];
+
+const FAQ_JSON_LD = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: FAQ.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
+});
 
 function PhoneMockup() {
   return (
@@ -145,6 +154,7 @@ const h2 = "mt-2 font-display text-3xl font-semibold leading-tight text-ink sm:t
 export default function Home() {
   return (
     <main id="main" className="flex-1">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: FAQ_JSON_LD }} />
       {/* Hero */}
       <section className="bg-navy-gradient relative overflow-hidden text-white">
         <div className="mx-auto grid w-full max-w-6xl items-center gap-12 px-5 pb-16 pt-14 sm:px-8 sm:pt-20 lg:grid-cols-[1.1fr_0.9fr] lg:gap-8 lg:pb-24 lg:pt-24">

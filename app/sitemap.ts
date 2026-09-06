@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
-import { SITE_URL } from "@/lib/site";
+import { LAST_UPDATED, SITE_URL } from "@/lib/site";
 
-const lastModified = new Date("2026-09-06");
+const lastModified = new Date(LAST_UPDATED);
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return [

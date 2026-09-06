@@ -4,7 +4,7 @@ import { Fredoka, Nunito } from "next/font/google";
 import "./globals.css";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
-import { SITE_URL } from "@/lib/site";
+import { CONTACT_EMAIL, SITE_URL } from "@/lib/site";
 
 const nunito = Nunito({
   subsets: ["latin"],
@@ -32,10 +32,26 @@ export const viewport: Viewport = {
   themeColor: "#0d2251",
 };
 
+const JSON_LD = JSON.stringify({
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      name: "Phriend",
+      url: SITE_URL,
+      logo: `${SITE_URL}/brand/logo-mark.png`,
+      sameAs: ["https://facebook.com/phriendapp", "https://instagram.com/phriendapp"],
+      contactPoint: { "@type": "ContactPoint", contactType: "customer support", email: CONTACT_EMAIL },
+    },
+    { "@type": "WebSite", name: "Phriend", url: SITE_URL },
+  ],
+});
+
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en-PH" className={`${nunito.variable} ${fredoka.variable} h-full antialiased`}>
       <body className="flex min-h-full flex-col">
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON_LD }} />
         <a
           href="#main"
           className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-full focus:bg-ink focus:px-4 focus:py-2 focus:font-bold focus:text-white"

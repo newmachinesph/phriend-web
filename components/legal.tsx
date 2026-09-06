@@ -19,7 +19,12 @@ export function Legal({
       <header className="border-b border-line pb-8">
         <p className="text-sm font-extrabold uppercase tracking-wider text-brand-text">{eyebrow}</p>
         <h1 className="mt-2 font-display text-4xl font-semibold leading-tight text-ink sm:text-5xl">{title}</h1>
-        {updated && <p className="mt-3 text-sm font-bold text-muted">Last updated {updated}</p>}
+        {updated && (
+          <p className="mt-3 text-sm font-bold text-muted">
+            Last updated{" "}
+            {new Date(updated).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" })}
+          </p>
+        )}
         {intro && <p className="mt-5 text-lg leading-relaxed">{intro}</p>}
       </header>
       <div className="legal pt-2">{children}</div>

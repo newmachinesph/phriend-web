@@ -6,7 +6,7 @@ import { LAST_UPDATED } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Safety and transaction rules",
   description:
-    "How Phriend meetups and payments work: public places only, only the people agreed in the chat, 50% in cash when you meet on a first meetup and 50% after, pay only the account saved in chat, ID verification, and what to do when someone is late or cancels.",
+    "How Phriend meetups and payments work: public places only, 50% cash on a first meetup, e-wallet only for repeat Phriends, late arrivals and cancellations.",
   alternates: { canonical: "/safety" },
 };
 

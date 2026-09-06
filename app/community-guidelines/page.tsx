@@ -6,7 +6,7 @@ import { LAST_UPDATED } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Community guidelines",
   description:
-    "What is allowed on Phriend and what is not. Strictly legit side gigs: no sexual or romantic services, no compensated dating, no escort services, nothing illegal under Philippine law.",
+    "What's allowed on Phriend and what isn't: strictly legit, platonic side gigs. No romantic or sexual services, no compensated dating, no escort services.",
   alternates: { canonical: "/community-guidelines" },
 };
 

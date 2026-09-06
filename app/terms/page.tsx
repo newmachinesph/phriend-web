@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Callout, Legal } from "@/components/legal";
-import { LAST_UPDATED, SUPPORT_EMAIL } from "@/lib/site";
+import { CONTACT_EMAIL, LAST_UPDATED } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Terms of Use",
@@ -45,7 +45,7 @@ export default function TermsPage() {
       <h2>3. Your account</h2>
       <p>
         Keep your login details private; you are responsible for everything done under your account. One person, one
-        account, with accurate information. Tell us at <a href={`mailto:${SUPPORT_EMAIL}`}>{SUPPORT_EMAIL}</a> if you
+        account, with accurate information. Tell us at <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a> if you
         think your account has been used without your permission.
       </p>
 
@@ -154,7 +154,7 @@ export default function TermsPage() {
 
       <h2>14. Contact</h2>
       <p>
-        Questions about these terms: <a href={`mailto:${SUPPORT_EMAIL}`}>{SUPPORT_EMAIL}</a>. Privacy questions:{" "}
+        Questions about these terms: <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>. Privacy questions:{" "}
         <Link href="/privacy">see the Privacy Policy</Link>.
       </p>
     </Legal>

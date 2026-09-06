@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Callout, Legal } from "@/components/legal";
-import { DPO_EMAIL, LAST_UPDATED } from "@/lib/site";
+import { CONTACT_EMAIL, LAST_UPDATED } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
@@ -21,7 +21,7 @@ export default function PrivacyPage() {
       <h2>1. Who is responsible</h2>
       <p>
         Phriend is the personal information controller for data processed through phriend.app and web.phriend.app. Our
-        Data Protection Officer can be reached at <a href={`mailto:${DPO_EMAIL}`}>{DPO_EMAIL}</a>.
+        Data Protection Officer can be reached at <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>.
       </p>
 
       <h2>2. What we collect</h2>
@@ -137,7 +137,7 @@ export default function PrivacyPage() {
         </li>
       </ul>
       <p>
-        To exercise any of these, email <a href={`mailto:${DPO_EMAIL}`}>{DPO_EMAIL}</a> from the address on your
+        To exercise any of these, email <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a> from the address on your
         account; we respond within 15 working days. You can also delete your account from the settings screen.
       </p>
 
@@ -153,7 +153,7 @@ export default function PrivacyPage() {
       <Callout>
         <p className="mb-0">
           Phriend is for adults only. <strong>We do not knowingly allow anyone under 18 to use the Service.</strong> If
-          you believe a minor has an account, email <a href={`mailto:${DPO_EMAIL}`}>{DPO_EMAIL}</a> and we will remove it.
+          you believe a minor has an account, email <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a> and we will remove it.
         </p>
       </Callout>
 
@@ -167,7 +167,7 @@ export default function PrivacyPage() {
       <h2>10. Changes and contact</h2>
       <p>
         We will update this policy when our practices change and show the new date at the top. Material changes are
-        announced in the app or by email. Questions: <a href={`mailto:${DPO_EMAIL}`}>{DPO_EMAIL}</a>. See also our{" "}
+        announced in the app or by email. Questions: <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>. See also our{" "}
         <Link href="/terms">Terms of Use</Link>.
       </p>
     </Legal>

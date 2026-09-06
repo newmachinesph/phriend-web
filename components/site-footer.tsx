@@ -12,7 +12,7 @@ const LEGAL = [
 // Only accounts that exist are rendered; add the TikTok URL here once that page is live.
 const SOCIAL = [
   { href: "https://facebook.com/phriendapp", label: "Facebook" },
-  { href: "https://instagram.com/phriendapp", label: "Instagram (@phriendapp)" },
+  { href: "https://instagram.com/phriendapp", label: "Instagram" },
   { href: "", label: "TikTok" },
 ] as const;
 

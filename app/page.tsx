@@ -61,7 +61,7 @@ const FAQ: { q: string; a: string }[] = [
   },
   {
     q: "Does Phriend take a commission?",
-    a: "Not yet. Members agree on a rate per hour, typically between ₱200 and ₱1,500 depending on the activity and the city, and keep all of it. If this changes we will announce it well ahead of time.",
+    a: "Not yet. Members agree on a rate per hour, typically between ₱300 and ₱1,500 depending on the activity and the city, and keep all of it. If this changes we will announce it well ahead of time.",
   },
   {
     q: "How does verification work?",
@@ -405,7 +405,7 @@ export default function Home() {
               <dl className="mt-6 grid grid-cols-2 gap-4">
                 <div className="rounded-2xl bg-white p-4">
                   <dt className="text-xs font-extrabold uppercase tracking-wider text-muted">Typical rate</dt>
-                  <dd className="mt-1 text-xl font-extrabold text-ink">₱200 to ₱1,500 / hr</dd>
+                  <dd className="mt-1 text-xl font-extrabold text-ink">₱300 to ₱1,500 / hr</dd>
                 </div>
                 <div className="rounded-2xl bg-white p-4">
                   <dt className="text-xs font-extrabold uppercase tracking-wider text-muted">Payment split</dt>

@@ -31,7 +31,7 @@ export default function PrivacyPage() {
           use.
         </li>
         <li>
-          <strong>Profile and post data</strong>: name or nickname, age, gender, city and area, languages, activities,
+          <strong>Account and Phriend profile data</strong>: name or nickname, age, gender, city and area, languages, activities,
           hourly rate, bio, and the photos you upload.
         </li>
         <li>
@@ -56,7 +56,7 @@ export default function PrivacyPage() {
       <h2>3. Why we use it</h2>
       <p>We process your data to:</p>
       <ul>
-        <li>run your account and show your posts and profile to other members (performance of our contract with you);</li>
+        <li>run your account and show your Phriend profile to other members (performance of our contract with you);</li>
         <li>deliver chat between members;</li>
         <li>verify age and identity, prevent fraud, and keep minors off the Service (legal obligation and legitimate interest);</li>
         <li>review reports, enforce the terms and community guidelines, and cooperate with lawful requests;</li>
@@ -88,7 +88,7 @@ export default function PrivacyPage() {
         </li>
       </ul>
       <p>
-        Other members see your profile, posts and the messages you send them. We may also disclose data when Philippine
+        Other members see your profile, your Phriend profile and the messages you send them. We may also disclose data when Philippine
         law, a court order or a lawful law-enforcement request requires it, or to protect members&apos; safety. Some
         processors store data outside the Philippines under contractual safeguards consistent with the Data Privacy
         Act.
@@ -97,7 +97,7 @@ export default function PrivacyPage() {
       <h2>5. How long we keep it</h2>
       <ul>
         <li>
-          <strong>Posts</strong> expire after 30 days unless you renew them, and are deleted shortly after expiry.
+          <strong>Phriend profiles</strong> expire after 30 days unless you renew them, and are deleted shortly after expiry.
         </li>
         <li>
           <strong>Verification data</strong> is retained only as long as needed to confirm the result and handle

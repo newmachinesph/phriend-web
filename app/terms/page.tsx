@@ -29,7 +29,7 @@ export default function TermsPage() {
       <p>
         Phriend (&quot;Phriend&quot;, &quot;we&quot;, &quot;us&quot;) operates the website phriend.app and the web app at
         web.phriend.app (together, the &quot;Service&quot;). The Service is a listing and messaging platform where adults
-        in the Philippines can post offers of platonic, paid-by-the-hour company and legitimate side gigs
+        in the Philippines can publish a Phriend profile offering platonic, paid-by-the-hour company and legitimate side gigs
         (&quot;Phriends&quot;), and other adults can find them and arrange meetups (&quot;clients&quot;). Both are
         &quot;members&quot;.
       </p>
@@ -70,10 +70,13 @@ export default function TermsPage() {
         not process payments and, at the time of writing, does not charge a commission.
       </p>
       <p>
-        We recommend, and the safety rules require, a <strong>50% downpayment before the meetup and 50% after</strong>,
-        with the downpayment deducted from the total, and never more than 50% paid in advance. Pay only to the account
-        the other member has saved in the chat. Phriend is not responsible for refunds, disputes, chargebacks or losses
-        arising from payments between members.
+        We recommend, and the safety rules require, <strong>50% at the start of the meetup and 50% after</strong>, with
+        the downpayment deducted from the total and never more than 50% paid in advance. On a{" "}
+        <strong>first meetup the downpayment is handed over in cash, in person, when the members meet</strong>.
+        E-wallets such as GCash or Maya, or bank transfer, are for repeat Phriends the client has already met and
+        trusts, for convenience, and only ever to the account the other member has saved in the chat. Phriend is not
+        responsible for refunds, disputes, chargebacks, unpaid balances or losses arising from payments between
+        members. Be prudent: your prudence is your protection.
       </p>
 
       <h2>6. Meetups and conduct</h2>
@@ -104,7 +107,7 @@ export default function TermsPage() {
       <p>
         You keep ownership of the photos and text you upload. By uploading them you give Phriend a worldwide,
         non-exclusive, royalty-free licence to host, store, display, resize and distribute that content within the
-        Service so other members can see your post and profile. The licence ends when you delete the content or your
+        Service so other members can see your Phriend profile. The licence ends when you delete the content or your
         account, except for short-lived backup copies or where the law requires retention. You confirm you have the
         right to post what you upload.
       </p>
@@ -112,7 +115,7 @@ export default function TermsPage() {
       <h2>9. Termination</h2>
       <p>
         You can delete your account at any time from the settings screen. We may suspend or remove your account,
-        posts or messages if you breach these terms, the community guidelines or the safety rules, if we receive a
+        Phriend profile or messages if you breach these terms, the community guidelines or the safety rules, if we receive a
         credible report about you, or if the law requires it. Breaches involving sexual or romantic services, minors,
         scams or violence mean immediate removal and, where required, a report to the authorities.
       </p>
@@ -130,6 +133,11 @@ export default function TermsPage() {
         </strong>{" "}
         Where liability cannot be excluded, it is limited to the amount you paid Phriend in the 12 months before the
         claim, which at present is nothing.
+      </p>
+      <p>
+        In plain words: Phriend is a platform only. It is not a party to any meetup or payment and is not liable for
+        any loss, injury, dispute, unpaid balance or harm between members. You use the Service at your own risk, and
+        your prudence is your protection.
       </p>
 
       <h2>11. Indemnity</h2>

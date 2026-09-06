@@ -63,7 +63,7 @@ export default function CommunityGuidelinesPage() {
           <strong>Drugs</strong>: buying, selling, using or being under the influence during a meetup.
         </li>
         <li>
-          <strong>Alcohol with minors.</strong> Phriend is 18+, and &quot;drinking buddy&quot; posts that target or
+          <strong>Alcohol with minors.</strong> Phriend is 18+, and &quot;drinking buddy&quot; profiles that target or
           involve anyone under 18 are banned. Drinking is never the point of a meetup, and a member who is drunk may be
           asked to leave.
         </li>
@@ -92,7 +92,7 @@ export default function CommunityGuidelinesPage() {
       <ul>
         <li>Use recent photos of yourself. No swimsuit, lingerie or suggestive photos.</li>
         <li>Describe what you actually offer, at the rate you actually charge.</li>
-        <li>No phone numbers, social handles or payment details in public posts. Share them in the chat instead.</li>
+        <li>No phone numbers, social handles or payment details in your public Phriend profile. Share them in the chat instead.</li>
       </ul>
 
       <h2>5. Consequences</h2>

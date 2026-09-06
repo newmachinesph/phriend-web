@@ -54,6 +54,9 @@ body {
 }
 
 .btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   background: linear-gradient(135deg, #e0491f 0%, #fe6138 60%, #ff8a66 100%);
   color: #fff;
   box-shadow: 0 8px 18px -8px rgba(254, 97, 56, 0.6);

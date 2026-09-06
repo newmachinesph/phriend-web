@@ -1,21 +1,23 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Callout, Legal } from "@/components/legal";
-import { LAST_UPDATED } from "@/lib/site";
+import { LAST_UPDATED, pageMeta } from "@/lib/site";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
   title: "Safety and transaction rules",
   description:
     "How Phriend meetups and payments work: public places only, 50% cash on a first meetup, e-wallet only for repeat Phriends, late arrivals and cancellations.",
-  alternates: { canonical: "/safety" },
-};
+  path: "/safety",
+});
 
 export default function SafetyPage() {
   return (
     <Legal
       eyebrow="Safety"
       title="Safety and transaction rules"
+      path="/safety"
       updated={LAST_UPDATED}
+      summary="Meet in public. Only the people agreed in the chat come along; if extra companions show up, cancel, leave and report. On a first meetup pay half in cash when you meet and half after, never more than half upfront. E-wallets are for repeat Phriends you trust, and only to the account saved in the chat. Tell a friend where you are, and report anything that feels wrong."
       intro="These rules apply to every member, on both sides of a meetup. They are short on purpose. Breaking them gets an account removed. Phriend is a platform only: it is not a party to any meetup or payment and is not liable for any loss, injury, dispute, unpaid balance or harm between members. You use the service at your own risk, and your prudence is your protection."
     >
       <h2>1. Public places only</h2>

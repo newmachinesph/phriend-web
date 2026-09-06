@@ -1,0 +1,74 @@
+# Phriend
+
+> Phriend is a Philippine app for hiring a verified local friend by the hour for legit, platonic activities: food trips, city tours, events, tutoring, hospital or errand buddies and more. Members are 18+, ID-verified, meet in public places only, and pay each other directly: 50% in cash on a first meetup, 50% after.
+
+- Website: https://phriend.app
+- App (runs in the browser, installable as a PWA): https://web.phriend.app
+- Contact: support@phriend.app
+- Launched 2026 in the Philippines. Nationwide, Metro Manila first.
+- Full text of the FAQ, safety rules and community guidelines: https://phriend.app/llms-full.txt
+
+## What Phriend is
+
+- A listing and messaging platform. Adults publish a "Phriend profile" offering platonic, paid-by-the-hour company and legit side gigs; other adults search, chat and arrange a meetup.
+- Not a dating app. Romantic or sexual services, compensated dating and escort services are banned and get an account removed immediately.
+- Not a party to any meetup or payment. Phriend holds no money, processes no payments and, at the time of writing, takes no commission.
+- No install needed. It runs at web.phriend.app on any phone; add it to the home screen for chat and notifications.
+
+## Who it is for
+
+- Clients: anyone 18+ in the Philippines who wants company or help for an activity: a food-trip buddy, a tour guide, a plus-one for an event, a study partner, a hospital companion, an errand runner.
+- Phriends: locals 18+ who want a side income from what they already have: their city, free time, skills and stories. They set their own rate and hours and keep 100% of what they earn.
+
+## How it works
+
+Clients:
+1. Search by city, activity, language, age and hourly rate. Every profile shows a verified badge and real reviews.
+2. Chat in the app and agree on the plan, the hours and the rate, so both sides have a record.
+3. Meet in public, hand over 50% in cash on arrival, settle the rest after, then leave a review.
+
+Phriends:
+1. Verify you are 18+ with a quick ID check through Didit.
+2. Write a profile with photos, city and rate per hour. It stays live for 30 days and renews in one tap.
+3. Get messages, meet in public, get paid directly.
+
+## The rules (short version)
+
+1. Public places only. Never a private residence, a hotel room or a private vehicle.
+2. Only the people agreed in the chat. If someone arrives with unagreed companions: do not proceed, cancel, leave, report. Any downpayment is refunded in full.
+3. Pay 50% at the start and 50% after. On a first meetup the downpayment is cash, in person, when you meet. Never more than half upfront.
+4. E-wallets (GCash, Maya) or bank transfer only for repeat Phriends you have already met and trust, and only to the account saved in the chat. Anything else is a scam.
+5. ID verification through Didit: government ID plus selfie, 18+ check. Verified profiles show a badge.
+6. Tell someone your plan, keep location sharing on, leave if something feels off.
+7. Report and block from any profile or chat. Reports are reviewed by a person; serious cases go to the authorities.
+8. Late: more than 30 minutes late without notice, the other side may cancel; a late Phriend refunds the downpayment. Cancel at least 24 hours ahead.
+9. Emergencies: call 911 (Philippine National Police) first, report to Phriend after.
+
+Allowed: food trips, cafe hopping, city tours, day trips, beach and island trips, hiking, workouts, photography help, events and weddings as a plus-one, karaoke, movies and games in public venues, tutoring, study buddies, language exchange, errands, queueing, hospital and elderly company, pet buddies, virtual study or language sessions.
+
+Banned: any sexual or romantic service, compensated dating, escort services, drugs, alcohol involving minors, anything illegal under Philippine law, harassment, impersonation, off-platform payment scams, private-place meetups, fake reviews and multiple accounts.
+
+## Pricing
+
+- Phriend charges members nothing: no commission, no booking fees, no in-app payments.
+- Members agree on a rate per hour in the chat, typically ₱300 to ₱1,500 (PHP) depending on the activity, the city and the Phriend.
+- Payment split: 50% on arrival, 50% after the meetup.
+
+## Facts
+
+- Founded 2026, Philippines. 37 activity categories. Age: 18+ only.
+- Identity verification: Didit. Chat delivery: Ably. Photo storage: Cloudflare R2. Database: Neon.
+- Brand: navy #0d2251, orange #fe6138, mango #ffb627. Fonts: Fredoka (display), Nunito (body).
+
+## Links
+
+- Home: https://phriend.app
+- Safety and transaction rules: https://phriend.app/safety
+- Community guidelines: https://phriend.app/community-guidelines
+- Terms of Use: https://phriend.app/terms
+- Privacy Policy: https://phriend.app/privacy
+- Press kit (boilerplate, logos, photos, quotes): https://phriend.app/press
+- Open the app: https://web.phriend.app
+- Become a Phriend: https://web.phriend.app/earn
+- Facebook: https://facebook.com/phriendapp
+- Instagram: https://instagram.com/phriendapp

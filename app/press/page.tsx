@@ -4,14 +4,14 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, BadgeCheck, Download, Mail, MapPin, Wallet, type LucideIcon } from "lucide-react";
 import { Logo } from "@/components/site-header";
-import { APP_URL, CONTACT_EMAIL, SITE_URL } from "@/lib/site";
+import { APP_URL, breadcrumbJsonLd, CONTACT_EMAIL, pageMeta, SITE_URL } from "@/lib/site";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
   title: "Press kit",
   description:
     "Phriend press kit: boilerplate, fast facts, logo downloads, brand colors, product images, safety stance, quotable lines and media contact.",
-  alternates: { canonical: "/press" },
-};
+  path: "/press",
+});
 
 const BOILERPLATE =
   "Phriend is a Philippine app for hiring a verified local friend by the hour for legit activities: food trips, city tours, events, tutoring, hospital or errand buddies, and more. Members are 18 and older, ID-verified through Didit, meet in public places only, and pay 50% upfront, 50% after: cash in person on a first meetup, e-wallet only once they already trust each other. Phriend is a platform only and is not a party to the meetups. It launched in 2026 in the Philippines. The company site is phriend.app and the app runs in the browser at web.phriend.app.";
@@ -155,6 +155,7 @@ function Mark({ height }: { height: number }) {
 export default function PressPage() {
   return (
     <main id="main" className="flex-1">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: breadcrumbJsonLd("Press kit", "/press") }} />
       {/* Hero + boilerplate */}
       <section className="bg-navy-gradient text-white">
         <div className="mx-auto w-full max-w-6xl px-5 pb-16 pt-14 sm:px-8 sm:pt-20 lg:pb-20">

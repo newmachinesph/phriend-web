@@ -76,8 +76,11 @@ export function SiteFooter() {
           </nav>
         </div>
 
-        <p className="mt-12 border-t border-line pt-6 text-sm font-semibold text-muted">
-          © 2026 Phriend · Made in the Philippines
+        <p className="mt-12 flex flex-wrap justify-between gap-x-6 gap-y-2 border-t border-line pt-6 text-sm font-semibold text-muted">
+          <span>© 2026 Phriend · Made in the Philippines</span>
+          <a href="/llms.txt" className="rounded-md transition-colors hover:text-brand-text">
+            For AI assistants: llms.txt
+          </a>
         </p>
       </div>
     </footer>

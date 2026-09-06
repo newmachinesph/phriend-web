@@ -6,9 +6,9 @@ import {
   Hospital, Lock, Map, MapPin, MessageCircle, Mic, Mountain, PenLine, Search, ShieldCheck, Umbrella, Users, UserX,
   Utensils, Wallet, type LucideIcon,
 } from "lucide-react";
-import { APP_URL, POST_URL } from "@/lib/site";
+import { APP_URL, pageMeta, POST_URL, SITE_DESCRIPTION, SITE_URL } from "@/lib/site";
 
-export const metadata: Metadata = { alternates: { canonical: "/" } };
+export const metadata: Metadata = pageMeta({ description: SITE_DESCRIPTION, path: "/" });
 
 const TRUST: { icon: LucideIcon; label: string }[] = [
   { icon: BadgeCheck, label: "ID-verified members" },
@@ -65,7 +65,7 @@ const FAQ: { q: string; a: string }[] = [
   },
   {
     q: "What if my Phriend brings someone else?",
-    a: "If the other member arrives with people who were not agreed in the chat, be prudent: do not proceed. Cancel the meetup, leave, and report the profile. The same applies to a client who shows up with extra people. A cancellation for this reason is refunded in full.",
+    a: "Do not proceed. If the other member arrives with people who were not agreed in the chat, be prudent: cancel the meetup, leave, and report the profile. The same applies to a client who shows up with extra people. A cancellation for this reason is refunded in full.",
   },
   {
     q: "Does Phriend take a commission?",
@@ -77,7 +77,7 @@ const FAQ: { q: string; a: string }[] = [
   },
   {
     q: "What if my Phriend is late or cancels?",
-    a: "If someone is more than 30 minutes late without notice, the other side may cancel. If the Phriend is the one late, any downpayment already paid is refunded in full. Cancellations should happen at least 24 hours before the meetup. The full rules are on the safety page.",
+    a: "You may cancel if the other member is more than 30 minutes late without notice, and a late Phriend refunds any downpayment already paid in full. Cancellations should happen at least 24 hours before the meetup. The full rules are on the safety page.",
   },
   {
     q: "Do I need to install anything?",
@@ -85,10 +85,21 @@ const FAQ: { q: string; a: string }[] = [
   },
 ];
 
-const FAQ_JSON_LD = JSON.stringify({
+const JSON_LD = JSON.stringify({
   "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: FAQ.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
+  "@graph": [
+    {
+      "@type": "FAQPage",
+      mainEntity: FAQ.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
+    },
+    {
+      "@type": "HowTo",
+      name: "How to find a friend on Phriend",
+      description: "Hire a verified local friend by the hour in three steps: search, chat, meet in public.",
+      url: `${SITE_URL}/#how-it-works`,
+      step: CLIENT_STEPS.map((s, i) => ({ "@type": "HowToStep", position: i + 1, name: s.title, text: s.text })),
+    },
+  ],
 });
 
 function PhoneMockup() {
@@ -154,7 +165,7 @@ const h2 = "mt-2 font-display text-3xl font-semibold leading-tight text-ink sm:t
 export default function Home() {
   return (
     <main id="main" className="flex-1">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: FAQ_JSON_LD }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON_LD }} />
       {/* Hero */}
       <section className="bg-navy-gradient relative overflow-hidden text-white">
         <div className="mx-auto grid w-full max-w-6xl items-center gap-12 px-5 pb-16 pt-14 sm:px-8 sm:pt-20 lg:grid-cols-[1.1fr_0.9fr] lg:gap-8 lg:pb-24 lg:pt-24">
@@ -390,6 +401,11 @@ export default function Home() {
       {/* FAQ */}
       <section id="faq" aria-labelledby="faq-title" className="bg-surface">
         <div className="mx-auto w-full max-w-6xl px-5 py-16 sm:px-8 sm:py-24">
+          <p id="what-is-phriend" className="mb-10 rounded-2xl border border-line bg-white p-5 text-[17px] leading-relaxed shadow-card sm:p-6">
+            <strong className="text-ink">What is Phriend?</strong> Phriend is a Philippine app for hiring a verified local friend
+            by the hour for legit activities such as food trips, city tours, events, tutoring and errands. Members are 18+, meet
+            in public places, and pay 50% in cash on a first meetup and 50% after.
+          </p>
           <div className="grid gap-10 lg:grid-cols-[0.7fr_1.3fr]">
             <div>
               <p className={eyebrow}>FAQ</p>

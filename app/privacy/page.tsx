@@ -1,20 +1,21 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Callout, Legal } from "@/components/legal";
-import { CONTACT_EMAIL, LAST_UPDATED } from "@/lib/site";
+import { CONTACT_EMAIL, LAST_UPDATED, pageMeta } from "@/lib/site";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
   title: "Privacy Policy",
   description:
     "How Phriend collects, uses, shares and keeps your personal data under the Philippine Data Privacy Act of 2012 (RA 10173), and the rights you have over it.",
-  alternates: { canonical: "/privacy" },
-};
+  path: "/privacy",
+});
 
 export default function PrivacyPage() {
   return (
     <Legal
       eyebrow="Legal"
       title="Privacy Policy"
+      path="/privacy"
       updated={LAST_UPDATED}
       intro="This policy explains what personal data Phriend collects, why, who sees it and how long we keep it. It is written to comply with the Data Privacy Act of 2012 (Republic Act No. 10173) and its implementing rules."
     >

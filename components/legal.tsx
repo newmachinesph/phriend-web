@@ -1,21 +1,29 @@
 import type { ReactNode } from "react";
+import { breadcrumbJsonLd } from "@/lib/site";
 
 /** Shared shell for long-form pages: eyebrow, display title, updated date, then `.legal` prose styles from globals.css. */
 export function Legal({
   eyebrow,
   title,
+  path,
   updated,
   intro,
+  summary,
   children,
 }: {
   eyebrow: string;
   title: string;
+  /** Route path, e.g. "/safety". Emits Home › Page breadcrumb JSON-LD. */
+  path?: string;
   updated?: string;
   intro?: string;
+  /** One-paragraph "In short" answer for readers and answer engines. */
+  summary?: string;
   children: ReactNode;
 }) {
   return (
     <main id="main" className="mx-auto w-full max-w-3xl flex-1 px-5 py-12 sm:px-8 sm:py-16">
+      {path && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: breadcrumbJsonLd(title, path) }} />}
       <header className="border-b border-line pb-8">
         <p className="text-sm font-extrabold uppercase tracking-wider text-brand-text">{eyebrow}</p>
         <h1 className="mt-2 font-display text-4xl font-semibold leading-tight text-ink sm:text-5xl">{title}</h1>
@@ -26,6 +34,11 @@ export function Legal({
           </p>
         )}
         {intro && <p className="mt-5 text-lg leading-relaxed">{intro}</p>}
+        {summary && (
+          <p id="in-short" className="mt-5 rounded-2xl border border-brand/30 bg-brand-soft px-5 py-4 text-[15px] leading-relaxed">
+            <strong className="text-ink">In short:</strong> {summary}
+          </p>
+        )}
       </header>
       <div className="legal pt-2">{children}</div>
     </main>

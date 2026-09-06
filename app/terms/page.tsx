@@ -1,21 +1,23 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Callout, Legal } from "@/components/legal";
-import { CONTACT_EMAIL, LAST_UPDATED } from "@/lib/site";
+import { CONTACT_EMAIL, LAST_UPDATED, pageMeta } from "@/lib/site";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
   title: "Terms of Use",
   description:
     "Terms for using Phriend, a platform for adults in the Philippines to arrange paid-by-the-hour, platonic company. Not a party to any meetup or payment.",
-  alternates: { canonical: "/terms" },
-};
+  path: "/terms",
+});
 
 export default function TermsPage() {
   return (
     <Legal
       eyebrow="Legal"
       title="Terms of Use"
+      path="/terms"
       updated={LAST_UPDATED}
+      summary="Phriend is a listing and messaging platform for adults (18+) in the Philippines to arrange platonic, paid-by-the-hour company and legit side gigs. Phriend is not a party to any meetup or payment, holds no money, takes no commission, and is not liable for any loss, injury, dispute or unpaid balance between members. You use the service at your own risk, and your prudence is your protection."
       intro="Please read these terms before using Phriend. By creating an account or using the app you agree to them. If you do not agree, do not use Phriend."
     >
       <Callout tone="verify">

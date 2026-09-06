@@ -4,7 +4,7 @@ import { Fredoka, Nunito } from "next/font/google";
 import "./globals.css";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
-import { CONTACT_EMAIL, SITE_URL } from "@/lib/site";
+import { APP_URL, CONTACT_EMAIL, pageMeta, SITE_DESCRIPTION, SITE_NAME, SITE_TITLE, SITE_URL } from "@/lib/site";
 
 const nunito = Nunito({
   subsets: ["latin"],
@@ -20,12 +20,23 @@ const fredoka = Fredoka({
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: { default: "Phriend: Find a friend for anything in the Philippines", template: "%s | Phriend" },
-  description:
-    "Find a verified local friend for food trips, city tours, gigs, hikes, errands and more across the Philippines. Paid by the hour, met in public, always legit.",
-  applicationName: "Phriend",
-  openGraph: { type: "website", siteName: "Phriend", locale: "en_PH" },
-  twitter: { card: "summary" },
+  title: { default: SITE_TITLE, template: `%s | ${SITE_NAME}` },
+  applicationName: SITE_NAME,
+  keywords: [
+    "hire a friend Philippines",
+    "rent a friend Manila",
+    "companion for events",
+    "tour buddy",
+    "verified locals",
+    "side gig Philippines",
+  ],
+  ...pageMeta({ description: SITE_DESCRIPTION, path: "/" }),
+  twitter: { card: "summary_large_image" },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1, "max-video-preview": -1 },
+  },
 };
 
 export const viewport: Viewport = {
@@ -37,13 +48,22 @@ const JSON_LD = JSON.stringify({
   "@graph": [
     {
       "@type": "Organization",
-      name: "Phriend",
+      name: SITE_NAME,
       url: SITE_URL,
       logo: `${SITE_URL}/brand/logo-mark.png`,
       sameAs: ["https://facebook.com/phriendapp", "https://instagram.com/phriendapp"],
-      contactPoint: { "@type": "ContactPoint", contactType: "customer support", email: CONTACT_EMAIL },
+      contactPoint: { "@type": "ContactPoint", contactType: "customer support", email: CONTACT_EMAIL, areaServed: "PH" },
     },
-    { "@type": "WebSite", name: "Phriend", url: SITE_URL },
+    { "@type": "WebSite", name: SITE_NAME, url: SITE_URL },
+    {
+      "@type": "WebApplication",
+      name: SITE_NAME,
+      url: APP_URL,
+      applicationCategory: "LifestyleApplication",
+      operatingSystem: "Web, Android, iOS (PWA)",
+      offers: { "@type": "Offer", price: 0, priceCurrency: "PHP" },
+      areaServed: { "@type": "Country", name: "Philippines" },
+    },
   ],
 });
 

@@ -1,21 +1,23 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Callout, Legal } from "@/components/legal";
-import { LAST_UPDATED } from "@/lib/site";
+import { LAST_UPDATED, pageMeta } from "@/lib/site";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
   title: "Community guidelines",
   description:
     "What's allowed on Phriend and what isn't: strictly legit, platonic side gigs. No romantic or sexual services, no compensated dating, no escort services.",
-  alternates: { canonical: "/community-guidelines" },
-};
+  path: "/community-guidelines",
+});
 
 export default function CommunityGuidelinesPage() {
   return (
     <Legal
       eyebrow="Community"
       title="Community guidelines"
+      path="/community-guidelines"
       updated={LAST_UPDATED}
+      summary="Phriend is for legit, platonic, paid-by-the-hour activities between adults in public places: food trips, tours, hikes, events, tutoring, errands, hospital company and the like. Any sexual or romantic service, compensated dating, escort services, drugs, private-place meetups, scams and impersonation are banned and get an account removed immediately, with a report to the authorities where the law requires it."
       intro="Phriend is for strictly legitimate side gigs: paid-by-the-hour company and help, in public, between adults. This page says exactly what that means."
     >
       <h2>1. What Phriend is for</h2>

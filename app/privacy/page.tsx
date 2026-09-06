@@ -143,8 +143,10 @@ export default function PrivacyPage() {
 
       <h2>7. Cookies</h2>
       <p>
-        We use <strong>essential cookies only</strong>: a session cookie that keeps you signed in and one that remembers
-        your preferences. No advertising or cross-site tracking cookies, so there is no cookie banner.
+        We use <strong>essential cookies</strong> (a session cookie that keeps you signed in and one that remembers
+        your preferences) and <strong>Google Analytics 4</strong> to count visits and see which pages are used. Analytics sets
+        first-party <code>_ga</code> cookies, uses no advertising or cross-site tracking cookies, and Google does not store
+        IP addresses. You can block it in your browser or with an extension without affecting the site.
       </p>
 
       <h2>8. Children</h2>

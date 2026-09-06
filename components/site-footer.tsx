@@ -9,10 +9,10 @@ const LEGAL = [
   { href: "/community-guidelines", label: "Community guidelines" },
 ] as const;
 
-// Only accounts that exist are rendered; add the Instagram and TikTok URLs here once those pages are live.
+// Only accounts that exist are rendered; add the TikTok URL here once that page is live.
 const SOCIAL = [
   { href: "https://facebook.com/phriendapp", label: "Facebook" },
-  { href: "", label: "Instagram" },
+  { href: "https://instagram.com/phriendapp", label: "Instagram (@phriendapp)" },
   { href: "", label: "TikTok" },
 ] as const;
 

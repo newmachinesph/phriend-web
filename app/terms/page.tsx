@@ -67,7 +67,7 @@ export default function TermsPage() {
 
       <h2>5. Payments</h2>
       <p>
-        <strong>There are no in-app payments and no in-app bookings.</strong> Members arrange and settle payments
+        <strong>There are no in-app payments. Bookings made in the app are a schedule between members, not a contract with Phriend.</strong> Members arrange and settle payments
         directly with each other, for example through GCash, Maya or bank transfer. Phriend does not hold money, does
         not process payments and, at the time of writing, does not charge a commission.
       </p>

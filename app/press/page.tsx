@@ -9,7 +9,7 @@ import { APP_URL, breadcrumbJsonLd, CONTACT_EMAIL, pageMeta, SITE_URL } from "@/
 export const metadata: Metadata = pageMeta({
   title: "Press kit",
   description:
-    "Phriend press kit: boilerplate, fast facts, logo downloads, brand colors, product images, safety stance, quotable lines and media contact.",
+    "Phriend press kit: boilerplate, fast facts, product features, logo downloads, brand colors, product images, safety stance, quotable lines and media contact.",
   path: "/press",
 });
 
@@ -24,6 +24,16 @@ const FACTS: { label: string; value: string }[] = [
   { label: "ID verification", value: "Didit" },
   { label: "Meet-ups", value: "Public places only" },
   { label: "Age", value: "18+ only" },
+];
+
+const PRODUCT = [
+  "Bookings: a client requests a date, start time, hours, a public meeting place and a note; the Phriend accepts or declines; either side can cancel with a reason; completed meetups can be reviewed. Every booking has Add to Google Calendar and an .ics download.",
+  "Schedule: Phriends set weekly availability and lock out dates. Clients cannot book a locked-out date.",
+  "Services and rates: each Phriend lists services with their own price per hour or per session, a minimum booking and an optional photo.",
+  "Manage dashboard for Phriends: profile views, favorites, reviews, bookings by status, an earnings estimate (cash, paid in person), private notes and an activity log.",
+  "Chat: photos, emojis, delete for everyone, archive, block, typing and online indicators, and a profanity filter that warns first, then mutes.",
+  "Safety: ID verification through Didit, sample profiles marked as samples, and moderation with an AI first pass and a human review queue.",
+  "Payments: none in the app. 50% in cash on a first meetup, 50% after; e-wallets only for repeat, trusted Phriends.",
 ];
 
 const MARK_FILES = [
@@ -206,6 +216,16 @@ export default function PressPage() {
               </div>
             ))}
           </dl>
+
+          <h3 className="mt-12 font-display text-2xl font-semibold text-ink">Product</h3>
+          <ul className="mt-4 max-w-3xl space-y-3 text-[15px] font-semibold text-ink">
+            {PRODUCT.map((p) => (
+              <li key={p} className="flex items-start gap-2.5">
+                <BadgeCheck size={20} className="mt-0.5 shrink-0 text-brand" aria-hidden="true" />
+                {p}
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 

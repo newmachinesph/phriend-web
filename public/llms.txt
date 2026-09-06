@@ -10,7 +10,7 @@
 
 ## What Phriend is
 
-- A listing and messaging platform. Adults publish a "Phriend profile" offering platonic, paid-by-the-hour company and legit side gigs; other adults search, chat and arrange a meetup.
+- A listing, chat and booking platform. Adults publish a "Phriend profile" offering platonic, paid-by-the-hour company and legit side gigs, with their own services and rates; other adults search, chat, book a time and meet in public.
 - Not a dating app. Romantic or sexual services, compensated dating and escort services are banned and get an account removed immediately.
 - Not a party to any meetup or payment. Phriend holds no money, processes no payments and, at the time of writing, takes no commission.
 - No install needed. It runs at web.phriend.app on any phone; add it to the home screen for chat and notifications.
@@ -23,14 +23,27 @@
 ## How it works
 
 Clients:
-1. Search by city, activity, language, age and hourly rate. Every profile shows a verified badge and real reviews.
-2. Chat in the app and agree on the plan, the hours and the rate, so both sides have a record.
-3. Meet in public, hand over 50% in cash on arrival, settle the rest after, then leave a review.
+1. Browse by city, activity, language, age and rate. Every profile shows a verified badge, real reviews and the services on offer.
+2. Chat in the app and agree on the plan, so both sides have a record.
+3. Book: send a request with the date, start time, hours, a public meeting place and a note. The Phriend accepts or declines. Add it to Google Calendar or download the .ics.
+4. Meet in public, hand over 50% in cash on arrival, settle the rest after, then leave a review.
 
 Phriends:
 1. Verify you are 18+ with a quick ID check through Didit.
-2. Write a profile with photos, city and rate per hour. It stays live for 30 days and renews in one tap.
-3. Get messages, meet in public, get paid directly.
+2. Write a profile with photos and city, and list your services with your own rate per hour or per session, a minimum booking and an optional photo. It stays live for 30 days and renews in one tap.
+3. Set your weekly availability and lock out busy dates. Accept or decline booking requests.
+4. Meet in public, get paid directly in cash, track it all in the Manage dashboard.
+
+## Features
+
+- Bookings: a client sends a booking request (date, start time, hours, public meeting place, note); the Phriend accepts or declines; either side can cancel with a reason; completed meetups can be reviewed by both sides. Every booking has "Add to Google Calendar" and an .ics download.
+- Schedule: Phriends set weekly availability and lock out dates. Clients cannot book a locked-out date.
+- Services and rates: a Phriend lists services, each with its own price per hour or per session, a minimum booking and an optional photo.
+- Manage dashboard (Phriends): profile views, favorites, reviews, bookings by status, an earnings estimate (cash, paid in person), private notes and an activity log.
+- Chat: photos, emojis, delete for everyone, archive, block, typing and online indicators, and a profanity filter that warns first, then mutes.
+- Reviews: after a completed meetup, both sides can leave a review; reviews show on the profile.
+- Safety: ID verification through Didit, sample profiles marked as samples, moderation by the Ops team with an AI first pass and a human review queue.
+- Payments: none in the app. 50% in cash on a first meetup, 50% after. E-wallets only for repeat, trusted Phriends.
 
 ## The rules (short version)
 
@@ -50,8 +63,8 @@ Banned: any sexual or romantic service, compensated dating, escort services, dru
 
 ## Pricing
 
-- Phriend charges members nothing: no commission, no booking fees, no in-app payments.
-- Members agree on a rate per hour in the chat, typically ₱300 to ₱1,500 (PHP) depending on the activity, the city and the Phriend.
+- Phriend charges members nothing: no commission, no booking fees, no in-app payments. Bookings are made in the app; money never moves through it.
+- Phriends list their own rates per hour or per session, typically ₱300 to ₱1,500 (PHP) per hour depending on the activity, the city and the Phriend.
 - Payment split: 50% on arrival, 50% after the meetup.
 
 ## Facts

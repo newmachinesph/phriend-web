@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import {
-  ArrowRight, BadgeCheck, BookOpen, CalendarDays, Camera, ChevronDown, ClipboardList, Dumbbell, Flag, GraduationCap,
-  Hospital, Lock, Map, MapPin, MessageCircle, Mic, Mountain, PenLine, Search, ShieldCheck, Umbrella, Users, UserX,
-  Utensils, Wallet, type LucideIcon,
+  ArrowRight, BadgeCheck, BookOpen, CalendarClock, CalendarDays, Camera, ChevronDown, ClipboardList, Dumbbell, Flag,
+  GraduationCap, Hospital, LayoutDashboard, Lock, Map, MapPin, MessageCircle, Mic, Mountain, PenLine, Search, ShieldCheck,
+  Star, Tag, Umbrella, Users, UserX, Utensils, Wallet, type LucideIcon,
 } from "lucide-react";
 import { APP_URL, pageMeta, POST_URL, SITE_DESCRIPTION, SITE_URL } from "@/lib/site";
 
@@ -18,15 +18,17 @@ const TRUST: { icon: LucideIcon; label: string }[] = [
 ];
 
 const CLIENT_STEPS: { icon: LucideIcon; title: string; text: string }[] = [
-  { icon: Search, title: "Search", text: "Filter by city, activity, language, age and hourly rate. Every profile shows a verified badge and real reviews." },
-  { icon: MessageCircle, title: "Chat", text: "Message in the app, agree on the plan, the hours and the rate. Keep it in the chat so both sides have the record." },
-  { icon: MapPin, title: "Meet", text: "Meet somewhere public, hand over 50% in cash when you arrive, and settle the rest after. Then leave a review." },
+  { icon: Search, title: "Browse", text: "Filter by city, activity, language, age and rate. Every profile shows a verified badge, real reviews and the services on offer." },
+  { icon: MessageCircle, title: "Chat", text: "Message in the app and agree on the plan. Keep it in the chat so both sides have the record." },
+  { icon: CalendarDays, title: "Book", text: "Send a booking request with the date, start time, hours and a public meeting place. The Phriend accepts or declines. Add it to your calendar." },
+  { icon: MapPin, title: "Meet", text: "Meet in public, hand over 50% in cash when you arrive, and settle the rest after. Then leave a review." },
 ];
 
 const PHRIEND_STEPS: { icon: LucideIcon; title: string; text: string }[] = [
   { icon: BadgeCheck, title: "Verify", text: "Confirm you are 18+ with a quick ID check through Didit. Verified profiles get the badge and more bookings." },
-  { icon: PenLine, title: "Profile", text: "Write what you offer, add photos, set your city and your rate per hour. Your Phriend profile stays live for 30 days and renews in one tap." },
-  { icon: Wallet, title: "Earn", text: "Clients message you, you agree on the plan, and you get paid directly. Phriend takes no cut, for now." },
+  { icon: PenLine, title: "Profile", text: "Add photos, set your city, and list your services with your own rate per hour or per session. Your profile stays live for 30 days and renews in one tap." },
+  { icon: CalendarClock, title: "Schedule", text: "Set your weekly availability and lock out the dates you are busy. Booking requests come in with the details; accept or decline." },
+  { icon: Wallet, title: "Earn", text: "Meet in public and get paid in cash, directly. Your dashboard tracks bookings, reviews and an earnings estimate. Phriend takes no cut, for now." },
 ];
 
 const ACTIVITIES: { icon: LucideIcon; label: string; slug: string }[] = [
@@ -54,10 +56,25 @@ const RULES: { icon: LucideIcon; title: string; text: string }[] = [
   { icon: Flag, title: "Report and block", text: "One tap to report a profile or a message. Reports are reviewed by a person, not a bot." },
 ];
 
+const FEATURES: { icon: LucideIcon; title: string; text: string }[] = [
+  { icon: CalendarDays, title: "Bookings", text: "Pick a date, start time, hours and a public meeting place, add a note, and send the request. The Phriend accepts or declines. Either side can cancel with a reason. Add it to Google Calendar or download the .ics." },
+  { icon: CalendarClock, title: "Schedule", text: "Phriends set their weekly availability and lock out the dates they are busy. Clients cannot book a locked-out date." },
+  { icon: Tag, title: "Services and rates", text: "Each Phriend lists their services with their own price per hour or per session, a minimum booking and an optional photo." },
+  { icon: MessageCircle, title: "Chat", text: "Photos, emojis, typing and online indicators. Delete a message for everyone, archive a chat, block a member. A profanity filter warns first, then mutes." },
+  { icon: Star, title: "Reviews", text: "After a completed meetup, both sides can leave a review. Reviews show on the profile next to the verified badge." },
+  { icon: LayoutDashboard, title: "Manage dashboard", text: "Phriends see profile views, favorites, reviews, bookings by status and an earnings estimate (cash, paid in person), plus private notes and an activity log." },
+  { icon: ShieldCheck, title: "Safety", text: "ID verification through Didit. Sample profiles are marked as samples. Reports get an AI first pass, then a person on the moderation team decides." },
+  { icon: Wallet, title: "Cash, in person", text: "Money never moves in the app. On a first meetup pay 50% in cash on arrival and 50% after. E-wallets are for repeat Phriends you already trust." },
+];
+
 const FAQ: { q: string; a: string }[] = [
   {
     q: "Is Phriend a dating app?",
     a: "No. Phriend is for platonic, paid-by-the-hour company and legit side gigs: a buddy for a food trip, a tour guide, a study partner, someone to keep you company at the hospital. Romantic or sexual services, compensated dating and escort services are banned and get an account removed immediately.",
+  },
+  {
+    q: "How do bookings work?",
+    a: "Send the Phriend a booking request with the date, start time, number of hours, a public meeting place and a note. The Phriend accepts or declines, and either side can cancel with a reason. Every booking has an Add to Google Calendar button and an .ics download, and a completed meetup can be reviewed by both sides. Money never moves in the app: 50% in cash when you meet, 50% after.",
   },
   {
     q: "How do I pay?",
@@ -70,6 +87,10 @@ const FAQ: { q: string; a: string }[] = [
   {
     q: "Does Phriend take a commission?",
     a: "Not yet. Members agree on a rate per hour, typically between ₱300 and ₱1,500 depending on the activity and the city, and keep all of it. If this changes we will announce it well ahead of time.",
+  },
+  {
+    q: "Can I set my own rates and services?",
+    a: "Yes. Each Phriend lists their own services, each with its own price per hour or per session, a minimum booking and an optional photo. You also set your weekly availability and lock out the dates you are busy, so clients can only book when you are free. Phriend takes no cut, so what you list is what you keep.",
   },
   {
     q: "How does verification work?",
@@ -95,7 +116,7 @@ const JSON_LD = JSON.stringify({
     {
       "@type": "HowTo",
       name: "How to find a friend on Phriend",
-      description: "Hire a verified local friend by the hour in three steps: search, chat, meet in public.",
+      description: "Hire a verified local friend by the hour in four steps: browse, chat, book, meet in public.",
       url: `${SITE_URL}/#how-it-works`,
       step: CLIENT_STEPS.map((s, i) => ({ "@type": "HowToStep", position: i + 1, name: s.title, text: s.text })),
     },
@@ -213,7 +234,7 @@ export default function Home() {
             <div className="max-w-2xl">
               <p className={eyebrow}>How it works</p>
               <h2 id="how-title" className={h2}>
-                Three steps, whichever side you are on.
+                Four steps, whichever side you are on.
               </h2>
             </div>
             <div className="relative aspect-[3/2] overflow-hidden rounded-3xl shadow-card">
@@ -227,7 +248,7 @@ export default function Home() {
             </div>
           </div>
 
-          <ol className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+          <ol className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-5">
             <li className="flex flex-col justify-between rounded-3xl bg-navy p-6 text-white md:col-span-2 lg:col-span-1">
               <Users size={28} className="text-brand-light" aria-hidden="true" />
               <div className="mt-10">
@@ -240,7 +261,7 @@ export default function Home() {
             ))}
           </ol>
 
-          <ol className="mt-4 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+          <ol className="mt-4 grid gap-4 md:grid-cols-2 lg:grid-cols-5">
             <li className="flex flex-col justify-between rounded-3xl bg-brand-soft p-6 text-ink md:col-span-2 lg:order-last lg:col-span-1">
               <Wallet size={28} className="text-brand" aria-hidden="true" />
               <div className="mt-10">
@@ -255,8 +276,30 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Features */}
+      <section id="features" aria-labelledby="features-title">
+        <div className="mx-auto w-full max-w-6xl px-5 py-16 sm:px-8 sm:py-24">
+          <div className="max-w-2xl">
+            <p className={eyebrow}>What you can do</p>
+            <h2 id="features-title" className={h2}>
+              From first message to review, in one app.
+            </h2>
+            <p className="mt-4 text-lg leading-relaxed">Bookings, schedules and chat happen in the app. Money never does.</p>
+          </div>
+          <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {FEATURES.map((f) => (
+              <li key={f.title} className="rounded-2xl border border-line bg-white p-5 shadow-card">
+                <f.icon size={22} className="text-brand" aria-hidden="true" />
+                <h3 className="mt-3 font-extrabold text-ink">{f.title}</h3>
+                <p className="mt-1 text-[15px] leading-relaxed">{f.text}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
       {/* Popular activities */}
-      <section aria-labelledby="activities-title">
+      <section aria-labelledby="activities-title" className="bg-surface">
         <div className="mx-auto w-full max-w-6xl px-5 py-16 sm:px-8 sm:py-24">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
             <div className="max-w-2xl">
@@ -340,12 +383,15 @@ export default function Home() {
               </h2>
               <p className="mt-4 text-lg leading-relaxed">
                 Know your city, take good photos, speak three languages, or just make waiting rooms less lonely. Set up
-                your Phriend profile once, get messages, meet in public, get paid.
+                your Phriend profile once, list your services, take bookings, meet in public, get paid.
               </p>
               <ul className="mt-6 space-y-3 text-[15px] font-semibold text-ink">
                 {[
-                  "Set your own rate per hour and your own schedule",
+                  "List your services with your own rate per hour or per session",
+                  "Set your weekly schedule and lock out the dates you are busy",
+                  "Accept or decline booking requests, cancel with a reason if you must",
                   "Keep 100% of what you earn, no commission",
+                  "One dashboard for views, favorites, reviews, bookings, an earnings estimate and your private notes",
                   "Your profile runs for 30 days and renews in one tap",
                   "Verify once, get the badge everywhere",
                 ].map((t) => (
@@ -376,8 +422,9 @@ export default function Home() {
                   ₱0 <span className="text-2xl text-muted sm:text-3xl">from Phriend</span>
                 </p>
                 <p className="mt-3 leading-relaxed">
-                  Phriend takes no cut yet. Members agree on a rate per hour in the chat and pay each other directly:
-                  cash on a first meetup, GCash, Maya or bank transfer for repeat Phriends they already trust.
+                  Phriend takes no cut yet. Phriends list their own rates, members confirm the plan in the chat and the
+                  booking, and pay each other directly: cash on a first meetup, GCash, Maya or bank transfer for repeat
+                  Phriends they already trust.
                 </p>
                 <dl className="mt-6 grid grid-cols-2 gap-4">
                   <div className="rounded-2xl bg-white p-4">
@@ -390,7 +437,7 @@ export default function Home() {
                   </div>
                 </dl>
                 <p className="mt-4 text-sm text-muted">
-                  Rates depend on the activity, the city and the Phriend. No bookings or payments happen inside the app.
+                  Rates depend on the activity, the city and the Phriend. Bookings happen in the app; payments never do.
                 </p>
               </div>
             </div>

@@ -62,13 +62,23 @@ const USAGE = [
 const SCREENSHOTS: { src: string; alt: string; caption: string }[] = [
   {
     src: "/photos/shot-home.png",
-    alt: "Phriend app home screen with search filters and verified profiles",
+    alt: "Phriend app home screen with a search bar, activity categories and verified profiles with hourly rates",
     caption: "Home: search and verified profiles",
   },
   {
     src: "/photos/shot-post.png",
-    alt: "A Phriend profile in the app showing the verified badge, activity tags, hourly rate, city and a Chat button",
-    caption: "Profile: badge, rate, city, chat",
+    alt: "A Phriend profile in the app showing photos, a star rating, activity tags, an hourly rate and a Chat button",
+    caption: "Profile: photos, tags, rate, chat",
+  },
+  {
+    src: "/photos/shot-gigs.png",
+    alt: "The Gigs screen listing what clients need, each with an activity, city, date and budget per hour",
+    caption: "Gigs: what clients need",
+  },
+  {
+    src: "/photos/shot-rules.png",
+    alt: "A Phriend profile showing non-negotiables and the house rules: public places only, 50% at the start and 50% after, no unagreed companions",
+    caption: "Rules and non-negotiables",
   },
 ];
 
@@ -309,7 +319,7 @@ export default function PressPage() {
           </p>
 
           <h3 className="mt-10 font-display text-2xl font-semibold text-ink">App screenshots</h3>
-          <ul className="mt-4 grid max-w-md grid-cols-2 gap-4">
+          <ul className="mt-4 grid max-w-3xl grid-cols-2 gap-4 sm:grid-cols-4">
             {SCREENSHOTS.map((s) => (
               <li key={s.src}>
                 <figure>
@@ -319,7 +329,7 @@ export default function PressPage() {
                       alt={s.alt}
                       width={430}
                       height={900}
-                      sizes="(min-width: 480px) 216px, 45vw"
+                      sizes="(min-width: 640px) 192px, 45vw"
                       className="h-auto w-full"
                     />
                   </a>

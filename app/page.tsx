@@ -306,7 +306,7 @@ export default function Home() {
             </h2>
             <p className="mt-4 text-lg leading-relaxed">Bookings, schedules and chat happen in the app. Money never does.</p>
           </div>
-          <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {FEATURES.map((f) => (
               <li key={f.title} className="rounded-2xl border border-line bg-white p-5 shadow-card">
                 <f.icon size={22} className="text-brand" aria-hidden="true" />

@@ -27,7 +27,7 @@ const FACTS: { label: string; value: string }[] = [
 ];
 
 const PRODUCT = [
-  "Profiles: 37 activity categories with sub-activities, up to 8 photos, languages, non-negotiables pinned to the top, an hourly rate, and a seven-point Phriend agreement plus ID verification before a profile goes live. Profiles run for 30 days and are renewed by saving them again.",
+  "Profiles: 46 activity categories with sub-activities, up to 8 photos, languages, non-negotiables pinned to the top, an hourly rate, and a seven-point Phriend agreement plus ID verification before a profile goes live. Profiles run for 30 days and are renewed by saving them again.",
   "Bookings: a client picks a service, a date, start time, 1 to 8 hours, a public meeting place and a note, up to 60 days ahead; the Phriend accepts or declines; either side can cancel with a reason and mark the meetup completed afterwards. Every booking has Add to Google Calendar and an .ics download.",
   "Schedule: Phriends set weekly days and hours and lock out dates up to a year ahead. Requests outside those hours, on a locked-out date or over an accepted booking are refused.",
   "Services and rates: each Phriend lists up to 12 services with their own price per hour or per session, a minimum number of hours and an optional photo.",

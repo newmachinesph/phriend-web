@@ -73,7 +73,7 @@ Banned: any sexual or romantic service, compensated dating, escort services, dru
 
 ## Facts
 
-- Founded 2026, Philippines. 37 activity categories with sub-activities. Age: 18+ only.
+- Founded 2026, Philippines. 46 activity categories with sub-activities. Age: 18+ only.
 - Limits: hourly rate ₱0 to ₱3,000; services ₱50 to ₱50,000, up to 12 per Phriend, minimum 1 to 12 hours; bookings 1 to 8 hours, up to 60 days ahead; lockouts up to a year ahead; 8 photos per profile, 4 per review, 4 per report; profiles live 30 days per save.
 - Sign-in: Google. Identity verification: Didit. Chat delivery: Ably. Photo storage: Cloudflare R2. Database: Neon. Moderation AI: OpenAI. Rate limiting: Upstash.
 - Brand: navy #0d2251, orange #fe6138, mango #ffb627. Fonts: Fredoka (display), Nunito (body).

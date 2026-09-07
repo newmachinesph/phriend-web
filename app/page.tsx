@@ -27,7 +27,7 @@ const CLIENT_STEPS: { icon: LucideIcon; title: string; text: string }[] = [
 
 const PHRIEND_STEPS: { icon: LucideIcon; title: string; text: string }[] = [
   { icon: BadgeCheck, title: "Verify", text: "Confirm you are 18+ with a quick ID check through Didit. Verification is required before your profile goes live; verified profiles get the badge." },
-  { icon: PenLine, title: "Profile", text: "Accept the Phriend agreement, add up to 8 photos, pick your activities, languages and non-negotiables, set your hourly rate and list your services with their own price per hour or per session. An AI checks the wording and every photo, then a person on the Phriend team approves the profile before it shows, usually within a day. It stays live for 30 days; save it again to renew." },
+  { icon: PenLine, title: "Profile", text: "Accept the Phriend agreement, claim your @username (web.phriend.app/@you, first come first served), add up to 8 photos, pick your activities, languages and non-negotiables, set your hourly rate and list your services with their own price per hour or per session. An AI checks the wording and every photo, then a person on the Phriend team approves the profile before it shows, usually within a day. It stays live for 30 days; save it again to renew." },
   { icon: CalendarClock, title: "Schedule", text: "Set your weekly availability and lock out the dates you are busy. Booking requests arrive in the app and by email; accept or decline." },
   { icon: Wallet, title: "Earn", text: "Meet in public and get paid in cash, directly. Your dashboard tracks bookings, reviews and an earnings estimate. Phriend takes no cut, for now." },
 ];

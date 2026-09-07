@@ -5,6 +5,7 @@ import {
   ArrowRight, BadgeCheck, Bell, BookOpen, CalendarClock, CalendarDays, Camera, ChevronDown, ClipboardList, Dumbbell, Flag,
   GraduationCap, Hospital, LayoutDashboard, Lock, Map, MapPin, Megaphone, MessageCircle, Mic, Mountain, PenLine, Search, ShieldCheck,
   Star, Tag, Umbrella, Users, UserX, Utensils, Wallet, type LucideIcon,
+  Footprints, Laptop, MessagesSquare, Sandwich,
 } from "lucide-react";
 import { APP_URL, pageMeta, POST_URL, SITE_DESCRIPTION, SITE_URL } from "@/lib/site";
 
@@ -33,6 +34,10 @@ const PHRIEND_STEPS: { icon: LucideIcon; title: string; text: string }[] = [
 
 const ACTIVITIES: { icon: LucideIcon; label: string; slug: string }[] = [
   { icon: Utensils, label: "Eat & Travel", slug: "eat_and_travel" },
+  { icon: Laptop, label: "Coworking", slug: "coworking" },
+  { icon: Footprints, label: "Walk & Talk", slug: "walk-and-talk" },
+  { icon: Sandwich, label: "Lunch Buddy", slug: "lunch-buddy" },
+  { icon: MessagesSquare, label: "Kwentuhan", slug: "kwentuhan" },
   { icon: Camera, label: "Photographer", slug: "photographer" },
   { icon: Map, label: "Tour Guide", slug: "tour-guide" },
   { icon: Dumbbell, label: "Workout", slug: "workout" },
@@ -341,6 +346,9 @@ export default function Home() {
               <h2 id="activities-title" className={h2}>
                 Whatever the plan, there is a Phriend for it.
               </h2>
+              <p className="mt-3 text-[15px] leading-relaxed text-body">
+                Working from home? Cowork at a cafe, take a lunch or walking break, or just have kwentuhan with someone new. 46 categories, each with its own sub-activities.
+              </p>
             </div>
             <a href={APP_URL} className="inline-flex items-center gap-1.5 font-bold text-brand-text hover:underline">
               Browse all activities <ArrowRight size={18} aria-hidden="true" />

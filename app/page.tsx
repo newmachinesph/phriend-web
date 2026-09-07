@@ -185,9 +185,9 @@ function PhoneMockup() {
   );
 }
 
-function StepTile({ n, icon: Icon, title, text }: { n: number; icon: LucideIcon; title: string; text: string }) {
+function StepTile({ n, icon: Icon, title, text, className = "" }: { n: number; icon: LucideIcon; title: string; text: string; className?: string }) {
   return (
-    <li className="flex flex-col rounded-3xl border border-line bg-white p-6 shadow-card">
+    <li className={`flex flex-col rounded-3xl border border-line bg-white p-6 shadow-card ${className}`}>
       <div className="flex items-center justify-between">
         <span className="grid size-11 place-items-center rounded-2xl bg-brand-soft text-brand">
           <Icon size={22} aria-hidden="true" />
@@ -268,7 +268,7 @@ export default function Home() {
             </div>
           </div>
 
-          <ol className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-5">
+          <ol className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
             <li className="flex flex-col justify-between rounded-3xl bg-navy p-6 text-white md:col-span-2 lg:col-span-1">
               <Users size={28} className="text-brand-light" aria-hidden="true" />
               <div className="mt-10">
@@ -277,12 +277,19 @@ export default function Home() {
               </div>
             </li>
             {CLIENT_STEPS.map((s, i) => (
-              <StepTile key={s.title} n={i + 1} {...s} />
+              <StepTile key={s.title} n={i + 1} {...s} className={i === CLIENT_STEPS.length - 1 ? "lg:col-span-2" : ""} />
             ))}
+            <li className="flex flex-col justify-between rounded-3xl bg-brand-soft p-6 md:col-span-2 lg:col-span-2">
+              <p className="font-display text-2xl font-semibold text-ink">Ready when you are.</p>
+              <p className="mt-2 text-[15px] leading-relaxed text-body">Verified locals, public places, 50% downpayment. Everything else is up to you and your Phriend.</p>
+              <a href={APP_URL} className="btn-primary mt-6 inline-flex w-fit items-center justify-center rounded-full px-6 py-3 font-bold">
+                Open the app
+              </a>
+            </li>
           </ol>
 
-          <ol className="mt-4 grid gap-4 md:grid-cols-2 lg:grid-cols-5">
-            <li className="flex flex-col justify-between rounded-3xl bg-brand-soft p-6 text-ink md:col-span-2 lg:order-last lg:col-span-1">
+          <ol className="mt-4 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+            <li className="flex flex-col justify-between rounded-3xl bg-brand-soft p-6 text-ink md:col-span-2 lg:col-span-1">
               <Wallet size={28} className="text-brand" aria-hidden="true" />
               <div className="mt-10">
                 <h3 className="font-display text-2xl font-semibold">Want to be a Phriend?</h3>
@@ -290,8 +297,15 @@ export default function Home() {
               </div>
             </li>
             {PHRIEND_STEPS.map((s, i) => (
-              <StepTile key={s.title} n={i + 1} {...s} />
+              <StepTile key={s.title} n={i + 1} {...s} className={i === PHRIEND_STEPS.length - 1 ? "lg:col-span-2" : ""} />
             ))}
+            <li className="flex flex-col justify-between rounded-3xl bg-navy p-6 text-white md:col-span-2 lg:col-span-2">
+              <p className="font-display text-2xl font-semibold">Your rate, your hours, your rules.</p>
+              <p className="mt-2 text-[15px] leading-relaxed text-white/85">Publish once, manage bookings and your schedule in the app, get paid in person.</p>
+              <a href={POST_URL} className="btn-primary mt-6 inline-flex w-fit items-center justify-center rounded-full px-6 py-3 font-bold">
+                Become a Phriend
+              </a>
+            </li>
           </ol>
         </div>
       </section>

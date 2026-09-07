@@ -26,7 +26,7 @@ Clients:
 1. Browse by city, activity, language, age and rate. Every profile shows a verified badge, real reviews and the services on offer.
 2. Chat in the app and agree on the plan, so both sides have a record.
 3. Book: send a request with the date, start time, hours, a public meeting place and a note. The Phriend accepts or declines. Add it to Google Calendar or download the .ics.
-4. Meet in public, hand over 50% in cash on arrival, settle the rest after, then leave a review.
+4. Meet in public, pay the 50% downpayment (cash in person on a first meetup, e-wallet only for repeat trusted Phriends), settle the rest after, then leave a review.
 
 Phriends:
 1. Verify you are 18+ with a quick ID check through Didit.
@@ -65,7 +65,7 @@ Banned: any sexual or romantic service, compensated dating, escort services, dru
 
 - Phriend charges members nothing: no commission, no booking fees, no in-app payments. Bookings are made in the app; money never moves through it.
 - Phriends list their own rates per hour or per session, typically ₱300 to ₱1,500 (PHP) per hour depending on the activity, the city and the Phriend.
-- Payment split: 50% on arrival, 50% after the meetup.
+- Payment split: 50% downpayment, 50% after the meetup. First meetup: cash in person; e-wallet only for repeat, trusted Phriends.
 
 ## Facts
 

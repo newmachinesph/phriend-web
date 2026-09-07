@@ -13,7 +13,7 @@ export const metadata: Metadata = pageMeta({ description: SITE_DESCRIPTION, path
 const TRUST: { icon: LucideIcon; label: string }[] = [
   { icon: BadgeCheck, label: "ID-verified members" },
   { icon: MapPin, label: "Public meet-ups only" },
-  { icon: Wallet, label: "50% cash on arrival, 50% after" },
+  { icon: Wallet, label: "50% downpayment, 50% after" },
   { icon: ShieldCheck, label: "18+ only" },
 ];
 
@@ -64,7 +64,7 @@ const FEATURES: { icon: LucideIcon; title: string; text: string }[] = [
   { icon: Star, title: "Reviews", text: "After a completed meetup, both sides can leave a review. Reviews show on the profile next to the verified badge." },
   { icon: LayoutDashboard, title: "Manage dashboard", text: "Phriends see profile views, favorites, reviews, bookings by status and an earnings estimate (cash, paid in person), plus private notes and an activity log." },
   { icon: ShieldCheck, title: "Safety", text: "ID verification through Didit. Sample profiles are marked as samples. Reports get an AI first pass, then a person on the moderation team decides." },
-  { icon: Wallet, title: "Cash, in person", text: "Money never moves in the app. On a first meetup pay 50% in cash on arrival and 50% after. E-wallets are for repeat Phriends you already trust." },
+  { icon: Wallet, title: "Cash, in person", text: "Money never moves in the app. Pay a 50% downpayment and 50% after. On a first meetup the downpayment is cash in person; e-wallets are for repeat Phriends you trust. Never after. E-wallets are for repeat Phriends you already trust." },
 ];
 
 const FAQ: { q: string; a: string }[] = [
@@ -157,7 +157,7 @@ function PhoneMockup() {
       >
         <p className="flex items-center gap-1.5 font-extrabold text-ink">
           <ShieldCheck size={14} className="text-success" />
-          50% in cash on arrival
+          50% downpayment
         </p>
         <p className="mt-0.5 text-muted">Balance after the meetup</p>
       </div>
@@ -433,7 +433,7 @@ export default function Home() {
                   </div>
                   <div className="rounded-2xl bg-white p-4">
                     <dt className="text-xs font-extrabold uppercase tracking-wider text-muted">Payment split</dt>
-                    <dd className="mt-1 text-xl font-extrabold text-ink">50% on arrival, 50% after</dd>
+                    <dd className="mt-1 text-xl font-extrabold text-ink">50% downpayment, 50% after</dd>
                   </div>
                 </dl>
                 <p className="mt-4 text-sm text-muted">

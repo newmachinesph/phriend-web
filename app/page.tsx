@@ -347,7 +347,7 @@ export default function Home() {
                 Whatever the plan, there is a Phriend for it.
               </h2>
               <p className="mt-3 text-[15px] leading-relaxed text-body">
-                Working from home? Cowork at a cafe, take a lunch or walking break, or just have kwentuhan with someone new. 46 categories, each with its own sub-activities.
+                Working from home? Cowork at a cafe, take a lunch or walking break, or just have kwentuhan with someone new. 46+ categories, each with its own sub-activities.
               </p>
             </div>
             <a href={APP_URL} className="inline-flex items-center gap-1.5 font-bold text-brand-text hover:underline">

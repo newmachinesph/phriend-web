@@ -46,7 +46,8 @@ export default function TermsPage() {
 
       <h2>3. Your account</h2>
       <p>
-        You sign in with your Google account; keep it secure, because you are responsible for everything done under
+        You sign in with your Google account or with your email and a password; keep them secure, because you are
+        responsible for everything done under
         your Phriend account. One person, one account, one Phriend profile, with accurate information. Tell us at{" "}
         <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a> if you think your account has been used without your
         permission.

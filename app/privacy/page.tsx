@@ -29,7 +29,8 @@ export default function PrivacyPage() {
       <ul>
         <li>
           <strong>Account data</strong>: the name, email address and profile photo of the Google account you sign in
-          with, plus the display name, gender, birth date and avatar you set.
+          with, or the name, email address and password you register with (the password is stored only as a scrypt
+          hash), plus the display name, gender, birth date and avatar you set.
         </li>
         <li>
           <strong>Phriend profile data</strong>: name or nickname, age, gender, city and area, languages, activities and
@@ -190,7 +191,8 @@ export default function PrivacyPage() {
 
       <h2>9. Security</h2>
       <p>
-        Data is encrypted in transit, sign-in goes through Google so we never hold a password, production access is
+        Data is encrypted in transit, Google sign-in never gives us a password and email passwords are stored only as
+        scrypt hashes, production access is
         limited to the people who need it, and ID documents never pass through our own servers. If a breach affects you we will notify you and the National
         Privacy Commission as the law requires.
       </p>

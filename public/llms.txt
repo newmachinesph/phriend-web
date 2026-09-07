@@ -13,7 +13,7 @@
 - A listing, chat and booking platform. Adults publish a "Phriend profile" offering platonic, paid-by-the-hour company and legit side gigs, with their own services and rates; other adults search, chat, book a time and meet in public.
 - Not a dating app. Romantic or sexual services, compensated dating and escort services are banned and get an account removed immediately.
 - Not a party to any meetup or payment. Phriend holds no money, processes no payments and, at the time of writing, takes no commission.
-- No install needed. It runs at web.phriend.app on any phone; add it to the home screen for chat, bookings and in-app notifications. Sign-in is with a Google account.
+- No install needed. It runs at web.phriend.app on any phone; add it to the home screen for chat, bookings and in-app notifications. Sign in with Google, or with an email address and password (verified by a 6-digit code).
 
 ## Who it is for
 
@@ -23,8 +23,8 @@
 ## How it works
 
 Clients:
-1. Browse by city, gender, language, activity, area, keyword, age and rate, then narrow by sub-activity. Every profile shows the verified badge, reviews with photos, the Phriend's non-negotiables and their services and rates. Favorite profiles follow your Google account.
-2. Chat in the app (Google sign-in) and agree on the plan, so both sides have a record.
+1. Browse by city, gender, language, activity, area, keyword, age and rate, then narrow by sub-activity. Every profile shows the verified badge, reviews with photos, the Phriend's non-negotiables and their services and rates. Favorite profiles follow your account.
+2. Chat in the app (Google or email sign-in) and agree on the plan, so both sides have a record.
 3. Book: pick a service if one is listed, then send a request with the date, start time, hours (1 to 8, up to 60 days ahead), a public meeting place and a note. The Phriend accepts or declines. Add it to Google Calendar or download the .ics.
 4. Meet in public, pay the 50% downpayment (cash in person on a first meetup, e-wallet only for repeat trusted Phriends), settle the rest after, then leave a review with up to 4 photos.
 
@@ -36,7 +36,7 @@ Phriends:
 
 ## Features
 
-- Search and favorites: filters for city, gender, language, activity, area, keyword, age and rate, sub-activity chips, favorites that follow the Google account, share a profile link.
+- Search and favorites: filters for city, gender, language, activity, area, keyword, age and rate, sub-activity chips, favorites that follow the account, share a profile link.
 - Bookings: a client picks a service, a date, start time, 1 to 8 hours, a public meeting place and a note, up to 60 days ahead; the Phriend accepts or declines; either side can cancel with a reason and mark the meetup completed once its time has passed. Every booking has "Add to Google Calendar" and an .ics download.
 - Schedule: Phriends set weekly days and hours and lock out dates up to a year ahead. Requests outside those hours, on a locked-out date or over an accepted booking are refused.
 - Services and rates: on top of the hourly rate, a Phriend lists up to 12 services, each with its own price per hour or per session, a minimum number of hours and an optional photo.
@@ -45,7 +45,7 @@ Phriends:
 - Reviews: any signed-in member can review a Phriend with a star rating, text and up to 4 photos, one review per member per Phriend; reviews show on the profile.
 - Gigs: clients post what they need (activity, city, budget per hour, date, details); Phriends with a live profile mark interest and chat; anyone can report a gig.
 - Notifications: an in-app bell and an email for every booking request, acceptance, decline, cancellation and completion, and for every new review.
-- Account: Google sign-in; members delete their own account by typing DELETE, which removes the profile, photos, favorites, reviews, bookings, notes and gigs.
+- Account: Google or email sign-in (email accounts confirm a 6-digit code; passwords are stored only as scrypt hashes); members delete their own account by typing DELETE, which removes the profile, photos, favorites, reviews, bookings, notes and gigs.
 - Safety: ID verification through Didit before a profile goes live, sample profiles marked as samples and unbookable, moderation by the Ops team with an AI first pass on reports, profiles and gigs, a human review queue and an audit log.
 - Payments: none in the app. 50% in cash on a first meetup, 50% after. E-wallets only for repeat, trusted Phriends.
 
@@ -75,7 +75,7 @@ Banned: any sexual or romantic service, compensated dating, escort services, dru
 
 - Founded 2026, Philippines. 46 activity categories with sub-activities. Age: 18+ only.
 - Limits: hourly rate ₱0 to ₱3,000; services ₱50 to ₱50,000, up to 12 per Phriend, minimum 1 to 12 hours; bookings 1 to 8 hours, up to 60 days ahead; lockouts up to a year ahead; 8 photos per profile, 4 per review, 4 per report; profiles live 30 days per save.
-- Sign-in: Google. Identity verification: Didit. Chat delivery: Ably. Photo storage: Cloudflare R2. Database: Neon. Moderation AI: OpenAI. Rate limiting: Upstash.
+- Sign-in: Google, or email and password. Identity verification: Didit. Chat delivery: Ably. Photo storage: Cloudflare R2. Database: Neon. Moderation AI: OpenAI. Rate limiting: Upstash.
 - Brand: navy #0d2251, orange #fe6138, mango #ffb627. Fonts: Fredoka (display), Nunito (body).
 
 ## Links

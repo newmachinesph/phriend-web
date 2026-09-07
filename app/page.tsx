@@ -20,7 +20,7 @@ const TRUST: { icon: LucideIcon; label: string }[] = [
 
 const CLIENT_STEPS: { icon: LucideIcon; title: string; text: string }[] = [
   { icon: Search, title: "Browse", text: "Filter by city, gender, language, activity, area, keyword, age and rate, then narrow by sub-activity. Every profile shows the verified badge, reviews with photos, the Phriend's non-negotiables and their services and rates." },
-  { icon: MessageCircle, title: "Chat", text: "Sign in with Google, message in the app and agree on the plan. Keep it in the chat so both sides have the record." },
+  { icon: MessageCircle, title: "Chat", text: "Sign in with Google or email, message in the app and agree on the plan. Keep it in the chat so both sides have the record." },
   { icon: CalendarDays, title: "Book", text: "Pick a service if they list one, then send a request with the date, start time, hours (1 to 8, up to 60 days ahead) and a public meeting place. The Phriend accepts or declines. Add it to your calendar." },
   { icon: MapPin, title: "Meet", text: "Meet in public, hand over 50% in cash when you arrive, and settle the rest after. Then leave a review with up to 4 photos." },
 ];
@@ -62,7 +62,7 @@ const RULES: { icon: LucideIcon; title: string; text: string }[] = [
 ];
 
 const FEATURES: { icon: LucideIcon; title: string; text: string }[] = [
-  { icon: Search, title: "Search and favorites", text: "Filter by city, gender, language, activity, area, keyword, age and rate, narrow by sub-activity, favorite profiles that follow your Google account, and share a profile link." },
+  { icon: Search, title: "Search and favorites", text: "Filter by city, gender, language, activity, area, keyword, age and rate, narrow by sub-activity, favorite profiles that follow your account, and share a profile link." },
   { icon: CalendarDays, title: "Bookings", text: "Pick a service, a date, start time, 1 to 8 hours and a public meeting place, add a note, and send the request up to 60 days ahead. The Phriend accepts or declines; either side can cancel with a reason and mark the meetup completed afterwards. Add it to Google Calendar or download the .ics." },
   { icon: CalendarClock, title: "Schedule", text: "Phriends set their weekly days and hours and lock out dates up to a year ahead. Requests outside those hours, on a locked-out date or over an accepted booking are refused." },
   { icon: Tag, title: "Services and rates", text: "On top of their hourly rate, each Phriend lists up to 12 services, each with its own price per hour or per session, a minimum number of hours and an optional photo." },
@@ -72,7 +72,7 @@ const FEATURES: { icon: LucideIcon; title: string; text: string }[] = [
   { icon: Megaphone, title: "Gigs board", text: "Post what you need: the activity, city, budget per hour, date and details. Phriends with a live profile mark interest and chat; anyone can report a gig." },
   { icon: Bell, title: "Notifications", text: "A bell in the app and an email for every booking request, acceptance, decline, cancellation and completion, and for every new review." },
   { icon: ShieldCheck, title: "Safety", text: "ID verification through Didit before a profile goes live. Sample profiles are marked as samples and cannot be booked. Reports, profiles and gigs get an AI first pass; unclear cases go to a person on the moderation team, and every action is logged." },
-  { icon: UserX, title: "Your account", text: "Sign in with Google. Delete your account yourself by typing DELETE; your profile, photos, favorites, reviews, bookings, notes and gigs go with it." },
+  { icon: UserX, title: "Your account", text: "Sign in with Google, or with your email and a password. Delete your account yourself by typing DELETE; your profile, photos, favorites, reviews, bookings, notes and gigs go with it." },
   { icon: Wallet, title: "Cash, in person", text: "Money never moves in the app. Pay a 50% downpayment and 50% after. On a first meetup the downpayment is cash in person; e-wallets are for repeat Phriends you already trust. Never more than half upfront." },
 ];
 

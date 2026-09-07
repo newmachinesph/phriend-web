@@ -11,7 +11,7 @@ FEATURES
 https://phriend.app/#features
 ==================================================
 
-Search and favorites: filter by city, gender, language, activity, area, keyword, age and rate, narrow by sub-activity, favorite profiles that follow your Google account, and share a profile link.
+Search and favorites: filter by city, gender, language, activity, area, keyword, age and rate, narrow by sub-activity, favorite profiles that follow your account, and share a profile link.
 
 Bookings: pick a service, a date, start time, 1 to 8 hours and a public meeting place, add a note, and send the request up to 60 days ahead. The Phriend accepts or declines; either side can cancel with a reason and mark the meetup completed afterwards. Add it to Google Calendar or download the .ics. Money never moves in the app: 50% in cash on a first meetup, 50% after; e-wallets only for repeat, trusted Phriends.
 
@@ -31,7 +31,7 @@ Notifications: a bell in the app and an email for every booking request, accepta
 
 Safety: ID verification through Didit before a profile goes live. Sample profiles are marked as samples and cannot be booked. Reports, profiles and gigs get an AI first pass; unclear cases go to a person on the moderation team, and every action is logged.
 
-Your account: sign in with Google. Delete your account yourself by typing DELETE; your profile, photos, favorites, reviews, bookings, notes and gigs go with it.
+Your account: sign in with Google, or with your email and a password (confirmed by a 6-digit code). Delete your account yourself by typing DELETE; your profile, photos, favorites, reviews, bookings, notes and gigs go with it.
 
 Cash, in person: money never moves in the app. Pay a 50% downpayment and 50% after. On a first meetup the downpayment is cash in person; e-wallets are for repeat Phriends you already trust. Never more than half upfront.
 

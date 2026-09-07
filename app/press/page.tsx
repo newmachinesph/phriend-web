@@ -36,7 +36,7 @@ const PRODUCT = [
   "Gigs: clients post what they need with an activity, city, budget per hour, date and details; Phriends with a live profile mark interest and chat; gigs can be reported.",
   "Chat: photos, emojis, saved replies, delete for everyone, archive, block, typing and online indicators, and a profanity filter that warns twice, then mutes for escalating periods.",
   "Notifications: an in-app bell and an email for every booking update and new review. Members delete their own account in the app by typing DELETE.",
-  "Safety: Google sign-in, ID verification through Didit, sample profiles marked as samples and unbookable, and moderation with an AI first pass on reports, profiles and gigs, a human review queue and an audit log.",
+  "Safety: Google or email sign-in, ID verification through Didit, sample profiles marked as samples and unbookable, and moderation with an AI first pass on reports, profiles and gigs, a human review queue and an audit log.",
   "Payments: none in the app. 50% in cash on a first meetup, 50% after; e-wallets only for repeat, trusted Phriends.",
 ];
 

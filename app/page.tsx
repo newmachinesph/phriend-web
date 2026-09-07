@@ -12,7 +12,7 @@ import { APP_URL, pageMeta, POST_URL, SITE_DESCRIPTION, SITE_URL } from "@/lib/s
 export const metadata: Metadata = pageMeta({ description: SITE_DESCRIPTION, path: "/" });
 
 const TRUST: { icon: LucideIcon; label: string }[] = [
-  { icon: BadgeCheck, label: "ID-verified members" },
+  { icon: BadgeCheck, label: "Everyone is ID-verified" },
   { icon: MapPin, label: "Public meet-ups only" },
   { icon: Wallet, label: "50% downpayment, 50% after" },
   { icon: ShieldCheck, label: "18+ only" },
@@ -20,7 +20,7 @@ const TRUST: { icon: LucideIcon; label: string }[] = [
 
 const CLIENT_STEPS: { icon: LucideIcon; title: string; text: string }[] = [
   { icon: Search, title: "Browse", text: "Filter by city, gender, language, activity, area, keyword, age and rate, then narrow by sub-activity. Every profile shows the verified badge, reviews with photos, the Phriend's non-negotiables and their services and rates." },
-  { icon: MessageCircle, title: "Chat", text: "Sign in with Google or email, message in the app and agree on the plan. Keep it in the chat so both sides have the record." },
+  { icon: MessageCircle, title: "Chat", text: "Sign in with Google or email and verify your ID with Didit (about two minutes), then message in the app and agree on the plan. Keep it in the chat so both sides have the record." },
   { icon: CalendarDays, title: "Book", text: "Pick a service if they list one, then send a request with the date, start time, hours (1 to 8, up to 60 days ahead) and a public meeting place. The Phriend accepts or declines. Add it to your calendar." },
   { icon: MapPin, title: "Meet", text: "Meet in public, hand over 50% in cash when you arrive, and settle the rest after. Then leave a review with up to 4 photos." },
 ];
@@ -103,7 +103,7 @@ const FAQ: { q: string; a: string }[] = [
   },
   {
     q: "How does verification work?",
-    a: "Members submit a government ID (PhilID, passport, driver's license or UMID) and a selfie through Didit, our identity verification partner. It takes about two minutes. Didit checks the ID and confirms the member is 18 or older; Phriend emails the result and shows the verified badge on their profile. Verification is required before a Phriend profile goes live. Phriend is strictly 18+.",
+    a: "Members submit a government ID (PhilID, passport, driver's license or UMID) and a selfie through Didit, our identity verification partner. It takes about two minutes. Didit checks the ID and confirms the member is 18 or older; Phriend emails the result and shows the verified badge on their profile. Everyone verifies: you need it to chat, book, review or post a gig, and a Phriend profile cannot go live without it. Phriend is strictly 18+.",
   },
   {
     q: "What do Phriends agree to?",

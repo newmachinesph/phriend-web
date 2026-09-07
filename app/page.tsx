@@ -27,7 +27,7 @@ const CLIENT_STEPS: { icon: LucideIcon; title: string; text: string }[] = [
 
 const PHRIEND_STEPS: { icon: LucideIcon; title: string; text: string }[] = [
   { icon: BadgeCheck, title: "Verify", text: "Confirm you are 18+ with a quick ID check through Didit. Verification is required before your profile goes live; verified profiles get the badge." },
-  { icon: PenLine, title: "Profile", text: "Accept the Phriend agreement, add up to 8 photos, pick your activities, languages and non-negotiables, set your hourly rate and list your services with their own price per hour or per session. Your profile stays live for 30 days; save it again to renew." },
+  { icon: PenLine, title: "Profile", text: "Accept the Phriend agreement, add up to 8 photos, pick your activities, languages and non-negotiables, set your hourly rate and list your services with their own price per hour or per session. An AI checks the wording and every photo, then a person on the Phriend team approves the profile before it shows, usually within a day. It stays live for 30 days; save it again to renew." },
   { icon: CalendarClock, title: "Schedule", text: "Set your weekly availability and lock out the dates you are busy. Booking requests arrive in the app and by email; accept or decline." },
   { icon: Wallet, title: "Earn", text: "Meet in public and get paid in cash, directly. Your dashboard tracks bookings, reviews and an earnings estimate. Phriend takes no cut, for now." },
 ];
@@ -58,7 +58,7 @@ const RULES: { icon: LucideIcon; title: string; text: string }[] = [
   { icon: Lock, title: "Pay only the shared account", text: "Send money only to the bank or e-wallet account the Phriend shared in the chat. Anything else is a scam." },
   { icon: BadgeCheck, title: "ID verification", text: "Members verify their identity and age through Didit before they get the badge, and before a Phriend profile goes live." },
   { icon: Users, title: "Tell someone your plan", text: "Share where you are going, who you are meeting and when you expect to be back." },
-  { icon: Flag, title: "Report and block", text: "Report a profile or a gig from the app, block a member from the chat. Reports get an AI first pass; anything unclear goes to a person on the moderation team." },
+  { icon: Flag, title: "Report and block", text: "Report a profile or a gig from the app, block a member from the chat. Reports, profiles, photos and reviews get an AI first pass; every Phriend profile is approved by a person before it shows, and anything unclear goes to the moderation team." },
 ];
 
 const FEATURES: { icon: LucideIcon; title: string; text: string }[] = [
@@ -67,11 +67,11 @@ const FEATURES: { icon: LucideIcon; title: string; text: string }[] = [
   { icon: CalendarClock, title: "Schedule", text: "Phriends set their weekly days and hours and lock out dates up to a year ahead. Requests outside those hours, on a locked-out date or over an accepted booking are refused." },
   { icon: Tag, title: "Services and rates", text: "On top of their hourly rate, each Phriend lists up to 12 services, each with its own price per hour or per session, a minimum number of hours and an optional photo." },
   { icon: MessageCircle, title: "Chat", text: "Photos, emojis, saved replies and an auto-reply for first messages, typing and online indicators. Delete a message for everyone, archive a chat, block a member. Offensive language is refused: two warnings, then escalating mutes." },
-  { icon: Star, title: "Reviews", text: "Any signed-in member can review a Phriend: a star rating, a few words and up to 4 photos, one review per member per Phriend. Reviews show on the profile next to the verified badge." },
+  { icon: Star, title: "Reviews", text: "Any signed-in member can review a Phriend: a star rating, a few words and up to 4 photos, one review per member per Phriend. A review shows on the profile only after the Phriend approves it; offensive words are refused on the spot, and the moderation team can take down any review that breaks the rules." },
   { icon: LayoutDashboard, title: "Manage dashboard", text: "Phriends see profile views, favorites, reviews, bookings by status and an earnings estimate (cash, paid in person), plus private notes they can link to a booking and an activity log." },
   { icon: Megaphone, title: "Gigs board", text: "Post what you need: the activity, city, budget per hour, date and details. Phriends with a live profile mark interest and chat; anyone can report a gig." },
   { icon: Bell, title: "Notifications", text: "A bell in the app and an email for every booking request, acceptance, decline, cancellation and completion, and for every new review." },
-  { icon: ShieldCheck, title: "Safety", text: "ID verification through Didit before a profile goes live, enforced on the server, not just in the form. Sample profiles are marked as samples, cannot be booked, and retire one by one as real Phriends join. Reports, profiles and gigs get an AI first pass; unclear cases go to a person on the moderation team, and every action is logged." },
+  { icon: ShieldCheck, title: "Safety", text: "ID verification through Didit, enforced on the server, then an AI check of the wording and every photo, then a person on the team approves each Phriend profile before it shows. Reviews wait for the Phriend's approval. Sample profiles are marked as samples, cannot be booked, and retire one by one as real Phriends join. Reports and gigs get the same AI first pass, unclear cases go to a person, and every action is logged." },
   { icon: UserX, title: "Your account", text: "Sign in with Google, or with your email and a password. Delete your account yourself by typing DELETE; your profile, photos, favorites, reviews, bookings, notes and gigs go with it." },
   { icon: Wallet, title: "Cash, in person", text: "Money never moves in the app. Pay a 50% downpayment and 50% after. On a first meetup the downpayment is cash in person; e-wallets are for repeat Phriends you already trust. Never more than half upfront." },
 ];

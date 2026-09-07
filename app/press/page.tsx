@@ -27,12 +27,16 @@ const FACTS: { label: string; value: string }[] = [
 ];
 
 const PRODUCT = [
-  "Bookings: a client requests a date, start time, hours, a public meeting place and a note; the Phriend accepts or declines; either side can cancel with a reason; completed meetups can be reviewed. Every booking has Add to Google Calendar and an .ics download.",
-  "Schedule: Phriends set weekly availability and lock out dates. Clients cannot book a locked-out date.",
-  "Services and rates: each Phriend lists services with their own price per hour or per session, a minimum booking and an optional photo.",
-  "Manage dashboard for Phriends: profile views, favorites, reviews, bookings by status, an earnings estimate (cash, paid in person), private notes and an activity log.",
-  "Chat: photos, emojis, delete for everyone, archive, block, typing and online indicators, and a profanity filter that warns first, then mutes.",
-  "Safety: ID verification through Didit, sample profiles marked as samples, and moderation with an AI first pass and a human review queue.",
+  "Profiles: 37 activity categories with sub-activities, up to 8 photos, languages, non-negotiables pinned to the top, an hourly rate, and a seven-point Phriend agreement plus ID verification before a profile goes live. Profiles run for 30 days and are renewed by saving them again.",
+  "Bookings: a client picks a service, a date, start time, 1 to 8 hours, a public meeting place and a note, up to 60 days ahead; the Phriend accepts or declines; either side can cancel with a reason and mark the meetup completed afterwards. Every booking has Add to Google Calendar and an .ics download.",
+  "Schedule: Phriends set weekly days and hours and lock out dates up to a year ahead. Requests outside those hours, on a locked-out date or over an accepted booking are refused.",
+  "Services and rates: each Phriend lists up to 12 services with their own price per hour or per session, a minimum number of hours and an optional photo.",
+  "Manage dashboard for Phriends: profile views, favorites, reviews, bookings by status, an earnings estimate (cash, paid in person), private notes linkable to a booking, and an activity log.",
+  "Reviews: any signed-in member can review a Phriend with a star rating, text and up to 4 photos, one review per member per Phriend.",
+  "Gigs: clients post what they need with an activity, city, budget per hour, date and details; Phriends with a live profile mark interest and chat; gigs can be reported.",
+  "Chat: photos, emojis, saved replies, delete for everyone, archive, block, typing and online indicators, and a profanity filter that warns twice, then mutes for escalating periods.",
+  "Notifications: an in-app bell and an email for every booking update and new review. Members delete their own account in the app by typing DELETE.",
+  "Safety: Google sign-in, ID verification through Didit, sample profiles marked as samples and unbookable, and moderation with an AI first pass on reports, profiles and gigs, a human review queue and an audit log.",
   "Payments: none in the app. 50% in cash on a first meetup, 50% after; e-wallets only for repeat, trusted Phriends.",
 ];
 

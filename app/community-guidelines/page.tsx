@@ -83,7 +83,7 @@ export default function CommunityGuidelinesPage() {
         </li>
         <li>
           <strong>Off-platform payment scams</strong>: asking for more than 50% upfront, asking for payment to an
-          account not saved in the chat, sending payment links or QR codes outside the app, or requesting gift cards
+          account not shared in the chat, sending payment links or QR codes outside the app, or requesting gift cards
           and crypto.
         </li>
         <li>Meetups in private residences, hotel rooms or other private places.</li>
@@ -106,13 +106,15 @@ export default function CommunityGuidelinesPage() {
         </p>
       </Callout>
       <p>
-        There is no warning system for the prohibited items in section 3. For lesser issues such as a rude message or
-        a late cancellation, we may warn first, then suspend, then remove.
+        There is no warning system for the prohibited items in section 3. Offensive language in chat is refused
+        automatically: the first two attempts only warn, then the sender is muted for 1 hour, 24 hours, 7 days and 30
+        days in turn, and the moderation team reviews every flag and can ban. For other lesser issues such as a late
+        cancellation, we may warn first, then suspend, then remove.
       </p>
 
       <h2>6. Reporting</h2>
       <p>
-        Use the report button on any profile or chat, or email <a href="mailto:support@phriend.app">support@phriend.app</a>.
+        Use the report button on any profile or gig, or email <a href="mailto:support@phriend.app">support@phriend.app</a>.
         Tell us the profile name and what happened. Reports are confidential. See the{" "}
         <Link href="/safety">safety and transaction rules</Link> for what to do in an emergency.
       </p>

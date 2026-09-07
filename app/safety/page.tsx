@@ -17,7 +17,7 @@ export default function SafetyPage() {
       title="Safety and transaction rules"
       path="/safety"
       updated={LAST_UPDATED}
-      summary="Meet in public. Only the people agreed in the chat come along; if extra companions show up, cancel, leave and report. On a first meetup pay half in cash when you meet and half after, never more than half upfront. E-wallets are for repeat Phriends you trust, and only to the account saved in the chat. Tell a friend where you are, and report anything that feels wrong."
+      summary="Meet in public. Only the people agreed in the chat come along; if extra companions show up, cancel, leave and report. On a first meetup pay half in cash when you meet and half after, never more than half upfront. E-wallets are for repeat Phriends you trust, and only to the account shared in the chat. Tell a friend where you are, and report anything that feels wrong."
       intro="These rules apply to every member, on both sides of a meetup. They are short on purpose. Breaking them gets an account removed. Phriend is a platform only: it is not a party to any meetup or payment and is not liable for any loss, injury, dispute, unpaid balance or harm between members. You use the service at your own risk, and your prudence is your protection."
     >
       <h2>1. Public places only</h2>
@@ -46,7 +46,8 @@ export default function SafetyPage() {
       <h2>3. Payments: 50% at the start, 50% after</h2>
       <ul>
         <li>
-          Agree on the rate per hour and the number of hours <strong>in the chat</strong>, so both sides have a record.
+          Agree on the rate and the number of hours <strong>in the chat and in the booking request</strong>, so both
+          sides have a record.
         </li>
         <li>
           The client pays <strong>50% at the start</strong> of the meetup and the remaining <strong>50% after</strong> it
@@ -59,7 +60,7 @@ export default function SafetyPage() {
         <li>
           E-wallets (GCash, Maya) or bank transfer are for{" "}
           <strong>repeat Phriends the client has already met and trusts</strong>, for convenience. Even then, never more
-          than 50% upfront, and only to the account saved in the chat.
+          than 50% upfront, and only to the account shared in the chat.
         </li>
         <li>
           <strong>Never pay more than 50% upfront.</strong> No member may ask for full payment, a &quot;reservation
@@ -72,10 +73,10 @@ export default function SafetyPage() {
         </li>
       </ul>
 
-      <h2>4. Pay only the account saved in the chat</h2>
+      <h2>4. Pay only the account shared in the chat</h2>
       <p>
-        When a transfer is appropriate, that is with a repeat Phriend you trust, the Phriend saves their GCash, Maya or
-        bank account inside the chat. <strong>Send money only to that account.</strong> Any request to pay a different
+        When a transfer is appropriate, that is with a repeat Phriend you trust, the Phriend shares their GCash, Maya or
+        bank account in the chat. <strong>Send money only to that account.</strong> Any request to pay a different
         number, a relative&apos;s account, a &quot;company&quot; account, a link, a QR code sent by SMS or Messenger, or
         anything outside the chat is a scam. Stop, do not pay, and report the member.
       </p>
@@ -96,11 +97,12 @@ export default function SafetyPage() {
 
       <h2>7. Report and block</h2>
       <p>
-        Every profile and every chat has a report button. Use it for anything that breaks these rules or the{" "}
-        <Link href="/community-guidelines">community guidelines</Link>: requests for private meetups, unagreed
-        companions, romantic or sexual propositions, off-platform payment requests, harassment, impersonation, or a
-        member who looks under 18. Blocking stops all contact immediately. Reports are reviewed by a person, and serious
-        cases are passed to the authorities.
+        Every profile and every gig has a report button, and the chat menu leads to it. Use it for anything that breaks
+        these rules or the <Link href="/community-guidelines">community guidelines</Link>: requests for private meetups,
+        unagreed companions, romantic or sexual propositions, off-platform payment requests, harassment, impersonation,
+        or a member who looks under 18. You can attach up to 4 photos as evidence. Blocking, from the chat menu, hides
+        the member&apos;s profile and chats and stops their messages reaching you. Reports get an AI first pass; anything
+        unclear goes to a person on the moderation team, and serious cases are passed to the authorities.
       </p>
 
       <h2>8. Late arrivals</h2>
@@ -119,7 +121,8 @@ export default function SafetyPage() {
       <h2>9. Cancellations</h2>
       <ul>
         <li>
-          Cancel at least <strong>24 hours</strong> before the meetup, in the chat.
+          Cancel at least <strong>24 hours</strong> before the meetup: cancel the booking in the app with a reason, and
+          say so in the chat.
         </li>
         <li>
           If the client cancels with less than 24 hours&apos; notice, the Phriend may keep any downpayment already paid.
@@ -158,7 +161,7 @@ export default function SafetyPage() {
         <li>Meet in public.</li>
         <li>Only the people agreed in the chat. Extra companions: cancel, leave, report.</li>
         <li>First meetup: half in cash when you meet, half after. Never more than half.</li>
-        <li>E-wallet only for repeat Phriends you trust, and only to the account saved in the chat.</li>
+        <li>E-wallet only for repeat Phriends you trust, and only to the account shared in the chat.</li>
         <li>Tell a friend where you are.</li>
         <li>Report anything that feels wrong.</li>
       </ol>

@@ -28,29 +28,37 @@ export default function PrivacyPage() {
       <h2>2. What we collect</h2>
       <ul>
         <li>
-          <strong>Account data</strong>: your email address, password hash, display name, and the sign-in method you
-          use.
+          <strong>Account data</strong>: the name, email address and profile photo of the Google account you sign in
+          with, plus the display name, gender, birth date and avatar you set.
         </li>
         <li>
-          <strong>Account and Phriend profile data</strong>: name or nickname, age, gender, city and area, languages, activities,
-          hourly rate, bio, and the photos you upload.
+          <strong>Phriend profile data</strong>: name or nickname, age, gender, city and area, languages, activities and
+          sub-activities, non-negotiables, hourly rate, services and their prices, working hours, weekly availability
+          and lockout dates, bio, and up to 8 photos you upload.
+        </li>
+        <li>
+          <strong>Bookings, reviews, favorites, gigs and notes</strong>: the date, time, hours, place, note and status
+          of each booking request; the reviews you write, with up to 4 photos; the profiles you favorite; the gigs you
+          post; and your private notes, which only you can read.
         </li>
         <li>
           <strong>Chat messages</strong>: the messages, images and payment account details you exchange with other
-          members. Chat is delivered through Ably, our real-time messaging provider.
+          members. Chat is delivered through Ably, our real-time messaging provider. A message that contains listed
+          offensive words is refused and recorded, with the matched words, for moderation.
         </li>
         <li>
           <strong>Identity verification data</strong>: if you verify, you submit a government ID and a selfie to
-          Didit, our verification partner. Didit checks them and stores the ID data on Phriend&apos;s behalf. Phriend
-          receives the result (verified or not), your verified age bracket, and a reference number, not a copy of your
-          ID.
+          Didit, our verification partner. Didit checks them and keeps the images. Phriend receives and stores
+          Didit&apos;s decision record: the result, a session reference and the details Didit read from your ID, not
+          the ID or selfie images.
         </li>
         <li>
           <strong>Device and usage data</strong>: IP address, browser and device type, pages viewed, approximate
           location derived from IP, crash and performance logs.
         </li>
         <li>
-          <strong>Reports and support</strong>: anything you send us when you report a member or contact support.
+          <strong>Reports and support</strong>: the reason and up to 4 photos you attach when you report a profile or
+          a gig, and anything you send support.
         </li>
       </ul>
 
@@ -58,11 +66,17 @@ export default function PrivacyPage() {
       <p>We process your data to:</p>
       <ul>
         <li>run your account and show your Phriend profile to other members (performance of our contract with you);</li>
-        <li>deliver chat between members;</li>
+        <li>deliver chat and booking requests between members;</li>
         <li>verify age and identity, prevent fraud, and keep minors off the Service (legal obligation and legitimate interest);</li>
-        <li>review reports, enforce the terms and community guidelines, and cooperate with lawful requests;</li>
-        <li>keep the Service secure and working, and fix bugs;</li>
-        <li>send you service emails such as verification results, security alerts and policy changes.</li>
+        <li>
+          review reports, profiles and gigs, including an automated first pass, enforce the terms and community
+          guidelines, and cooperate with lawful requests;
+        </li>
+        <li>keep the Service secure and working, limit abusive request rates, and fix bugs;</li>
+        <li>
+          send you service emails (a welcome on first sign-in, verification results and booking updates) and in-app
+          notifications for bookings and reviews, and announce policy changes.
+        </li>
       </ul>
       <p>We do not sell personal data and we do not use it for third-party advertising.</p>
 
@@ -73,10 +87,22 @@ export default function PrivacyPage() {
       </p>
       <ul>
         <li>
+          <strong>Google</strong>: sign-in. We receive your name, email address and profile photo from your Google
+          account.
+        </li>
+        <li>
           <strong>Ably</strong>: real-time chat delivery.
         </li>
         <li>
           <strong>Didit</strong>: identity and age verification.
+        </li>
+        <li>
+          <strong>OpenAI</strong>: the automated first-pass review of reports, Phriend profiles and gigs run by our
+          moderation team.
+        </li>
+        <li>
+          <strong>Upstash</strong>: request rate limiting, which keeps short-lived counters keyed by your account or IP
+          address.
         </li>
         <li>
           <strong>Cloudflare R2</strong>: storage of uploaded photos.
@@ -98,15 +124,18 @@ export default function PrivacyPage() {
       <h2>5. How long we keep it</h2>
       <ul>
         <li>
-          <strong>Phriend profiles</strong> expire after 30 days unless you renew them, and are deleted shortly after expiry.
+          <strong>Phriend profiles</strong> leave the feed after 30 days unless you save them again; the profile stays
+          on your account until you delete it or your account.
         </li>
         <li>
           <strong>Verification data</strong> is retained only as long as needed to confirm the result and handle
           disputes, then deleted by Didit on our instruction.
         </li>
         <li>
-          <strong>Account, profile and chat data</strong> are kept while your account is active and deleted within 30
-          days of account deletion, except where we must keep records of a report or a legal matter.
+          <strong>Account data</strong> is kept while your account is active. When you delete your account, your
+          account, Phriend profile, photos, favorites, reviews, bookings, notes, gigs and reports are removed right
+          away, except the moderation log, which keeps a record of any action taken on the account. Chat messages are
+          delivered and stored by Ably under its message retention; deleting your account does not itself erase them.
         </li>
         <li>
           <strong>Logs</strong> are kept for up to 90 days.
@@ -139,7 +168,8 @@ export default function PrivacyPage() {
       </ul>
       <p>
         To exercise any of these, email <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a> from the address on your
-        account; we respond within 15 working days. You can also delete your account from the settings screen.
+        account; we respond within 15 working days. You can also delete your account from your profile screen by
+        typing DELETE.
       </p>
 
       <h2>7. Cookies</h2>
@@ -160,8 +190,8 @@ export default function PrivacyPage() {
 
       <h2>9. Security</h2>
       <p>
-        Data is encrypted in transit, passwords are hashed, production access is limited to the people who need it, and
-        ID documents never pass through our own servers. If a breach affects you we will notify you and the National
+        Data is encrypted in transit, sign-in goes through Google so we never hold a password, production access is
+        limited to the people who need it, and ID documents never pass through our own servers. If a breach affects you we will notify you and the National
         Privacy Commission as the law requires.
       </p>
 

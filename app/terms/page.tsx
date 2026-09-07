@@ -17,7 +17,7 @@ export default function TermsPage() {
       title="Terms of Use"
       path="/terms"
       updated={LAST_UPDATED}
-      summary="Phriend is a listing and messaging platform for adults (18+) in the Philippines to arrange platonic, paid-by-the-hour company and legit side gigs. Phriend is not a party to any meetup or payment, holds no money, takes no commission, and is not liable for any loss, injury, dispute or unpaid balance between members. You use the service at your own risk, and your prudence is your protection."
+      summary="Phriend is a listing, messaging and booking platform for adults (18+) in the Philippines to arrange platonic, paid-by-the-hour company and legit side gigs. Phriend is not a party to any meetup or payment, holds no money, takes no commission, and is not liable for any loss, injury, dispute or unpaid balance between members. You use the service at your own risk, and your prudence is your protection."
       intro="Please read these terms before using Phriend. By creating an account or using the app you agree to them. If you do not agree, do not use Phriend."
     >
       <Callout tone="verify">
@@ -30,7 +30,7 @@ export default function TermsPage() {
       <h2>1. Who we are and what Phriend is</h2>
       <p>
         Phriend (&quot;Phriend&quot;, &quot;we&quot;, &quot;us&quot;) operates the website phriend.app and the web app at
-        web.phriend.app (together, the &quot;Service&quot;). The Service is a listing and messaging platform where adults
+        web.phriend.app (together, the &quot;Service&quot;). The Service is a listing, messaging and booking platform where adults
         in the Philippines can publish a Phriend profile offering platonic, paid-by-the-hour company and legitimate side gigs
         (&quot;Phriends&quot;), and other adults can find them and arrange meetups (&quot;clients&quot;). Both are
         &quot;members&quot;.
@@ -39,16 +39,17 @@ export default function TermsPage() {
       <h2>2. Eligibility</h2>
       <p>
         You must be of legal age in the Philippines to use the Service. Republic Act No. 6809 sets the age of majority
-        at <strong>18 years</strong>. By using the Service you confirm you are 18 or older. We may ask you to verify
-        your identity and age through our verification partner, Didit, and we may suspend or remove accounts that are
-        not verified when we ask or that we reasonably believe belong to a minor.
+        at <strong>18 years</strong>. By using the Service you confirm you are 18 or older. Publishing a Phriend profile
+        requires verifying your identity and age through our verification partner, Didit; any member may verify. We
+        may suspend or remove accounts that we reasonably believe belong to a minor.
       </p>
 
       <h2>3. Your account</h2>
       <p>
-        Keep your login details private; you are responsible for everything done under your account. One person, one
-        account, with accurate information. Tell us at <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a> if you
-        think your account has been used without your permission.
+        You sign in with your Google account; keep it secure, because you are responsible for everything done under
+        your Phriend account. One person, one account, one Phriend profile, with accurate information. Tell us at{" "}
+        <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a> if you think your account has been used without your
+        permission.
       </p>
 
       <h2>4. Phriend is a platform, not a party</h2>
@@ -76,7 +77,7 @@ export default function TermsPage() {
         the downpayment deducted from the total and never more than 50% paid in advance. On a{" "}
         <strong>first meetup the downpayment is handed over in cash, in person, when the members meet</strong>.
         E-wallets such as GCash or Maya, or bank transfer, are for repeat Phriends the client has already met and
-        trusts, for convenience, and only ever to the account the other member has saved in the chat. Phriend is not
+        trusts, for convenience, and only ever to the account the other member has shared in the chat. Phriend is not
         responsible for refunds, disputes, chargebacks, unpaid balances or losses arising from payments between
         members. Be prudent: your prudence is your protection.
       </p>
@@ -89,7 +90,11 @@ export default function TermsPage() {
           <Link href="/community-guidelines">community guidelines</Link>.
         </li>
         <li>Treat other members with respect. No harassment, threats, discrimination or hate speech.</li>
-        <li>Agree on the plan, hours and rate in the chat so both sides have a record.</li>
+        <li>Agree on the plan, hours and rate in the chat and in the booking request so both sides have a record.</li>
+        <li>
+          Before a Phriend profile goes live, the member accepts the seven-point Phriend agreement shown in the app,
+          which restates these rules, the payment terms and this platform-only status.
+        </li>
       </ul>
 
       <h2>7. Prohibited uses</h2>
@@ -116,9 +121,11 @@ export default function TermsPage() {
 
       <h2>9. Termination</h2>
       <p>
-        You can delete your account at any time from the settings screen. We may suspend or remove your account,
-        Phriend profile or messages if you breach these terms, the community guidelines or the safety rules, if we receive a
-        credible report about you, or if the law requires it. Breaches involving sexual or romantic services, minors,
+        You can delete your account at any time from your profile screen by typing DELETE; this permanently removes
+        your account, Phriend profile, photos, favorites, reviews, bookings, notes and gigs. We may hide your Phriend
+        profile or gig, mute you in chat, cancel a booking, or suspend or remove your account if you breach these
+        terms, the community guidelines or the safety rules, if we receive a credible report about you, or if the law
+        requires it. Breaches involving sexual or romantic services, minors,
         scams or violence mean immediate removal and, where required, a report to the authorities.
       </p>
 

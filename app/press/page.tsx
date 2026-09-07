@@ -16,18 +16,18 @@ export const metadata: Metadata = pageMeta({
 const BOILERPLATE =
   "Phriend is a Philippine app for hiring a verified local friend by the hour for legit activities: food trips, city tours, events, tutoring, hospital or errand buddies, and more. Members are 18 and older, ID-verified through Didit, meet in public places only, and pay 50% upfront, 50% after: cash in person on a first meetup, e-wallet only once they already trust each other. Phriend is a platform only and is not a party to the meetups. It launched in 2026 in the Philippines. The company site is phriend.app and the app runs in the browser at web.phriend.app.";
 
-const FACTS: { label: string; value: string }[] = [
+const facts = (n: number): { label: string; value: string }[] => [
   { label: "Founded", value: "2026" },
   { label: "Based in", value: "Metro Manila, nationwide" },
-  { label: "Activity categories", value: "46+" },
+  { label: "Activity categories", value: `${n}+` },
   { label: "Typical rate", value: "₱300 to ₱1,500 / hr" },
   { label: "ID verification", value: "Didit" },
   { label: "Meet-ups", value: "Public places only" },
   { label: "Age", value: "18+ only" },
 ];
 
-const PRODUCT = [
-  "Profiles: 46+ activity categories with sub-activities, up to 8 photos, languages, non-negotiables pinned to the top, an hourly rate, and a seven-point Phriend agreement plus ID verification before a profile goes live. Profiles run for 30 days and are renewed by saving them again.",
+const product = (n: number) => [
+  `Profiles: ${n}+ activity categories with sub-activities, up to 8 photos, languages, non-negotiables pinned to the top, an hourly rate, and a seven-point Phriend agreement plus ID verification before a profile goes live. Profiles run for 30 days and are renewed by saving them again.`,
   "Bookings: a client picks a service, a date, start time, 1 to 8 hours, a public meeting place and a note, up to 60 days ahead; the Phriend accepts or declines; either side can cancel with a reason and mark the meetup completed afterwards. Every booking has Add to Google Calendar and an .ics download.",
   "Schedule: Phriends set weekly days and hours and lock out dates up to a year ahead. Requests outside those hours, on a locked-out date or over an accepted booking are refused.",
   "Services and rates: each Phriend lists up to 12 services with their own price per hour or per session, a minimum number of hours and an optional photo.",
@@ -176,7 +176,19 @@ function Mark({ height }: { height: number }) {
   );
 }
 
-export default function PressPage() {
+/** Live category count from the app, refreshed hourly, so the numbers never drift from the product. */
+async function categoryCount() {
+  try {
+    const res = await fetch("https://web.phriend.app/api/categories", { next: { revalidate: 3600 } });
+    const d = (await res.json()) as { categories?: unknown[] };
+    return d.categories?.length || 46;
+  } catch {
+    return 46;
+  }
+}
+
+export default async function PressPage() {
+  const n = await categoryCount();
   return (
     <main id="main" className="flex-1">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: breadcrumbJsonLd("Press kit", "/press") }} />
@@ -223,7 +235,7 @@ export default function PressPage() {
             Phriend in numbers.
           </h2>
           <dl className="mt-8 grid grid-cols-2 gap-3 md:grid-cols-4">
-            {FACTS.map((f) => (
+            {facts(n).map((f) => (
               <div key={f.label} className="rounded-2xl border border-line bg-white p-4 shadow-card">
                 <dt className="text-xs font-extrabold uppercase tracking-wider text-muted">{f.label}</dt>
                 <dd className="mt-1 text-xl font-extrabold text-ink">{f.value}</dd>
@@ -233,7 +245,7 @@ export default function PressPage() {
 
           <h3 className="mt-12 font-display text-2xl font-semibold text-ink">Product</h3>
           <ul className="mt-4 max-w-3xl space-y-3 text-[15px] font-semibold text-ink">
-            {PRODUCT.map((p) => (
+            {product(n).map((p) => (
               <li key={p} className="flex items-start gap-2.5">
                 <BadgeCheck size={20} className="mt-0.5 shrink-0 text-brand" aria-hidden="true" />
                 {p}

@@ -1,7 +1,10 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  // phriend.app/@name is the short form of a Phriend's vanity link; the app serves it.
+  async redirects() {
+    return [{ source: "/@:username", destination: "https://web.phriend.app/@:username", permanent: false }];
+  },
 };
 
 export default nextConfig;

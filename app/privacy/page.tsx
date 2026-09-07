@@ -173,7 +173,7 @@ export default function PrivacyPage() {
         typing DELETE.
       </p>
 
-      <h2>7. Cookies</h2>
+      <h2 id="cookies" className="scroll-mt-24">7. Cookies</h2>
       <p>
         We use <strong>essential cookies</strong> (a session cookie that keeps you signed in and one that remembers
         your preferences) and <strong>Google Analytics 4</strong> to count visits and see which pages are used. Analytics sets

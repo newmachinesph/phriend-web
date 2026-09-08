@@ -358,7 +358,7 @@ export default function Home() {
             {ACTIVITIES.map((a) => (
               <li key={a.slug}>
                 <a
-                  href={`${APP_URL}/?category=${a.slug}`}
+                  href={`${APP_URL}/${a.label.toLowerCase().replace(/&/g, " and ").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "")}`} // the app's friendly category landing (same slug rule as web.phriend.app)
                   className="group flex items-center gap-3 rounded-2xl border border-line bg-white px-4 py-3.5 font-bold text-ink transition-colors hover:border-brand hover:bg-brand-soft"
                 >
                   <span className="grid size-10 shrink-0 place-items-center rounded-xl bg-surface text-brand transition-colors group-hover:bg-white">

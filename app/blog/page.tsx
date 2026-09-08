@@ -11,7 +11,7 @@ export const metadata: Metadata = pageMeta({
   path: "/blog",
 });
 
-const fmt = (iso: string) => new Date(`${iso}T00:00:00+08:00`).toLocaleDateString("en-PH", { year: "numeric", month: "long", day: "numeric" });
+const fmt = (iso: string) => new Date(`${iso}T00:00:00+08:00`).toLocaleDateString("en-PH", { timeZone: "Asia/Manila", year: "numeric", month: "long", day: "numeric" });
 
 export default function BlogIndex() {
   const [latest, ...rest] = [...POSTS].sort((a, b) => b.date.localeCompare(a.date));

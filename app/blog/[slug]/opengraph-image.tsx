@@ -1,6 +1,7 @@
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { ImageResponse } from "next/og";
+import { findDbPost } from "@/lib/blog-db";
 import { findPost } from "../_posts";
 
 export const alt = "Phriend blog";
@@ -14,9 +15,11 @@ const logo = `data:image/png;base64,${read("brand/logo-mark.png").toString("base
 
 /** Share card for an article: the hero photo with a navy wash, the headline, the logo tile and a read prompt, at 1.91:1. */
 export default async function Image({ params }: { params: Promise<{ slug: string }> }) {
-  const post = findPost((await params).slug);
-  const photo = post ? `data:image/jpeg;base64,${read(post.hero.src).toString("base64")}` : null;
-  const headline = post?.ogTitle ?? post?.title ?? "Guides for people who could be earning on Phriend";
+  const slug = (await params).slug;
+  const post = findPost(slug);
+  const db = post ? null : await findDbPost(slug);
+  const photo = post ? `data:image/jpeg;base64,${read(post.hero.src).toString("base64")}` : db?.cover?.startsWith("https://") ? db.cover : null;
+  const headline = post?.ogTitle ?? post?.title ?? db?.title ?? "Guides for people who could be earning on Phriend";
   return new ImageResponse(
     (
       <div style={{ width: "100%", height: "100%", display: "flex", position: "relative", background: "#0d2251", color: "#fff", fontFamily: "Fredoka" }}>

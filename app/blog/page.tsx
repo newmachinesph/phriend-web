@@ -3,7 +3,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { breadcrumbJsonLd, pageMeta } from "@/lib/site";
+import { listDbPosts, readingMinutes } from "@/lib/blog-db";
 import { POSTS } from "./_posts";
+
+export const revalidate = 300;
 
 export const metadata: Metadata = pageMeta({
   title: "Blog: side-income guides for Filipino locals",
@@ -13,8 +16,12 @@ export const metadata: Metadata = pageMeta({
 
 const fmt = (iso: string) => new Date(`${iso}T00:00:00+08:00`).toLocaleDateString("en-PH", { timeZone: "Asia/Manila", year: "numeric", month: "long", day: "numeric" });
 
-export default function BlogIndex() {
-  const [latest, ...rest] = [...POSTS].sort((a, b) => b.date.localeCompare(a.date));
+type Card = { slug: string; title: string; description: string; date: string; readingMinutes: number; tag: string; label: string; hero: { src: string; alt: string } };
+const fromStatic = (p: (typeof POSTS)[number]): Card => ({ slug: p.slug, title: p.title, description: p.description, date: p.date, readingMinutes: p.readingMinutes, tag: p.tags[0], label: p.category.label, hero: p.hero });
+
+export default async function BlogIndex() {
+  const db = (await listDbPosts()).map<Card>((p) => ({ slug: p.slug, title: p.title, description: p.description, date: p.publishedAt.slice(0, 10), readingMinutes: readingMinutes(p.bodyMd), tag: p.tags[0] ?? "Guide", label: p.niche || "Phriend", hero: { src: p.cover || "/blog/photographers-hero.jpg", alt: p.title } }));
+  const [latest, ...rest] = [...POSTS.map(fromStatic), ...db].sort((a, b) => b.date.localeCompare(a.date));
   return (
     <main className="mx-auto w-full max-w-6xl px-5 py-14 sm:px-8 sm:py-20">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: breadcrumbJsonLd("Blog", "/blog") }} />
@@ -28,7 +35,7 @@ export default function BlogIndex() {
             <Image src={latest.hero.src} alt={latest.hero.alt} width={1600} height={900} sizes="(min-width: 768px) 640px, 100vw" className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]" priority />
           </div>
           <div className="flex flex-col justify-center">
-            <p className="text-sm font-extrabold uppercase tracking-wider text-brand-text">{latest.tags[0]} · {latest.category.label}</p>
+            <p className="text-sm font-extrabold uppercase tracking-wider text-brand-text">{latest.tag} · {latest.label}</p>
             <h2 className="mt-2 font-display text-2xl font-semibold leading-tight text-ink sm:text-3xl">{latest.title}</h2>
             <p className="mt-3 leading-relaxed">{latest.description}</p>
             <p className="mt-4 text-sm font-semibold text-muted">
@@ -49,7 +56,7 @@ export default function BlogIndex() {
                 <div className="relative aspect-[16/9] overflow-hidden rounded-2xl">
                   <Image src={p.hero.src} alt={p.hero.alt} width={1600} height={900} sizes="(min-width: 1024px) 360px, (min-width: 640px) 50vw, 100vw" className="h-full w-full object-cover" />
                 </div>
-                <p className="mt-4 text-xs font-extrabold uppercase tracking-wider text-brand-text">{p.category.label}</p>
+                <p className="mt-4 text-xs font-extrabold uppercase tracking-wider text-brand-text">{p.label}</p>
                 <h2 className="mt-1 font-display text-xl font-semibold leading-tight text-ink">{p.title}</h2>
                 <p className="mt-auto pt-3 text-sm font-semibold text-muted">
                   {fmt(p.date)} · {p.readingMinutes} min read

@@ -9,8 +9,11 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@neondatabase/serverless": "^1.1.0",
     "@next/third-parties": "^16.3.4",
+    "isomorphic-dompurify": "^4.2.0",
     "lucide-react": "^1.41.0",
+    "marked": "^18.0.12",
     "next": "16.3.4",
     "react": "19.2.8",
     "react-dom": "19.2.8"

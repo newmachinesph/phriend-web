@@ -8,7 +8,7 @@ import { APP_URL, POST_URL } from "@/lib/site";
 
 export function Figure({ src, alt, caption, priority = false }: { src: string; alt: string; caption?: string; priority?: boolean }) {
   return (
-    <figure className="not-article my-10">
+    <figure className="my-10">
       <div className="relative aspect-[16/9] overflow-hidden rounded-3xl shadow-card">
         <Image src={src} alt={alt} fill sizes="(min-width: 768px) 768px, 100vw" className="object-cover" priority={priority} />
       </div>
@@ -20,7 +20,7 @@ export function Figure({ src, alt, caption, priority = false }: { src: string; a
 /** Two app screenshots side by side in phone frames, with a caption under each. */
 export function PhoneShots({ shots }: { shots: { src: string; alt: string; caption: string }[] }) {
   return (
-    <div className="not-article my-10 rounded-3xl bg-navy-gradient px-6 py-10 sm:px-10">
+    <div className="my-10 rounded-3xl bg-navy-gradient px-6 py-10 sm:px-10">
       <div className="mx-auto grid max-w-2xl gap-8 sm:grid-cols-2">
         {shots.map((s) => (
           <figure key={s.src} className="mx-auto w-full max-w-[260px]">
@@ -39,7 +39,7 @@ export function PhoneShots({ shots }: { shots: { src: string; alt: string; capti
 
 export function Callout({ title, children }: { title: string; children: ReactNode }) {
   return (
-    <aside className="not-article my-8 rounded-2xl border-2 border-brand/30 bg-brand-soft px-6 py-5">
+    <aside className="my-8 rounded-2xl border-2 border-brand/30 bg-brand-soft px-6 py-5">
       <p className="text-sm font-extrabold uppercase tracking-wider text-brand-text">{title}</p>
       <div className="mt-2 text-[17px] leading-relaxed text-ink">{children}</div>
     </aside>
@@ -48,7 +48,7 @@ export function Callout({ title, children }: { title: string; children: ReactNod
 
 export function Steps({ steps }: { steps: { icon: LucideIcon; title: string; text: string }[] }) {
   return (
-    <ol className="not-article my-10 grid gap-5 sm:grid-cols-3">
+    <ol className="my-10 grid gap-5 sm:grid-cols-3">
       {steps.map((s, i) => (
         <li key={s.title} className="flex flex-col rounded-3xl border border-line bg-white px-7 py-8 shadow-card">
           <div className="flex items-center justify-between">
@@ -69,7 +69,7 @@ export function Steps({ steps }: { steps: { icon: LucideIcon; title: string; tex
 export function RateTable({ rows }: { rows: { session: string; hours: number; rate: number }[] }) {
   const peso = (n: number) => `₱${n.toLocaleString("en-PH")}`;
   return (
-    <div className="not-article my-10 overflow-hidden rounded-3xl border border-line shadow-card">
+    <div className="my-10 overflow-hidden rounded-3xl border border-line shadow-card">
       <table className="w-full text-left text-[15px]">
         <thead className="bg-surface text-xs font-extrabold uppercase tracking-wider text-muted">
           <tr>
@@ -97,7 +97,7 @@ export function RateTable({ rows }: { rows: { session: string; hours: number; ra
 
 export function ArticleCta({ category }: { category: { path: string; label: string } }) {
   return (
-    <div className="not-article mt-14 rounded-3xl bg-navy-gradient px-6 py-10 text-white sm:px-10">
+    <div className="mt-14 rounded-3xl bg-navy-gradient px-6 py-10 text-white sm:px-10">
       <p className="text-sm font-extrabold uppercase tracking-wider text-brand-light">Ready when you are</p>
       <h2 className="mt-2 font-display text-3xl font-semibold leading-tight sm:text-4xl">Put your camera on Phriend this week.</h2>
       <p className="mt-3 max-w-xl text-white/80">

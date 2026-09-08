@@ -135,56 +135,58 @@ body {
   font-weight: 800;
 }
 
-/* Blog articles: same idea as .legal, tuned for reading. Components that bring their own layout carry .not-article. */
-.article {
-  font-size: 1.0625rem;
-  line-height: 1.8;
-  color: var(--color-body);
-}
-.article .lead {
-  font-size: 1.25rem;
-  line-height: 1.65;
-  color: var(--color-ink);
-}
-.article h2 {
-  margin: 2.75rem 0 0.875rem;
-  font-family: var(--font-display);
-  font-size: 1.75rem;
-  font-weight: 600;
-  line-height: 1.2;
-  color: var(--color-ink);
-}
-.article p {
-  margin-bottom: 1.125rem;
-}
-.article ul {
-  margin: 0 0 1.25rem 1.25rem;
-  list-style: disc;
-}
-.article li {
-  margin-bottom: 0.5rem;
-  padding-left: 0.25rem;
-}
-.article li::marker {
-  color: var(--color-brand);
-}
-.article strong {
-  color: var(--color-ink);
-  font-weight: 800;
-}
-.article a {
-  color: var(--color-brand-text);
-  font-weight: 700;
-  text-decoration: underline;
-  text-underline-offset: 3px;
-}
-.article dl div {
-  margin-bottom: 1.25rem;
-}
-.article dt {
-  font-weight: 800;
-  color: var(--color-ink);
-}
-.article dd {
-  margin-top: 0.25rem;
+/* Blog articles: same idea as .legal, tuned for reading. In @layer components so utility classes on embedded cards, figures and tables override these. */
+@layer components {
+  .article {
+    font-size: 1.0625rem;
+    line-height: 1.8;
+    color: var(--color-body);
+  }
+  .article .lead {
+    font-size: 1.25rem;
+    line-height: 1.65;
+    color: var(--color-ink);
+  }
+  .article h2 {
+    margin: 2.75rem 0 0.875rem;
+    font-family: var(--font-display);
+    font-size: 1.75rem;
+    font-weight: 600;
+    line-height: 1.2;
+    color: var(--color-ink);
+  }
+  .article p {
+    margin-bottom: 1.125rem;
+  }
+  .article ul {
+    margin: 0 0 1.25rem 1.25rem;
+    list-style: disc;
+  }
+  .article li {
+    margin-bottom: 0.5rem;
+    padding-left: 0.25rem;
+  }
+  .article li::marker {
+    color: var(--color-brand);
+  }
+  .article strong {
+    color: var(--color-ink);
+    font-weight: 800;
+  }
+  .article a {
+    color: var(--color-brand-text);
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .article dl div {
+    margin-bottom: 1.25rem;
+  }
+  .article dt {
+    font-weight: 800;
+    color: var(--color-ink);
+  }
+  .article dd {
+    margin-top: 0.25rem;
+  }
 }

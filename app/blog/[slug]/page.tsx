@@ -6,7 +6,7 @@ import { pageMeta, SITE_NAME, SITE_URL } from "@/lib/site";
 import { findDbPost, readingMinutes, renderMarkdown } from "@/lib/blog-db";
 import { findPost, POSTS } from "../_posts";
 
-export const revalidate = 300;
+export const revalidate = 60; // articles published in Ops appear within a minute (a cached 404 for a draft too)
 export const dynamicParams = true;
 
 export const generateStaticParams = () => POSTS.map((p) => ({ slug: p.slug }));

@@ -6,7 +6,7 @@ import { breadcrumbJsonLd, pageMeta } from "@/lib/site";
 import { listDbPosts, readingMinutes } from "@/lib/blog-db";
 import { POSTS } from "./_posts";
 
-export const revalidate = 300;
+export const revalidate = 60; // articles published in Ops appear within a minute (a cached 404 for a draft too)
 
 export const metadata: Metadata = pageMeta({
   title: "Blog: side-income guides for Filipino locals",

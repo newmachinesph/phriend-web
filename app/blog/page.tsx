@@ -6,7 +6,7 @@ import { breadcrumbJsonLd, pageMeta } from "@/lib/site";
 import { POSTS } from "./_posts";
 
 export const metadata: Metadata = pageMeta({
-  title: "Blog",
+  title: "Blog: side-income guides for Filipino locals",
   description: "Guides for people who could earn on Phriend: photographers, tour guides, tutors, fitness buddies and more. What clients book, what to charge, how to stay safe.",
   path: "/blog",
 });

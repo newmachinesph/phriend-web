@@ -4,7 +4,7 @@ import { Callout, Legal } from "@/components/legal";
 import { LAST_UPDATED, pageMeta } from "@/lib/site";
 
 export const metadata: Metadata = pageMeta({
-  title: "Safety and transaction rules",
+  title: "Safety and transaction rules for meetups",
   description:
     "How Phriend meetups and payments work: public places only, 50% cash on a first meetup, e-wallet only for repeat Phriends, late arrivals and cancellations.",
   path: "/safety",

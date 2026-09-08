@@ -4,7 +4,7 @@ import { Callout, Legal } from "@/components/legal";
 import { CONTACT_EMAIL, LAST_UPDATED, pageMeta } from "@/lib/site";
 
 export const metadata: Metadata = pageMeta({
-  title: "Terms of Use",
+  title: "Terms of Use for the Phriend platform",
   description:
     "Terms for using Phriend, a platform for adults in the Philippines to arrange paid-by-the-hour, platonic company. Not a party to any meetup or payment.",
   path: "/terms",

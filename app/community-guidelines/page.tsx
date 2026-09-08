@@ -4,7 +4,7 @@ import { Callout, Legal } from "@/components/legal";
 import { LAST_UPDATED, pageMeta } from "@/lib/site";
 
 export const metadata: Metadata = pageMeta({
-  title: "Community guidelines",
+  title: "Community guidelines: what Phriend allows",
   description:
     "What's allowed on Phriend and what isn't: strictly legit, platonic side gigs. No romantic or sexual services, no compensated dating, no escort services.",
   path: "/community-guidelines",

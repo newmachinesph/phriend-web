@@ -7,7 +7,7 @@ import { Logo } from "@/components/site-header";
 import { APP_URL, breadcrumbJsonLd, CONTACT_EMAIL, pageMeta, SITE_URL } from "@/lib/site";
 
 export const metadata: Metadata = pageMeta({
-  title: "Press kit",
+  title: "Press kit: logos, facts and photos",
   description:
     "Phriend press kit: boilerplate, fast facts, product features, logo downloads, brand colors, product images, safety stance, quotable lines and media contact.",
   path: "/press",

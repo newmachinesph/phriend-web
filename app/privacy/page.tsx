@@ -4,7 +4,7 @@ import { Callout, Legal } from "@/components/legal";
 import { CONTACT_EMAIL, LAST_UPDATED, pageMeta } from "@/lib/site";
 
 export const metadata: Metadata = pageMeta({
-  title: "Privacy Policy",
+  title: "Privacy Policy: how Phriend handles your data",
   description:
     "How Phriend collects, uses, shares and keeps your personal data under the Philippine Data Privacy Act of 2012 (RA 10173), and the rights you have over it.",
   path: "/privacy",

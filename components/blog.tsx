@@ -48,17 +48,17 @@ export function Callout({ title, children }: { title: string; children: ReactNod
 
 export function Steps({ steps }: { steps: { icon: LucideIcon; title: string; text: string }[] }) {
   return (
-    <ol className="not-article my-10 grid gap-4 sm:grid-cols-3">
+    <ol className="not-article my-10 grid gap-5 sm:grid-cols-3">
       {steps.map((s, i) => (
-        <li key={s.title} className="rounded-3xl border border-line bg-white p-6 shadow-card">
+        <li key={s.title} className="flex flex-col rounded-3xl border border-line bg-white px-7 py-8 shadow-card">
           <div className="flex items-center justify-between">
             <span className="grid size-12 place-items-center rounded-2xl bg-brand-soft text-brand-text">
               <s.icon size={24} strokeWidth={2} aria-hidden="true" />
             </span>
             <span className="font-display text-3xl font-semibold text-line">{String(i + 1).padStart(2, "0")}</span>
           </div>
-          <h3 className="mt-4 font-display text-xl font-semibold text-ink">{s.title}</h3>
-          <p className="mt-2 text-[15px] leading-relaxed text-body">{s.text}</p>
+          <h3 className="mt-6 font-display text-xl font-semibold text-ink">{s.title}</h3>
+          <p className="mt-3 text-[15px] leading-relaxed text-body">{s.text}</p>
         </li>
       ))}
     </ol>

@@ -70,6 +70,10 @@ const JSON_LD = JSON.stringify({
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en-PH" className={`${nunito.variable} ${fredoka.variable} h-full antialiased`}>
+      <head>
+        <link rel="preconnect" href={APP_URL} />
+        <link rel="dns-prefetch" href={APP_URL} />
+      </head>
       <body className="flex min-h-full flex-col">
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON_LD }} />
         <a

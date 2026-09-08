@@ -1,7 +1,7 @@
 import "server-only";
 import { neon } from "@neondatabase/serverless";
-import DOMPurify from "isomorphic-dompurify";
 import { marked } from "marked";
+import sanitizeHtml from "sanitize-html";
 
 /** Articles written in Ops (blog_posts table); only published rows reach the site. The photographers article stays in code. */
 export type DbPost = {
@@ -61,7 +61,13 @@ export async function findDbPost(slug: string): Promise<DbPost | null> {
 /** Markdown from Ops -> sanitized HTML for the article body. */
 export function renderMarkdown(md: string): string {
   const html = marked.parse(md, { gfm: true, breaks: false }) as string;
-  return DOMPurify.sanitize(html, { USE_PROFILES: { html: true }, ADD_ATTR: ["target", "rel"] });
+  // sanitize-html is pure JavaScript (the jsdom-based sanitizers do not load on Vercel's runtime)
+  return sanitizeHtml(html, {
+    allowedTags: [...sanitizeHtml.defaults.allowedTags, "img"],
+    allowedAttributes: { ...sanitizeHtml.defaults.allowedAttributes, a: ["href", "name", "target", "rel"], img: ["src", "alt", "width", "height"] },
+    allowedSchemes: ["https", "mailto"],
+    allowedSchemesByTag: { img: ["https"] },
+  });
 }
 
 export const readingMinutes = (md: string) => Math.max(1, Math.round(md.split(/\s+/).length / 200));

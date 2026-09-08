@@ -70,7 +70,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
         </p>
       </header>
       <div className="relative mt-8 aspect-[16/9] overflow-hidden rounded-3xl shadow-card">
-        <Image src={post.hero.src} alt={post.hero.alt} fill sizes="(min-width: 768px) 768px, 100vw" className="object-cover" priority />
+        <Image src={post.hero.src} alt={post.hero.alt} width={1600} height={900} sizes="(min-width: 768px) 768px, 100vw" className="h-full w-full object-cover" priority />
       </div>
 
       <article className="article mt-10">

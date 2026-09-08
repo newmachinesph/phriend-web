@@ -362,9 +362,10 @@ export default async function PressPage() {
                     <Image
                       src={p.src}
                       alt={p.alt}
-                      fill
+                      width={1536}
+                      height={1024}
                       sizes="(min-width: 1024px) 352px, (min-width: 640px) 33vw, 100vw"
-                      className="object-cover"
+                      className="h-full w-full object-cover"
                     />
                   </a>
                   <figcaption className="mt-2 text-sm font-semibold text-muted">

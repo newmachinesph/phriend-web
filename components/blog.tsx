@@ -10,7 +10,7 @@ export function Figure({ src, alt, caption, priority = false }: { src: string; a
   return (
     <figure className="my-10">
       <div className="relative aspect-[16/9] overflow-hidden rounded-3xl shadow-card">
-        <Image src={src} alt={alt} fill sizes="(min-width: 768px) 768px, 100vw" className="object-cover" priority={priority} />
+        <Image src={src} alt={alt} width={1600} height={900} sizes="(min-width: 768px) 768px, 100vw" className="h-full w-full object-cover" priority={priority} />
       </div>
       {caption && <figcaption className="mt-3 text-center text-sm font-semibold text-muted">{caption}</figcaption>}
     </figure>
@@ -26,7 +26,7 @@ export function PhoneShots({ shots }: { shots: { src: string; alt: string; capti
           <figure key={s.src} className="mx-auto w-full max-w-[260px]">
             <div className="rounded-[2.2rem] bg-[#081a3f] p-2.5 shadow-float">
               <div className="relative aspect-[390/780] overflow-hidden rounded-[1.8rem] bg-white">
-                <Image src={s.src} alt={s.alt} fill sizes="260px" className="object-cover object-top" />
+                <Image src={s.src} alt={s.alt} width={390} height={780} sizes="260px" className="h-full w-full object-cover object-top" />
               </div>
             </div>
             <figcaption className="mt-4 text-center text-sm font-bold text-white/85">{s.caption}</figcaption>

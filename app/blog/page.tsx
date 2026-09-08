@@ -25,7 +25,7 @@ export default function BlogIndex() {
       {latest && (
         <Link href={`/blog/${latest.slug}`} className="group mt-12 grid gap-6 rounded-3xl border border-line bg-white p-4 shadow-card transition-colors hover:border-brand md:grid-cols-[1.3fr_1fr] md:p-6">
           <div className="relative aspect-[16/9] overflow-hidden rounded-2xl">
-            <Image src={latest.hero.src} alt={latest.hero.alt} fill sizes="(min-width: 768px) 640px, 100vw" className="object-cover transition-transform duration-500 group-hover:scale-[1.03]" priority />
+            <Image src={latest.hero.src} alt={latest.hero.alt} width={1600} height={900} sizes="(min-width: 768px) 640px, 100vw" className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]" priority />
           </div>
           <div className="flex flex-col justify-center">
             <p className="text-sm font-extrabold uppercase tracking-wider text-brand-text">{latest.tags[0]} · {latest.category.label}</p>
@@ -47,7 +47,7 @@ export default function BlogIndex() {
             <li key={p.slug}>
               <Link href={`/blog/${p.slug}`} className="group flex h-full flex-col rounded-3xl border border-line bg-white p-4 shadow-card transition-colors hover:border-brand">
                 <div className="relative aspect-[16/9] overflow-hidden rounded-2xl">
-                  <Image src={p.hero.src} alt={p.hero.alt} fill sizes="(min-width: 1024px) 360px, (min-width: 640px) 50vw, 100vw" className="object-cover" />
+                  <Image src={p.hero.src} alt={p.hero.alt} width={1600} height={900} sizes="(min-width: 1024px) 360px, (min-width: 640px) 50vw, 100vw" className="h-full w-full object-cover" />
                 </div>
                 <p className="mt-4 text-xs font-extrabold uppercase tracking-wider text-brand-text">{p.category.label}</p>
                 <h2 className="mt-1 font-display text-xl font-semibold leading-tight text-ink">{p.title}</h2>

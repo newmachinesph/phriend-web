@@ -170,7 +170,7 @@ function PhoneMockup() {
         className="absolute -left-14 top-[30%] hidden w-52 rounded-2xl border border-line bg-white p-3 text-xs leading-snug text-body shadow-float sm:block lg:-left-24"
       >
         <p className="mb-1 flex items-center gap-1.5 font-extrabold text-ink">
-          <Image src="/photos/kyla-1.jpg" alt="" width={24} height={24} className="size-6 rounded-full object-cover" />
+          <Image src="/photos/kyla-1.jpg" alt="Kyla" width={24} height={24} className="size-6 rounded-full object-cover" />
           Kyla <BadgeCheck size={12} className="fill-verify text-white" />
           <span className="ml-auto font-bold text-muted">2:14 pm</span>
         </p>
@@ -266,9 +266,10 @@ export default function Home() {
               <Image
                 src="/photos/life-food-trip.jpg"
                 alt="Two friends laughing over grilled skewers at a night street-food stall, a jeepney behind them"
-                fill
+                width={1536}
+                height={1024}
                 sizes="(min-width: 1024px) 560px, 100vw"
-                className="object-cover"
+                className="h-full w-full object-cover"
               />
             </div>
           </div>
@@ -395,9 +396,10 @@ export default function Home() {
                 <Image
                   src="/photos/life-verified.jpg"
                   alt="A smiling woman in a cafe holding her phone and giving a thumbs up"
-                  fill
+                  width={1024}
+                  height={1536}
                   sizes="(min-width: 640px) 384px, 100vw"
-                  className="object-cover"
+                  className="h-full w-full object-cover"
                 />
               </div>
             </div>
@@ -455,9 +457,10 @@ export default function Home() {
                 <Image
                   src="/photos/life-hiking.jpg"
                   alt="Three friends taking a selfie on a hilltop trail above rice terraces and the sea"
-                  fill
+                  width={1536}
+                  height={1024}
                   sizes="(min-width: 1024px) 560px, 100vw"
-                  className="object-cover"
+                  className="h-full w-full object-cover"
                 />
               </div>
               <div className="rounded-3xl border border-line bg-surface p-6 sm:p-8">

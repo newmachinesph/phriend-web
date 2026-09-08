@@ -18,7 +18,9 @@ export default async function Image({ params }: { params: Promise<{ slug: string
   const slug = (await params).slug;
   const post = findPost(slug);
   const db = post ? null : await findDbPost(slug);
-  const photo = post ? `data:image/jpeg;base64,${read(post.hero.src).toString("base64")}` : db?.cover?.startsWith("https://") ? db.cover : null;
+  // A cover from Ops is either a full URL or a file under public/ (e.g. /blog/is-phriend-safe.jpg), like the static heroes.
+  const local = (p: string) => `data:image/${p.endsWith(".png") ? "png" : "jpeg"};base64,${read(p).toString("base64")}`;
+  const photo = post ? local(post.hero.src) : db?.cover?.startsWith("https://") ? db.cover : db?.cover?.startsWith("/") ? local(db.cover) : null;
   const headline = post?.ogTitle ?? post?.title ?? db?.title ?? "Guides for people who could be earning on Phriend";
   return new ImageResponse(
     (

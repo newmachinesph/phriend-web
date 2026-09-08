@@ -18,7 +18,16 @@ export type DbPost = {
   updatedAt: string;
 };
 
-const sql = () => (process.env.DATABASE_URL ? neon(process.env.DATABASE_URL) : null);
+/** The Neon client, or null when the site runs without a database (local builds, a misconfigured env): the blog then shows only the coded article. */
+const sql = () => {
+  const url = (process.env.DATABASE_URL ?? "").trim().replace(/^["']|["']$/g, "");
+  if (!url) return null;
+  try {
+    return neon(url);
+  } catch {
+    return null;
+  }
+};
 const cols = "id, slug, title, seo_title as \"seoTitle\", description, niche, tags, cover, body_md as \"bodyMd\", published_at as \"publishedAt\", updated_at as \"updatedAt\"";
 const row = (r: Record<string, unknown>): DbPost => ({
   ...(r as Omit<DbPost, "publishedAt" | "updatedAt" | "tags">),

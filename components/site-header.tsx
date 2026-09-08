@@ -8,6 +8,7 @@ export const NAV = [
   { href: "/#safety", label: "Safety" },
   { href: "/#for-phriends", label: "For Phriends" },
   { href: "/#faq", label: "FAQ" },
+  { href: "/blog", label: "Blog" },
 ] as const;
 
 const LOGO_RATIO = 1774 / 470;

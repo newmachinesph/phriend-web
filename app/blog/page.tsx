@@ -20,7 +20,7 @@ export default function BlogIndex() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: breadcrumbJsonLd("Blog", "/blog") }} />
       <p className="text-sm font-extrabold uppercase tracking-wider text-brand-text">Blog</p>
       <h1 className="mt-2 max-w-2xl font-display text-4xl font-semibold leading-tight text-ink sm:text-5xl">Guides for people who could be earning on Phriend.</h1>
-      <p className="mt-4 max-w-2xl text-lg leading-relaxed">One article per skill: what clients book, what it pays, how a booking works, and how to stay safe while you do it.</p>
+      <p className="mt-4 max-w-2xl text-lg leading-relaxed">What clients book, what it pays, how a booking works, and how to stay safe while you do it.</p>
 
       {latest && (
         <Link href={`/blog/${latest.slug}`} className="group mt-12 grid gap-6 rounded-3xl border border-line bg-white p-4 shadow-card transition-colors hover:border-brand md:grid-cols-[1.3fr_1fr] md:p-6">

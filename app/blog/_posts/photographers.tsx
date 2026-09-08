@@ -8,6 +8,9 @@ export const photographers: Post = {
   title: "Photographers and videographers: turn your free weekends into paid shoots",
   description:
     "How Filipino photographers and videographers book portrait sessions, event coverage and content days on Phriend, set their own hourly rate, keep 100% of it and stay safe doing it.",
+  seoTitle: "Photographers: earn per hour on Phriend",
+  seoDescription: "Book portrait, event and content shoots by the hour, set your own rate and keep all of it. A guide for Filipino photographers and videographers.",
+  ogTitle: "Turn your free weekends into paid shoots",
   date: "2026-09-08",
   readingMinutes: 6,
   category: { slug: "photographer", path: "/photographer", label: "Photographer" },

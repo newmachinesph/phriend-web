@@ -10,11 +10,12 @@ export const generateStaticParams = () => POSTS.map((p) => ({ slug: p.slug }));
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const post = findPost((await params).slug);
   if (!post) return { title: "Article not found", robots: { index: false } };
-  const base = pageMeta({ title: post.title, description: post.description, path: `/blog/${post.slug}` });
+  const base = pageMeta({ title: post.seoTitle, description: post.seoDescription, path: `/blog/${post.slug}` });
+  const og = { url: `/blog/${post.slug}/opengraph-image`, width: 1200, height: 630, alt: post.ogTitle ?? post.seoTitle };
   return {
     ...base,
-    openGraph: { ...base.openGraph, type: "article", publishedTime: `${post.date}T09:00:00+08:00`, authors: [SITE_NAME], tags: post.tags, images: [{ url: post.hero.src, width: 1600, height: 900, alt: post.hero.alt }] },
-    twitter: { card: "summary_large_image", title: post.title, description: post.description, images: [post.hero.src] },
+    openGraph: { ...base.openGraph, type: "article", publishedTime: `${post.date}T09:00:00+08:00`, authors: [SITE_NAME], tags: post.tags, images: [og] },
+    twitter: { card: "summary_large_image", title: post.seoTitle, description: post.seoDescription, images: [og.url] },
   };
 }
 

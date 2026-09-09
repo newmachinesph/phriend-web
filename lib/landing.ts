@@ -1,4 +1,4 @@
-import { APP_URL, POST_URL, SITE_NAME, SITE_URL } from "@/lib/site";
+import { API_URL, APP_URL, apiHeaders, POST_URL, SITE_NAME, SITE_URL } from "@/lib/site";
 
 /** Activity and city landing pages: live data from the app's public API, rendered on the marketing domain so it carries its authority. */
 
@@ -44,7 +44,7 @@ export const appProfileUrl = (p: Phriend) => (p.username ? `${APP_URL}/@${p.user
 
 export async function getCategories(): Promise<Category[]> {
   try {
-    const r = await fetch(`${APP_URL}/api/categories`, { next: { revalidate: 3600 } });
+    const r = await fetch(`${API_URL}/api/categories`, { headers: apiHeaders(), next: { revalidate: 3600 } });
     if (!r.ok) return [];
     const d = (await r.json()) as { categories: Category[] };
     return d.categories ?? [];
@@ -62,7 +62,7 @@ export async function getPhriends(q: { category?: string; city?: string }): Prom
   if (q.category) sp.set("category", q.category);
   if (q.city) sp.set("city", q.city);
   try {
-    const r = await fetch(`${APP_URL}/api/phriends?${sp}`, { next: { revalidate: 600 } });
+    const r = await fetch(`${API_URL}/api/phriends?${sp}`, { headers: apiHeaders(), next: { revalidate: 600 } });
     if (!r.ok) return [];
     const d = (await r.json()) as { posts: Phriend[] };
     return (d.posts ?? []).slice(0, 12);

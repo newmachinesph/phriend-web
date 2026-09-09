@@ -1,5 +1,5 @@
 import "server-only";
-import { neon } from "@neondatabase/serverless";
+import { API_URL, apiHeaders } from "./site";
 import { marked } from "marked";
 import sanitizeHtml from "sanitize-html";
 
@@ -18,41 +18,24 @@ export type DbPost = {
   updatedAt: string;
 };
 
-/** The Neon client, or null when the site runs without a database (local builds, a misconfigured env): the blog then shows only the coded article. */
-const sql = () => {
-  const url = (process.env.DATABASE_URL ?? "").trim().replace(/^["']|["']$/g, "");
-  if (!url) return null;
-  try {
-    return neon(url);
-  } catch {
-    return null;
-  }
-};
-const cols = "id, slug, title, seo_title as \"seoTitle\", description, niche, tags, cover, body_md as \"bodyMd\", published_at as \"publishedAt\", updated_at as \"updatedAt\"";
-const row = (r: Record<string, unknown>): DbPost => ({
-  ...(r as Omit<DbPost, "publishedAt" | "updatedAt" | "tags">),
-  tags: Array.isArray(r.tags) ? (r.tags as string[]) : [],
-  publishedAt: new Date(String(r.publishedAt)).toISOString(),
-  updatedAt: new Date(String(r.updatedAt)).toISOString(),
-});
-
+/** Published articles from the Phriend API (written in Ops). Empty when the API is unreachable: the blog then shows only the coded article. */
 export async function listDbPosts(): Promise<DbPost[]> {
-  const q = sql();
-  if (!q) return [];
   try {
-    const rows = await q.query(`select ${cols} from blog_posts where status = 'published' order by published_at desc limit 100`);
-    return (rows as Record<string, unknown>[]).map(row);
+    const r = await fetch(`${API_URL}/api/blog`, { headers: apiHeaders(), next: { revalidate: 300 } });
+    if (!r.ok) return [];
+    const d = (await r.json()) as { posts: DbPost[] };
+    return d.posts ?? [];
   } catch {
     return [];
   }
 }
 
 export async function findDbPost(slug: string): Promise<DbPost | null> {
-  const q = sql();
-  if (!q) return null;
   try {
-    const rows = await q.query(`select ${cols} from blog_posts where status = 'published' and slug = $1 limit 1`, [slug]);
-    return rows.length ? row((rows as Record<string, unknown>[])[0]) : null;
+    const r = await fetch(`${API_URL}/api/blog/${encodeURIComponent(slug)}`, { headers: apiHeaders(), next: { revalidate: 300 } });
+    if (!r.ok) return null;
+    const d = (await r.json()) as { post: DbPost | null };
+    return d.post ?? null;
   } catch {
     return null;
   }

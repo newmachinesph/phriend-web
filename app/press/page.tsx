@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, BadgeCheck, Download, Mail, MapPin, Wallet, type LucideIcon } from "lucide-react";
 import { Logo } from "@/components/site-header";
-import { APP_URL, breadcrumbJsonLd, CONTACT_EMAIL, pageMeta, SITE_URL } from "@/lib/site";
+import { API_URL, APP_URL, apiHeaders, breadcrumbJsonLd, CONTACT_EMAIL, pageMeta, SITE_URL } from "@/lib/site";
 
 export const metadata: Metadata = pageMeta({
   title: "Press kit: logos, facts and photos",
@@ -179,7 +179,7 @@ function Mark({ height }: { height: number }) {
 /** Live category count from the app, refreshed hourly, so the numbers never drift from the product. */
 async function categoryCount() {
   try {
-    const res = await fetch("https://web.phriend.app/api/categories", { next: { revalidate: 3600 } });
+    const res = await fetch(`${API_URL}/api/categories`, { headers: apiHeaders(), next: { revalidate: 3600 } });
     const d = (await res.json()) as { categories?: unknown[] };
     return d.categories?.length || 46;
   } catch {

@@ -2,6 +2,10 @@ import type { Metadata } from "next";
 
 export const SITE_URL = "https://phriend.app";
 export const APP_URL = "https://web.phriend.app";
+/** The Phriend API (data for the landing pages and the blog). Local: http://localhost:8010. */
+export const API_URL = (process.env.API_URL ?? "https://api.phriend.app").replace(/\/$/, "");
+/** Server-to-server calls carry this so the API's origin gate lets the site's server through (see phriend-api app/security/gate.py). */
+export const apiHeaders = (): HeadersInit => (process.env.API_SERVER_KEY ? { "x-phriend-app": process.env.API_SERVER_KEY } : {});
 export const POST_URL = `${APP_URL}/earn`;
 export const CONTACT_EMAIL = "support@phriend.app";
 export const LAST_UPDATED = "2026-09-07";

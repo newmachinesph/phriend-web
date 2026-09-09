@@ -7,6 +7,7 @@ import {
   Star, Tag, Umbrella, Users, UserX, Utensils, Wallet, type LucideIcon,
   Footprints, Laptop, MessagesSquare, Sandwich,
 } from "lucide-react";
+import { StoreBadges } from "@/components/store-badges";
 import { APP_URL, pageMeta, POST_URL, SITE_DESCRIPTION, SITE_URL } from "@/lib/site";
 
 export const metadata: Metadata = pageMeta({ description: SITE_DESCRIPTION, path: "/" });
@@ -123,7 +124,7 @@ const FAQ: { q: string; a: string }[] = [
   },
   {
     q: "Do I need to install anything?",
-    a: "No. Phriend runs in the browser at web.phriend.app on any phone. Add it to your home screen and it works like an app, with chat, bookings and in-app notifications.",
+    a: "Not yet. Phriend runs in the browser at web.phriend.app on any phone. Add it to your home screen and it works like an app, with chat, bookings and in-app notifications. The App Store and Google Play apps are coming soon.",
   },
   {
     q: "How do I delete my account?",
@@ -244,6 +245,7 @@ export default function Home() {
                 </li>
               ))}
             </ul>
+            <StoreBadges dark className="mt-8" />
           </div>
           <div className="relative">
             <div aria-hidden="true" className="absolute inset-x-8 top-6 h-[92%] rounded-[3rem] bg-white/5" />
@@ -549,6 +551,7 @@ export default function Home() {
                 Become a Phriend
               </a>
             </div>
+            <StoreBadges dark className="relative mt-8 [&>div]:justify-center" />
           </div>
         </div>
       </section>

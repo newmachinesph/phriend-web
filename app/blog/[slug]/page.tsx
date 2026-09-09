@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { ArticleCta, BackToBlog } from "@/components/blog";
+import { ShareBar } from "@/components/share-bar";
 import { pageMeta, SITE_NAME, SITE_URL } from "@/lib/site";
 import { findDbPost, readingMinutes, renderMarkdown } from "@/lib/blog-db";
 import { findPost, POSTS } from "../_posts";
@@ -19,7 +20,11 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     if (!db) return { title: "Article not found", robots: { index: false } };
     const base = pageMeta({ title: db.seoTitle || db.title.slice(0, 60), description: db.description.slice(0, 150), path: `/blog/${db.slug}` });
     const og = { url: `/blog/${db.slug}/opengraph-image`, width: 1200, height: 630, alt: db.title };
-    return { ...base, openGraph: { ...base.openGraph, type: "article", publishedTime: db.publishedAt, modifiedTime: db.updatedAt, authors: [SITE_NAME], tags: db.tags, images: [og] }, twitter: { card: "summary_large_image", title: db.seoTitle || db.title, description: db.description, images: [og.url] } };
+    return {
+      ...base,
+      openGraph: { ...base.openGraph, type: "article", publishedTime: db.publishedAt, modifiedTime: db.updatedAt, authors: [SITE_NAME], tags: db.tags, images: [og] },
+      twitter: { card: "summary_large_image", title: db.seoTitle || db.title, description: db.description, images: [og.url] },
+    };
   }
   const base = pageMeta({ title: post.seoTitle, description: post.seoDescription, path: `/blog/${post.slug}` });
   const og = { url: `/blog/${post.slug}/opengraph-image`, width: 1200, height: 630, alt: post.ogTitle ?? post.seoTitle };
@@ -84,6 +89,9 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
         <p className="mt-4 text-sm font-semibold text-muted">
           By the Phriend team · {fmt(post.date)} · {post.readingMinutes} min read
         </p>
+        <div className="mt-5">
+          <ShareBar url={url} title={post.title} />
+        </div>
       </header>
       <div className="relative mt-8 aspect-[16/9] overflow-hidden rounded-3xl shadow-card">
         <Image src={post.hero.src} alt={post.hero.alt} width={1600} height={900} sizes="(min-width: 768px) 768px, 100vw" className="h-full w-full object-cover" priority />
@@ -102,6 +110,9 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
         </dl>
       </article>
 
+      <div className="mt-10 border-t border-line pt-6">
+        <ShareBar url={url} title={post.title} />
+      </div>
       <ArticleCta category={post.category} />
     </main>
   );
@@ -148,6 +159,9 @@ function DbArticle({ post }: { post: NonNullable<Awaited<ReturnType<typeof findD
         <p className="mt-4 text-sm font-semibold text-muted">
           By the Phriend team · {fmt(post.publishedAt.slice(0, 10))} · {readingMinutes(post.bodyMd)} min read
         </p>
+        <div className="mt-5">
+          <ShareBar url={url} title={post.title} />
+        </div>
       </header>
       {post.cover && (
         <div className="relative mt-8 aspect-[16/9] overflow-hidden rounded-3xl shadow-card">
@@ -156,6 +170,9 @@ function DbArticle({ post }: { post: NonNullable<Awaited<ReturnType<typeof findD
       )}
       {/* Markdown written by Ops admins, sanitized in renderMarkdown before it reaches the page */}
       <article className="article mt-10" dangerouslySetInnerHTML={{ __html: renderMarkdown(post.bodyMd) }} />
+      <div className="mt-10 border-t border-line pt-6">
+        <ShareBar url={url} title={post.title} />
+      </div>
       {niche && <ArticleCta category={niche} />}
     </main>
   );

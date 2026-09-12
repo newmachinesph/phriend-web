@@ -23,5 +23,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...CITY_PAGES.flatMap((city) => featured.map((c) => ({ url: `${SITE_URL}${comboPath(c, city)}`, lastModified, changeFrequency: "weekly" as const, priority: 0.7 }))),
     { url: `${SITE_URL}/terms`, lastModified, changeFrequency: "yearly", priority: 0.4 },
     { url: `${SITE_URL}/privacy`, lastModified, changeFrequency: "yearly", priority: 0.4 },
+    { url: `${SITE_URL}/delete-account`, lastModified, changeFrequency: "yearly", priority: 0.4 },
   ];
 }

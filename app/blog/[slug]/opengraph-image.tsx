@@ -1,6 +1,7 @@
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { ImageResponse } from "next/og";
+import { findCategory } from "@/lib/landing";
 import { findDbPost, readingMinutes } from "@/lib/blog-db";
 import { findPost } from "../_posts";
 
@@ -23,7 +24,8 @@ export default async function Image({ params }: { params: Promise<{ slug: string
   const photo = post ? local(post.hero.src) : db?.cover?.startsWith("https://") ? db.cover : db?.cover?.startsWith("/") ? local(db.cover) : null;
   const headline = post?.ogTitle ?? post?.title ?? db?.title ?? "Guides for people who could be earning on Phriend";
   // The kicker and read time mirror the blog index card: static posts carry a category, Ops posts a niche and tags.
-  const kicker = post ? `${post.category.label} · Side income` : db ? `${db.niche || "Phriend"} · ${db.tags[0] ?? "Guide"}` : "For Phriends · Side income";
+  const category = db?.niche ? await findCategory(db.niche) : undefined;
+  const kicker = post ? `${post.category.label} · Side income` : db ? `${category?.label ?? "Phriend"} · ${db.tags[0] ?? "Guide"}` : "For Phriends · Side income";
   const minutes = post?.readingMinutes ?? (db ? readingMinutes(db.bodyMd) : null);
   return new ImageResponse(
     (

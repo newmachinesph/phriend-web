@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { breadcrumbJsonLd, pageMeta } from "@/lib/site";
+import { getCategories } from "@/lib/landing";
 import { listDbPosts, readingMinutes } from "@/lib/blog-db";
 import { POSTS } from "./_posts";
 
@@ -20,7 +21,9 @@ type Card = { slug: string; title: string; description: string; date: string; re
 const fromStatic = (p: (typeof POSTS)[number]): Card => ({ slug: p.slug, title: p.title, description: p.description, date: p.date, readingMinutes: p.readingMinutes, tag: p.tags[0], label: p.category.label, hero: p.hero });
 
 export default async function BlogIndex() {
-  const db = (await listDbPosts()).map<Card>((p) => ({ slug: p.slug, title: p.title, description: p.description, date: p.publishedAt.slice(0, 10), readingMinutes: readingMinutes(p.bodyMd), tag: p.tags[0] ?? "Guide", label: p.niche || "Phriend", hero: { src: p.cover || "/blog/photographers-hero.jpg", alt: p.title } }));
+  // the niche is a category slug ("elderly_care"); the card shows its label, as the coded posts do
+  const labels = new Map((await getCategories()).map((c) => [c.slug, c.label]));
+  const db = (await listDbPosts()).map<Card>((p) => ({ slug: p.slug, title: p.title, description: p.description, date: p.publishedAt.slice(0, 10), readingMinutes: readingMinutes(p.bodyMd), tag: p.tags[0] ?? "Guide", label: labels.get(p.niche) ?? "Phriend", hero: { src: p.cover || "/blog/photographers-hero.jpg", alt: p.title } }));
   const [latest, ...rest] = [...POSTS.map(fromStatic), ...db].sort((a, b) => b.date.localeCompare(a.date));
   return (
     <main className="mx-auto w-full max-w-6xl px-5 py-14 sm:px-8 sm:py-20">

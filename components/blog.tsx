@@ -95,11 +95,11 @@ export function RateTable({ rows }: { rows: { session: string; hours: number; ra
   );
 }
 
-export function ArticleCta({ category }: { category: { path: string; label: string } }) {
+export function ArticleCta({ category, headline = "Put your camera on Phriend this week." }: { category: { path: string; label: string }; headline?: string }) {
   return (
     <div className="mt-14 rounded-3xl bg-navy-gradient px-6 py-10 text-white sm:px-10">
       <p className="text-sm font-extrabold uppercase tracking-wider text-brand-light">Ready when you are</p>
-      <h2 className="mt-2 font-display text-3xl font-semibold leading-tight sm:text-4xl">Put your camera on Phriend this week.</h2>
+      <h2 className="mt-2 font-display text-3xl font-semibold leading-tight sm:text-4xl">{headline}</h2>
       <p className="mt-3 max-w-xl text-white/80">
         Verify your ID in about two minutes, list your services and rates, and take bookings that fit around your day job. Your profile is reviewed by a person before it goes live.
       </p>

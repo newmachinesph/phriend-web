@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { ArticleCta, BackToBlog } from "@/components/blog";
 import { ShareBar } from "@/components/share-bar";
 import { pageMeta, SITE_NAME, SITE_URL } from "@/lib/site";
+import { findCategory } from "@/lib/landing";
 import { findDbPost, readingMinutes, renderMarkdown } from "@/lib/blog-db";
 import { findPost, POSTS } from "../_posts";
 
@@ -43,7 +44,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
   if (!post) {
     const db = await findDbPost(slug);
     if (!db) notFound();
-    return <DbArticle post={db} />;
+    return DbArticle({ post: db });
   }
   const url = `${SITE_URL}/blog/${post.slug}`;
   const jsonLd = {
@@ -119,7 +120,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
 }
 
 /** An article written in Ops: markdown body, the niche's call to action when one is set. */
-function DbArticle({ post }: { post: NonNullable<Awaited<ReturnType<typeof findDbPost>>> }) {
+async function DbArticle({ post }: { post: NonNullable<Awaited<ReturnType<typeof findDbPost>>> }) {
   const url = `${SITE_URL}/blog/${post.slug}`;
   const cover = post.cover ? (post.cover.startsWith("http") ? post.cover : `${SITE_URL}${post.cover}`) : `${SITE_URL}/brand/logo-mark.png`;
   const jsonLd = {
@@ -147,7 +148,7 @@ function DbArticle({ post }: { post: NonNullable<Awaited<ReturnType<typeof findD
       },
     ],
   };
-  const niche = post.niche ? { slug: post.niche, path: `/${post.niche}`, label: post.tags[0] ?? "Phriend" } : null;
+  const category = post.niche ? await findCategory(post.niche) : undefined;
   return (
     <main className="mx-auto w-full max-w-3xl px-5 py-12 sm:px-8 sm:py-16">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
@@ -173,7 +174,7 @@ function DbArticle({ post }: { post: NonNullable<Awaited<ReturnType<typeof findD
       <div className="mt-10 border-t border-line pt-6">
         <ShareBar url={url} title={post.title} />
       </div>
-      {niche && <ArticleCta category={niche} />}
+      {category && <ArticleCta category={{ path: `/${post.niche}`, label: category.label }} headline={`Start taking ${category.label} bookings this week.`} />}
     </main>
   );
 }

@@ -166,6 +166,11 @@ body {
     margin: 0 0 1.25rem 1.25rem;
     list-style: disc;
   }
+  /* Preflight strips the numbering, so a markdown "1." step list renders as flat lines without this. */
+  .article ol {
+    margin: 0 0 1.25rem 1.25rem;
+    list-style: decimal;
+  }
   .article li {
     margin-bottom: 0.5rem;
     padding-left: 0.25rem;

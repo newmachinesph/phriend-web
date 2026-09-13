@@ -1,6 +1,6 @@
 # Phriend
 
-> Phriend is a Philippine app for hiring a verified local friend by the hour for legit, platonic activities: food trips, city tours, events, tutoring, hospital or errand buddies and more. Members are 18+, ID-verified, meet in public places only, and pay each other directly: 50% in cash on a first meetup, 50% after.
+> Phriend is a Philippine app for hiring a verified local companion by the hour for legit, platonic activities: food trips, city tours, events, tutoring, hospital or errand buddies and more. Members are 18+, ID-verified, meet in public places only, and pay each other directly: 50% in cash on a first meetup, 50% after.
 
 - Website: https://phriend.app
 - App (runs in the browser, installable as a PWA): https://web.phriend.app

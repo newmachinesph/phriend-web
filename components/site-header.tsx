@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
-import { APP_URL } from "@/lib/site";
+import { APP_URL, cdn } from "@/lib/site";
 
 export const NAV = [
   { href: "/#how-it-works", label: "How it works" },
@@ -27,7 +27,7 @@ export function Logo({
 }) {
   return (
     <Image
-      src="/brand/logo-horizontal.png"
+      src={cdn("/brand/logo-horizontal.png")}
       alt={alt}
       width={Math.round(height * LOGO_RATIO)}
       height={height}

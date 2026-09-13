@@ -3,7 +3,7 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import { ArticleCta, BackToBlog } from "@/components/blog";
 import { ShareBar } from "@/components/share-bar";
-import { pageMeta, SITE_NAME, SITE_URL } from "@/lib/site";
+import { cdn, pageMeta, SITE_NAME, SITE_URL } from "@/lib/site";
 import { findCategory } from "@/lib/landing";
 import { findDbPost, readingMinutes, renderMarkdown } from "@/lib/blog-db";
 import { findPost, POSTS } from "../_posts";
@@ -58,7 +58,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
         datePublished: `${post.date}T09:00:00+08:00`,
         dateModified: `${post.date}T09:00:00+08:00`,
         author: { "@type": "Organization", name: SITE_NAME, url: SITE_URL },
-        publisher: { "@type": "Organization", name: SITE_NAME, logo: { "@type": "ImageObject", url: `${SITE_URL}/brand/logo-mark.png` } },
+        publisher: { "@type": "Organization", name: SITE_NAME, logo: { "@type": "ImageObject", url: cdn("/brand/logo-mark.png") } },
         mainEntityOfPage: url,
         keywords: post.tags.join(", "),
       },
@@ -122,7 +122,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
 /** An article written in Ops: markdown body, the niche's call to action when one is set. */
 async function DbArticle({ post }: { post: NonNullable<Awaited<ReturnType<typeof findDbPost>>> }) {
   const url = `${SITE_URL}/blog/${post.slug}`;
-  const cover = post.cover ? (post.cover.startsWith("http") ? post.cover : `${SITE_URL}${post.cover}`) : `${SITE_URL}/brand/logo-mark.png`;
+  const cover = cdn(post.cover || "/brand/logo-mark.png");
   const jsonLd = {
     "@context": "https://schema.org",
     "@graph": [
@@ -134,7 +134,7 @@ async function DbArticle({ post }: { post: NonNullable<Awaited<ReturnType<typeof
         datePublished: post.publishedAt,
         dateModified: post.updatedAt,
         author: { "@type": "Organization", name: SITE_NAME, url: SITE_URL },
-        publisher: { "@type": "Organization", name: SITE_NAME, logo: { "@type": "ImageObject", url: `${SITE_URL}/brand/logo-mark.png` } },
+        publisher: { "@type": "Organization", name: SITE_NAME, logo: { "@type": "ImageObject", url: cdn("/brand/logo-mark.png") } },
         mainEntityOfPage: url,
         keywords: post.tags.join(", "),
       },
@@ -166,7 +166,7 @@ async function DbArticle({ post }: { post: NonNullable<Awaited<ReturnType<typeof
       </header>
       {post.cover && (
         <div className="relative mt-8 aspect-[16/9] overflow-hidden rounded-3xl shadow-card">
-          <Image src={post.cover} alt={post.title} width={1600} height={900} sizes="(min-width: 768px) 768px, 100vw" className="h-full w-full object-cover" priority />
+          <Image src={cdn(post.cover)} alt={post.title} width={1600} height={900} sizes="(min-width: 768px) 768px, 100vw" className="h-full w-full object-cover" priority />
         </div>
       )}
       {/* Markdown written by Ops admins, sanitized in renderMarkdown before it reaches the page */}

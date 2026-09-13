@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { ArrowRight, BadgeCheck, Clapperboard, Coffee, Download, Map as MapIcon, MessageCircle, ShoppingBag, Utensils, type LucideIcon } from "lucide-react";
 import { OverlayTool } from "@/components/overlay-tool";
-import { breadcrumbJsonLd, pageMeta, POST_URL } from "@/lib/site";
+import { breadcrumbJsonLd, cdn, pageMeta, POST_URL } from "@/lib/site";
 
 const TITLE = "Be the creator people book";
 const DESCRIPTION =
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   twitter: { card: "summary_large_image", title: SHARE_TITLE, description: SHARE_DESCRIPTION, images: [OG.url] },
 };
 
-const KIT_PDF = "/creators/Phriend-Creator-Collab-Kit.pdf";
+const KIT_PDF = cdn("/creators/Phriend-Creator-Collab-Kit.pdf");
 const MESSENGER = "https://m.me/phriendapp";
 
 const STEPS = [
@@ -75,7 +75,7 @@ export default function CreatorsPage() {
           {/* AI-generated creator and the sample overlay card, not a real member */}
           <div className="relative mx-auto w-full max-w-[420px] pl-10 sm:pl-16 lg:max-w-none">
             <Image
-              src="/creators/hero.jpg"
+              src={cdn("/creators/hero.jpg")}
               alt="A creator filming vertical video of herself on a phone in a ring light at a street food stall"
               width={800}
               height={1000}
@@ -84,7 +84,7 @@ export default function CreatorsPage() {
               className="aspect-[4/5] w-full rounded-[2rem] object-cover shadow-float"
             />
             <Image
-              src="/creators/og-card.png"
+              src={cdn("/creators/og-card.png")}
               alt="Example Phriend profile overlay card with a Win 2 hours with me tag"
               width={320}
               height={547}

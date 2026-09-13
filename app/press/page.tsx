@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, BadgeCheck, Download, Mail, MapPin, Wallet, type LucideIcon } from "lucide-react";
 import { Logo } from "@/components/site-header";
-import { API_URL, APP_URL, apiHeaders, breadcrumbJsonLd, CONTACT_EMAIL, pageMeta, SITE_URL } from "@/lib/site";
+import { API_URL, APP_URL, apiHeaders, breadcrumbJsonLd, cdn, CONTACT_EMAIL, pageMeta, SITE_URL } from "@/lib/site";
 
 export const metadata: Metadata = pageMeta({
   title: "Press kit: logos, facts and photos",
@@ -14,7 +14,7 @@ export const metadata: Metadata = pageMeta({
 });
 
 const BOILERPLATE =
-  "Phriend is a Philippine app for hiring a verified local friend by the hour for legit activities: food trips, city tours, events, tutoring, hospital or errand buddies, and more. Members are 18 and older, ID-verified through Didit, meet in public places only, and pay 50% upfront, 50% after: cash in person on a first meetup, e-wallet only once they already trust each other. Phriend is a platform only and is not a party to the meetups. It launched in 2026 in the Philippines. The company site is phriend.app and the app runs in the browser at web.phriend.app.";
+  "Phriend is a Philippine app for hiring a verified local companion by the hour for legit activities: food trips, city tours, events, tutoring, hospital or errand buddies, and more. Members are 18 and older, ID-verified through Didit, meet in public places only, and pay 50% upfront, 50% after: cash in person on a first meetup, e-wallet only once they already trust each other. Phriend is a platform only and is not a party to the meetups. It launched in 2026 in the Philippines. The company site is phriend.app and the app runs in the browser at web.phriend.app.";
 
 const facts = (n: number): { label: string; value: string }[] => [
   { label: "Founded", value: "2026" },
@@ -41,10 +41,10 @@ const product = (n: number) => [
 ];
 
 const MARK_FILES = [
-  { href: "/brand/logo-mark.svg", label: "SVG" },
-  { href: "/brand/logo-mark.png", label: "PNG, 894×975" },
+  { href: cdn("/brand/logo-mark.svg"), label: "SVG" },
+  { href: cdn("/brand/logo-mark.png"), label: "PNG, 894×975" },
 ];
-const HORIZONTAL_FILES = [{ href: "/brand/logo-horizontal.png", label: "PNG, 1774×470" }];
+const HORIZONTAL_FILES = [{ href: cdn("/brand/logo-horizontal.png"), label: "PNG, 1774×470" }];
 
 const COLORS: { name: string; hex: string; use: string }[] = [
   { name: "Navy", hex: "#0d2251", use: "Headings, hero, wordmark" },
@@ -61,22 +61,22 @@ const USAGE = [
 
 const SCREENSHOTS: { src: string; alt: string; caption: string }[] = [
   {
-    src: "/photos/shot-home.png",
+    src: cdn("/photos/shot-home.png"),
     alt: "Phriend app home screen with a search bar, activity categories and verified profiles with hourly rates",
     caption: "Home: search and verified profiles",
   },
   {
-    src: "/photos/shot-post.png",
+    src: cdn("/photos/shot-post.png"),
     alt: "A Phriend profile in the app showing photos, a star rating, activity tags, an hourly rate and a Chat button",
     caption: "Profile: photos, tags, rate, chat",
   },
   {
-    src: "/photos/shot-gigs.png",
+    src: cdn("/photos/shot-gigs.png"),
     alt: "The Gigs screen listing what clients need, each with an activity, city, date and budget per hour",
     caption: "Gigs: what clients need",
   },
   {
-    src: "/photos/shot-rules.png",
+    src: cdn("/photos/shot-rules.png"),
     alt: "A Phriend profile showing non-negotiables and the house rules: public places only, 50% at the start and 50% after, no unagreed companions",
     caption: "Rules and non-negotiables",
   },
@@ -84,19 +84,19 @@ const SCREENSHOTS: { src: string; alt: string; caption: string }[] = [
 
 const PHOTOS: { src: string; alt: string; caption: string; size: string }[] = [
   {
-    src: "/photos/life-food-trip.jpg",
-    alt: "Two friends laughing over grilled skewers at a night street-food stall, a jeepney behind them",
+    src: cdn("/photos/life-food-trip.jpg"),
+    alt: "A client and their companion laughing over grilled skewers at a night street-food stall, a jeepney behind them",
     caption: "Night street-food trip",
     size: "JPG, 1536×1024",
   },
   {
-    src: "/photos/life-hiking.jpg",
-    alt: "Three friends taking a selfie on a hilltop trail above rice terraces and the sea",
+    src: cdn("/photos/life-hiking.jpg"),
+    alt: "Three people taking a selfie on a hilltop trail above rice terraces and the sea",
     caption: "Hiking day with a Phriend",
     size: "JPG, 1536×1024",
   },
   {
-    src: "/photos/life-verified.jpg",
+    src: cdn("/photos/life-verified.jpg"),
     alt: "A smiling woman in a cafe holding her phone and giving a thumbs up",
     caption: "Verified and ready to meet",
     size: "JPG, 1024×1536, portrait",
@@ -166,7 +166,7 @@ function AssetCard({
 function Mark({ height }: { height: number }) {
   return (
     <Image
-      src="/brand/logo-mark.png"
+      src={cdn("/brand/logo-mark.png")}
       alt="Phriend logo mark"
       width={Math.round((height * 894) / 975)}
       height={height}
@@ -295,7 +295,7 @@ export default async function PressPage() {
           <ul className="mt-4 grid gap-4 sm:grid-cols-2">
             <li className="rounded-2xl border border-line bg-white p-6 shadow-card">
               <p className="text-xs font-extrabold uppercase tracking-wider text-muted">Display · Fredoka</p>
-              <p className="mt-3 font-display text-4xl font-semibold leading-tight text-ink">Find a friend for anything</p>
+              <p className="mt-3 font-display text-4xl font-semibold leading-tight text-ink">Find a companion for anything</p>
             </li>
             <li className="rounded-2xl border border-line bg-white p-6 shadow-card">
               <p className="text-xs font-extrabold uppercase tracking-wider text-muted">Body · Nunito</p>

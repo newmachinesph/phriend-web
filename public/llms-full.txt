@@ -3,7 +3,7 @@ Source: https://phriend.app (landing features and FAQ), https://phriend.app/safe
 Last updated: 2026-09-07. Short version: https://phriend.app/llms.txt
 
 What is Phriend?
-Phriend is a Philippine app for hiring a verified local friend by the hour for legit activities such as food trips, city tours, events, tutoring and errands. Members are 18+, meet in public places, and pay 50% in cash on a first meetup and 50% after. The app runs in the browser at https://web.phriend.app. Contact: support@phriend.app.
+Phriend is a Philippine app for hiring a verified local companion by the hour for legit activities such as food trips, city tours, events, tutoring and errands. Members are 18+, meet in public places, and pay 50% in cash on a first meetup and 50% after. The app runs in the browser at https://web.phriend.app. Contact: support@phriend.app.
 
 
 ==================================================

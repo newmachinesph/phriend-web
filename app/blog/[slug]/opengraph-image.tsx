@@ -1,6 +1,7 @@
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { ImageResponse } from "next/og";
+import { cdn } from "@/lib/site";
 import { findCategory } from "@/lib/landing";
 import { findDbPost, readingMinutes } from "@/lib/blog-db";
 import { findPost } from "../_posts";
@@ -19,9 +20,8 @@ export default async function Image({ params }: { params: Promise<{ slug: string
   const slug = (await params).slug;
   const post = findPost(slug);
   const db = post ? null : await findDbPost(slug);
-  // A cover from Ops is either a full URL or a file under public/ (e.g. /blog/is-phriend-safe.jpg), like the static heroes.
-  const local = (p: string) => `data:image/${p.endsWith(".png") ? "png" : "jpeg"};base64,${read(p).toString("base64")}`;
-  const photo = post ? local(post.hero.src) : db?.cover?.startsWith("https://") ? db.cover : db?.cover?.startsWith("/") ? local(db.cover) : null;
+  // Heroes and Ops covers live on the CDN; an Ops cover may still be stored as a path (e.g. /blog/is-phriend-safe.jpg), which cdn() resolves.
+  const photo = post ? post.hero.src : db?.cover ? cdn(db.cover) : null;
   const headline = post?.ogTitle ?? post?.title ?? db?.title ?? "Guides for people who could be earning on Phriend";
   // The kicker and read time mirror the blog index card: static posts carry a category, Ops posts a niche and tags.
   const category = db?.niche ? await findCategory(db.niche) : undefined;

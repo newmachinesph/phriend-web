@@ -4,7 +4,7 @@ import { Fredoka, Nunito } from "next/font/google";
 import "./globals.css";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
-import { APP_URL, CONTACT_EMAIL, pageMeta, SITE_DESCRIPTION, SITE_NAME, SITE_TITLE, SITE_URL } from "@/lib/site";
+import { APP_URL, cdn, CONTACT_EMAIL, pageMeta, SITE_DESCRIPTION, SITE_NAME, SITE_TITLE, SITE_URL } from "@/lib/site";
 
 const nunito = Nunito({
   subsets: ["latin"],
@@ -23,8 +23,8 @@ export const metadata: Metadata = {
   title: { default: SITE_TITLE, template: `%s | ${SITE_NAME}` },
   applicationName: SITE_NAME,
   keywords: [
-    "hire a friend Philippines",
-    "rent a friend Manila",
+    "hire a companion Philippines",
+    "book a companion Manila",
     "companion for events",
     "tour buddy",
     "verified locals",
@@ -50,7 +50,7 @@ const JSON_LD = JSON.stringify({
       "@type": "Organization",
       name: SITE_NAME,
       url: SITE_URL,
-      logo: `${SITE_URL}/brand/logo-mark.png`,
+      logo: cdn("/brand/logo-mark.png"),
       sameAs: ["https://facebook.com/phriendapp", "https://instagram.com/phriendapp"],
       contactPoint: { "@type": "ContactPoint", contactType: "customer support", email: CONTACT_EMAIL, areaServed: "PH" },
     },

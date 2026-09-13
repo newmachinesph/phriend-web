@@ -1,6 +1,7 @@
 import { BadgeCheck, CalendarCheck, Camera } from "lucide-react";
 import { Callout, Figure, PhoneShots, RateTable } from "@/components/blog";
 import { Steps } from "@/components/blog";
+import { cdn } from "@/lib/site";
 import type { Post } from "./index";
 
 export const photographers: Post = {
@@ -16,7 +17,7 @@ export const photographers: Post = {
   category: { slug: "photographer", path: "/photographer", label: "Photographer" },
   tags: ["For Phriends", "Photography", "Videography", "Side income"],
   hero: {
-    src: "/blog/photographers-hero.jpg",
+    src: cdn("/blog/photographers-hero.jpg"),
     alt: "A photographer shows a smiling client the portrait he just took on his camera screen, on a sunlit Intramuros street",
   },
   faq: [
@@ -66,7 +67,7 @@ function Body() {
       </ul>
 
       <Figure
-        src="/blog/photographers-video.jpg"
+        src={cdn("/blog/photographers-video.jpg")}
         alt="A videographer films a garden wedding reception with a mirrorless camera on a gimbal at golden hour"
         caption="Event coverage by the hour: four hours at a garden wedding in Tagaytay is a typical Phriend booking."
       />
@@ -115,12 +116,12 @@ function Body() {
       <PhoneShots
         shots={[
           {
-            src: "/blog/shot-photographer-feed.webp",
+            src: cdn("/blog/shot-photographer-feed.webp"),
             alt: "The Phriend app filtered to the Photographer category, showing verified profiles with hourly rates",
             caption: "Clients filter by Photographer, then by Portrait, Event or Product.",
           },
           {
-            src: "/blog/shot-photographer-profile.webp",
+            src: cdn("/blog/shot-photographer-profile.webp"),
             alt: "A photographer's profile on Phriend with a gallery, a rating, an hourly rate and a Chat button",
             caption: "Your profile: gallery, rating, rate, services and a Chat button.",
           },
@@ -136,8 +137,8 @@ function Body() {
       </Callout>
 
       <Figure
-        src="/blog/photographers-travel.jpg"
-        alt="A photographer takes travel portraits of two friends posing in front of colorful jeepneys and a street mural in Manila"
+        src={cdn("/blog/photographers-travel.jpg")}
+        alt="A photographer takes travel portraits of two travelers posing in front of colorful jeepneys and a street mural in Manila"
         caption="Travel portraits are the fastest bookings to fill: one location, two hours, cash on the day."
       />
 

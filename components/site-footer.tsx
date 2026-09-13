@@ -28,7 +28,7 @@ export function SiteFooter() {
               <Logo height={36} />
             </Link>
             <p className="mt-3 text-[15px] leading-relaxed">
-              Find a verified local friend for food trips, tours, gigs and errands across the Philippines. Paid by the
+              Find a verified local companion for food trips, tours, gigs and errands across the Philippines. Paid by the
               hour, met in public, always legit.
             </p>
           </div>

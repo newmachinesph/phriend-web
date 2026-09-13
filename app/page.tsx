@@ -8,7 +8,7 @@ import {
   Footprints, Laptop, MessagesSquare, Sandwich,
 } from "lucide-react";
 import { StoreBadges } from "@/components/store-badges";
-import { APP_URL, pageMeta, POST_URL, SITE_DESCRIPTION, SITE_URL } from "@/lib/site";
+import { APP_URL, cdn, pageMeta, POST_URL, SITE_DESCRIPTION, SITE_URL } from "@/lib/site";
 
 export const metadata: Metadata = pageMeta({ description: SITE_DESCRIPTION, path: "/" });
 
@@ -141,8 +141,8 @@ const JSON_LD = JSON.stringify({
     },
     {
       "@type": "HowTo",
-      name: "How to find a friend on Phriend",
-      description: "Hire a verified local friend by the hour in four steps: browse, chat, book, meet in public.",
+      name: "How to find a companion on Phriend",
+      description: "Hire a verified local companion by the hour in four steps: browse, chat, book, meet in public.",
       url: `${SITE_URL}/#how-it-works`,
       step: CLIENT_STEPS.map((s, i) => ({ "@type": "HowToStep", position: i + 1, name: s.title, text: s.text })),
     },
@@ -155,7 +155,7 @@ function PhoneMockup() {
       <div className="rounded-[2.75rem] border-[6px] border-ink bg-ink p-1.5 shadow-float ring-1 ring-white/25">
         <div className="aspect-[43/90] overflow-hidden rounded-[2.2rem] bg-white">
           <Image
-            src="/photos/shot-home.png"
+            src={cdn("/photos/shot-home.png")}
             alt="Phriend app home screen"
             width={430}
             height={900}
@@ -171,7 +171,7 @@ function PhoneMockup() {
         className="absolute -left-14 top-[30%] hidden w-52 rounded-2xl border border-line bg-white p-3 text-xs leading-snug text-body shadow-float sm:block lg:-left-24"
       >
         <p className="mb-1 flex items-center gap-1.5 font-extrabold text-ink">
-          <Image src="/photos/kyla-1.jpg" alt="Kyla" width={24} height={24} className="size-6 rounded-full object-cover" />
+          <Image src={cdn("/photos/kyla-1.jpg")} alt="Kyla" width={24} height={24} className="size-6 rounded-full object-cover" />
           Kyla <BadgeCheck size={12} className="fill-verify text-white" />
           <span className="ml-auto font-bold text-muted">2:14 pm</span>
         </p>
@@ -222,7 +222,7 @@ export default function Home() {
               Verified locals across the Philippines
             </p>
             <h1 className="mt-5 font-display text-[44px] font-semibold leading-[1.02] tracking-tight text-white sm:text-6xl lg:text-7xl">
-              Find a friend for <span className="text-brand-light">anything</span>
+              Find a companion for <span className="text-brand-light">anything</span>
             </h1>
             <p className="mt-5 text-lg leading-relaxed text-white/80 sm:text-xl">
               Food trips, city tours, gigs, hikes, errands and more, with verified locals across the Philippines. Paid by
@@ -266,8 +266,8 @@ export default function Home() {
             </div>
             <div className="relative aspect-[3/2] overflow-hidden rounded-3xl shadow-card">
               <Image
-                src="/photos/life-food-trip.jpg"
-                alt="Two friends laughing over grilled skewers at a night street-food stall, a jeepney behind them"
+                src={cdn("/photos/life-food-trip.jpg")}
+                alt="A client and their companion laughing over grilled skewers at a night street-food stall, a jeepney behind them"
                 width={1536}
                 height={1024}
                 sizes="(min-width: 1024px) 560px, 100vw"
@@ -280,7 +280,7 @@ export default function Home() {
             <li className="flex flex-col justify-between rounded-3xl bg-navy p-6 text-white md:col-span-2 lg:col-span-1">
               <Users size={28} className="text-brand-light" aria-hidden="true" />
               <div className="mt-10">
-                <h3 className="font-display text-2xl font-semibold">Looking for a friend?</h3>
+                <h3 className="font-display text-2xl font-semibold">Looking for a companion?</h3>
                 <p className="mt-2 text-[15px] leading-relaxed text-white/85">From scrolling to a real meet-up in an afternoon.</p>
               </div>
             </li>
@@ -396,7 +396,7 @@ export default function Home() {
               </Link>
               <div className="relative mt-8 aspect-[4/5] max-w-sm overflow-hidden rounded-3xl shadow-card">
                 <Image
-                  src="/photos/life-verified.jpg"
+                  src={cdn("/photos/life-verified.jpg")}
                   alt="A smiling woman in a cafe holding her phone and giving a thumbs up"
                   width={1024}
                   height={1536}
@@ -457,8 +457,8 @@ export default function Home() {
             <div className="flex flex-col gap-4">
               <div className="relative aspect-[3/2] overflow-hidden rounded-3xl shadow-card">
                 <Image
-                  src="/photos/life-hiking.jpg"
-                  alt="Three friends taking a selfie on a hilltop trail above rice terraces and the sea"
+                  src={cdn("/photos/life-hiking.jpg")}
+                  alt="Three people taking a selfie on a hilltop trail above rice terraces and the sea"
                   width={1536}
                   height={1024}
                   sizes="(min-width: 1024px) 560px, 100vw"
@@ -498,7 +498,7 @@ export default function Home() {
       <section id="faq" aria-labelledby="faq-title" className="bg-surface">
         <div className="mx-auto w-full max-w-6xl px-5 py-16 sm:px-8 sm:py-24">
           <p id="what-is-phriend" className="mb-10 rounded-2xl border border-line bg-white p-5 text-[17px] leading-relaxed shadow-card sm:p-6">
-            <strong className="text-ink">What is Phriend?</strong> Phriend is a Philippine app for hiring a verified local friend
+            <strong className="text-ink">What is Phriend?</strong> Phriend is a Philippine app for hiring a verified local companion
             by the hour for legit activities such as food trips, city tours, events, tutoring and errands. Members are 18+, meet
             in public places, and pay 50% in cash on a first meetup and 50% after.
           </p>

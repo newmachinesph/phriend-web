@@ -34,12 +34,12 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!r) return { title: "Not found", robots: { index: false } };
   if (r.category)
     return pageMeta({
-      title: `${r.category.label} buddies in ${r.city.name}: rent a friend`.slice(0, 60),
+      title: `${r.category.label} buddies in ${r.city.name}: book a companion`.slice(0, 60),
       description: `Hire a verified local in ${r.city.name} for ${r.category.label.toLowerCase()} by the hour. ID-checked Phriends, public meetups, cash on arrival.`.slice(0, 150),
       path: comboPath(r.category, r.city),
     });
   return pageMeta({
-    title: `Rent a friend in ${r.city.name}: verified locals by the hour`.slice(0, 60),
+    title: `Book a companion in ${r.city.name}: verified locals by the hour`.slice(0, 60),
     description: `Food trips, tours, study buddies, errands and more in ${r.city.name}. Every Phriend is ID-verified; meet in public, pay in cash when you meet.`.slice(0, 150),
     path: `/${r.city.slug}`,
   });
@@ -72,7 +72,7 @@ async function CityLanding({ city, categories }: { city: CityPage; categories: A
       },
       {
         "@type": "Service",
-        name: `Rent a friend in ${city.name}`,
+        name: `Book a companion in ${city.name}`,
         serviceType: "Paid platonic company by the hour",
         provider: { "@type": "Organization", name: SITE_NAME, url: SITE_URL },
         areaServed: { "@type": "City", name: city.name, containedInPlace: { "@type": "Country", name: "Philippines" } },
@@ -92,7 +92,7 @@ async function CityLanding({ city, categories }: { city: CityPage; categories: A
         {" › "}
         <span className="text-ink">{city.name}</span>
       </nav>
-      <h1 className="mt-4 max-w-3xl font-display text-4xl font-semibold leading-tight text-ink sm:text-5xl">Rent a friend in {city.name}</h1>
+      <h1 className="mt-4 max-w-3xl font-display text-4xl font-semibold leading-tight text-ink sm:text-5xl">Book a companion in {city.name}</h1>
       <p className="mt-5 max-w-3xl text-lg leading-relaxed">
         {city.name} is {city.blurb}. On Phriend you hire a verified local there by the hour for {acts.slice(0, -1).join(", ")} and {acts[acts.length - 1]}, and dozens of other activities. Every Phriend confirmed their identity and age
         with a government ID, and a person approved their profile before it went live. You agree on the plan in the chat, meet in a public place, and pay half in cash when you meet and half after. Platonic company and legit side gigs only.

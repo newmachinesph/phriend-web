@@ -15,7 +15,7 @@ export async function generateMetadata({ params }: { params: Promise<{ activity:
   const category = await findCategory((await params).activity);
   if (!category) return { title: "Not found", robots: { index: false } };
   return pageMeta({
-    title: `Rent a friend for ${category.label} in the Philippines`.slice(0, 60),
+    title: `Book a companion for ${category.label} in the Philippines`.slice(0, 60),
     description: `Hire a verified local for ${category.label.toLowerCase()} by the hour. ID-checked Phriends, public meetups, cash on arrival. See who is available today.`.slice(0, 150),
     path: `/rent-a-friend/${activitySlug(category.label)}`,
   });

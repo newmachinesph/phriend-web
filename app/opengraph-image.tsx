@@ -48,7 +48,7 @@ export default function Image() {
         </div>
 
         <div style={{ display: "flex", flexDirection: "column", fontSize: 104, lineHeight: 1.02, letterSpacing: -3 }}>
-          <div>Find a friend for</div>
+          <div>Find a companion for</div>
           <div style={{ color: "#fe6138" }}>anything</div>
         </div>
 

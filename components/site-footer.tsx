@@ -73,11 +73,14 @@ export function SiteFooter() {
             <Link href="/press" className={link}>
               Press
             </Link>
+            <Link href="/creators" className={link}>
+              Creators
+            </Link>
           </nav>
         </div>
 
         <p className="mt-12 flex flex-wrap justify-between gap-x-6 gap-y-2 border-t border-line pt-6 text-sm font-semibold text-muted">
-          <span>© 2026 Phriend · Made in the Philippines</span>
+          <span>© 2026 Phriend · Made in the Philippines</span>
         </p>
       </div>
     </footer>

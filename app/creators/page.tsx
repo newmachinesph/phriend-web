@@ -1,14 +1,24 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { ArrowRight, BadgeCheck, Clapperboard, Coffee, Download, Map as MapIcon, MessageCircle, ShoppingBag, Utensils, type LucideIcon } from "lucide-react";
 import { OverlayTool } from "@/components/overlay-tool";
 import { breadcrumbJsonLd, pageMeta, POST_URL } from "@/lib/site";
 
-export const metadata: Metadata = pageMeta({
-  title: "Creators: Be the creator people book",
-  description:
-    "For TikTok and Facebook Reels creators in the Philippines: join Phriend, post one video with your Phriend profile card, and give one follower 2 hours with you. Make your profile overlay here.",
-  path: "/creators",
-});
+const TITLE = "Be the creator people book";
+const DESCRIPTION =
+  "For TikTok and Facebook Reels creators in the Philippines: join Phriend, post one video with your Phriend profile card, and give one follower 2 hours with you. Make your profile overlay here.";
+const SHARE_TITLE = "Be the creator people book. One follower wins 2 hours with you.";
+const SHARE_DESCRIPTION = "Post one video with your Phriend profile card. Your followers comment for a week and the best comment wins 2 hours with you. #BeMyPhriend";
+// pageMeta sets the site-wide share image; this page has its own (app/creators/opengraph-image.tsx)
+const OG = { url: "/creators/opengraph-image", width: 1200, height: 630, alt: "Be the creator people book: Phriend creator collab" };
+
+const base = pageMeta({ title: TITLE, description: DESCRIPTION, path: "/creators" });
+export const metadata: Metadata = {
+  ...base,
+  keywords: ["content creator Philippines", "TikTok creator collab", "Facebook Reels creator", "creator side income", "BeMyPhriend", "Phriend creators"],
+  openGraph: { ...base.openGraph, title: SHARE_TITLE, description: SHARE_DESCRIPTION, images: [OG] },
+  twitter: { card: "summary_large_image", title: SHARE_TITLE, description: SHARE_DESCRIPTION, images: [OG.url] },
+};
 
 const KIT_PDF = "/creators/Phriend-Creator-Collab-Kit.pdf";
 const MESSENGER = "https://m.me/phriendapp";
@@ -36,11 +46,13 @@ export default function CreatorsPage() {
     <main id="main" className="flex-1">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: breadcrumbJsonLd("Creators", "/creators") }} />
 
-      <section className="bg-navy-gradient text-white">
-        <div className="mx-auto w-full max-w-6xl px-5 pb-16 pt-14 sm:px-8 sm:pt-20 lg:pb-20">
+      <section className="overflow-hidden bg-navy-gradient text-white">
+        <div className="mx-auto grid w-full max-w-6xl items-center gap-12 px-5 pb-16 pt-14 sm:px-8 sm:pt-20 lg:grid-cols-[1.15fr_0.85fr] lg:pb-20">
+          <div>
           <p className="text-sm font-extrabold uppercase tracking-wider text-mango">#BeMyPhriend · Creator collab</p>
           <h1 className="mt-3 font-display text-[44px] font-semibold leading-[1.02] tracking-tight sm:text-6xl">
-            Be the creator <span className="text-brand-light">people book.</span>
+            Be the creator <br className="hidden sm:block" />
+            <span className="text-brand-light">people book.</span>
           </h1>
           <p className="mt-6 max-w-2xl text-lg leading-relaxed text-white/85">
             Post one video with your Phriend profile card on screen. For a week your followers comment for a chance to hang out with you, and
@@ -57,6 +69,28 @@ export default function CreatorsPage() {
             >
               <Download size={20} aria-hidden="true" /> Creator kit (PDF)
             </a>
+          </div>
+          </div>
+
+          {/* AI-generated creator and the sample overlay card, not a real member */}
+          <div className="relative mx-auto w-full max-w-[420px] pl-10 sm:pl-16 lg:max-w-none">
+            <Image
+              src="/creators/hero.jpg"
+              alt="A creator filming vertical video of herself on a phone in a ring light at a street food stall"
+              width={800}
+              height={1000}
+              priority
+              sizes="(min-width: 1024px) 420px, 90vw"
+              className="aspect-[4/5] w-full rounded-[2rem] object-cover shadow-float"
+            />
+            <Image
+              src="/creators/og-card.png"
+              alt="Example Phriend profile overlay card with a Win 2 hours with me tag"
+              width={320}
+              height={547}
+              sizes="(min-width: 1024px) 190px, 40vw"
+              className="absolute bottom-8 left-0 w-[42%] max-w-[190px] -rotate-6 drop-shadow-2xl"
+            />
           </div>
         </div>
       </section>

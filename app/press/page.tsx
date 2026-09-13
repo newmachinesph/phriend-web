@@ -61,7 +61,7 @@ const USAGE = [
 
 const SCREENSHOTS: { src: string; alt: string; caption: string }[] = [
   {
-    src: cdn("/photos/shot-home.png"),
+    src: cdn("/photos/shot-home-v2.png"),
     alt: "Phriend app home screen with a search bar, activity categories and verified profiles with hourly rates",
     caption: "Home: search and verified profiles",
   },

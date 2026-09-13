@@ -5,7 +5,7 @@
 // Cached for a week: give a changed image a new file name if it has to update everywhere at once.
 import { createHash, createHmac } from "node:crypto";
 import { readdirSync, readFileSync, statSync } from "node:fs";
-import { extname, join, relative, sep } from "node:path";
+import { extname, isAbsolute, join, relative, sep } from "node:path";
 
 const TYPES = { ".jpg": "image/jpeg", ".jpeg": "image/jpeg", ".png": "image/png", ".webp": "image/webp", ".svg": "image/svg+xml", ".gif": "image/gif", ".avif": "image/avif", ".pdf": "application/pdf" };
 const { R2_ACCOUNT_ID: account, R2_ACCESS_KEY_ID: accessKey, R2_SECRET_ACCESS_KEY: secret, R2_BUCKET: bucket } = process.env;
@@ -25,7 +25,7 @@ async function put(key, body, contentType) {
   const scope = `${date}/auto/s3/aws4_request`;
   const signingKey = hmac(hmac(hmac(hmac(`AWS4${secret}`, date), "auto"), "s3"), "aws4_request");
   const signature = createHmac("sha256", signingKey).update(["AWS4-HMAC-SHA256", amzDate, scope, sha256(canonical)].join("\n")).digest("hex");
-  const { host: _, ...sent } = headers;
+  const sent = Object.fromEntries(Object.entries(headers).filter(([h]) => h !== "host")); // fetch sets Host itself
   const res = await fetch(`https://${host}${path}`, { method: "PUT", body, headers: { ...sent, authorization: `AWS4-HMAC-SHA256 Credential=${accessKey}/${scope}, SignedHeaders=${signed}, Signature=${signature}` } });
   if (!res.ok) throw new Error(`${key}: HTTP ${res.status} ${(await res.text()).slice(0, 300)}`);
 }
@@ -35,6 +35,7 @@ const args = process.argv.slice(2);
 if (!args.length) throw new Error("name at least one file or folder");
 
 for (const arg of args) {
+  if (isAbsolute(arg) || arg.startsWith("..")) throw new Error(`pass a relative path like new/blog/cover.jpg, not ${arg}`);
   const root = arg.split(/[\\/]/)[0];
   for (const file of walk(arg)) {
     const type = TYPES[extname(file).toLowerCase()];

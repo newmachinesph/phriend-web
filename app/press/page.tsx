@@ -61,17 +61,17 @@ const USAGE = [
 
 const SCREENSHOTS: { src: string; alt: string; caption: string }[] = [
   {
-    src: cdn("/photos/shot-home-v4.png"),
+    src: cdn("/photos/shot-home-v5.png"),
     alt: "The Phriend home screen: a search bar, service categories and verified local pros with their hourly rate",
     caption: "Home: search and verified pros",
   },
   {
-    src: cdn("/photos/shot-post-v4.png"),
+    src: cdn("/photos/shot-post-v5.png"),
     alt: "A tour guide's listing showing photos, the services they offer, the city and the hourly rate, with a Book button",
     caption: "Listing: services, rate, booking",
   },
   {
-    src: cdn("/photos/shot-hiking-v4.png"),
+    src: cdn("/photos/shot-hiking-v5.png"),
     alt: "A hiking guide's listing with trail photos, the routes they guide and the hourly rate",
     caption: "Listing: a hiking guide",
   },

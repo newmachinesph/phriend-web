@@ -61,24 +61,19 @@ const USAGE = [
 
 const SCREENSHOTS: { src: string; alt: string; caption: string }[] = [
   {
-    src: cdn("/photos/shot-home-v2.png"),
-    alt: "Phriend app home screen with a search bar, activity categories and verified profiles with hourly rates",
-    caption: "Home: search and verified profiles",
+    src: cdn("/photos/shot-home-v3.png"),
+    alt: "The Phriend home screen: a search bar, service categories and verified local pros with their hourly rate",
+    caption: "Home: search and verified pros",
   },
   {
-    src: cdn("/photos/shot-post.png"),
-    alt: "A Phriend profile in the app showing photos, a star rating, activity tags, an hourly rate and a Chat button",
-    caption: "Profile: photos, tags, rate, chat",
+    src: cdn("/photos/shot-post-v3.png"),
+    alt: "A tour guide's listing showing photos, the services they offer, the city and the hourly rate, with a Book button",
+    caption: "Listing: services, rate, booking",
   },
   {
-    src: cdn("/photos/shot-gigs.png"),
-    alt: "The Gigs screen listing what clients need, each with an activity, city, date and budget per hour",
-    caption: "Gigs: what clients need",
-  },
-  {
-    src: cdn("/photos/shot-rules.png"),
-    alt: "A Phriend profile showing non-negotiables and the house rules: public places only, 50% at the start and 50% after, no extra people not agreed in chat",
-    caption: "Rules and non-negotiables",
+    src: cdn("/photos/shot-hiking-v3.png"),
+    alt: "A hiking guide's listing with trail photos, the routes they guide and the hourly rate",
+    caption: "Listing: a hiking guide",
   },
 ];
 

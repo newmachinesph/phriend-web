@@ -150,8 +150,8 @@ function PhoneMockup() {
       <div className="rounded-[2.75rem] border-[6px] border-ink bg-ink p-1.5 shadow-float ring-1 ring-white/25">
         <div className="aspect-[43/90] overflow-hidden rounded-[2.2rem] bg-white">
           <Image
-            src={cdn("/photos/shot-home-v2.png")}
-            alt="Phriend app home screen"
+            src={cdn("/photos/shot-home-v3.png")}
+            alt="The Phriend home screen: a search bar, service categories and verified local pros with their hourly rate"
             width={430}
             height={900}
             preload

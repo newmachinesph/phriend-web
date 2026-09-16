@@ -17,7 +17,7 @@ export default function SafetyPage() {
       title="Safety and transaction rules"
       path="/safety"
       updated={LAST_UPDATED}
-      summary="Meet in public. Only the people agreed in the chat come along; if extra companions show up, cancel, leave and report. On a first meetup pay half in cash when you meet and half after, never more than half upfront. E-wallets are for repeat Phriends you trust, and only to the account shared in the chat. Tell a friend where you are, and report anything that feels wrong."
+      summary="Meet in public. Only the people agreed in the chat come along; if extra people not agreed in chat show up, cancel, leave and report. On a first meetup pay half in cash when you meet and half after, never more than half upfront. E-wallets are for repeat Phriends you trust, and only to the account shared in the chat. Tell a friend where you are, and report anything that feels wrong."
       intro="These rules apply to every member, on both sides of a meetup. They are short on purpose. Breaking them gets an account removed. Phriend is a platform only: it is not a party to any meetup or payment and is not liable for any loss, injury, dispute, unpaid balance or harm between members. You use the service at your own risk, and your prudence is your protection."
     >
       <h2>1. Public places only</h2>
@@ -36,7 +36,7 @@ export default function SafetyPage() {
         spaces throughout.
       </p>
 
-      <h2>2. Unagreed companions</h2>
+      <h2>2. Extra people not agreed in chat</h2>
       <p>
         Who is coming is agreed in the chat, like everything else. If the other
         member arrives with people who were not agreed in the chat, a friend, a
@@ -170,7 +170,7 @@ export default function SafetyPage() {
         Every profile and every gig has a report button, and the chat menu leads
         to it. Use it for anything that breaks these rules or the{" "}
         <Link href="/community-guidelines">community guidelines</Link>: requests
-        for private meetups, unagreed companions, romantic or sexual
+        for private meetups, extra people not agreed in chat, romantic or sexual
         propositions, off-platform payment requests, harassment, impersonation,
         or a member who looks under 18. You can attach up to 4 photos as
         evidence. Blocking, from the chat menu, hides the member&apos;s profile
@@ -211,8 +211,8 @@ export default function SafetyPage() {
           cancellations lead to removal.
         </li>
         <li>
-          Cancellations because of typhoons, floods, unagreed companions or any
-          other safety concern are refunded in full, no questions asked.
+          Cancellations because of typhoons, floods, extra people not agreed in
+          chat or any other safety concern are refunded in full, no questions asked.
         </li>
       </ul>
 
@@ -245,8 +245,8 @@ export default function SafetyPage() {
       <ol>
         <li>Meet in public.</li>
         <li>
-          Only the people agreed in the chat. Extra companions: cancel, leave,
-          report.
+          Only the people agreed in the chat. Extra people not agreed in chat:
+          cancel, leave, report.
         </li>
         <li>
           First meetup: half in cash when you meet, half after. Never more than

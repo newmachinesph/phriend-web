@@ -48,8 +48,8 @@ export default function Image() {
         </div>
 
         <div style={{ display: "flex", flexDirection: "column", fontSize: 104, lineHeight: 1.02, letterSpacing: -3 }}>
-          <div>Find a companion for</div>
-          <div style={{ color: "#fe6138" }}>anything</div>
+          <div>Local guides</div>
+          <div style={{ color: "#fe6138" }}>&amp; pros</div>
         </div>
 
         <div style={{ display: "flex", flexDirection: "column", gap: 12, fontFamily: "Nunito" }}>

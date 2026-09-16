@@ -5,7 +5,8 @@ import { API_URL, APP_URL, apiHeaders } from "@/lib/site";
 export type CreatorCard = {
   id: number;
   name: string;
-  age: number | null;
+  /** The service the card advertises (first activity, else first category). */
+  service: string | null;
   city: string;
   rate: number;
   rating: number;
@@ -23,6 +24,7 @@ const MAX_PHOTO_BYTES = 4_000_000;
 
 const str = (v: unknown) => (typeof v === "string" ? v.trim() : "");
 const num = (v: unknown) => (typeof v === "number" && Number.isFinite(v) ? v : null);
+const firstStr = (v: unknown) => (Array.isArray(v) ? (v.map(str).find(Boolean) ?? null) : null);
 
 /** Photos are either on the CDN or served by the API at /api/img/...; anything else is refused. */
 async function inlinePhoto(path: unknown): Promise<string | null> {
@@ -71,7 +73,7 @@ export async function getCreatorCard(link: string): Promise<Result> {
     card: {
       id,
       name,
-      age: num(post.age),
+      service: firstStr(post.activities) ?? firstStr(post.categories),
       city: str(post.city),
       rate: num(post.pricePerHour) ?? 0,
       rating: num(post.averageStarRating) ?? 0,

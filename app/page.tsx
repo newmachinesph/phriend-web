@@ -2,10 +2,10 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import {
-  ArrowRight, BadgeCheck, Bell, BookOpen, CalendarClock, CalendarDays, Camera, ChevronDown, ClipboardList, Dumbbell, Flag,
-  GraduationCap, Hospital, LayoutDashboard, Lock, Map, MapPin, Megaphone, MessageCircle, Mic, Mountain, PenLine, Search, ShieldCheck,
+  ArrowRight, BadgeCheck, Bell, CalendarClock, CalendarDays, Camera, Car, ChevronDown, ClipboardList, Dumbbell, Flag,
+  GraduationCap, LayoutDashboard, Lock, Map, MapPin, Megaphone, MessageCircle, Mountain, PenLine, Search, ShieldCheck,
   Star, Tag, Umbrella, Users, UserX, Utensils, Wallet, type LucideIcon,
-  Footprints, Laptop, MessagesSquare, Sandwich,
+  Laptop,
 } from "lucide-react";
 import { StoreBadges } from "@/components/store-badges";
 import { APP_URL, cdn, pageMeta, POST_URL, SITE_DESCRIPTION, SITE_URL } from "@/lib/site";
@@ -15,7 +15,7 @@ export const metadata: Metadata = pageMeta({ description: SITE_DESCRIPTION, path
 const TRUST: { icon: LucideIcon; label: string }[] = [
   { icon: BadgeCheck, label: "Everyone is ID-verified" },
   { icon: MapPin, label: "Public meet-ups only" },
-  { icon: Wallet, label: "50% downpayment, 50% after" },
+  { icon: Wallet, label: "Agree the price in chat, pay in person" },
   { icon: ShieldCheck, label: "18+ only" },
 ];
 
@@ -34,27 +34,22 @@ const PHRIEND_STEPS: { icon: LucideIcon; title: string; text: string }[] = [
 ];
 
 const ACTIVITIES: { icon: LucideIcon; label: string; slug: string }[] = [
-  { icon: Utensils, label: "Eat & Travel", slug: "eat_and_travel" },
-  { icon: Laptop, label: "Coworking", slug: "coworking" },
-  { icon: Footprints, label: "Walk & Talk", slug: "walk-and-talk" },
-  { icon: Sandwich, label: "Lunch Buddy", slug: "lunch-buddy" },
-  { icon: MessagesSquare, label: "Kwentuhan", slug: "kwentuhan" },
-  { icon: Camera, label: "Photographer", slug: "photographer" },
   { icon: Map, label: "Tour Guide", slug: "tour-guide" },
-  { icon: Dumbbell, label: "Workout", slug: "workout" },
-  { icon: Mic, label: "Karaoke", slug: "karaoke" },
-  { icon: Umbrella, label: "Beach", slug: "beach" },
-  { icon: Mountain, label: "Hiking", slug: "hiking" },
+  { icon: Camera, label: "Photographer", slug: "photographer" },
   { icon: GraduationCap, label: "Tutor", slug: "tutor" },
-  { icon: BookOpen, label: "Study Buddy", slug: "study-buddy" },
+  { icon: Mountain, label: "Hiking", slug: "hiking" },
   { icon: ClipboardList, label: "Errand", slug: "errand" },
-  { icon: Hospital, label: "Hospital Buddy", slug: "hospital_asst" },
+  { icon: Car, label: "Driver", slug: "driver" },
+  { icon: Utensils, label: "Eat & Travel", slug: "eat_and_travel" },
   { icon: CalendarDays, label: "Event", slug: "event" },
+  { icon: Dumbbell, label: "Workout", slug: "workout" },
+  { icon: Umbrella, label: "Beach", slug: "beach" },
+  { icon: Laptop, label: "Coworking", slug: "coworking" },
 ];
 
 const RULES: { icon: LucideIcon; title: string; text: string }[] = [
   { icon: MapPin, title: "Public places only", text: "Malls, cafes, parks, trails, events. Never a private residence or a hotel room." },
-  { icon: UserX, title: "Unagreed companions", text: "If someone arrives with people not agreed in the chat, do not proceed. Leave and report." },
+  { icon: UserX, title: "Extra people not agreed in chat", text: "If someone arrives with people not agreed in the chat, do not proceed. Leave and report." },
   { icon: Wallet, title: "Half before, half after", text: "50% in cash when you meet, 50% after. E-wallets only for repeat Phriends you trust." },
   { icon: Lock, title: "Pay only the shared account", text: "Send money only to the account shared in the chat. Anything else is a scam." },
   { icon: BadgeCheck, title: "ID verification", text: "Everyone verifies their identity and age before they get the badge or a profile goes live." },
@@ -63,11 +58,11 @@ const RULES: { icon: LucideIcon; title: string; text: string }[] = [
 ];
 
 const FEATURES: { icon: LucideIcon; title: string; text: string }[] = [
-  { icon: Search, title: "Search and favorites", text: "Filter by city, activity, language, age and rate. Favorite profiles and share a Phriend's @username link." },
+  { icon: Search, title: "Search and favorites", text: "Filter by city, activity, language and rate. Favorite profiles and share a Phriend's @username link." },
   { icon: CalendarDays, title: "Bookings", text: "Pick a service, date, time and a public place. Accept, decline or cancel with a reason, and add it to your calendar." },
   { icon: CalendarClock, title: "Schedule", text: "Phriends set weekly hours and lock out dates. Requests outside those hours are refused automatically." },
   { icon: Tag, title: "Services and rates", text: "An hourly rate, plus services with their own price per hour or per session and a minimum booking." },
-  { icon: MessageCircle, title: "Chat", text: "Photos, emoji reactions, read receipts, saved replies, typing and online indicators. Archive or block anyone." },
+  { icon: MessageCircle, title: "Chat", text: "Photos, emoji reactions, read receipts, saved replies and typing indicators. Archive or block anyone." },
   { icon: Star, title: "Reviews", text: "A star rating, a few words and photos. It shows once the Phriend approves it." },
   { icon: LayoutDashboard, title: "Manage dashboard", text: "Profile views, favorites, reviews to approve, bookings by status, earnings and private notes." },
   { icon: Megaphone, title: "Gigs board", text: "Post what you need with a budget and date. Phriends apply in the chat with the gig pinned as the subject." },
@@ -79,8 +74,8 @@ const FEATURES: { icon: LucideIcon; title: string; text: string }[] = [
 
 const FAQ: { q: string; a: string }[] = [
   {
-    q: "Is Phriend a dating app?",
-    a: "No. Phriend is for platonic, paid-by-the-hour company and legit side gigs: a buddy for a food trip, a tour guide, a study partner, someone to keep you company at the hospital. Romantic or sexual services, compensated dating and escort services are banned and get an account removed immediately.",
+    q: "What can I book on Phriend?",
+    a: "Local services and activities, by the hour: guided city and food tours, photo and video shoots, tutoring and lessons, hiking and trail guiding, personal training, driving and airport transfers, errands and queueing, event coverage and on-site help. Phriend is not a dating service. Romantic or sexual services, compensated dating and escort services are banned and get an account removed immediately.",
   },
   {
     q: "How do bookings work?",
@@ -108,7 +103,7 @@ const FAQ: { q: string; a: string }[] = [
   },
   {
     q: "What do Phriends agree to?",
-    a: "Before a profile goes live, every Phriend ticks an agreement: 18 or older and ID-verified; legitimate activities only, nothing romantic, sexual or illegal; public places only and nobody who was not agreed in the chat; half at the start and half after, cash in person on a first meetup; and prudence if a client shows up with unagreed companions. The full text is on the safety page.",
+    a: "Before a profile goes live, every Phriend ticks an agreement: 18 or older and ID-verified; legitimate activities only, nothing romantic, sexual or illegal; public places only and nobody who was not agreed in the chat; half at the start and half after, cash in person on a first meetup; and prudence if a client shows up with extra people not agreed in the chat. The full text is on the safety page.",
   },
   {
     q: "What are non-negotiables?",
@@ -141,8 +136,8 @@ const JSON_LD = JSON.stringify({
     },
     {
       "@type": "HowTo",
-      name: "How to find a companion on Phriend",
-      description: "Hire a verified local companion by the hour in four steps: browse, chat, book, meet in public.",
+      name: "How to book a local guide or pro on Phriend",
+      description: "Book a verified local guide or pro by the hour in four steps: browse, chat, book, meet in public.",
       url: `${SITE_URL}/#how-it-works`,
       step: CLIENT_STEPS.map((s, i) => ({ "@type": "HowToStep", position: i + 1, name: s.title, text: s.text })),
     },
@@ -183,9 +178,9 @@ function PhoneMockup() {
       >
         <p className="flex items-center gap-1.5 font-extrabold text-ink">
           <ShieldCheck size={14} className="text-success" />
-          50% downpayment
+          Price agreed in chat
         </p>
-        <p className="mt-0.5 text-muted">Balance after the meetup</p>
+        <p className="mt-0.5 text-muted">Paid in person when you meet</p>
       </div>
     </div>
   );
@@ -222,11 +217,11 @@ export default function Home() {
               Verified locals across the Philippines
             </p>
             <h1 className="mt-5 font-display text-[44px] font-semibold leading-[1.02] tracking-tight text-white sm:text-6xl lg:text-7xl">
-              Find a companion for <span className="text-brand-light">anything</span>
+              Book local guides and <span className="text-brand-light">pros</span>
             </h1>
             <p className="mt-5 text-lg leading-relaxed text-white/80 sm:text-xl">
-              Food trips, city tours, gigs, hikes, errands and more, with verified locals across the Philippines. Paid by
-              the hour, met in public, always legit.
+              Tours, photo shoots, lessons, hikes, errands and driving, with ID-verified locals across the Philippines.
+              Booked by the hour, met in public, paid in person.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <a href={APP_URL} className="btn-primary inline-flex items-center justify-center gap-2 rounded-full px-7 py-3.5 text-lg font-bold">
@@ -267,7 +262,7 @@ export default function Home() {
             <div className="relative aspect-[3/2] overflow-hidden rounded-3xl shadow-card">
               <Image
                 src={cdn("/photos/life-food-trip.jpg")}
-                alt="A client and their companion laughing over grilled skewers at a night street-food stall, a jeepney behind them"
+                alt="A food-tour guide and their client laughing over grilled skewers at a night street-food stall, a jeepney behind them"
                 width={1536}
                 height={1024}
                 sizes="(min-width: 1024px) 560px, 100vw"
@@ -280,8 +275,8 @@ export default function Home() {
             <li className="flex flex-col justify-between rounded-3xl bg-navy p-6 text-white md:col-span-2 lg:col-span-1">
               <Users size={28} className="text-brand-light" aria-hidden="true" />
               <div className="mt-10">
-                <h3 className="font-display text-2xl font-semibold">Looking for a companion?</h3>
-                <p className="mt-2 text-[15px] leading-relaxed text-white/85">From scrolling to a real meet-up in an afternoon.</p>
+                <h3 className="font-display text-2xl font-semibold">Need a local pro?</h3>
+                <p className="mt-2 text-[15px] leading-relaxed text-white/85">From scrolling to a booked meet-up in an afternoon.</p>
               </div>
             </li>
             {CLIENT_STEPS.map((s, i) => (
@@ -289,7 +284,7 @@ export default function Home() {
             ))}
             <li className="flex flex-col justify-between rounded-3xl bg-brand-soft p-6 md:col-span-2 lg:col-span-2">
               <p className="font-display text-2xl font-semibold text-ink">Ready when you are.</p>
-              <p className="mt-2 text-[15px] leading-relaxed text-body">Verified locals, public places, 50% downpayment. Everything else is up to you and your Phriend.</p>
+              <p className="mt-2 text-[15px] leading-relaxed text-body">Verified locals, public places, the price agreed in chat. Everything else is up to you and your Phriend.</p>
               <a href={APP_URL} className="btn-primary mt-6 inline-flex w-fit items-center justify-center rounded-full px-6 py-3 font-bold">
                 Open the app
               </a>
@@ -350,7 +345,7 @@ export default function Home() {
                 Whatever the plan, there is a Phriend for it.
               </h2>
               <p className="mt-3 text-[15px] leading-relaxed text-body">
-                Working from home? Cowork at a cafe, take a lunch or walking break, or just have kwentuhan with someone new. 46+ categories, each with its own sub-activities.
+                A guide for the weekend, a photographer for the shoot, a tutor for the exam, a driver for the airport run. 46+ categories, each with its own sub-activities.
               </p>
             </div>
             <a href={APP_URL} className="inline-flex items-center gap-1.5 font-bold text-brand-text hover:underline">
@@ -428,7 +423,7 @@ export default function Home() {
                 Turn free time into a side gig.
               </h2>
               <p className="mt-4 text-lg leading-relaxed">
-                Know your city, take good photos, speak three languages, or just make waiting rooms less lonely. Set up
+                Know your city, take good photos, speak three languages, or drive a clean car. Set up
                 your Phriend profile once, list your services, take bookings, meet in public, get paid.
               </p>
               <ul className="mt-6 space-y-3 text-[15px] font-semibold text-ink">
@@ -481,8 +476,8 @@ export default function Home() {
                     <dd className="mt-1 text-xl font-extrabold text-ink">₱300 to ₱1,500 / hr</dd>
                   </div>
                   <div className="rounded-2xl bg-white p-4">
-                    <dt className="text-xs font-extrabold uppercase tracking-wider text-muted">Payment split</dt>
-                    <dd className="mt-1 text-xl font-extrabold text-ink">50% downpayment, 50% after</dd>
+                    <dt className="text-xs font-extrabold uppercase tracking-wider text-muted">Payment</dt>
+                    <dd className="mt-1 text-xl font-extrabold text-ink">Agreed in chat, paid in person</dd>
                   </div>
                 </dl>
                 <p className="mt-4 text-sm text-muted">
@@ -498,9 +493,9 @@ export default function Home() {
       <section id="faq" aria-labelledby="faq-title" className="bg-surface">
         <div className="mx-auto w-full max-w-6xl px-5 py-16 sm:px-8 sm:py-24">
           <p id="what-is-phriend" className="mb-10 rounded-2xl border border-line bg-white p-5 text-[17px] leading-relaxed shadow-card sm:p-6">
-            <strong className="text-ink">What is Phriend?</strong> Phriend is a Philippine app for hiring a verified local companion
-            by the hour for legit activities such as food trips, city tours, events, tutoring and errands. Members are 18+, meet
-            in public places, and pay 50% in cash on a first meetup and 50% after.
+            <strong className="text-ink">What is Phriend?</strong> Phriend is a Philippine app for booking ID-verified local guides
+            and pros by the hour: city and food tours, photo shoots, tutoring, hikes, driving and errands. Members are 18+, agree
+            the price in the chat, meet in public places, and pay in person.
           </p>
           <div className="grid gap-10 lg:grid-cols-[0.7fr_1.3fr]">
             <div>
@@ -538,7 +533,7 @@ export default function Home() {
             <div aria-hidden="true" className="absolute -right-16 -top-16 size-64 rounded-full bg-brand/20" />
             <div aria-hidden="true" className="absolute -bottom-20 -left-10 size-56 rounded-full bg-white/5" />
             <h2 id="cta-title" className="relative font-display text-3xl font-semibold leading-tight sm:text-5xl">
-              Your next food trip buddy is one message away.
+              Your next local guide is one message away.
             </h2>
             <p className="relative mx-auto mt-4 max-w-xl text-lg text-white/85">
               Open the app, pick a city, and say hi. It is free to browse and free to become a Phriend.

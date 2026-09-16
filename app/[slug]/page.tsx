@@ -34,13 +34,13 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!r) return { title: "Not found", robots: { index: false } };
   if (r.category)
     return pageMeta({
-      title: `${r.category.label} buddies in ${r.city.name}: book a companion`.slice(0, 60),
-      description: `Hire a verified local in ${r.city.name} for ${r.category.label.toLowerCase()} by the hour. ID-checked Phriends, public meetups, cash on arrival.`.slice(0, 150),
+      title: `${r.category.label} pros in ${r.city.name}: book a local`.slice(0, 60),
+      description: `Book a verified local in ${r.city.name} for ${r.category.label.toLowerCase()} by the hour. ID-checked pros, public meetups, price agreed in the chat.`.slice(0, 150),
       path: comboPath(r.category, r.city),
     });
   return pageMeta({
-    title: `Book a companion in ${r.city.name}: verified locals by the hour`.slice(0, 60),
-    description: `Food trips, tours, study buddies, errands and more in ${r.city.name}. Every Phriend is ID-verified; meet in public, pay in cash when you meet.`.slice(0, 150),
+    title: `Local guides and pros in ${r.city.name}, by the hour`.slice(0, 60),
+    description: `Tours, photo shoots, lessons, hikes, driving and errands in ${r.city.name}. Every Phriend is ID-verified; meet in public, pay in cash when you meet.`.slice(0, 150),
     path: `/${r.city.slug}`,
   });
 }
@@ -72,8 +72,8 @@ async function CityLanding({ city, categories }: { city: CityPage; categories: A
       },
       {
         "@type": "Service",
-        name: `Book a companion in ${city.name}`,
-        serviceType: "Paid platonic company by the hour",
+        name: `Book a local guide or pro in ${city.name}`,
+        serviceType: "Local services",
         provider: { "@type": "Organization", name: SITE_NAME, url: SITE_URL },
         areaServed: { "@type": "City", name: city.name, containedInPlace: { "@type": "Country", name: "Philippines" } },
         url: `${SITE_URL}${path}`,
@@ -92,10 +92,10 @@ async function CityLanding({ city, categories }: { city: CityPage; categories: A
         {" › "}
         <span className="text-ink">{city.name}</span>
       </nav>
-      <h1 className="mt-4 max-w-3xl font-display text-4xl font-semibold leading-tight text-ink sm:text-5xl">Book a companion in {city.name}</h1>
+      <h1 className="mt-4 max-w-3xl font-display text-4xl font-semibold leading-tight text-ink sm:text-5xl">Local guides and pros in {city.name}</h1>
       <p className="mt-5 max-w-3xl text-lg leading-relaxed">
-        {city.name} is {city.blurb}. On Phriend you hire a verified local there by the hour for {acts.slice(0, -1).join(", ")} and {acts[acts.length - 1]}, and dozens of other activities. Every Phriend confirmed their identity and age
-        with a government ID, and a person approved their profile before it went live. You agree on the plan in the chat, meet in a public place, and pay half in cash when you meet and half after. Platonic company and legit side gigs only.
+        {city.name} is {city.blurb}. On Phriend you book a verified local there by the hour for {acts.slice(0, -1).join(", ")} and {acts[acts.length - 1]}, and dozens of other services. Every Phriend confirmed their identity and age
+        with a government ID, and a person approved their profile before it went live. You agree on the plan and the price in the chat, meet in a public place, and pay half in cash when you meet and half after. Legitimate services only.
       </p>
       <div className="mt-6 flex flex-wrap gap-3">
         <a href={`${APP_URL}/?city=${encodeURIComponent(city.name)}`} className="inline-flex items-center gap-2 rounded-full bg-brand px-5 py-3 font-bold text-white shadow-card hover:bg-brand-deep">
@@ -108,7 +108,7 @@ async function CityLanding({ city, categories }: { city: CityPage; categories: A
 
       <section aria-labelledby="acts" className="mt-14">
         <h2 id="acts" className="font-display text-2xl font-semibold text-ink sm:text-3xl">
-          What you can hire a Phriend for in {city.name}
+          What you can book a Phriend for in {city.name}
         </h2>
         <ul className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {categories.map((c) => (
@@ -117,7 +117,7 @@ async function CityLanding({ city, categories }: { city: CityPage; categories: A
                 <p className="font-display text-lg font-semibold text-ink">
                   {c.label} in {city.name}
                 </p>
-                <p className="mt-1 text-sm text-muted">{c.activities.slice(0, 4).join(" · ") || "Company by the hour"}</p>
+                <p className="mt-1 text-sm text-muted">{c.activities.slice(0, 4).join(" · ") || "Services by the hour"}</p>
               </Link>
             </li>
           ))}
@@ -162,7 +162,7 @@ async function CityLanding({ city, categories }: { city: CityPage; categories: A
             </li>
           ))}
           <li>
-            <Link href={`/rent-a-friend/${activitySlug(categories[0]?.label ?? "eat and travel")}`} className="inline-block rounded-full bg-surface px-4 py-1.5 text-sm font-bold text-ink hover:bg-brand-soft">
+            <Link href={`/services/${activitySlug(categories[0]?.label ?? "eat and travel")}`} className="inline-block rounded-full bg-surface px-4 py-1.5 text-sm font-bold text-ink hover:bg-brand-soft">
               All activities
             </Link>
           </li>

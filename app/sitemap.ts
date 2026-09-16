@@ -19,7 +19,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...POSTS.map((p) => ({ url: `${SITE_URL}/blog/${p.slug}`, lastModified: new Date(p.date), changeFrequency: "monthly" as const, priority: 0.7 })),
     ...dbPosts.map((p) => ({ url: `${SITE_URL}/blog/${p.slug}`, lastModified: new Date(p.updatedAt), changeFrequency: "monthly" as const, priority: 0.7 })),
     // landing pages: every activity, the six cities, and each city crossed with the featured activities
-    ...categories.map((c) => ({ url: `${SITE_URL}/rent-a-friend/${activitySlug(c.label)}`, lastModified, changeFrequency: "weekly" as const, priority: 0.8 })),
+    ...categories.map((c) => ({ url: `${SITE_URL}/services/${activitySlug(c.label)}`, lastModified, changeFrequency: "weekly" as const, priority: 0.8 })),
     ...CITY_PAGES.map((c) => ({ url: `${SITE_URL}/${c.slug}`, lastModified, changeFrequency: "weekly" as const, priority: 0.8 })),
     ...CITY_PAGES.flatMap((city) => featured.map((c) => ({ url: `${SITE_URL}${comboPath(c, city)}`, lastModified, changeFrequency: "weekly" as const, priority: 0.7 }))),
     { url: `${SITE_URL}/terms`, lastModified, changeFrequency: "yearly", priority: 0.4 },

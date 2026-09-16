@@ -6,7 +6,7 @@ import { LAST_UPDATED, pageMeta } from "@/lib/site";
 export const metadata: Metadata = pageMeta({
   title: "Community guidelines: what Phriend allows",
   description:
-    "What's allowed on Phriend and what isn't: strictly legit, platonic side gigs. No romantic or sexual services, no compensated dating, no escort services.",
+    "What's allowed on Phriend and what isn't: legitimate local services and activities only. No romantic or sexual services, no dating, no escort services.",
   path: "/community-guidelines",
 });
 
@@ -17,33 +17,33 @@ export default function CommunityGuidelinesPage() {
       title="Community guidelines"
       path="/community-guidelines"
       updated={LAST_UPDATED}
-      summary="Phriend is for legit, platonic, paid-by-the-hour activities between adults in public places: food trips, tours, hikes, events, tutoring, errands, hospital company and the like. Any sexual or romantic service, compensated dating, escort services, drugs, private-place meetups, scams and impersonation are banned and get an account removed immediately, with a report to the authorities where the law requires it."
-      intro="Phriend is for strictly legitimate side gigs: paid-by-the-hour company and help, in public, between adults. This page says exactly what that means."
+      summary="Phriend is for legitimate local services and activities booked by the hour between adults in public places: guided tours, photo and video shoots, tutoring and lessons, hiking, driving, errands and the like. Any sexual or romantic service, compensated dating, escort services, drugs, private-place meetups, scams and impersonation are banned and get an account removed immediately, with a report to the authorities where the law requires it."
+      intro="Phriend is for legitimate local services: work and activities you book by the hour, done in public, between adults. This page says exactly what that means."
     >
       <h2>1. What Phriend is for</h2>
       <p>
-        A Phriend is a local you pay per hour for a platonic activity or a legit service. The relationship is
-        friendly, professional and public. If you would not do it in front of your parents or a police officer, it
-        does not belong on Phriend.
+        A Phriend is a local you book and pay by the hour for a service or an activity: a tour, a shoot, a lesson, a
+        hike, a drive, an errand. The relationship is professional and public. If you would not do it in front of your
+        parents or a police officer, it does not belong on Phriend.
       </p>
 
       <h2>2. Allowed activities</h2>
       <ul>
-        <li>Food trips, cafe hopping, restaurant company, cooking together</li>
+        <li>Food tours, market and street-food guiding, cooking lessons</li>
         <li>City tours, local guiding, out-of-town day trips, beach and island trips</li>
-        <li>Hiking, camping, workouts, gym partners, sports and games</li>
-        <li>Photography, videography and content creation help</li>
-        <li>Concerts, events, weddings, parties and conventions as a plus-one or companion</li>
-        <li>Karaoke, movies, board games, video games in public venues</li>
-        <li>Tutoring, study buddies, language exchange, consulting and coaching</li>
-        <li>Errands, shopping company, queueing, moving help</li>
-        <li>Hospital companions, elderly care company, waiting-room company</li>
-        <li>Pet buddies, dog walking company</li>
-        <li>Virtual meetups such as language practice or study sessions over video call</li>
+        <li>Hiking and trail guiding, camping, personal training, sports coaching</li>
+        <li>Photography, videography and content creation work</li>
+        <li>Event, wedding and convention coverage, hosting and on-site help</li>
+        <li>Driving, riding and airport transfers</li>
+        <li>Tutoring, lessons, language practice, consulting and coaching</li>
+        <li>Errands, shopping runs, queueing, moving and delivery help</li>
+        <li>Hospital and clinic assistance, elderly care help, waiting-room assistance</li>
+        <li>Dog walking and pet sitting</li>
+        <li>Online sessions such as tutoring or language practice over video call</li>
       </ul>
       <p>
-        If your idea is not on the list but is legal, platonic and happens in public, it is probably fine. When in
-        doubt, email <a href="mailto:support@phriend.app">support@phriend.app</a> before posting.
+        If your idea is not on the list but is a legal, professional service that happens in public, it is probably
+        fine. When in doubt, email <a href="mailto:support@phriend.app">support@phriend.app</a> before posting.
       </p>
 
       <h2>3. Prohibited</h2>
@@ -54,20 +54,20 @@ export default function CommunityGuidelinesPage() {
           &quot;special&quot;, cuddling, massage, or any physical contact beyond a normal greeting.
         </li>
         <li>
-          <strong>Compensated dating</strong> and any arrangement where romance, affection or companionship of a
-          sexual nature is exchanged for money, gifts or favours.
+          <strong>Compensated dating.</strong> Phriend is not a dating service. Any arrangement where romance,
+          affection or intimacy is exchanged for money, gifts or favours is banned.
         </li>
         <li>
-          <strong>Escort services</strong> of any kind, including &quot;overnight&quot;, &quot;travel companion&quot; with
-          shared rooms, or hotel meetups.
+          <strong>Escort services</strong> of any kind, including &quot;overnight&quot; bookings, trips with shared
+          rooms, or hotel meetups.
         </li>
         <li>
           <strong>Drugs</strong>: buying, selling, using or being under the influence during a meetup.
         </li>
         <li>
-          <strong>Alcohol with minors.</strong> Phriend is 18+, and &quot;drinking buddy&quot; profiles that target or
-          involve anyone under 18 are banned. Drinking is never the point of a meetup, and a member who is drunk may be
-          asked to leave.
+          <strong>Alcohol with minors.</strong> Phriend is 18+, and any listing built around drinking that targets or
+          involves anyone under 18 is banned. Drinking is never the point of a booking, and a member who is drunk may
+          be asked to leave.
         </li>
         <li>
           <strong>Anything illegal under Philippine law</strong>, including gambling arrangements, smuggling, fraud
@@ -97,7 +97,17 @@ export default function CommunityGuidelinesPage() {
         <li>No phone numbers, social handles or payment details in your public Phriend profile. Share them in the chat instead.</li>
       </ul>
 
-      <h2>5. Consequences</h2>
+      <h2>5. Zero tolerance for objectionable content and abusive behaviour</h2>
+      <p>
+        <strong>Objectionable content and abusive behaviour are not tolerated on Phriend.</strong> Profiles, photos,
+        gigs and chat messages pass an automated filter, and a person approves every Phriend profile before it goes
+        live. Any member can report a profile, gig, review or message from the report button in the app, or by email to{" "}
+        <a href="mailto:support@phriend.app">support@phriend.app</a>, and can block another member instantly from the
+        chat. <strong>We review every report within 24 hours</strong>, remove the offending content, and remove the
+        account of any member who breaks these rules. There is no warning for the items in section 3.
+      </p>
+
+      <h2>6. Consequences</h2>
       <Callout>
         <p className="mb-0">
           Breaking these guidelines leads to <strong>immediate removal</strong> of the account and any related accounts.
@@ -112,7 +122,7 @@ export default function CommunityGuidelinesPage() {
         cancellation, we may warn first, then suspend, then remove.
       </p>
 
-      <h2>6. Reporting</h2>
+      <h2>7. Reporting</h2>
       <p>
         Use the report button on any profile or gig, or email <a href="mailto:support@phriend.app">support@phriend.app</a>.
         Tell us the profile name and what happened. Reports are confidential. See the{" "}

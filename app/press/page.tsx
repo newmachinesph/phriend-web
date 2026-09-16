@@ -14,7 +14,7 @@ export const metadata: Metadata = pageMeta({
 });
 
 const BOILERPLATE =
-  "Phriend is a Philippine app for hiring a verified local companion by the hour for legit activities: food trips, city tours, events, tutoring, hospital or errand buddies, and more. Members are 18 and older, ID-verified through Didit, meet in public places only, and pay 50% upfront, 50% after: cash in person on a first meetup, e-wallet only once they already trust each other. Phriend is a platform only and is not a party to the meetups. It launched in 2026 in the Philippines. The company site is phriend.app and the app runs in the browser at web.phriend.app.";
+  "Phriend is a Philippine app for booking ID-verified local guides and pros by the hour: city and food tours, photo and video shoots, tutoring and lessons, hiking guides, drivers, errand helpers and more. Members are 18 and older, ID-verified through Didit, meet in public places only, and pay 50% upfront, 50% after: cash in person on a first meetup, e-wallet only once they already trust each other. Phriend is a platform only and is not a party to the meetups. It launched in 2026 in the Philippines. The company site is phriend.app and the app runs in the browser at web.phriend.app.";
 
 const facts = (n: number): { label: string; value: string }[] => [
   { label: "Founded", value: "2026" },
@@ -77,7 +77,7 @@ const SCREENSHOTS: { src: string; alt: string; caption: string }[] = [
   },
   {
     src: cdn("/photos/shot-rules.png"),
-    alt: "A Phriend profile showing non-negotiables and the house rules: public places only, 50% at the start and 50% after, no unagreed companions",
+    alt: "A Phriend profile showing non-negotiables and the house rules: public places only, 50% at the start and 50% after, no extra people not agreed in chat",
     caption: "Rules and non-negotiables",
   },
 ];
@@ -85,7 +85,7 @@ const SCREENSHOTS: { src: string; alt: string; caption: string }[] = [
 const PHOTOS: { src: string; alt: string; caption: string; size: string }[] = [
   {
     src: cdn("/photos/life-food-trip.jpg"),
-    alt: "A client and their companion laughing over grilled skewers at a night street-food stall, a jeepney behind them",
+    alt: "A food-tour guide and their client laughing over grilled skewers at a night street-food stall, a jeepney behind them",
     caption: "Night street-food trip",
     size: "JPG, 1536×1024",
   },
@@ -107,12 +107,12 @@ const STANCE: { icon: LucideIcon; title: string; text: string }[] = [
   {
     icon: BadgeCheck,
     title: "Verified members, 18+ only",
-    text: "Members submit a government ID and a selfie through Didit before they get the badge. Phriend is strictly 18+ and strictly platonic: dating, romantic or sexual services get an account removed.",
+    text: "Members submit a government ID and a selfie through Didit before they get the badge. Phriend is strictly 18+ and strictly a services marketplace: dating, romantic or sexual services get an account removed.",
   },
   {
     icon: MapPin,
     title: "Public places, agreed people",
-    text: "Every meetup happens in a public place, and who is coming is agreed in the chat. If the other member arrives with unagreed companions, the rule is simple: be prudent, do not proceed, leave and report.",
+    text: "Every meetup happens in a public place, and who is coming is agreed in the chat. If the other member arrives with extra people not agreed in chat, the rule is simple: be prudent, do not proceed, leave and report.",
   },
   {
     icon: Wallet,
@@ -122,7 +122,7 @@ const STANCE: { icon: LucideIcon; title: string; text: string }[] = [
 ];
 
 const QUOTES = [
-  "Paying a local to show you the best lechon in Cebu is not strange. Tour guides, tutors and hospital companions have always worked this way. Phriend puts them on one screen.",
+  "Paying a local to show you the best lechon in Cebu is not strange. Tour guides, photographers and tutors have always worked this way. Phriend puts them on one screen.",
   "We wrote the rules before we wrote the code: public places, verified IDs, half in cash when you meet, leave if something is off. Safety is the product.",
   "For many Filipinos this is a side income built on what they already have: their city, their free time and their stories. Phriend takes no cut, so they keep all of it.",
 ];
@@ -295,12 +295,12 @@ export default async function PressPage() {
           <ul className="mt-4 grid gap-4 sm:grid-cols-2">
             <li className="rounded-2xl border border-line bg-white p-6 shadow-card">
               <p className="text-xs font-extrabold uppercase tracking-wider text-muted">Display · Fredoka</p>
-              <p className="mt-3 font-display text-4xl font-semibold leading-tight text-ink">Find a companion for anything</p>
+              <p className="mt-3 font-display text-4xl font-semibold leading-tight text-ink">Book local guides and pros</p>
             </li>
             <li className="rounded-2xl border border-line bg-white p-6 shadow-card">
               <p className="text-xs font-extrabold uppercase tracking-wider text-muted">Body · Nunito</p>
               <p className="mt-3 text-lg leading-relaxed">
-                Food trips, city tours, gigs, hikes, errands and more. Paid by the hour, met in public, always legit.
+                Tours, photo shoots, lessons, hikes, errands and driving. Booked by the hour, met in public, paid in person.
               </p>
             </li>
           </ul>

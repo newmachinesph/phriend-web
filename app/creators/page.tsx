@@ -6,9 +6,9 @@ import { breadcrumbJsonLd, cdn, pageMeta, POST_URL } from "@/lib/site";
 
 const TITLE = "Be the creator people book";
 const DESCRIPTION =
-  "For TikTok and Facebook Reels creators in the Philippines: join Phriend, post one video with your Phriend profile card, and give one follower 2 hours with you. Make your profile overlay here.";
-const SHARE_TITLE = "Be the creator people book. One follower wins 2 hours with you.";
-const SHARE_DESCRIPTION = "Post one video with your Phriend profile card. Your followers comment for a week and the best comment wins 2 hours with you. #BeMyPhriend";
+  "For TikTok and Facebook Reels creators in the Philippines: join Phriend, post one video with your Phriend profile card, and give one follower a free session, a photo shoot or a guided tour. Make your profile overlay here.";
+const SHARE_TITLE = "Be the creator people book. One follower wins a free session.";
+const SHARE_DESCRIPTION = "Post one video with your Phriend profile card. Your followers comment for a week and the best comment wins a free session with you: a photo shoot, a guided tour, whatever you offer. #BeMyPhriend";
 // pageMeta sets the site-wide share image; this page has its own (app/creators/opengraph-image.tsx)
 const OG = { url: "/creators/opengraph-image", width: 1200, height: 630, alt: "Be the creator people book: Phriend creator collab" };
 
@@ -26,8 +26,8 @@ const MESSENGER = "https://m.me/phriendapp";
 const STEPS = [
   { title: "Become a verified Phriend", text: "Sign up, verify your ID in about two minutes, and set a username so your link reads web.phriend.app/@yourname." },
   { title: "Post one video", text: "A TikTok or Reel with your Phriend profile card on screen. Make the card below in a few seconds." },
-  { title: "Followers comment for 7 days", text: "They follow you and Phriend, like the video, and comment where they'd take you for 2 hours." },
-  { title: "Best comment wins 2 hours", text: "You pick the winner on day 8. They book you on Phriend, free for them, and Phriend pays your rate." },
+  { title: "Followers comment for 7 days", text: "They follow you and Phriend, like the video, and comment which of your services they'd book." },
+  { title: "Best comment wins a free session", text: "You pick the winner on day 8. They book you on Phriend, free for them, and Phriend pays your rate." },
 ];
 
 const TOP_BOOKINGS: { icon: LucideIcon; title: string; text: string }[] = [
@@ -55,8 +55,8 @@ export default function CreatorsPage() {
             <span className="text-brand-light">people book.</span>
           </h1>
           <p className="mt-6 max-w-2xl text-lg leading-relaxed text-white/85">
-            Post one video with your Phriend profile card on screen. For a week your followers comment for a chance to hang out with you, and
-            the best comment wins 2 hours with you, booked on Phriend.
+            Post one video with your Phriend profile card on screen. For a week your followers comment for a chance to book you, and
+            the best comment wins a free session: a photo shoot, a guided tour, whatever you offer.
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <a href="#overlay" className="btn-primary inline-flex items-center justify-center gap-2 rounded-full px-7 py-3.5 text-lg font-bold">
@@ -85,7 +85,7 @@ export default function CreatorsPage() {
             />
             <Image
               src={cdn("/creators/og-card.png")}
-              alt="Example Phriend profile overlay card with a Win 2 hours with me tag"
+              alt="Example Phriend profile overlay card with a Win a free session with me tag"
               width={320}
               height={547}
               sizes="(min-width: 1024px) 190px, 40vw"
@@ -127,7 +127,7 @@ export default function CreatorsPage() {
           <h2 id="bookings-title" className={h2}>
             Top 5 bookings that make good content.
           </h2>
-          <p className="mt-4 max-w-2xl leading-relaxed">List these on your profile. The winner&apos;s 2 hours turn into your next video.</p>
+          <p className="mt-4 max-w-2xl leading-relaxed">List these on your profile. The winner&apos;s session turns into your next video.</p>
           <ul className="mt-8 grid grid-cols-2 gap-4 md:grid-cols-5">
             {TOP_BOOKINGS.map((b) => (
               <li key={b.title} className="rounded-2xl border border-line bg-white p-5 text-center shadow-card">

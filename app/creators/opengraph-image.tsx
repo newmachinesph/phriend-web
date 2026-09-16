@@ -2,7 +2,7 @@ import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { ImageResponse } from "next/og";
 
-export const alt = "Be the creator people book: Phriend creator collab, one follower wins 2 hours with you";
+export const alt = "Be the creator people book: Phriend creator collab, one follower wins a free session with you";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -44,7 +44,7 @@ export default function Image() {
             </div>
             <div style={{ display: "flex", flexDirection: "column", fontFamily: "Nunito", fontSize: 28, lineHeight: 1.3, color: "rgba(255,255,255,0.85)" }}>
               <div>One video. One week.</div>
-              <div>One follower wins 2 hours with you.</div>
+              <div>One follower wins a free session.</div>
             </div>
           </div>
 

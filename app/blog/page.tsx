@@ -11,7 +11,7 @@ export const revalidate = 60; // articles published in Ops appear within a minut
 
 export const metadata: Metadata = pageMeta({
   title: "Blog: side-income guides for Filipino locals",
-  description: "Guides for people who could earn on Phriend: photographers, tour guides, tutors, fitness buddies and more. What clients book, what to charge, how to stay safe.",
+  description: "Guides for people who could earn on Phriend: photographers, tour guides, tutors, fitness coaches and more. What clients book, what to charge, how to stay safe.",
   path: "/blog",
 });
 

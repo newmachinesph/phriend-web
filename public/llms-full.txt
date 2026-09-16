@@ -3,7 +3,7 @@ Source: https://phriend.app (landing features and FAQ), https://phriend.app/safe
 Last updated: 2026-09-07. Short version: https://phriend.app/llms.txt
 
 What is Phriend?
-Phriend is a Philippine app for hiring a verified local companion by the hour for legit activities such as food trips, city tours, events, tutoring and errands. Members are 18+, meet in public places, and pay 50% in cash on a first meetup and 50% after. The app runs in the browser at https://web.phriend.app. Contact: support@phriend.app.
+Phriend is a Philippine app for booking ID-verified local guides and pros by the hour: city and food tours, photo and video shoots, tutoring and lessons, hiking guides, drivers and errand helpers. Members are 18+, meet in public places, and pay 50% in cash on a first meetup and 50% after. The app runs in the browser at https://web.phriend.app. Contact: support@phriend.app.
 
 
 ==================================================
@@ -40,8 +40,8 @@ Cash, in person: money never moves in the app. Pay a 50% downpayment and 50% aft
 FREQUENTLY ASKED QUESTIONS
 ==================================================
 
-Q: Is Phriend a dating app?
-A: No. Phriend is for platonic, paid-by-the-hour company and legit side gigs: a buddy for a food trip, a tour guide, a study partner, someone to keep you company at the hospital. Romantic or sexual services, compensated dating and escort services are banned and get an account removed immediately.
+Q: What can I book on Phriend?
+A: Local services and activities, by the hour: guided city and food tours, photo and video shoots, tutoring and lessons, hiking and trail guiding, personal training, driving and airport transfers, errands and queueing, event coverage and on-site help. Phriend is not a dating service. Romantic or sexual services, compensated dating and escort services are banned and get an account removed immediately.
 
 Q: How do bookings work?
 A: Send the Phriend a booking request with the date, start time, number of hours (1 to 8), a public meeting place and a note, up to 60 days ahead. If the Phriend lists services, pick one; some need a minimum number of hours. The Phriend accepts or declines, either side can cancel with a reason, and once the meetup time has passed either side can mark it completed. Every booking has an Add to Google Calendar button and an .ics download. Money never moves in the app: 50% in cash when you meet, 50% after.
@@ -62,7 +62,7 @@ Q: How does verification work?
 A: Members submit a government ID (PhilID, passport, driver's license or UMID) and a selfie through Didit, our identity verification partner. It takes about two minutes. Didit checks the ID and confirms the member is 18 or older; Phriend emails the result and shows the verified badge on their profile. Verification is required before a Phriend profile goes live. Phriend is strictly 18+.
 
 Q: What do Phriends agree to?
-A: Before a profile goes live, every Phriend ticks a seven-point agreement: they are 18 or older and will verify with a government ID; they offer legitimate activities only, nothing romantic, sexual or illegal; they meet in public places and never bring or allow anyone not agreed in the chat; payment is 50% at the start and 50% after, cash in person on a first meetup and e-wallets only for repeat clients they trust; they stop the meetup and report it if a client brings unagreed companions, is very late or makes them uncomfortable; Phriend is a platform only and not liable for what happens between members; and they have read the Terms, Privacy Policy and Community Guidelines.
+A: Before a profile goes live, every Phriend ticks a seven-point agreement: they are 18 or older and will verify with a government ID; they offer legitimate activities only, nothing romantic, sexual or illegal; they meet in public places and never bring or allow anyone not agreed in the chat; payment is 50% at the start and 50% after, cash in person on a first meetup and e-wallets only for repeat clients they trust; they stop the meetup and report it if a client brings extra people not agreed in chat, is very late or makes them uncomfortable; Phriend is a platform only and not liable for what happens between members; and they have read the Terms, Privacy Policy and Community Guidelines.
 
 Q: What are non-negotiables?
 A: Rules a Phriend pins to the top of their profile so clients agree before they chat. They pick from: public meet-up only, no physical contact, cash downpayment on arrival, daytime only, no alcohol, no smoking, groups must be agreed in chat, no riding in client vehicles, ID check on arrival, and no overnight or out-of-town.
@@ -87,13 +87,13 @@ https://phriend.app/safety
 
 These rules apply to every member, on both sides of a meetup. They are short on purpose. Breaking them gets an account removed. Phriend is a platform only: it is not a party to any meetup or payment and is not liable for any loss, injury, dispute, unpaid balance or harm between members. You use the service at your own risk, and your prudence is your protection.
 
-In short: Meet in public. Only the people agreed in the chat come along; if extra companions show up, cancel, leave and report. On a first meetup pay half in cash when you meet and half after, never more than half upfront. E-wallets are for repeat Phriends you trust, and only to the account shared in the chat. Tell a friend where you are, and report anything that feels wrong.
+In short: Meet in public. Only the people agreed in the chat come along; if extra people not agreed in chat show up, cancel, leave and report. On a first meetup pay half in cash when you meet and half after, never more than half upfront. E-wallets are for repeat Phriends you trust, and only to the account shared in the chat. Tell a friend where you are, and report anything that feels wrong.
 
 1. Public places only
 Every meetup happens in a public place: a mall, a cafe, a restaurant, a park, a trail, a gym, a hospital lobby, a venue. Never a private residence, a hotel room or a private vehicle you do not both trust. If a member asks to move somewhere private, decline and report them.
 For out-of-town trips, hikes and beach days, agree on the meeting point and the route in the chat before the day, and keep the group in public spaces throughout.
 
-2. Unagreed companions
+2. Extra people not agreed in chat
 Who is coming is agreed in the chat, like everything else. If the other member arrives with people who were not agreed in the chat, a friend, a "cousin", a driver who stays, be prudent: do not proceed. Cancel the meetup, leave, and report the profile. This applies to both sides; a client who shows up with extra people is treated the same way.
 A cancellation for this reason counts as a safety concern under section 9: any downpayment already paid is refunded in full.
 
@@ -116,7 +116,7 @@ Before you go, share the meetup place, the time, the other member's profile and 
 Members verify their identity and age through Didit, an independent identity verification provider. Didit checks a government ID and a selfie and confirms the member is 18 or older. Verified profiles show a blue badge. Prefer verified members, and verify yourself so others can trust you.
 
 7. Report and block
-Every profile and every gig has a report button, and the chat menu leads to it. Use it for anything that breaks these rules or the community guidelines: requests for private meetups, unagreed companions, romantic or sexual propositions, off-platform payment requests, harassment, impersonation, or a member who looks under 18. You can attach up to 4 photos as evidence. Blocking, from the chat menu, hides the member's profile and chats and stops their messages reaching you. Reports get an AI first pass; anything unclear goes to a person on the moderation team, and serious cases are passed to the authorities.
+Every profile and every gig has a report button, and the chat menu leads to it. Use it for anything that breaks these rules or the community guidelines: requests for private meetups, extra people not agreed in chat, romantic or sexual propositions, off-platform payment requests, harassment, impersonation, or a member who looks under 18. You can attach up to 4 photos as evidence. Blocking, from the chat menu, hides the member's profile and chats and stops their messages reaching you. Reports get an AI first pass; anything unclear goes to a person on the moderation team, and serious cases are passed to the authorities.
 
 8. Late arrivals
 - If a member is more than 30 minutes late without notice, the other member may cancel the meetup.
@@ -127,7 +127,7 @@ Every profile and every gig has a report button, and the chat menu leads to it. 
 - Cancel at least 24 hours before the meetup: cancel the booking in the app with a reason, and say so in the chat.
 - If the client cancels with less than 24 hours' notice, the Phriend may keep any downpayment already paid.
 - If the Phriend cancels with less than 24 hours' notice, any downpayment already paid is refunded in full. Repeated late cancellations lead to removal.
-- Cancellations because of typhoons, floods, unagreed companions or any other safety concern are refunded in full, no questions asked.
+- Cancellations because of typhoons, floods, extra people not agreed in chat or any other safety concern are refunded in full, no questions asked.
 
 10. Emergencies
 If you are in danger, call for help first and report to Phriend later.
@@ -138,7 +138,7 @@ After you are safe, report the member in the app and email support@phriend.app w
 
 11. The short version
 1. Meet in public.
-2. Only the people agreed in the chat. Extra companions: cancel, leave, report.
+2. Only the people agreed in the chat. Extra people not agreed in chat: cancel, leave, report.
 3. First meetup: half in cash when you meet, half after. Never more than half.
 4. E-wallet only for repeat Phriends you trust, and only to the account shared in the chat.
 5. Tell a friend where you are.
@@ -150,34 +150,34 @@ COMMUNITY GUIDELINES
 https://phriend.app/community-guidelines
 ==================================================
 
-Phriend is for strictly legitimate side gigs: paid-by-the-hour company and help, in public, between adults. This page says exactly what that means.
+Phriend is for legitimate local services: work and activities you book by the hour, done in public, between adults. This page says exactly what that means.
 
-In short: Phriend is for legit, platonic, paid-by-the-hour activities between adults in public places: food trips, tours, hikes, events, tutoring, errands, hospital company and the like. Any sexual or romantic service, compensated dating, escort services, drugs, private-place meetups, scams and impersonation are banned and get an account removed immediately, with a report to the authorities where the law requires it.
+In short: Phriend is for legitimate local services and activities booked by the hour between adults in public places: guided tours, photo and video shoots, tutoring and lessons, hiking, driving, errands and the like. Any sexual or romantic service, compensated dating, escort services, drugs, private-place meetups, scams and impersonation are banned and get an account removed immediately, with a report to the authorities where the law requires it.
 
 1. What Phriend is for
-A Phriend is a local you pay per hour for a platonic activity or a legit service. The relationship is friendly, professional and public. If you would not do it in front of your parents or a police officer, it does not belong on Phriend.
+A Phriend is a local you book and pay by the hour for a service or an activity: a tour, a shoot, a lesson, a hike, a drive, an errand. The relationship is professional and public. If you would not do it in front of your parents or a police officer, it does not belong on Phriend.
 
 2. Allowed activities
-- Food trips, cafe hopping, restaurant company, cooking together
+- Food tours, market and street-food guiding, cooking lessons
 - City tours, local guiding, out-of-town day trips, beach and island trips
-- Hiking, camping, workouts, gym partners, sports and games
-- Photography, videography and content creation help
-- Concerts, events, weddings, parties and conventions as a plus-one or companion
-- Karaoke, movies, board games, video games in public venues
-- Tutoring, study buddies, language exchange, consulting and coaching
-- Errands, shopping company, queueing, moving help
-- Hospital companions, elderly care company, waiting-room company
-- Pet buddies, dog walking company
-- Virtual meetups such as language practice or study sessions over video call
-If your idea is not on the list but is legal, platonic and happens in public, it is probably fine. When in doubt, email support@phriend.app before posting.
+- Hiking and trail guiding, camping, personal training, sports coaching
+- Photography, videography and content creation work
+- Event, wedding and convention coverage, hosting and on-site help
+- Driving, riding and airport transfers
+- Tutoring, lessons, language practice, consulting and coaching
+- Errands, shopping runs, queueing, moving and delivery help
+- Hospital and clinic assistance, elderly care help, waiting-room assistance
+- Dog walking and pet sitting
+- Online sessions such as tutoring or language practice over video call
+If your idea is not on the list but is a legal, professional service that happens in public, it is probably fine. When in doubt, email support@phriend.app before posting.
 
 3. Prohibited
 The following are banned. Offering, requesting or hinting at any of them gets an account removed.
 - Any sexual or romantic service. This includes anything "intimate", "private", "special", cuddling, massage, or any physical contact beyond a normal greeting.
-- Compensated dating and any arrangement where romance, affection or companionship of a sexual nature is exchanged for money, gifts or favours.
-- Escort services of any kind, including "overnight", "travel companion" with shared rooms, or hotel meetups.
+- Compensated dating. Phriend is not a dating service. Any arrangement where romance, affection or intimacy is exchanged for money, gifts or favours is banned.
+- Escort services of any kind, including "overnight" bookings, trips with shared rooms, or hotel meetups.
 - Drugs: buying, selling, using or being under the influence during a meetup.
-- Alcohol with minors. Phriend is 18+, and "drinking buddy" profiles that target or involve anyone under 18 are banned. Drinking is never the point of a meetup, and a member who is drunk may be asked to leave.
+- Alcohol with minors. Phriend is 18+, and any listing built around drinking that targets or involves anyone under 18 is banned. Drinking is never the point of a booking, and a member who is drunk may be asked to leave.
 - Anything illegal under Philippine law, including gambling arrangements, smuggling, fraud and human trafficking.
 - Harassment: unwanted contact, threats, stalking, hate speech, or sharing someone's private information.
 - Impersonation: using someone else's photos, name or ID, or pretending to be a company or a Phriend staff member.
@@ -190,9 +190,12 @@ The following are banned. Offering, requesting or hinting at any of them gets an
 - Describe what you actually offer, at the rate you actually charge.
 - No phone numbers, social handles or payment details in your public Phriend profile. Share them in the chat instead.
 
-5. Consequences
+5. Zero tolerance for objectionable content and abusive behaviour
+Objectionable content and abusive behaviour are not tolerated on Phriend. Profiles, photos, gigs and chat messages pass an automated filter, and a person approves every Phriend profile before it goes live. Any member can report a profile, gig, review or message from the report button in the app, or by email to support@phriend.app, and can block another member instantly from the chat. We review every report within 24 hours, remove the offending content, and remove the account of any member who breaks these rules. There is no warning for the items in section 3.
+
+6. Consequences
 Breaking these guidelines leads to immediate removal of the account and any related accounts. Where the law requires it, or where someone's safety is at risk, we report to the authorities and cooperate fully with investigations.
 There is no warning system for the prohibited items in section 3. Offensive language in chat is refused automatically: the first two attempts only warn, then the sender is muted for 1 hour, 24 hours, 7 days and 30 days in turn, and the moderation team reviews every flag and can ban. For other lesser issues such as a late cancellation, we may warn first, then suspend, then remove.
 
-6. Reporting
+7. Reporting
 Use the report button on any profile or gig, or email support@phriend.app. Tell us the profile name and what happened. Reports are confidential. See the safety and transaction rules for what to do in an emergency.

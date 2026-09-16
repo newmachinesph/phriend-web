@@ -36,7 +36,7 @@ export const activitySlug = (label: string) =>
     .replace(/&/g, " and ")
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-|-$/g, "");
-export const activityPath = (c: Category) => `/rent-a-friend/${activitySlug(c.label)}`;
+export const activityPath = (c: Category) => `/services/${activitySlug(c.label)}`;
 export const comboPath = (c: Category, city: CityPage) => `/${activitySlug(c.label)}-in-${city.slug}`;
 /** The same page on the app (the friendly category path the app uses). */
 export const appCategoryUrl = (c: Category) => `${APP_URL}/${activitySlug(c.label)}`;
@@ -82,22 +82,21 @@ export function landingCopy(c: Category, city?: CityPage, phriends: Phriend[] = 
   const rate = prices.length ? `${peso(Math.min(...prices))} to ${peso(Math.max(...prices))} per hour` : "₱300 to ₱1,500 per hour, depending on the activity and the city";
   const cities = [...new Set(phriends.map((p) => p.city))].slice(0, 5);
   return {
-    h1: city ? `${c.label} buddies in ${city.name}` : `Book a companion for ${c.label} in the Philippines`,
+    h1: city ? `${c.label} pros in ${city.name}` : `Book a local ${c.label} pro in the Philippines`,
     intro: city
-      ? `Looking for someone to join you for ${c.label.toLowerCase()} in ${city.name}? Phriend is where you hire a verified local by the hour for ${list(acts.slice(0, 3).map((a) => a.toLowerCase()))} and more. ${city.name} is ${city.blurb}, and a Phriend who lives there knows where to go, what it costs and how to get around. You agree on the plan in the chat, meet in a public place, and pay in cash when you meet.`
-      : `Phriend is where you hire a verified local by the hour for ${c.label.toLowerCase()}: ${list(acts.slice(0, 4).map((a) => a.toLowerCase()))}. Every Phriend on this page confirmed their identity and age with a government ID, and a person approved their profile before it went live. You agree on the plan in the chat, meet in a public place, and pay in cash when you meet. Nothing romantic, nothing sexual: platonic company and legit side gigs only.`,
+      ? `Need someone for ${c.label.toLowerCase()} in ${city.name}? Phriend is where you book a verified local by the hour for ${list(acts.slice(0, 3).map((a) => a.toLowerCase()))} and more. ${city.name} is ${city.blurb}, and a Phriend who lives there knows where to go, what it costs and how to get around. You agree on the plan and the price in the chat, meet in a public place, and pay in cash when you meet.`
+      : `Phriend is where you book a verified local by the hour for ${c.label.toLowerCase()}: ${list(acts.slice(0, 4).map((a) => a.toLowerCase()))}. Every Phriend on this page confirmed their identity and age with a government ID, and a person approved their profile before it went live. You agree on the plan and the price in the chat, meet in a public place, and pay in cash when you meet. Legitimate services only: nothing romantic, nothing sexual.`,
     what: `A ${c.label} Phriend is a local who does this for real: ${list(acts.map((a) => a.toLowerCase()))}. Each profile lists the services they offer with a price per hour or per session, the languages they speak, their non-negotiables and their weekly availability, so you know what you are booking before you send the request${cities.length ? `. Right now there are Phriends for ${c.label.toLowerCase()} in ${list(cities)}` : ""}.`,
     how: [
-      `Browse the profiles below or open the full list in the app. Filter by city, language, age and rate, and read the reviews left by other members.`,
+      `Browse the profiles below or open the full list in the app. Filter by city, language and rate, and read the reviews left by other members.`,
       `Sign in and verify your ID (it takes about two minutes), then message the Phriend. Say what you have in mind, when, and where you want to meet.`,
       `Send a booking request with the date, start time, number of hours and a public meeting place. The Phriend accepts or declines, and it goes into your calendar.`,
       `Meet in public. Hand over 50% in cash when you arrive and the rest after. Then leave a review so the next member knows what to expect.`,
     ],
-    rates: `Phriends for ${c.label.toLowerCase()} in ${where} currently charge ${rate}. The rate is per hour of company; food, tickets and fares are on you unless a service says otherwise. Phriend does not take a cut, so the rate you see is what the Phriend keeps.`,
-    safety: `Every member is ID-verified, meetups happen in public places only, and the chat keeps the record of what was agreed. If someone shows up with people who were not agreed in the chat, do not proceed: leave and report. Never pay more than half upfront, and only to the account the Phriend shared in the chat.`,
+    rates: `Phriends for ${c.label.toLowerCase()} in ${where} currently charge ${rate}. The rate is per hour of work; food, tickets and fares are on you unless a service says otherwise. Phriend does not take a cut, so the rate you see is what the Phriend keeps.`,
+    safety: `Every member is ID-verified, meetups happen in public places only, and the chat keeps the record of what was agreed. If someone shows up with extra people who were not agreed in the chat, do not proceed: leave and report. Never pay more than half upfront, and only to the account the Phriend shared in the chat.`,
     faq: [
       { q: `How much does a ${c.label.toLowerCase()} Phriend cost in ${where}?`, a: `Between ${rate}. The rate is set by each Phriend and shown on their profile, together with the services they offer and any minimum booking.` },
-      { q: `Is booking a companion for ${c.label.toLowerCase()} legal in the Philippines?`, a: `Yes. Phriend is paid, platonic company by the hour, like hiring a guide, a tutor or an assistant. Romantic, sexual or escort services are banned and get an account removed.` },
       { q: `How do I know the Phriend is who they say they are?`, a: `Every member verifies their identity and age with a government ID and a selfie before they can chat or book, and a person approves each Phriend profile before it shows. Verified profiles carry the badge.` },
     ],
   };
@@ -108,7 +107,7 @@ export function landingJsonLd(c: Category, path: string, phriends: Phriend[], co
   const url = `${SITE_URL}${path}`;
   const crumbs = [
     { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
-    ...(city ? [{ "@type": "ListItem", position: 2, name: city.name, item: `${SITE_URL}/${city.slug}` }] : [{ "@type": "ListItem", position: 2, name: "Book a companion", item: `${SITE_URL}/rent-a-friend/${activitySlug(c.label)}` }]),
+    ...(city ? [{ "@type": "ListItem", position: 2, name: city.name, item: `${SITE_URL}/${city.slug}` }] : [{ "@type": "ListItem", position: 2, name: "Services", item: `${SITE_URL}/services/${activitySlug(c.label)}` }]),
     { "@type": "ListItem", position: city ? 3 : 2, name: copy.h1, item: url },
   ].filter((x, i, a) => a.findIndex((y) => y.item === x.item) === i);
   return JSON.stringify({
@@ -118,7 +117,7 @@ export function landingJsonLd(c: Category, path: string, phriends: Phriend[], co
       {
         "@type": "Service",
         name: copy.h1,
-        serviceType: `${c.label} companion, paid by the hour`,
+        serviceType: `${c.label} services, booked by the hour`,
         provider: { "@type": "Organization", name: SITE_NAME, url: SITE_URL },
         areaServed: city ? { "@type": "City", name: city.name, containedInPlace: { "@type": "Country", name: "Philippines" } } : { "@type": "Country", name: "Philippines" },
         url,

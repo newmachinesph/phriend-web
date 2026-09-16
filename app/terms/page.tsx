@@ -6,7 +6,7 @@ import { CONTACT_EMAIL, LAST_UPDATED, pageMeta } from "@/lib/site";
 export const metadata: Metadata = pageMeta({
   title: "Terms of Use for the Phriend platform",
   description:
-    "Terms for using Phriend, a platform for adults in the Philippines to arrange paid-by-the-hour, platonic company. Not a party to any meetup or payment.",
+    "Terms for using Phriend, a platform for adults in the Philippines to book local services and activities by the hour. Not a party to any booking or payment.",
   path: "/terms",
 });
 
@@ -17,7 +17,7 @@ export default function TermsPage() {
       title="Terms of Use"
       path="/terms"
       updated={LAST_UPDATED}
-      summary="Phriend is a listing, messaging and booking platform for adults (18+) in the Philippines to arrange platonic, paid-by-the-hour company and legit side gigs. Phriend is not a party to any meetup or payment, holds no money, takes no commission, and is not liable for any loss, injury, dispute or unpaid balance between members. You use the service at your own risk, and your prudence is your protection."
+      summary="Phriend is a listing, messaging and booking platform for adults (18+) in the Philippines to book local services and activities by the hour: guided tours, photo and video shoots, tutoring and lessons, hikes, driving, errands and similar work. Phriend is not a party to any booking or payment, holds no money, takes no commission, and is not liable for any loss, injury, dispute or unpaid balance between members. You use the service at your own risk, and your prudence is your protection."
       intro="Please read these terms before using Phriend. By creating an account or using the app you agree to them. If you do not agree, do not use Phriend."
     >
       <Callout tone="verify">
@@ -31,8 +31,9 @@ export default function TermsPage() {
       <p>
         Phriend (&quot;Phriend&quot;, &quot;we&quot;, &quot;us&quot;) operates the website phriend.app and the web app at
         web.phriend.app (together, the &quot;Service&quot;). The Service is a listing, messaging and booking platform where adults
-        in the Philippines can publish a Phriend profile offering platonic, paid-by-the-hour company and legitimate side gigs
-        (&quot;Phriends&quot;), and other adults can find them and arrange meetups (&quot;clients&quot;). Both are
+        in the Philippines can publish a Phriend profile offering local services and activities by the hour, such as guided
+        tours, photo and video shoots, tutoring and lessons, hiking guiding, driving and errands
+        (&quot;Phriends&quot;), and other adults can find them and book them (&quot;clients&quot;). Both are
         &quot;members&quot;.
       </p>
 
@@ -87,7 +88,7 @@ export default function TermsPage() {
       <ul>
         <li>Meetups take place in public places only.</li>
         <li>
-          The Service is for <strong>strictly legitimate, platonic side gigs</strong> as described in the{" "}
+          The Service is for <strong>legitimate local services and activities</strong> as described in the{" "}
           <Link href="/community-guidelines">community guidelines</Link>.
         </li>
         <li>Treat other members with respect. No harassment, threats, discrimination or hate speech.</li>
@@ -110,6 +111,17 @@ export default function TermsPage() {
         <li>scrape, copy, reverse engineer or interfere with the Service or its security;</li>
         <li>contact members for advertising, recruitment or anything unrelated to a legitimate meetup.</li>
       </ul>
+
+      <h2>7b. Zero tolerance for objectionable content and abusive behaviour</h2>
+      <p>
+        <strong>Objectionable content and abusive behaviour are not tolerated on Phriend.</strong> Profiles, photos,
+        gigs and chat messages pass an automated filter, and a person approves every Phriend profile before it goes
+        live. Any member can report a profile, gig, review or message from the report button in the app, or by email to{" "}
+        <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>, and can block another member instantly from the chat.{" "}
+        <strong>We review every report within 24 hours</strong>, remove the offending content, and remove the account of
+        any member who breaks these terms or the <Link href="/community-guidelines">community guidelines</Link>. There
+        is no warning for the prohibited uses listed above.
+      </p>
 
       <h2>8. Your content</h2>
       <p>

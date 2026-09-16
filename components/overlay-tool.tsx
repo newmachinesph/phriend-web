@@ -65,7 +65,7 @@ export function OverlayTool() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [card, setCard] = useState<CreatorCard | null>(null);
-  const [tag, setTag] = useState("Win 2 hours with me");
+  const [tag, setTag] = useState("Win a free session with me");
   const [size, setSize] = useState(0.9);
   const [guides, setGuides] = useState(true);
   const [hasVideo, setHasVideo] = useState(false);
@@ -123,8 +123,8 @@ export function OverlayTool() {
     const rw = ctx.measureText(rt).width;
     ctx.fillStyle = C.body; ctx.fillText(rt, w - 18 - rw, ty - 2);
     icon(ctx, PATHS.star, w - 18 - rw - 26, ty - 21, 22, { fill: C.mango, stroke: C.mango });
-    const nameAge = c.age ? `${c.name}, ${c.age}` : c.name;
-    ctx.fillStyle = C.navy; fitText(ctx, nameAge, w - 90 - rw, display(600), 32); ctx.fillText(nameAge, 18, ty);
+    const nameLine = c.service ? `${c.name} · ${c.service}` : c.name;
+    ctx.fillStyle = C.navy; fitText(ctx, nameLine, w - 90 - rw, display(600), 32); ctx.fillText(nameLine, 18, ty);
 
     ty += 34;
     icon(ctx, PATHS.pin, 16, ty - 18, 20, { stroke: C.orange, width: 2.4 });

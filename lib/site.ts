@@ -15,12 +15,12 @@ export const CONTACT_EMAIL = "support@phriend.app";
 export const LAST_UPDATED = "2026-09-07";
 
 export const SITE_NAME = "Phriend";
-export const SITE_TITLE = "Phriend: Find a companion for anything in the Philippines";
+export const SITE_TITLE = "Phriend: Local Guides & Pros";
 export const SITE_DESCRIPTION =
-  "Find a verified local companion for food trips, city tours, gigs, hikes, errands and more across the Philippines. Paid by the hour, met in public, always legit.";
+  "Book ID-verified local guides and pros across the Philippines: tours, photo shoots, lessons, hikes, errands and driving. Agreed in chat, met in public.";
 
 /** Rendered by app/opengraph-image.tsx; listed here because a page-level `openGraph` drops the file-convention image (see pageMeta). */
-export const OG_IMAGE = { url: "/opengraph-image", width: 1200, height: 630, alt: "Phriend: Find a companion for anything" };
+export const OG_IMAGE = { url: "/opengraph-image", width: 1200, height: 630, alt: "Phriend: local guides & pros" };
 
 /** Per-page metadata. Next replaces nested `openGraph` and `alternates` wholesale per segment, so each page restates the shared bits here. */
 export function pageMeta({ title, description, path }: { title?: string; description: string; path: string }): Metadata {

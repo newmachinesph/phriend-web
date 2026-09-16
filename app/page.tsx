@@ -148,12 +148,13 @@ function PhoneMockup() {
   return (
     <div className="relative mx-auto w-[272px] sm:w-[300px]">
       <div className="rounded-[2.75rem] border-[6px] border-ink bg-ink p-1.5 shadow-float ring-1 ring-white/25">
-        <div className="aspect-[43/90] overflow-hidden rounded-[2.2rem] bg-white">
+        {/* a real phone viewport (390x844), so the screenshot fills the frame at its own proportions and nothing is cropped */}
+        <div className="aspect-[390/844] overflow-hidden rounded-[2.2rem] bg-white">
           <Image
-            src={cdn("/photos/shot-home-v5.png")}
+            src={cdn("/photos/shot-home-v6.png")}
             alt="The Phriend home screen: a search bar, service categories and verified local pros with their hourly rate"
-            width={430}
-            height={900}
+            width={390}
+            height={844}
             preload
             sizes="(min-width: 640px) 300px, 272px"
             className="size-full object-cover object-top"

@@ -7,7 +7,6 @@ import {
   Star, Tag, Umbrella, Users, UserX, Utensils, Wallet, type LucideIcon,
   Laptop,
 } from "lucide-react";
-import { StoreBadges } from "@/components/store-badges";
 import { APP_URL, cdn, pageMeta, POST_URL, SITE_DESCRIPTION, SITE_URL } from "@/lib/site";
 
 export const metadata: Metadata = pageMeta({ description: SITE_DESCRIPTION, path: "/" });
@@ -151,7 +150,7 @@ function PhoneMockup() {
         {/* a real phone viewport (390x844), so the screenshot fills the frame at its own proportions and nothing is cropped */}
         <div className="aspect-[390/844] overflow-hidden rounded-[2.2rem] bg-white">
           <Image
-            src={cdn("/photos/shot-home-v6.png")}
+            src={cdn("/photos/shot-home-v7.png")}
             alt="The Phriend home screen: a search bar, service categories and verified local pros with their hourly rate"
             width={390}
             height={844}
@@ -241,7 +240,6 @@ export default function Home() {
                 </li>
               ))}
             </ul>
-            <StoreBadges dark className="mt-8" />
           </div>
           <div className="relative">
             <div aria-hidden="true" className="absolute inset-x-8 top-6 h-[92%] rounded-[3rem] bg-white/5" />
@@ -547,7 +545,6 @@ export default function Home() {
                 Become a Phriend
               </a>
             </div>
-            <StoreBadges dark className="relative mt-8 [&>div]:justify-center" />
           </div>
         </div>
       </section>

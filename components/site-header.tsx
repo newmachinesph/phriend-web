@@ -1,7 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
-import { APP_URL, cdn } from "@/lib/site";
+import { AppLink } from "@/components/app-link";
+import { cdn } from "@/lib/site";
 
 export const NAV = [
   { href: "/#how-it-works", label: "How it works" },
@@ -55,9 +56,7 @@ export function SiteHeader() {
         </nav>
 
         <div className="flex items-center gap-2">
-          <a href={APP_URL} className="btn-primary hidden rounded-full px-5 py-2.5 text-[15px] font-bold sm:inline-flex">
-            Open the app
-          </a>
+          <AppLink className="btn-primary hidden rounded-full px-5 py-2.5 text-[15px] font-bold sm:inline-flex" />
           {/* ponytail: native <details> menu, no client JS. It stays open after tapping a same-page link; swap for a client component if that bites. */}
           <details className="group relative md:hidden">
             <summary
@@ -76,9 +75,7 @@ export function SiteHeader() {
                   {n.label}
                 </Link>
               ))}
-              <a href={APP_URL} className="btn-primary mt-1 rounded-xl px-3 py-2.5 text-center font-bold">
-                Open the app
-              </a>
+              <AppLink className="btn-primary mt-1 rounded-xl px-3 py-2.5 text-center font-bold" />
             </nav>
           </details>
         </div>

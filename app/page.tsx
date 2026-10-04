@@ -7,6 +7,7 @@ import {
   Star, Tag, Umbrella, Users, UserX, Utensils, Wallet, type LucideIcon,
   Laptop,
 } from "lucide-react";
+import { AppLink } from "@/components/app-link";
 import { APP_URL, cdn, pageMeta, POST_URL, SITE_DESCRIPTION, SITE_URL } from "@/lib/site";
 
 export const metadata: Metadata = pageMeta({ description: SITE_DESCRIPTION, path: "/" });
@@ -118,7 +119,7 @@ const FAQ: { q: string; a: string }[] = [
   },
   {
     q: "Do I need to install anything?",
-    a: "Not yet. Phriend runs in the browser at web.phriend.app on any phone. Add it to your home screen and it works like an app, with chat, bookings and in-app notifications. The App Store and Google Play apps are coming soon.",
+    a: "On Android, yes: get the Phriend app on Google Play. On iPhone, not yet: Phriend runs in the browser at web.phriend.app. Add it to your home screen and it works like an app, with chat, bookings and in-app notifications. The App Store app is coming soon.",
   },
   {
     q: "How do I delete my account?",
@@ -224,10 +225,9 @@ export default function Home() {
               Booked by the hour, met in public, paid in person.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <a href={APP_URL} className="btn-primary inline-flex items-center justify-center gap-2 rounded-full px-7 py-3.5 text-lg font-bold">
-                Open the app
+              <AppLink className="btn-primary inline-flex items-center justify-center gap-2 rounded-full px-7 py-3.5 text-lg font-bold">
                 <ArrowRight size={20} aria-hidden="true" />
-              </a>
+              </AppLink>
               <a href={POST_URL} className="btn-secondary inline-flex items-center justify-center rounded-full px-7 py-3.5 text-lg font-bold">
                 Become a Phriend
               </a>
@@ -284,9 +284,7 @@ export default function Home() {
             <li className="flex flex-col justify-between rounded-3xl bg-brand-soft p-6 md:col-span-2 lg:col-span-2">
               <p className="font-display text-2xl font-semibold text-ink">Ready when you are.</p>
               <p className="mt-2 text-[15px] leading-relaxed text-body">Verified locals, public places, the price agreed in chat. Everything else is up to you and your Phriend.</p>
-              <a href={APP_URL} className="btn-primary mt-6 inline-flex w-fit items-center justify-center rounded-full px-6 py-3 font-bold">
-                Open the app
-              </a>
+              <AppLink className="btn-primary mt-6 inline-flex w-fit items-center justify-center rounded-full px-6 py-3 font-bold" />
             </li>
           </ol>
 
@@ -538,9 +536,7 @@ export default function Home() {
               Open the app, pick a city, and say hi. It is free to browse and free to become a Phriend.
             </p>
             <div className="relative mt-8 flex flex-col justify-center gap-3 sm:flex-row">
-              <a href={APP_URL} className="btn-primary inline-flex items-center justify-center rounded-full px-7 py-3.5 text-lg font-bold">
-                Open the app
-              </a>
+              <AppLink className="btn-primary inline-flex items-center justify-center rounded-full px-7 py-3.5 text-lg font-bold" />
               <a href={POST_URL} className="inline-flex items-center justify-center rounded-full border-2 border-white/70 px-7 py-3.5 text-lg font-bold text-white hover:bg-white/10">
                 Become a Phriend
               </a>

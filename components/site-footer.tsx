@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Logo, NAV } from "@/components/site-header";
-import { APP_URL, POST_URL } from "@/lib/site";
+import { AppLink } from "@/components/app-link";
+import { PLAY_URL, POST_URL } from "@/lib/site";
 
 const LEGAL = [
   { href: "/terms", label: "Terms of Use" },
@@ -42,8 +43,9 @@ export function SiteFooter() {
                 {n.label}
               </Link>
             ))}
-            <a href={APP_URL} className={link}>
-              Open the app
+            <AppLink className={link} />
+            <a href={PLAY_URL} className={link}>
+              Android app on Google Play
             </a>
             <a href={POST_URL} className={link}>
               Become a Phriend

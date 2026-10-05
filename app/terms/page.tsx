@@ -22,7 +22,7 @@ export default function TermsPage() {
     >
       <Callout tone="verify">
         <p className="mb-0">
-          <strong>Not legal advice.</strong> This document is a plain-English draft written by the Phriend team. It is
+          <strong>Not legal advice.</strong> This document is a plain-English draft written by Phriend. It is
           not legal advice and should be reviewed by a lawyer licensed in the Philippines before launch.
         </p>
       </Callout>
@@ -99,7 +99,33 @@ export default function TermsPage() {
         </li>
       </ul>
 
-      <h2>7. Prohibited uses</h2>
+      <h2>7. Teams</h2>
+      <p>
+        A team is a group of ID-verified Phriends offering a service together, with one team page, packages and a group
+        chat. Each member keeps their own Phriend profile and can still be booked alone.
+      </p>
+      <ul>
+        <li>
+          The team lead is responsible for the team page, its members and its payment terms being accurate and kept up
+          to date.
+        </li>
+        <li>
+          Every member follows the same rules as on their own profile: these terms, the{" "}
+          <Link href="/safety">safety and transaction rules</Link> and the{" "}
+          <Link href="/community-guidelines">community guidelines</Link>.
+        </li>
+        <li>One booking covers the members named on it. Anyone else is not part of the booking.</li>
+        <li>
+          The downpayment, at most 50% and paid in cash, in person, is handed to the team lead, and the team splits it
+          among themselves. Phriend never holds the money and is not a party to how a team divides it.
+        </li>
+        <li>
+          Either side can cancel a team booking as with any booking. If a member cannot make it, the team lead cancels
+          the booking or rebooks it.
+        </li>
+      </ul>
+
+      <h2>8. Prohibited uses</h2>
       <p>You may not use the Service to:</p>
       <ul>
         <li>offer, request or arrange sexual or romantic services, compensated dating or escort services;</li>
@@ -112,7 +138,7 @@ export default function TermsPage() {
         <li>contact members for advertising, recruitment or anything unrelated to a legitimate meetup.</li>
       </ul>
 
-      <h2>7b. Zero tolerance for objectionable content and abusive behaviour</h2>
+      <h2>8b. Zero tolerance for objectionable content and abusive behaviour</h2>
       <p>
         <strong>Objectionable content and abusive behaviour are not tolerated on Phriend.</strong> Profiles, photos,
         gigs and chat messages pass an automated filter, and a person approves every Phriend profile before it goes
@@ -123,7 +149,7 @@ export default function TermsPage() {
         is no warning for the prohibited uses listed above.
       </p>
 
-      <h2>8. Your content</h2>
+      <h2>9. Your content</h2>
       <p>
         You keep ownership of the photos and text you upload. By uploading them you give Phriend a worldwide,
         non-exclusive, royalty-free licence to host, store, display, resize and distribute that content within the
@@ -132,7 +158,7 @@ export default function TermsPage() {
         right to post what you upload.
       </p>
 
-      <h2>9. Termination</h2>
+      <h2>10. Termination</h2>
       <p>
         You can delete your account at any time from your profile screen by typing DELETE; this permanently removes
         your account, Phriend profile, photos, favorites, reviews, bookings, notes and gigs. We may hide your Phriend
@@ -142,7 +168,7 @@ export default function TermsPage() {
         scams or violence mean immediate removal and, where required, a report to the authorities.
       </p>
 
-      <h2>10. Disclaimer and limitation of liability</h2>
+      <h2>11. Disclaimer and limitation of liability</h2>
       <p>
         The Service is provided &quot;as is&quot; and &quot;as available&quot;. We do not promise that it will be
         uninterrupted, error-free or secure, or that any member is who they say they are.
@@ -162,27 +188,27 @@ export default function TermsPage() {
         your prudence is your protection.
       </p>
 
-      <h2>11. Indemnity</h2>
+      <h2>12. Indemnity</h2>
       <p>
         You agree to indemnify and hold harmless Phriend, its owners, staff and partners from any claims, damages,
         losses and expenses, including reasonable legal fees, arising from your use of the Service, your content, your
         meetups, or your breach of these terms or of the law.
       </p>
 
-      <h2>12. Changes to the Service and these terms</h2>
+      <h2>13. Changes to the Service and these terms</h2>
       <p>
         We may change or discontinue parts of the Service, and we may update these terms. When we do, the date at the
         top changes and material changes are announced in the app or by email. Continuing to use the Service after a
         change means you accept the new terms.
       </p>
 
-      <h2>13. Governing law</h2>
+      <h2>14. Governing law</h2>
       <p>
         These terms are governed by the laws of the <strong>Republic of the Philippines</strong>, and disputes go
         before the proper Philippine courts. Nothing here limits rights you have under mandatory Philippine law.
       </p>
 
-      <h2>14. Contact</h2>
+      <h2>15. Contact</h2>
       <p>
         Questions about these terms: <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>. Privacy questions:{" "}
         <Link href="/privacy">see the Privacy Policy</Link>.

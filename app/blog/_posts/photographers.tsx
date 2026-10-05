@@ -100,7 +100,7 @@ function Body() {
           {
             icon: Camera,
             title: "Post your profile",
-            text: "Up to eight of your best photos, your city, your services and rates, the days and hours you shoot. Phriend's team reviews it before it goes live.",
+            text: "Up to eight of your best photos, your city, your services and rates, the days and hours you shoot. Phriend's moderators review it before it goes live.",
           },
           {
             icon: CalendarCheck,

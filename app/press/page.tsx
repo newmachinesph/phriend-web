@@ -107,7 +107,7 @@ const STANCE: { icon: LucideIcon; title: string; text: string }[] = [
   {
     icon: MapPin,
     title: "Public places, agreed people",
-    text: "Every meetup happens in a public place, and who is coming is agreed in the chat. If the other member arrives with extra people not agreed in chat, the rule is simple: be prudent, do not proceed, leave and report.",
+    text: "Every meetup happens in a public place, and who is coming is agreed in the chat (on a team booking, the teammates named on the booking are the agreed people). If the other member arrives with anyone else not agreed in chat, the rule is simple: be prudent, do not proceed, leave and report.",
   },
   {
     icon: Wallet,
@@ -411,7 +411,7 @@ export default async function PressPage() {
         <div className="mx-auto w-full max-w-6xl px-5 py-16 sm:px-8 sm:py-20">
           <p className={eyebrow}>Quotable lines</p>
           <h2 id="quotes-title" className={h2}>
-            Attribute to the Phriend team.
+            Attribute to Phriend.
           </h2>
           <ul className="mt-8 grid gap-4 md:grid-cols-3">
             {QUOTES.map((q) => (
@@ -424,7 +424,7 @@ export default async function PressPage() {
                     <p>{q}</p>
                   </blockquote>
                   <figcaption className="mt-4 text-sm font-extrabold uppercase tracking-wider text-muted">
-                    Phriend team
+                    Phriend
                   </figcaption>
                 </figure>
               </li>

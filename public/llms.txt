@@ -46,24 +46,31 @@ Phriends:
 - Gigs: clients post what they need (activity, city, budget per hour, date, details); Phriends with a live profile mark interest and chat; anyone can report a gig.
 - Notifications: an in-app bell and an email for every booking request, acceptance, decline, cancellation and completion, and for every new review.
 - Account: Google or email sign-in (email accounts confirm a 6-digit code; passwords are stored only as scrypt hashes); members delete their own account by typing DELETE, which removes the profile, photos, favorites, reviews, bookings, notes and gigs.
-- Safety: ID verification through Didit before a profile goes live, sample profiles marked as samples and unbookable, moderation by the Ops team with an AI first pass on reports, profiles and gigs, a human review queue and an audit log.
+- Safety: ID verification through Didit before a profile goes live, sample profiles marked as samples and unbookable, moderation by our moderators with an AI first pass on reports, profiles and gigs, a human review queue and an audit log.
 - Payments: none in the app. 50% in cash on a first meetup, 50% after. E-wallets only for repeat, trusted Phriends.
 
 ## The rules (short version)
 
 1. Public places only. Never a private residence, a hotel room or a private vehicle.
-2. Only the people agreed in the chat. If someone arrives with extra people not agreed in chat: do not proceed, cancel, leave, report. Any downpayment is refunded in full.
+2. Only the people agreed in the chat (on a team booking, the teammates named on the booking). If someone arrives with extra people not agreed in chat: do not proceed, cancel, leave, report. Any downpayment is refunded in full.
 3. Pay 50% at the start and 50% after. On a first meetup the downpayment is cash, in person, when you meet. Never more than half upfront.
 4. E-wallets (GCash, Maya) or bank transfer only for repeat Phriends you have already met and trust, and only to the account shared in the chat. Anything else is a scam.
 5. ID verification through Didit: government ID plus selfie, 18+ check. Verified profiles show a badge. Phriends also pin non-negotiables (public meet-up only, no physical contact, cash downpayment on arrival, daytime only, no alcohol, no smoking, groups agreed in chat, no client vehicles, ID check on arrival, no overnight or out-of-town) to their profile.
 6. Tell someone your plan, keep location sharing on, leave if something feels off.
-7. Report a profile or a gig (up to 4 photos as evidence) and block from the chat. Reports get an AI first pass; unclear cases go to a person on the moderation team; serious cases go to the authorities.
+7. Report a profile or a gig (up to 4 photos as evidence) and block from the chat. Reports get an AI first pass; unclear cases go to one of our moderators; serious cases go to the authorities.
 8. Late: more than 30 minutes late without notice, the other side may cancel; a late Phriend refunds the downpayment. Cancel at least 24 hours ahead, in the app with a reason.
 9. Emergencies: call 911 (Philippine National Police) first, report to Phriend after.
 
 Allowed: food tours, cafe and restaurant guiding, city tours, day trips, beach and island trips, hiking and trail guiding, personal training, photography and videography work, event and wedding coverage and on-site help, driving and airport transfers, tutoring, lessons, language practice, errands, queueing, hospital and elderly assistance, dog walking and pet sitting, online tutoring or language sessions.
 
 Banned: any sexual or romantic service, compensated dating, escort services, drugs, alcohol involving minors, anything illegal under Philippine law, harassment, impersonation, off-platform payment scams, private-place meetups, fake reviews and multiple accounts.
+
+## Teams
+
+- A team is a group of ID-verified Phriends who offer a service together: for example a guide, a photographer and a driver for one day out. One team page, one group chat, one price per group, one booking. Every member keeps their own profile and can still be booked alone.
+- Teams are listed at https://phriend.app/teams (filter by city); each team page is in the app at https://web.phriend.app/teams/<slug>. The list may be empty while teams are being set up.
+- The team lead is responsible for the team page, its members and its payment terms being accurate. Every member follows the same rules as on their own profile. One booking covers the members named on it; anyone else is not part of it.
+- Payment is unchanged: a downpayment of at most 50%, in cash, in person, handed to the team lead, who splits it with the team. Phriend never holds money. Either side can cancel as with any booking; if a member cannot make it, the lead cancels or rebooks.
 
 ## Pricing
 
@@ -85,6 +92,7 @@ Banned: any sexual or romantic service, compensated dating, escort services, dru
 - Community guidelines: https://phriend.app/community-guidelines
 - Terms of Use: https://phriend.app/terms
 - Privacy Policy: https://phriend.app/privacy
+- Teams: https://phriend.app/teams
 - Press kit (boilerplate, logos, photos, quotes): https://phriend.app/press
 - Open the app: https://web.phriend.app
 - Become a Phriend: https://web.phriend.app/earn

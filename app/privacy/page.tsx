@@ -99,7 +99,7 @@ export default function PrivacyPage() {
         </li>
         <li>
           <strong>OpenAI</strong>: the automated first-pass review of reports, Phriend profiles and gigs run by our
-          moderation team.
+          moderators.
         </li>
         <li>
           <strong>Upstash</strong>: request rate limiting, which keeps short-lived counters keyed by your account or IP

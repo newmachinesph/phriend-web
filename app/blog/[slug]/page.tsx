@@ -88,7 +88,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
         <h1 className="mt-2 font-display text-4xl font-semibold leading-[1.1] text-ink sm:text-5xl">{post.title}</h1>
         <p className="mt-4 text-lg leading-relaxed text-body">{post.description}</p>
         <p className="mt-4 text-sm font-semibold text-muted">
-          By the Phriend team · {fmt(post.date)} · {post.readingMinutes} min read
+          By Phriend · {fmt(post.date)} · {post.readingMinutes} min read
         </p>
         <div className="mt-5">
           <ShareBar url={url} title={post.title} />
@@ -158,7 +158,7 @@ async function DbArticle({ post }: { post: NonNullable<Awaited<ReturnType<typeof
         <h1 className="mt-2 font-display text-4xl font-semibold leading-[1.1] text-ink sm:text-5xl">{post.title}</h1>
         {post.description && <p className="mt-4 text-lg leading-relaxed text-body">{post.description}</p>}
         <p className="mt-4 text-sm font-semibold text-muted">
-          By the Phriend team · {fmt(post.publishedAt.slice(0, 10))} · {readingMinutes(post.bodyMd)} min read
+          By Phriend · {fmt(post.publishedAt.slice(0, 10))} · {readingMinutes(post.bodyMd)} min read
         </p>
         <div className="mt-5">
           <ShareBar url={url} title={post.title} />

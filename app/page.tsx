@@ -8,6 +8,8 @@ import {
   Laptop,
 } from "lucide-react";
 import { AppLink } from "@/components/app-link";
+import { TeamTile } from "@/components/teams";
+import { getTeams } from "@/lib/landing";
 import { APP_URL, cdn, pageMeta, POST_URL, SITE_DESCRIPTION, SITE_URL } from "@/lib/site";
 
 export const metadata: Metadata = pageMeta({ description: SITE_DESCRIPTION, path: "/" });
@@ -49,7 +51,7 @@ const ACTIVITIES: { icon: LucideIcon; label: string; slug: string }[] = [
 
 const RULES: { icon: LucideIcon; title: string; text: string }[] = [
   { icon: MapPin, title: "Public places only", text: "Malls, cafes, parks, trails, events. Never a private residence or a hotel room." },
-  { icon: UserX, title: "Extra people not agreed in chat", text: "If someone arrives with people not agreed in the chat, do not proceed. Leave and report." },
+  { icon: UserX, title: "Extra people not agreed in chat", text: "If someone arrives with people not agreed in the chat, do not proceed. Leave and report. On a team booking, the teammates named on the booking are agreed; anyone else is not." },
   { icon: Wallet, title: "Half before, half after", text: "50% in cash when you meet, 50% after. E-wallets only for repeat Phriends you trust." },
   { icon: Lock, title: "Pay only the shared account", text: "Send money only to the account shared in the chat. Anything else is a scam." },
   { icon: BadgeCheck, title: "ID verification", text: "Everyone verifies their identity and age before they get the badge or a profile goes live." },
@@ -87,7 +89,7 @@ const FAQ: { q: string; a: string }[] = [
   },
   {
     q: "What if my Phriend brings someone else?",
-    a: "Do not proceed. If the other member arrives with people who were not agreed in the chat, be prudent: cancel the meetup, leave, and report the profile. The same applies to a client who shows up with extra people. A cancellation for this reason is refunded in full.",
+    a: "Do not proceed. If the other member arrives with people who were not agreed in the chat, be prudent: cancel the meetup, leave, and report the profile. The same applies to a client who shows up with extra people. On a team booking, the teammates named on the booking are the agreed people; anyone else still is not. A cancellation for this reason is refunded in full.",
   },
   {
     q: "Does Phriend take a commission?",
@@ -206,7 +208,8 @@ function StepTile({ n, icon: Icon, title, text, className = "" }: { n: number; i
 const eyebrow = "text-sm font-extrabold uppercase tracking-wider text-brand-text";
 const h2 = "mt-2 font-display text-3xl font-semibold leading-tight text-ink sm:text-4xl lg:text-5xl";
 
-export default function Home() {
+export default async function Home() {
+  const { teams } = await getTeams({ limit: 3 });
   return (
     <main id="main" className="flex-1">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON_LD }} />
@@ -367,6 +370,35 @@ export default function Home() {
           </ul>
         </div>
       </section>
+
+      {/* Book a team: renders nothing until the API has live teams */}
+      {teams.length > 0 && (
+        <section aria-labelledby="teams-title">
+          <div className="mx-auto w-full max-w-6xl px-5 py-16 sm:px-8 sm:py-24">
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+              <div className="max-w-2xl">
+                <p className={eyebrow}>Teams</p>
+                <h2 id="teams-title" className={h2}>
+                  Book a team.
+                </h2>
+                <p className="mt-3 text-[15px] leading-relaxed text-body">
+                  Some days need more than one pro. A team books as one: one chat, one price, one booking. Every member is an ID-verified Phriend you can also book alone.
+                </p>
+              </div>
+              <Link href="/teams" className="inline-flex items-center gap-1.5 font-bold text-brand-text hover:underline">
+                See all teams <ArrowRight size={18} aria-hidden="true" />
+              </Link>
+            </div>
+            <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {teams.map((t) => (
+                <li key={t.id}>
+                  <TeamTile team={t} />
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+      )}
 
       {/* Safety */}
       <section id="safety" aria-labelledby="safety-title" className="bg-navy-soft">

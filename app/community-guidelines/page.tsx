@@ -97,7 +97,28 @@ export default function CommunityGuidelinesPage() {
         <li>No phone numbers, social handles or payment details in your public Phriend profile. Share them in the chat instead.</li>
       </ul>
 
-      <h2>5. Zero tolerance for objectionable content and abusive behaviour</h2>
+      <h2>5. Teams</h2>
+      <p>
+        A team is a few ID-verified Phriends who offer a service together, for example a guide, a photographer and a
+        driver for one day out. Every member follows the same rules as on their own profile.
+      </p>
+      <ul>
+        <li>
+          The team lead is responsible for the team page: the members, roles, prices and payment terms must be real and
+          accurate.
+        </li>
+        <li>
+          One booking covers the members named on it. If anyone else turns up, do not proceed: leave and report, as on
+          any booking.
+        </li>
+        <li>
+          The downpayment, at most 50% and paid in cash, in person, goes to the team lead, and the team splits it
+          among themselves. Phriend never holds the money.
+        </li>
+        <li>Either side can cancel as with any booking. If a member cannot make it, the team lead cancels or rebooks.</li>
+      </ul>
+
+      <h2>6. Zero tolerance for objectionable content and abusive behaviour</h2>
       <p>
         <strong>Objectionable content and abusive behaviour are not tolerated on Phriend.</strong> Profiles, photos,
         gigs and chat messages pass an automated filter, and a person approves every Phriend profile before it goes
@@ -107,7 +128,7 @@ export default function CommunityGuidelinesPage() {
         account of any member who breaks these rules. There is no warning for the items in section 3.
       </p>
 
-      <h2>6. Consequences</h2>
+      <h2>7. Consequences</h2>
       <Callout>
         <p className="mb-0">
           Breaking these guidelines leads to <strong>immediate removal</strong> of the account and any related accounts.
@@ -118,11 +139,11 @@ export default function CommunityGuidelinesPage() {
       <p>
         There is no warning system for the prohibited items in section 3. Offensive language in chat is refused
         automatically: the first two attempts only warn, then the sender is muted for 1 hour, 24 hours, 7 days and 30
-        days in turn, and the moderation team reviews every flag and can ban. For other lesser issues such as a late
+        days in turn, and our moderators review every flag and can ban. For other lesser issues such as a late
         cancellation, we may warn first, then suspend, then remove.
       </p>
 
-      <h2>7. Reporting</h2>
+      <h2>8. Reporting</h2>
       <p>
         Use the report button on any profile or gig, or email <a href="mailto:support@phriend.app">support@phriend.app</a>.
         Tell us the profile name and what happened. Reports are confidential. See the{" "}

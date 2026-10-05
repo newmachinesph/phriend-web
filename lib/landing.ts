@@ -94,7 +94,7 @@ export function landingCopy(c: Category, city?: CityPage, phriends: Phriend[] = 
       `Meet in public. Hand over 50% in cash when you arrive and the rest after. Then leave a review so the next member knows what to expect.`,
     ],
     rates: `Phriends for ${c.label.toLowerCase()} in ${where} currently charge ${rate}. The rate is per hour of work; food, tickets and fares are on you unless a service says otherwise. Phriend does not take a cut, so the rate you see is what the Phriend keeps.`,
-    safety: `Every member is ID-verified, meetups happen in public places only, and the chat keeps the record of what was agreed. If someone shows up with extra people who were not agreed in the chat, do not proceed: leave and report. Never pay more than half upfront, and only to the account the Phriend shared in the chat.`,
+    safety: `Every member is ID-verified, meetups happen in public places only, and the chat keeps the record of what was agreed. If someone shows up with extra people who were not agreed in the chat, do not proceed: leave and report. On a team booking, the teammates named on the booking are the agreed people; anyone else still is not. Never pay more than half upfront, and only to the account the Phriend shared in the chat.`,
     faq: [
       { q: `How much does a ${c.label.toLowerCase()} Phriend cost in ${where}?`, a: `Between ${rate}. The rate is set by each Phriend and shown on their profile, together with the services they offer and any minimum booking.` },
       { q: `How do I know the Phriend is who they say they are?`, a: `Every member verifies their identity and age with a government ID and a selfie before they can chat or book, and a person approves each Phriend profile before it shows. Verified profiles carry the badge.` },
@@ -134,3 +134,54 @@ export function landingJsonLd(c: Category, path: string, phriends: Phriend[], co
 }
 
 export const LANDING_CTA = { browse: (c: Category) => appCategoryUrl(c), become: POST_URL };
+
+/** Teams: the shapes GET /api/teams and /api/teams/{slug} return (types only; copied from phriend-ph lib/team-rules.ts). */
+export type TeamDeposit = 0 | 25 | 50;
+export type TeamMember = { postId: number; name: string; photo: string; username: string | null; role: string; lead: boolean };
+export type TeamPackage = {
+  id: number;
+  title: string;
+  description: string;
+  photo: string | null;
+  price: number;
+  hours: number;
+  includedGuests: number;
+  maxGuests: number;
+  extraGuestFee: number;
+  memberPostIds: number[];
+  bookable?: boolean;
+};
+export type TeamCard = {
+  id: number;
+  slug: string;
+  name: string;
+  city: string;
+  photo: string;
+  memberCount: number;
+  roles: string[];
+  avatars: string[];
+  rating: number | null;
+  reviewCount: number;
+  priceFrom: number | null;
+};
+
+export const TEAMS_PER_PAGE = 12;
+/** A team in the app. */
+export const appTeamUrl = (slug: string) => `${APP_URL}/teams/${slug}`;
+
+/** Live teams. The API answers with an empty list while the feature is switched off, and a failure is an empty list too, so the page still renders. */
+export async function getTeams(q: { city?: string; page?: number; limit?: number } = {}): Promise<{ teams: TeamCard[]; total: number; page: number }> {
+  const sp = new URLSearchParams();
+  if (q.city) sp.set("city", q.city);
+  if (q.page && q.page > 1) sp.set("page", String(q.page));
+  sp.set("limit", String(q.limit ?? TEAMS_PER_PAGE));
+  try {
+    const r = await fetch(`${API_URL}/api/teams?${sp}`, { headers: apiHeaders(), next: { revalidate: 600 } });
+    if (!r.ok) return { teams: [], total: 0, page: 1 };
+    const d = (await r.json()) as { teams?: TeamCard[]; total?: number; page?: number };
+    const teams = d.teams ?? [];
+    return { teams, total: d.total ?? teams.length, page: d.page ?? q.page ?? 1 };
+  } catch {
+    return { teams: [], total: 0, page: 1 };
+  }
+}

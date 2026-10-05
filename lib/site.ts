@@ -15,7 +15,7 @@ export const ANDROID_PACKAGE = "app.phriend.mobile";
 export const PLAY_URL = `https://play.google.com/store/apps/details?id=${ANDROID_PACKAGE}`;
 export const POST_URL = `${APP_URL}/earn`;
 export const CONTACT_EMAIL = "support@phriend.app";
-export const LAST_UPDATED = "2026-09-07";
+export const LAST_UPDATED = "2026-10-06";
 
 export const SITE_NAME = "Phriend";
 export const SITE_TITLE = "Phriend: Local Guides & Pros";

@@ -17,7 +17,7 @@ export default function SafetyPage() {
       title="Safety and transaction rules"
       path="/safety"
       updated={LAST_UPDATED}
-      summary="Meet in public. Only the people agreed in the chat come along; if extra people not agreed in chat show up, cancel, leave and report. On a first meetup pay half in cash when you meet and half after, never more than half upfront. E-wallets are for repeat Phriends you trust, and only to the account shared in the chat. Tell a friend where you are, and report anything that feels wrong."
+      summary="Meet in public. Only the people agreed in the chat come along (on a team booking, the teammates named on the booking); if extra people not agreed in chat show up, cancel, leave and report. On a first meetup pay half in cash when you meet and half after, never more than half upfront. E-wallets are for repeat Phriends you trust, and only to the account shared in the chat. Tell a friend where you are, and report anything that feels wrong."
       intro="These rules apply to every member, on both sides of a meetup. They are short on purpose. Breaking them gets an account removed. Phriend is a platform only: it is not a party to any meetup or payment and is not liable for any loss, injury, dispute, unpaid balance or harm between members. You use the service at your own risk, and your prudence is your protection."
     >
       <h2>1. Public places only</h2>
@@ -44,6 +44,10 @@ export default function SafetyPage() {
         <strong>be prudent: do not proceed.</strong> Cancel the meetup, leave,
         and report the profile. This applies to both sides; a client who shows
         up with extra people is treated the same way.
+      </p>
+      <p>
+        On a team booking, the teammates named on the booking are the agreed
+        people. Anyone else still is not.
       </p>
       <p>
         A cancellation for this reason counts as a safety concern under section
@@ -83,6 +87,10 @@ export default function SafetyPage() {
         <li>
           Phriend does not process payments and does not hold money. Payments
           happen directly between members.
+        </li>
+        <li>
+          On a team booking, the downpayment is handed to the team lead, who
+          splits it with the team. The same limit applies: never more than 50%.
         </li>
       </ul>
 
@@ -124,8 +132,8 @@ export default function SafetyPage() {
         </li>
         <li>
           <strong>If the Phriend does not show up,</strong> mark the meetup as a
-          no-show in the booking. Two no-shows limit an account until the team
-          reviews it. Report it as well if you sent a downpayment; the team can
+          no-show in the booking. Two no-shows limit an account until Phriend
+          reviews it. Report it as well if you sent a downpayment; Phriend can
           act on the account.
         </li>
       </ul>
@@ -175,7 +183,7 @@ export default function SafetyPage() {
         or a member who looks under 18. You can attach up to 4 photos as
         evidence. Blocking, from the chat menu, hides the member&apos;s profile
         and chats and stops their messages reaching you. Reports get an AI first
-        pass; anything unclear goes to a person on the moderation team, and
+        pass; anything unclear goes to one of our moderators, and
         serious cases are passed to the authorities.
       </p>
 
@@ -245,8 +253,8 @@ export default function SafetyPage() {
       <ol>
         <li>Meet in public.</li>
         <li>
-          Only the people agreed in the chat. Extra people not agreed in chat:
-          cancel, leave, report.
+          Only the people agreed in the chat (on a team booking, the teammates
+          named on it). Extra people not agreed in chat: cancel, leave, report.
         </li>
         <li>
           First meetup: half in cash when you meet, half after. Never more than

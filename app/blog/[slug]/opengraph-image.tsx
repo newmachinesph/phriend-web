@@ -4,11 +4,15 @@ import { ImageResponse } from "next/og";
 import { cdn } from "@/lib/site";
 import { findCategory } from "@/lib/landing";
 import { findDbPost, readingMinutes } from "@/lib/blog-db";
-import { findPost } from "../_posts";
+import { POSTS, findPost } from "../_posts";
 
 export const alt = "Phriend blog";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
+// A share card was rendered again on every request (1.2 MB, about 0.6 s). Static posts are built once; an Ops post
+// is cached for an hour.
+export const revalidate = 3600;
+export const generateStaticParams = () => POSTS.map((p) => ({ slug: p.slug }));
 
 const read = (p: string) => readFileSync(join(process.cwd(), "public", p));
 const fredoka = read("fonts/Fredoka-Bold.ttf");

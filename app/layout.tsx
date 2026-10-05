@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { GoogleAnalytics } from "@next/third-parties/google";
+import Script from "next/script";
 import { Fredoka, Nunito } from "next/font/google";
 import "./globals.css";
 import { SiteFooter } from "@/components/site-footer";
@@ -69,11 +69,12 @@ const JSON_LD = JSON.stringify({
   ],
 });
 
+const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
+
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en-PH" className={`${nunito.variable} ${fredoka.variable} h-full antialiased`}>
       <head>
-        <link rel="preconnect" href={APP_URL} />
         <link rel="dns-prefetch" href={APP_URL} />
       </head>
       <body className="flex min-h-full flex-col">
@@ -87,8 +88,15 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <SiteHeader />
         {children}
         <SiteFooter />
+        {/* Analytics once the page has loaded and the browser is idle. The default strategy preloaded the 174 KB tag in
+            <head>, where it competed with the CSS, fonts and first paint on a phone. */}
+        {GA_ID && (
+          <>
+            <Script id="ga-init" strategy="lazyOnload">{`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','${GA_ID}');`}</Script>
+            <Script id="ga" src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`} strategy="lazyOnload" />
+          </>
+        )}
       </body>
-      {process.env.NEXT_PUBLIC_GA_ID && <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />}
     </html>
   );
 }

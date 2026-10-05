@@ -155,7 +155,8 @@ function PhoneMockup() {
             alt="The Phriend home screen: a search bar, service categories and verified local pros with their hourly rate"
             width={390}
             height={844}
-            preload
+            loading="eager"
+            fetchPriority="high"
             sizes="(min-width: 640px) 300px, 272px"
             className="size-full object-cover object-top"
           />

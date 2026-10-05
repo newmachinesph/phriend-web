@@ -177,16 +177,33 @@ export function OverlayTool() {
     const { display, sans } = media.current.fonts;
     Promise.all([`600 30px ${display}`, `700 22px ${display}`, `700 20px ${sans}`, `800 20px ${sans}`, `900 30px ${sans}`].map((f) => document.fonts.load(f))).catch(() => {});
     loadImg("/brand/logo-mark.svg").then((i) => (media.current.logo = i)).catch(() => {});
-    loadImg(SAMPLE_FRAME).then((i) => (media.current.bg = i)).catch(() => {});
 
+    // The tool sits below the fold: the 360 KB sample frame loads and the preview redraws only while the canvas is near
+    // the screen, not from page load.
     let raf = 0;
+    let loaded = false;
     const loop = () => {
       const ctx = canvasRef.current?.getContext("2d");
       if (ctx && !isRecording.current) drawFrame(ctx, { showGuides: settings.current.guides });
       raf = requestAnimationFrame(loop);
     };
-    raf = requestAnimationFrame(loop);
-    return () => cancelAnimationFrame(raf);
+    const seen = new IntersectionObserver(
+      ([entry]) => {
+        cancelAnimationFrame(raf);
+        if (!entry.isIntersecting) return;
+        if (!loaded) {
+          loaded = true;
+          loadImg(SAMPLE_FRAME).then((i) => (media.current.bg = i)).catch(() => {});
+        }
+        raf = requestAnimationFrame(loop);
+      },
+      { rootMargin: "300px" },
+    );
+    if (canvasRef.current) seen.observe(canvasRef.current);
+    return () => {
+      seen.disconnect();
+      cancelAnimationFrame(raf);
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps -- the loop reads refs only
   }, []);
 

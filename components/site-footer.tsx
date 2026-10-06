@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { Logo, NAV } from "@/components/site-header";
 import { AppLink } from "@/components/app-link";
@@ -32,6 +33,10 @@ export function SiteFooter() {
               Book ID-verified local guides and pros across the Philippines: tours, photo shoots, lessons, hikes and
               errands. Agreed in chat, met in public, paid in person.
             </p>
+            {/* Google's badge, used as supplied: keep the proportions, no restyling (Play brand guidelines). */}
+            <a href={PLAY_URL} className="mt-5 inline-block rounded-md" aria-label="Get it on Google Play">
+              <Image src="/badges/google-play.png" alt="Get it on Google Play" width={646} height={250} className="h-12 w-auto" />
+            </a>
           </div>
 
           <nav aria-labelledby="footer-product" className="flex flex-col gap-2.5">
@@ -44,9 +49,6 @@ export function SiteFooter() {
               </Link>
             ))}
             <AppLink className={link} />
-            <a href={PLAY_URL} className={link}>
-              Android app on Google Play
-            </a>
             <a href={POST_URL} className={link}>
               Become a Phriend
             </a>

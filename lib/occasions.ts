@@ -1,3 +1,5 @@
+import { cdn } from "@/lib/site";
+
 /**
  * Occasion pages (/occasions/<slug>): the pros people book for one event, grouped. Each lists category slugs from the API;
  * a slug Ops deletes or renames simply drops off the page. The copy is written per occasion so no two pages read alike.
@@ -197,3 +199,7 @@ export const OCCASIONS: Occasion[] = [
 ];
 
 export const findOccasion = (slug: string) => OCCASIONS.find((o) => o.slug === slug);
+
+/** The occasion photos live on the CDN at site/occasions/<slug>.jpg (1536x1024); "occasions" is the hub's. */
+export const occasionImage = (slug: string) => cdn(`/occasions/${slug}.jpg`);
+export const OCCASION_IMAGE = { width: 1536, height: 1024 } as const;

@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowRight, Check } from "lucide-react";
 import { activityPath, appCategoryUrl, getCategories } from "@/lib/landing";
-import { findOccasion, OCCASIONS } from "@/lib/occasions";
+import { findOccasion, OCCASION_IMAGE, OCCASIONS, occasionImage } from "@/lib/occasions";
 import { APP_URL, pageMeta, POST_URL, SITE_URL } from "@/lib/site";
 
 export const revalidate = 600;
@@ -14,7 +15,9 @@ export const generateStaticParams = () => OCCASIONS.map((o) => ({ occasion: o.sl
 export async function generateMetadata({ params }: { params: Promise<{ occasion: string }> }): Promise<Metadata> {
   const o = findOccasion((await params).occasion);
   if (!o) return { title: "Not found", robots: { index: false } };
-  return pageMeta({ title: o.title, description: o.description, path: `/occasions/${o.slug}` });
+  const meta = pageMeta({ title: o.title, description: o.description, path: `/occasions/${o.slug}` });
+  const shareImage = { url: occasionImage(o.slug), ...OCCASION_IMAGE, alt: `${o.name} in the Philippines` };
+  return { ...meta, openGraph: { ...meta.openGraph, images: [shareImage] }, twitter: { card: "summary_large_image", images: [shareImage.url] } };
 }
 
 export default async function OccasionPage({ params }: { params: Promise<{ occasion: string }> }) {
@@ -36,6 +39,7 @@ export default async function OccasionPage({ params }: { params: Promise<{ occas
           { "@type": "ListItem", position: 3, name: o.name, item: `${SITE_URL}${path}` },
         ],
       },
+      { "@type": "ImageObject", contentUrl: occasionImage(o.slug), ...OCCASION_IMAGE, caption: `${o.name} in the Philippines` },
       { "@type": "FAQPage", mainEntity: o.faq.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })) },
       {
         "@type": "ItemList",
@@ -68,6 +72,9 @@ export default async function OccasionPage({ params }: { params: Promise<{ occas
         <Link href="/teams" className="inline-flex items-center gap-2 rounded-full border-2 border-line px-5 py-3 font-bold text-ink hover:border-brand">
           Book a team
         </Link>
+      </div>
+      <div className="relative mt-10 aspect-[3/2] max-h-[480px] w-full overflow-hidden rounded-3xl bg-navy-soft sm:aspect-[21/9]">
+        <Image src={occasionImage(o.slug)} alt={`${o.name} in the Philippines`} fill priority sizes="(min-width: 1152px) 1088px, 100vw" className="object-cover" />
       </div>
 
       <section id="who-to-book" aria-labelledby="book-title" className="mt-14">

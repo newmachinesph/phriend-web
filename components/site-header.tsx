@@ -8,6 +8,7 @@ export const NAV = [
   { href: "/#how-it-works", label: "How it works" },
   { href: "/#safety", label: "Safety" },
   { href: "/#for-phriends", label: "For Phriends" },
+  { href: "/occasions", label: "Occasions" },
   { href: "/teams", label: "Teams" },
   { href: "/#faq", label: "FAQ" },
   { href: "/blog", label: "Blog" },

@@ -3,6 +3,7 @@ import { LAST_UPDATED, SITE_URL } from "@/lib/site";
 import { POSTS } from "./blog/_posts";
 import { listDbPosts } from "@/lib/blog-db";
 import { activitySlug, CITY_PAGES, comboPath, getCategories } from "@/lib/landing";
+import { OCCASIONS } from "@/lib/occasions";
 
 const lastModified = new Date(LAST_UPDATED);
 
@@ -15,6 +16,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${SITE_URL}/community-guidelines`, lastModified, changeFrequency: "monthly", priority: 0.6 },
     { url: `${SITE_URL}/press`, lastModified, changeFrequency: "monthly", priority: 0.5 },
     { url: `${SITE_URL}/teams`, lastModified, changeFrequency: "daily", priority: 0.7 },
+    { url: `${SITE_URL}/occasions`, lastModified, changeFrequency: "monthly", priority: 0.8 },
+    ...OCCASIONS.map((o) => ({ url: `${SITE_URL}/occasions/${o.slug}`, lastModified, changeFrequency: "monthly" as const, priority: 0.8 })),
     { url: `${SITE_URL}/creators`, lastModified, changeFrequency: "monthly", priority: 0.6 },
     { url: `${SITE_URL}/blog`, lastModified, changeFrequency: "weekly", priority: 0.7 },
     ...POSTS.map((p) => ({ url: `${SITE_URL}/blog/${p.slug}`, lastModified: new Date(p.date), changeFrequency: "monthly" as const, priority: 0.7 })),

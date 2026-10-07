@@ -18,7 +18,6 @@ const TRUST: { icon: LucideIcon; label: string }[] = [
   { icon: BadgeCheck, label: "Everyone is ID-verified" },
   { icon: MapPin, label: "Public meet-ups only" },
   { icon: Wallet, label: "Agree the price in chat, pay in person" },
-  { icon: ShieldCheck, label: "18+ only" },
 ];
 
 const CLIENT_STEPS: { icon: LucideIcon; title: string; text: string }[] = [

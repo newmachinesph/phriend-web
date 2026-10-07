@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArrowRight, BadgeCheck, Star } from "lucide-react";
 import { activityPath, appProfileUrl, CITY_PAGES, comboPath, LANDING_CTA, landingJsonLd, type Category, type CityPage, type Phriend, landingCopy } from "@/lib/landing";
 import { POST_URL } from "@/lib/site";
+import { OCCASIONS } from "@/lib/occasions";
 
 const peso = (n: number) => `₱${n.toLocaleString("en-PH")}`;
 
@@ -128,6 +129,23 @@ export function Landing({ category, city, phriends, path, others }: { category: 
           )}
         </ul>
       </section>
+
+      {OCCASIONS.some((o) => o.book.includes(category.slug)) && (
+        <section aria-labelledby="occasions" className="mt-14">
+          <h2 id="occasions" className="font-display text-2xl font-semibold text-ink">
+            Often booked for
+          </h2>
+          <ul className="mt-4 flex flex-wrap gap-2">
+            {OCCASIONS.filter((o) => o.book.includes(category.slug)).map((o) => (
+              <li key={o.slug}>
+                <Link href={`/occasions/${o.slug}`} className="inline-block rounded-full border-2 border-line px-4 py-1.5 text-sm font-bold text-ink hover:border-brand">
+                  {o.name}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
 
       <section aria-labelledby="more" className="mt-14">
         <h2 id="more" className="font-display text-2xl font-semibold text-ink">

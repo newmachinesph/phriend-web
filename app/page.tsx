@@ -120,7 +120,7 @@ const FAQ: { q: string; a: string }[] = [
   },
   {
     q: "Do I need to install anything?",
-    a: "On Android, yes: get the Phriend app on Google Play. On iPhone, not yet: Phriend runs in the browser at web.phriend.app. Add it to your home screen and it works like an app, with chat, bookings and in-app notifications. The App Store app is coming soon.",
+    a: "No. Phriend runs in the browser at web.phriend.app on any phone, Android or iPhone. Add it to your home screen and it works like an app, with chat, bookings and in-app notifications. An early Android app is also on Google Play if you prefer one.",
   },
   {
     q: "How do I delete my account?",

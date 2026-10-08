@@ -10,7 +10,7 @@ export const apiHeaders = (): HeadersInit => (process.env.API_SERVER_KEY ? { "x-
 export const CDN_URL = "https://cdn.phriend.app/site";
 /** "/blog/x.jpg" -> the CDN copy; full URLs pass through (Ops covers may be either). */
 export const cdn = (path: string) => (/^https?:\/\//.test(path) ? path : `${CDN_URL}${path.startsWith("/") ? "" : "/"}${path}`);
-/** The Android app. Android phones use it instead of the web app (web.phriend.app sends them to /android). */
+/** The Android app on Google Play: an extra. The web app (APP_URL) is the default on every phone. */
 export const ANDROID_PACKAGE = "app.phriend.mobile";
 export const PLAY_URL = `https://play.google.com/store/apps/details?id=${ANDROID_PACKAGE}`;
 export const POST_URL = `${APP_URL}/earn`;

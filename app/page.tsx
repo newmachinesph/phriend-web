@@ -1,16 +1,12 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import {
-  ArrowRight, BadgeCheck, Bell, CalendarClock, CalendarDays, Camera, Car, ChevronDown, ClipboardList, Dumbbell, Flag,
-  GraduationCap, LayoutDashboard, Lock, Map, MapPin, Megaphone, MessageCircle, Mountain, PenLine, Search, ShieldCheck,
-  Star, Tag, Umbrella, Users, UserX, Utensils, Wallet, type LucideIcon,
-  Laptop,
-} from "lucide-react";
+import { ArrowRight, BadgeCheck, Bell, CalendarClock, CalendarDays, ChevronDown, Flag, LayoutDashboard, Lock, MapPin, Megaphone, MessageCircle, PenLine, Search, ShieldCheck, Star, Tag, Users, UserX, Wallet, type LucideIcon } from "lucide-react";
 import { AppLink } from "@/components/app-link";
 import { TeamTile } from "@/components/teams";
-import { getTeams } from "@/lib/landing";
-import { APP_URL, cdn, pageMeta, POST_URL, SITE_DESCRIPTION, SITE_URL } from "@/lib/site";
+import { ServiceGroups } from "@/components/services";
+import { getGroups, getTeams } from "@/lib/landing";
+import { cdn, pageMeta, POST_URL, SITE_DESCRIPTION, SITE_URL } from "@/lib/site";
 
 export const metadata: Metadata = pageMeta({ description: SITE_DESCRIPTION, path: "/" });
 
@@ -32,20 +28,6 @@ const PHRIEND_STEPS: { icon: LucideIcon; title: string; text: string }[] = [
   { icon: PenLine, title: "Profile", text: "Claim your @username, add photos, pick activities and non-negotiables, set your rate and services. A person approves it, usually within a day." },
   { icon: CalendarClock, title: "Schedule", text: "Set your weekly availability and lock out busy dates. Requests arrive in the app and by email; accept or decline with one tap." },
   { icon: Wallet, title: "Earn", text: "Meet in public and get paid in cash, directly. Your dashboard tracks bookings, reviews and earnings. Phriend takes no cut." },
-];
-
-const ACTIVITIES: { icon: LucideIcon; label: string; slug: string }[] = [
-  { icon: Map, label: "Tour Guide", slug: "tour-guide" },
-  { icon: Camera, label: "Photographer", slug: "photographer" },
-  { icon: GraduationCap, label: "Tutor", slug: "tutor" },
-  { icon: Mountain, label: "Hiking", slug: "hiking" },
-  { icon: ClipboardList, label: "Errand", slug: "errand" },
-  { icon: Car, label: "Driver", slug: "driver" },
-  { icon: Utensils, label: "Eat & Travel", slug: "eat_and_travel" },
-  { icon: CalendarDays, label: "Event", slug: "event" },
-  { icon: Dumbbell, label: "Workout", slug: "workout" },
-  { icon: Umbrella, label: "Beach", slug: "beach" },
-  { icon: Laptop, label: "Coworking", slug: "coworking" },
 ];
 
 const RULES: { icon: LucideIcon; title: string; text: string }[] = [
@@ -208,7 +190,8 @@ const eyebrow = "text-sm font-extrabold uppercase tracking-wider text-brand-text
 const h2 = "mt-2 font-display text-3xl font-semibold leading-tight text-ink sm:text-4xl lg:text-5xl";
 
 export default async function Home() {
-  const { teams } = await getTeams({ limit: 3 });
+  const [{ teams }, groups] = await Promise.all([getTeams({ limit: 3 }), getGroups()]);
+  const serviceCount = groups.reduce((n, g) => n + g.categories.length, 0);
   return (
     <main id="main" className="flex-1">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON_LD }} />
@@ -221,11 +204,11 @@ export default async function Home() {
               Verified locals across the Philippines
             </p>
             <h1 className="mt-5 font-display text-[44px] font-semibold leading-[1.02] tracking-tight text-white sm:text-6xl lg:text-7xl">
-              Book local guides and <span className="text-brand-light">pros</span>
+              Get it done by a <span className="text-brand-light">verified local</span>
             </h1>
             <p className="mt-5 text-lg leading-relaxed text-white/80 sm:text-xl">
-              Tours, photo shoots, lessons, hikes, errands and driving, with ID-verified locals across the Philippines.
-              Booked by the hour, met in public, paid in person.
+              Errands, pet care, events, lessons, photo shoots, rides and more, from ID-verified locals across the
+              Philippines. Agree the price in the chat, pay in person.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <AppLink className="btn-primary inline-flex items-center justify-center gap-2 rounded-full px-7 py-3.5 text-lg font-bold">
@@ -247,6 +230,30 @@ export default async function Home() {
           <div className="relative">
             <div aria-hidden="true" className="absolute inset-x-8 top-6 h-[92%] rounded-[3rem] bg-white/5" />
             <PhoneMockup />
+          </div>
+        </div>
+      </section>
+
+      {/* Services: the groups, live from Ops */}
+      <section aria-labelledby="services-title" className="bg-surface">
+        <div className="mx-auto w-full max-w-6xl px-5 py-16 sm:px-8 sm:py-24">
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+            <div className="max-w-2xl">
+              <p className={eyebrow}>Services</p>
+              <h2 id="services-title" className={h2}>
+                What do you need done?
+              </h2>
+              <p className="mt-3 text-[15px] leading-relaxed text-body">
+                {serviceCount} services in {groups.length} groups, from errands and pet care to weddings, lessons, tours and freelance work. Pick one to see who
+                is available.
+              </p>
+            </div>
+            <Link href="/services" className="inline-flex items-center gap-1.5 font-bold text-brand-text hover:underline">
+              All services <ArrowRight size={18} aria-hidden="true" />
+            </Link>
+          </div>
+          <div className="mt-10">
+            <ServiceGroups groups={groups} limit={9} />
           </div>
         </div>
       </section>
@@ -329,41 +336,6 @@ export default async function Home() {
                 <f.icon size={22} className="text-brand" aria-hidden="true" />
                 <h3 className="mt-3 font-extrabold text-ink">{f.title}</h3>
                 <p className="mt-1 text-[15px] leading-relaxed">{f.text}</p>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
-
-      {/* Popular activities */}
-      <section aria-labelledby="activities-title" className="bg-surface">
-        <div className="mx-auto w-full max-w-6xl px-5 py-16 sm:px-8 sm:py-24">
-          <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-            <div className="max-w-2xl">
-              <p className={eyebrow}>Popular activities</p>
-              <h2 id="activities-title" className={h2}>
-                Whatever the plan, there is a Phriend for it.
-              </h2>
-              <p className="mt-3 text-[15px] leading-relaxed text-body">
-                A guide for the weekend, a photographer for the shoot, a tutor for the exam, a driver for the airport run. 46+ categories, each with its own sub-activities.
-              </p>
-            </div>
-            <a href={APP_URL} className="inline-flex items-center gap-1.5 font-bold text-brand-text hover:underline">
-              Browse all activities <ArrowRight size={18} aria-hidden="true" />
-            </a>
-          </div>
-          <ul className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
-            {ACTIVITIES.map((a) => (
-              <li key={a.slug}>
-                <a
-                  href={`${APP_URL}/${a.label.toLowerCase().replace(/&/g, " and ").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "")}`} // the app's friendly category landing (same slug rule as web.phriend.app)
-                  className="group flex items-center gap-3 rounded-2xl border border-line bg-white px-4 py-3.5 font-bold text-ink transition-colors hover:border-brand hover:bg-brand-soft"
-                >
-                  <span className="grid size-10 shrink-0 place-items-center rounded-xl bg-surface text-brand transition-colors group-hover:bg-white">
-                    <a.icon size={20} strokeWidth={1.75} aria-hidden="true" />
-                  </span>
-                  {a.label}
-                </a>
               </li>
             ))}
           </ul>
@@ -522,9 +494,9 @@ export default async function Home() {
       <section id="faq" aria-labelledby="faq-title" className="bg-surface">
         <div className="mx-auto w-full max-w-6xl px-5 py-16 sm:px-8 sm:py-24">
           <p id="what-is-phriend" className="mb-10 rounded-2xl border border-line bg-white p-5 text-[17px] leading-relaxed shadow-card sm:p-6">
-            <strong className="text-ink">What is Phriend?</strong> Phriend is a Philippine app for booking ID-verified local guides
-            and pros by the hour: city and food tours, photo shoots, tutoring, hikes, driving and errands. Members are 18+, agree
-            the price in the chat, meet in public places, and pay in person.
+            <strong className="text-ink">What is Phriend?</strong> Phriend is a Philippine app for booking ID-verified local pros by
+            the hour: errands, pet care, events, lessons, photo shoots, tours, rides and more. Members are 18+, agree the price in
+            the chat, meet in public places, and pay in person.
           </p>
           <div className="grid gap-10 lg:grid-cols-[0.7fr_1.3fr]">
             <div>

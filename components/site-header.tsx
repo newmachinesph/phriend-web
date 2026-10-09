@@ -5,6 +5,7 @@ import { AppLink } from "@/components/app-link";
 import { cdn } from "@/lib/site";
 
 export const NAV = [
+  { href: "/services", label: "Services" },
   { href: "/#how-it-works", label: "How it works" },
   { href: "/#safety", label: "Safety" },
   { href: "/#for-phriends", label: "For Phriends" },

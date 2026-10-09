@@ -30,8 +30,8 @@ export function SiteFooter() {
               <Logo height={36} />
             </Link>
             <p className="mt-3 text-[15px] leading-relaxed">
-              Book ID-verified local guides and pros across the Philippines: tours, photo shoots, lessons, hikes and
-              errands. Agreed in chat, met in public, paid in person.
+              Book ID-verified local pros across the Philippines: errands, pet care, events, lessons, photo shoots, tours
+              and more. Agreed in chat, met in public, paid in person.
             </p>
             {/* Google's badge, used as supplied: keep the proportions, no restyling (Play brand guidelines). */}
             <a href={PLAY_URL} className="mt-5 inline-block rounded-md" aria-label="Get it on Google Play">

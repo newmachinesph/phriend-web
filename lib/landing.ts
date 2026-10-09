@@ -2,7 +2,10 @@ import { API_URL, APP_URL, apiHeaders, POST_URL, SITE_NAME, SITE_URL } from "@/l
 
 /** Activity and city landing pages: live data from the app's public API, rendered on the marketing domain so it carries its authority. */
 
-export type Category = { slug: string; label: string; icon: string; activities: string[] };
+export type IconNode = [string, Record<string, string | number>][];
+export type Category = { slug: string; label: string; icon: string; activities: string[]; iconNode?: IconNode; group?: string | null };
+/** A service group (Errands & Home Help, Weddings & Events…), managed in Ops; the API sends only groups with a shown category. */
+export type CategoryGroup = { slug: string; label: string; icon: string; iconNode: IconNode };
 export type Phriend = {
   id: number;
   workName: string;
@@ -42,16 +45,27 @@ export const comboPath = (c: Category, city: CityPage) => `/${activitySlug(c.lab
 export const appCategoryUrl = (c: Category) => `${APP_URL}/${activitySlug(c.label)}`;
 export const appProfileUrl = (p: Phriend) => (p.username ? `${APP_URL}/@${p.username}` : `${APP_URL}/phriends/${p.id}`);
 
-export async function getCategories(): Promise<Category[]> {
+/** Categories and their groups in one call (the API sends both, in Ops order). */
+export async function getCatalog(): Promise<{ categories: Category[]; groups: CategoryGroup[] }> {
   try {
     const r = await fetch(`${API_URL}/api/categories`, { headers: apiHeaders(), next: { revalidate: 3600 } });
-    if (!r.ok) return [];
-    const d = (await r.json()) as { categories: Category[] };
-    return d.categories ?? [];
+    if (!r.ok) return { categories: [], groups: [] };
+    const d = (await r.json()) as { categories?: Category[]; groups?: CategoryGroup[] };
+    return { categories: d.categories ?? [], groups: d.groups ?? [] };
   } catch {
-    return [];
+    return { categories: [], groups: [] };
   }
 }
+export const getCategories = async () => (await getCatalog()).categories;
+
+/** Each group with its categories, in order; groups without categories are left out. */
+export async function getGroups(): Promise<(CategoryGroup & { categories: Category[] })[]> {
+  const { categories, groups } = await getCatalog();
+  return groups.map((g) => ({ ...g, categories: categories.filter((c) => c.group === g.slug) })).filter((g) => g.categories.length);
+}
+export const groupPath = (g: { slug: string }) => `/services/${g.slug}`;
+/** The same group in the app. */
+export const appGroupUrl = (g: { slug: string }) => `${APP_URL}/services/${g.slug}`;
 export async function findCategory(segment: string): Promise<Category | undefined> {
   const list = await getCategories();
   return list.find((c) => activitySlug(c.label) === segment || c.slug === segment);

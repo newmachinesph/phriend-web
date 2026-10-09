@@ -15,8 +15,8 @@ export const metadata: Metadata = pageMeta({
 const STEPS = [
   { title: "Pick a team", text: "Browse the teams in your city. Each one lists its members and their roles, its packages and what it costs per group." },
   { title: "Choose a package", text: "A package has a fixed length, a group price and the members who come along. Pick one and the number of guests." },
-  { title: "Send one booking request", text: "Give the date, start time and a public meeting place. The team lead accepts or declines for everyone, and the team has one group chat with you." },
-  { title: "Meet in public, pay in person", text: "The downpayment is at most 50%, in cash, handed to the team lead when you meet. Phriend never holds the money. Then leave a review." },
+  { title: "Send one booking request", text: "Give the date, start time and a meeting place (a public place, or your address for a home service). The team lead accepts or declines for everyone, and the team has one group chat with you." },
+  { title: "Meet, pay in person", text: "The downpayment is at most 50%, in cash, handed to the team lead when you meet. Phriend never holds the money. Then leave a review." },
 ] as const;
 
 const pill = "inline-block rounded-full border-2 px-4 py-1.5 text-sm font-bold";

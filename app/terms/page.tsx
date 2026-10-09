@@ -86,7 +86,7 @@ export default function TermsPage() {
 
       <h2>6. Meetups and conduct</h2>
       <ul>
-        <li>Meetups take place in public places only.</li>
+        <li>Meetups take place in public places, or at the client's home when the client books a home service (for example repairs, cleaning, moving, tutoring or pet care). The client decides whether to invite a Phriend into their home. Meetups never take place in hotel rooms, overnight, or at the Phriend's own place.</li>
         <li>
           The Service is for <strong>legitimate local services and activities</strong> as described in the{" "}
           <Link href="/community-guidelines">community guidelines</Link>.

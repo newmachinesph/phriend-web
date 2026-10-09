@@ -13,7 +13,7 @@ https://phriend.app/#features
 
 Search and favorites: filter by city, gender, language, activity, area, keyword, age and rate, narrow by sub-activity, favorite profiles that follow your account, and share a profile link.
 
-Bookings: pick a service, a date, start time, 1 to 8 hours and a public meeting place, add a note, and send the request up to 60 days ahead. The Phriend accepts or declines; either side can cancel with a reason and mark the meetup completed afterwards. Add it to Google Calendar or download the .ics. Money never moves in the app: 50% in cash on a first meetup, 50% after; e-wallets only for repeat, trusted Phriends.
+Bookings: pick a service, a date, start time, 1 to 8 hours and a meeting place (a public place, or the client's address for a home service), add a note, and send the request up to 60 days ahead. The Phriend accepts or declines; either side can cancel with a reason and mark the meetup completed afterwards. Add it to Google Calendar or download the .ics. Money never moves in the app: 50% in cash on a first meetup, 50% after; e-wallets only for repeat, trusted Phriends.
 
 Schedule: Phriends set their weekly days and hours and lock out dates up to a year ahead. Requests outside those hours, on a locked-out date or over an accepted booking are refused.
 
@@ -46,7 +46,7 @@ Q: What can I book on Phriend?
 A: Local services and activities, by the hour: guided city and food tours, photo and video shoots, tutoring and lessons, hiking and trail guiding, personal training, driving and airport transfers, errands and queueing, event coverage and on-site help. Phriend is not a dating service. Romantic or sexual services, compensated dating and escort services are banned and get an account removed immediately.
 
 Q: How do bookings work?
-A: Send the Phriend a booking request with the date, start time, number of hours (1 to 8), a public meeting place and a note, up to 60 days ahead. If the Phriend lists services, pick one; some need a minimum number of hours. The Phriend accepts or declines, either side can cancel with a reason, and once the meetup time has passed either side can mark it completed. Every booking has an Add to Google Calendar button and an .ics download. Money never moves in the app: 50% in cash when you meet, 50% after.
+A: Send the Phriend a booking request with the date, start time, number of hours (1 to 8), a meeting place (a public place, or the client's address for a home service) and a note, up to 60 days ahead. If the Phriend lists services, pick one; some need a minimum number of hours. The Phriend accepts or declines, either side can cancel with a reason, and once the meetup time has passed either side can mark it completed. Every booking has an Add to Google Calendar button and an .ics download. Money never moves in the app: 50% in cash when you meet, 50% after.
 
 Q: How do I pay?
 A: Directly between members, never through Phriend. On a first meetup, hand over 50% in cash, in person, when you meet, then pay the remaining 50% after. GCash, Maya or bank transfer are for repeat Phriends you have already met and trust, for convenience, and only to the account the Phriend shared in the chat. Never pay more than half upfront, and never to an account that is not the one shared in the chat.
@@ -92,10 +92,10 @@ https://phriend.app/safety
 
 These rules apply to every member, on both sides of a meetup. They are short on purpose. Breaking them gets an account removed. Phriend is a platform only: it is not a party to any meetup or payment and is not liable for any loss, injury, dispute, unpaid balance or harm between members. You use the service at your own risk, and your prudence is your protection.
 
-In short: Meet in public. Only the people agreed in the chat come along (on a team booking, the teammates named on the booking); if extra people not agreed in chat show up, cancel, leave and report. On a first meetup pay half in cash when you meet and half after, never more than half upfront. E-wallets are for repeat Phriends you trust, and only to the account shared in the chat. Tell a friend where you are, and report anything that feels wrong.
+In short: Meet in public, or at your own home for a home service. Only the people agreed in the chat come along (on a team booking, the teammates named on the booking); if extra people not agreed in chat show up, cancel, leave and report. On a first meetup pay half in cash when you meet and half after, never more than half upfront. E-wallets are for repeat Phriends you trust, and only to the account shared in the chat. Tell a friend where you are, and report anything that feels wrong.
 
-1. Public places only
-Every meetup happens in a public place: a mall, a cafe, a restaurant, a park, a trail, a gym, a hospital lobby, a venue. Never a private residence, a hotel room or a private vehicle you do not both trust. If a member asks to move somewhere private, decline and report them.
+1. Public places, or your home for a home service
+Most meetups happen in a public place: a mall, a cafe, a restaurant, a park, a trail, a gym, a hospital lobby, a venue. A home service can happen at the client's home, the client's choice. Never a hotel room, an overnight stay, the Phriend's own place, or a private vehicle you do not both trust. If a member asks to move somewhere private, decline and report them.
 For out-of-town trips, hikes and beach days, agree on the meeting point and the route in the chat before the day, and keep the group in public spaces throughout.
 
 2. Extra people not agreed in chat
@@ -144,7 +144,7 @@ If you are in danger, call for help first and report to Phriend later.
 After you are safe, report the member in the app and email support@phriend.app with the profile name and what happened. We cooperate with law enforcement.
 
 11. The short version
-1. Meet in public.
+1. Meet in public, or at your own home for a home service.
 2. Only the people agreed in the chat (on a team booking, the teammates named on it). Extra people not agreed in chat: cancel, leave, report.
 3. First meetup: half in cash when you meet, half after. Never more than half.
 4. E-wallet only for repeat Phriends you trust, and only to the account shared in the chat.
@@ -157,9 +157,9 @@ COMMUNITY GUIDELINES
 https://phriend.app/community-guidelines
 ==================================================
 
-Phriend is for legitimate local services: work and activities you book by the hour, done in public, between adults. This page says exactly what that means.
+Phriend is for legitimate local services: work and activities you book by the hour, done in public or at the client's home, between adults. This page says exactly what that means.
 
-In short: Phriend is for legitimate local services and activities booked by the hour between adults in public places: guided tours, photo and video shoots, tutoring and lessons, hiking, driving, errands and the like. Any sexual or romantic service, compensated dating, escort services, drugs, private-place meetups, scams and impersonation are banned and get an account removed immediately, with a report to the authorities where the law requires it.
+In short: Phriend is for legitimate local services and activities booked by the hour between adults, in public places or at the client's home for home services: guided tours, photo and video shoots, tutoring and lessons, hiking, driving, errands and the like. Any sexual or romantic service, compensated dating, escort services, drugs, private-place meetups, scams and impersonation are banned and get an account removed immediately, with a report to the authorities where the law requires it.
 
 1. What Phriend is for
 A Phriend is a local you book and pay by the hour for a service or an activity: a tour, a shoot, a lesson, a hike, a drive, an errand. The relationship is professional and public. If you would not do it in front of your parents or a police officer, it does not belong on Phriend.
@@ -176,7 +176,7 @@ A Phriend is a local you book and pay by the hour for a service or an activity: 
 - Hospital and clinic assistance, elderly care help, waiting-room assistance
 - Dog walking and pet sitting
 - Online sessions such as tutoring or language practice over video call
-If your idea is not on the list but is a legal, professional service that happens in public, it is probably fine. When in doubt, email support@phriend.app before posting.
+If your idea is not on the list but is a legal, professional service done in public or at the client's home, it is probably fine. When in doubt, email support@phriend.app before posting.
 
 3. Prohibited
 The following are banned. Offering, requesting or hinting at any of them gets an account removed.
@@ -189,7 +189,7 @@ The following are banned. Offering, requesting or hinting at any of them gets an
 - Harassment: unwanted contact, threats, stalking, hate speech, or sharing someone's private information.
 - Impersonation: using someone else's photos, name or ID, or pretending to be a company or a Phriend staff member.
 - Off-platform payment scams: asking for more than 50% upfront, asking for payment to an account not shared in the chat, sending payment links or QR codes outside the app, or requesting gift cards and crypto.
-- Meetups in private residences, hotel rooms or other private places.
+- Meetups in hotel rooms, overnight stays or the Phriend's own place, and home visits for anything that is not a home service.
 - Fake reviews, fake profiles, and multiple accounts for the same person.
 
 4. Profiles and photos

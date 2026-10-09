@@ -6,7 +6,7 @@ import { LAST_UPDATED, pageMeta } from "@/lib/site";
 export const metadata: Metadata = pageMeta({
   title: "Safety and transaction rules for meetups",
   description:
-    "How Phriend meetups and payments work: public places only, a downpayment of up to 50% agreed in the chat, the rest in cash after, the red flags to watch for, late arrivals and cancellations.",
+    "How Phriend meetups and payments work: public places or, for a home service, your home; a downpayment of up to 50% agreed in the chat; the rest in cash after, the red flags to watch for, late arrivals and cancellations.",
   path: "/safety",
 });
 
@@ -17,19 +17,30 @@ export default function SafetyPage() {
       title="Safety and transaction rules"
       path="/safety"
       updated={LAST_UPDATED}
-      summary="Meet in public. Only the people agreed in the chat come along (on a team booking, the teammates named on the booking); if extra people not agreed in chat show up, cancel, leave and report. On a first meetup pay half in cash when you meet and half after, never more than half upfront. E-wallets are for repeat Phriends you trust, and only to the account shared in the chat. Tell a friend where you are, and report anything that feels wrong."
+      summary="Meet in public, or at your own home when you book a home service. Only the people agreed in the chat come along (on a team booking, the teammates named on the booking); if extra people not agreed in chat show up, cancel, leave and report. On a first meetup pay half in cash when you meet and half after, never more than half upfront. E-wallets are for repeat Phriends you trust, and only to the account shared in the chat. Tell a friend where you are, and report anything that feels wrong."
       intro="These rules apply to every member, on both sides of a meetup. They are short on purpose. Breaking them gets an account removed. Phriend is a platform only: it is not a party to any meetup or payment and is not liable for any loss, injury, dispute, unpaid balance or harm between members. You use the service at your own risk, and your prudence is your protection."
     >
-      <h2>1. Public places only</h2>
+      <h2>1. Public places, or your home for a home service</h2>
       <p>
-        Every meetup happens in a public place: a mall, a cafe, a restaurant, a
-        park, a trail, a gym, a hospital lobby, a venue.{" "}
+        Most meetups happen in a public place: a mall, a cafe, a restaurant, a
+        park, a trail, a gym, a hospital lobby, a venue. A home service (repairs,
+        aircon cleaning, plumbing, cleaning, laundry, moving, tutoring, pet care,
+        cooking, senior care and the like) can happen at the client&apos;s home:
+        the client decides whether to invite a Phriend in.{" "}
         <strong>
-          Never a private residence, a hotel room or a private vehicle you do
-          not both trust.
+          Never a hotel room, an overnight stay, the Phriend&apos;s own place, or
+          a home visit for anything that is not a home service.
         </strong>{" "}
-        If a member asks to move somewhere private, decline and report them.
+        If a member asks to move somewhere private for any other reason, decline
+        and report them.
       </p>
+      <p>For a home visit:</p>
+      <ul>
+        <li>Share the address only in the chat, once the booking is accepted, and tell someone who is coming and when.</li>
+        <li>Have another adult at home if you can, and keep valuables and documents out of sight.</li>
+        <li>Check that the person at the door is the verified Phriend you booked (name and photo), and do the meetup check-in in the app.</li>
+        <li>Phriends: share the booking with someone you trust, and leave if anything feels wrong. Report it in the app.</li>
+      </ul>
       <p>
         For out-of-town trips, hikes and beach days, agree on the meeting point
         and the route in the chat before the day, and keep the group in public
@@ -251,7 +262,7 @@ export default function SafetyPage() {
 
       <h2>11. The short version</h2>
       <ol>
-        <li>Meet in public.</li>
+        <li>Meet in public, or at your own home for a home service.</li>
         <li>
           Only the people agreed in the chat (on a team booking, the teammates
           named on it). Extra people not agreed in chat: cancel, leave, report.

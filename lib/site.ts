@@ -20,7 +20,7 @@ export const LAST_UPDATED = "2026-10-06";
 export const SITE_NAME = "Phriend";
 export const SITE_TITLE = "Phriend: Local Guides & Pros";
 export const SITE_DESCRIPTION =
-  "Book ID-verified local guides and pros across the Philippines: tours, photo shoots, lessons, hikes, errands and driving. Agreed in chat, met in public.";
+  "Book ID-verified local guides and pros across the Philippines: tours, photo shoots, lessons, hikes, errands and driving. Agreed in chat, paid in person.";
 
 /** Rendered by app/opengraph-image.tsx; listed here because a page-level `openGraph` drops the file-convention image (see pageMeta). */
 export const OG_IMAGE = { url: "/opengraph-image", width: 1200, height: 630, alt: "Phriend: local guides & pros" };

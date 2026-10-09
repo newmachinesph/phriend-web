@@ -14,7 +14,7 @@ export const metadata: Metadata = pageMeta({
 });
 
 const BOILERPLATE =
-  "Phriend is a Philippine app for booking ID-verified local guides and pros by the hour: city and food tours, photo and video shoots, tutoring and lessons, hiking guides, drivers, errand helpers and more. Members are 18 and older, ID-verified through Didit, meet in public places only, and pay 50% upfront, 50% after: cash in person on a first meetup, e-wallet only once they already trust each other. Phriend is a platform only and is not a party to the meetups. It launched in 2026 in the Philippines. The company site is phriend.app and the app runs in the browser at web.phriend.app.";
+  "Phriend is a Philippine app for booking ID-verified local guides and pros by the hour: city and food tours, photo and video shoots, tutoring and lessons, hiking guides, drivers, errand helpers and more. Members are 18 and older, ID-verified through Didit, meet in public places or, for a home service, at the client's home, and pay 50% upfront, 50% after: cash in person on a first meetup, e-wallet only once they already trust each other. Phriend is a platform only and is not a party to the meetups. It launched in 2026 in the Philippines. The company site is phriend.app and the app runs in the browser at web.phriend.app.";
 
 const facts = (n: number): { label: string; value: string }[] => [
   { label: "Founded", value: "2026" },
@@ -22,7 +22,7 @@ const facts = (n: number): { label: string; value: string }[] => [
   { label: "Activity categories", value: `${n}+` },
   { label: "Typical rate", value: "₱300 to ₱1,500 / hr" },
   { label: "ID verification", value: "Didit" },
-  { label: "Meet-ups", value: "Public places only" },
+  { label: "Meet-ups", value: "Public places, or the client's home for home services" },
   { label: "Age", value: "18+ only" },
 ];
 

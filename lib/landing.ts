@@ -104,11 +104,11 @@ export function landingCopy(c: Category, city?: CityPage, phriends: Phriend[] = 
     how: [
       `Browse the profiles below or open the full list in the app. Filter by city, language and rate, and read the reviews left by other members.`,
       `Sign in and verify your ID (it takes about two minutes), then message the Phriend. Say what you have in mind, when, and where you want to meet.`,
-      `Send a booking request with the date, start time, number of hours and a public meeting place. The Phriend accepts or declines, and it goes into your calendar.`,
-      `Meet in public. Hand over 50% in cash when you arrive and the rest after. Then leave a review so the next member knows what to expect.`,
+      `Send a booking request with the date, start time, number of hours and a meeting place: a public place, or your address for a home service. The Phriend accepts or declines, and it goes into your calendar.`,
+      `Meet up. Hand over 50% in cash when you arrive and the rest after. Then leave a review so the next member knows what to expect.`,
     ],
     rates: `Phriends for ${c.label.toLowerCase()} in ${where} currently charge ${rate}. The rate is per hour of work; food, tickets and fares are on you unless a service says otherwise. Phriend does not take a cut, so the rate you see is what the Phriend keeps.`,
-    safety: `Every member is ID-verified, meetups happen in public places only, and the chat keeps the record of what was agreed. If someone shows up with extra people who were not agreed in the chat, do not proceed: leave and report. On a team booking, the teammates named on the booking are the agreed people; anyone else still is not. Never pay more than half upfront, and only to the account the Phriend shared in the chat.`,
+    safety: `Every member is ID-verified, meetups happen in public places or, for a home service, at your home, and the chat keeps the record of what was agreed. If someone shows up with extra people who were not agreed in the chat, do not proceed: leave and report. On a team booking, the teammates named on the booking are the agreed people; anyone else still is not. Never pay more than half upfront, and only to the account the Phriend shared in the chat.`,
     faq: [
       { q: `How much does a ${c.label.toLowerCase()} Phriend cost in ${where}?`, a: `Between ${rate}. The rate is set by each Phriend and shown on their profile, together with the services they offer and any minimum booking.` },
       { q: `How do I know the Phriend is who they say they are?`, a: `Every member verifies their identity and age with a government ID and a selfie before they can chat or book, and a person approves each Phriend profile before it shows. Verified profiles carry the badge.` },

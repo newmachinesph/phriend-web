@@ -35,7 +35,7 @@ export async function generateMetadata({ params }: { params: Promise<{ activity:
   if (!category) return { title: "Not found", robots: { index: false } };
   return pageMeta({
     title: `Book a local ${category.label} pro in the Philippines`.slice(0, 60),
-    description: `Book a verified local for ${category.label.toLowerCase()} by the hour. ID-checked pros, public meetups, price agreed in the chat. See who is available today.`.slice(0, 150),
+    description: `Book a verified local for ${category.label.toLowerCase()} by the hour. ID-checked pros, price agreed in the chat. See who is available today.`.slice(0, 150),
     path: `/services/${activitySlug(category.label)}`,
   });
 }

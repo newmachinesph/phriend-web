@@ -17,8 +17,8 @@ export default function CommunityGuidelinesPage() {
       title="Community guidelines"
       path="/community-guidelines"
       updated={LAST_UPDATED}
-      summary="Phriend is for legitimate local services and activities booked by the hour between adults in public places: guided tours, photo and video shoots, tutoring and lessons, hiking, driving, errands and the like. Any sexual or romantic service, compensated dating, escort services, drugs, private-place meetups, scams and impersonation are banned and get an account removed immediately, with a report to the authorities where the law requires it."
-      intro="Phriend is for legitimate local services: work and activities you book by the hour, done in public, between adults. This page says exactly what that means."
+      summary="Phriend is for legitimate local services and activities booked by the hour between adults, in public places or at the client's home for home services: guided tours, photo and video shoots, tutoring and lessons, hiking, driving, errands and the like. Any sexual or romantic service, compensated dating, escort services, drugs, private-place meetups, scams and impersonation are banned and get an account removed immediately, with a report to the authorities where the law requires it."
+      intro="Phriend is for legitimate local services: work and activities you book by the hour, done in public or at the client's home, between adults. This page says exactly what that means."
     >
       <h2>1. What Phriend is for</h2>
       <p>
@@ -42,7 +42,7 @@ export default function CommunityGuidelinesPage() {
         <li>Online sessions such as tutoring or language practice over video call</li>
       </ul>
       <p>
-        If your idea is not on the list but is a legal, professional service that happens in public, it is probably
+        If your idea is not on the list but is a legal, professional service done in public or at the client's home, it is probably
         fine. When in doubt, email <a href="mailto:support@phriend.app">support@phriend.app</a> before posting.
       </p>
 
@@ -86,7 +86,7 @@ export default function CommunityGuidelinesPage() {
           account not shared in the chat, sending payment links or QR codes outside the app, or requesting gift cards
           and crypto.
         </li>
-        <li>Meetups in private residences, hotel rooms or other private places.</li>
+        <li>Meetups in hotel rooms, overnight stays or the Phriend's own place, and home visits for anything that is not a home service.</li>
         <li>Fake reviews, fake profiles, and multiple accounts for the same person.</li>
       </ul>
 

@@ -12,26 +12,26 @@ export const metadata: Metadata = pageMeta({ description: SITE_DESCRIPTION, path
 
 const TRUST: { icon: LucideIcon; label: string }[] = [
   { icon: BadgeCheck, label: "Everyone is ID-verified" },
-  { icon: MapPin, label: "Public meet-ups only" },
+  { icon: MapPin, label: "Public places, or your home for home services" },
   { icon: Wallet, label: "Agree the price in chat, pay in person" },
 ];
 
 const CLIENT_STEPS: { icon: LucideIcon; title: string; text: string }[] = [
   { icon: Search, title: "Browse", text: "Filter by city, activity, language and rate. Every profile shows the verified badge, reviews and the Phriend's services with prices." },
   { icon: MessageCircle, title: "Chat", text: "Sign in, verify your ID in a couple of minutes, then agree on the plan in the chat so both sides have the record." },
-  { icon: CalendarDays, title: "Book", text: "Send the date, start time, hours and a public meeting place. The Phriend accepts or declines, and it goes in your calendar." },
-  { icon: MapPin, title: "Meet", text: "Meet in public, pay half in cash when you arrive and the rest after. Then leave a review." },
+  { icon: CalendarDays, title: "Book", text: "Send the date, start time, hours and a meeting place: a public place, or your address for a home service. The Phriend accepts or declines, and it goes in your calendar." },
+  { icon: MapPin, title: "Meet", text: "Meet up (or welcome them home for a home service), pay half in cash when they arrive and the rest after. Then leave a review." },
 ];
 
 const PHRIEND_STEPS: { icon: LucideIcon; title: string; text: string }[] = [
   { icon: BadgeCheck, title: "Verify", text: "A quick ID check confirms you are 18 or older. Every member verifies, and a profile cannot go live without it." },
   { icon: PenLine, title: "Profile", text: "Claim your @username, add photos, pick activities and non-negotiables, set your rate and services. A person approves it, usually within a day." },
   { icon: CalendarClock, title: "Schedule", text: "Set your weekly availability and lock out busy dates. Requests arrive in the app and by email; accept or decline with one tap." },
-  { icon: Wallet, title: "Earn", text: "Meet in public and get paid in cash, directly. Your dashboard tracks bookings, reviews and earnings. Phriend takes no cut." },
+  { icon: Wallet, title: "Earn", text: "Meet in public or at the client's home for a home service, and get paid in cash, directly. Your dashboard tracks bookings, reviews and earnings. Phriend takes no cut." },
 ];
 
 const RULES: { icon: LucideIcon; title: string; text: string }[] = [
-  { icon: MapPin, title: "Public places only", text: "Malls, cafes, parks, trails, events. Never a private residence or a hotel room." },
+  { icon: MapPin, title: "Public places, or your home", text: "Malls, cafes, parks, trails and venues, or your own home when you book a home service. Never a hotel room, an overnight stay or the Phriend's own place." },
   { icon: UserX, title: "Extra people not agreed in chat", text: "If someone arrives with people not agreed in the chat, do not proceed. Leave and report. On a team booking, the teammates named on the booking are agreed; anyone else is not." },
   { icon: Wallet, title: "Half before, half after", text: "50% in cash when you meet, 50% after. E-wallets only for repeat Phriends you trust." },
   { icon: Lock, title: "Pay only the shared account", text: "Send money only to the account shared in the chat. Anything else is a scam." },
@@ -42,7 +42,7 @@ const RULES: { icon: LucideIcon; title: string; text: string }[] = [
 
 const FEATURES: { icon: LucideIcon; title: string; text: string }[] = [
   { icon: Search, title: "Search and favorites", text: "Filter by city, activity, language and rate. Favorite profiles and share a Phriend's @username link." },
-  { icon: CalendarDays, title: "Bookings", text: "Pick a service, date, time and a public place. Accept, decline or cancel with a reason, and add it to your calendar." },
+  { icon: CalendarDays, title: "Bookings", text: "Pick a service, date, time and a public place or the client's address. Accept, decline or cancel with a reason, and add it to your calendar." },
   { icon: CalendarClock, title: "Schedule", text: "Phriends set weekly hours and lock out dates. Requests outside those hours are refused automatically." },
   { icon: Tag, title: "Services and rates", text: "An hourly rate, plus services with their own price per hour or per session and a minimum booking." },
   { icon: MessageCircle, title: "Chat", text: "Photos, emoji reactions, read receipts, saved replies and typing indicators. Archive or block anyone." },
@@ -62,7 +62,7 @@ const FAQ: { q: string; a: string }[] = [
   },
   {
     q: "How do bookings work?",
-    a: "Send a booking request with the date, start time, hours, a public meeting place and a note. If the Phriend lists services, pick one. The Phriend accepts or declines, either side can cancel with a reason, and after the meetup either side marks it completed. Every booking can be added to your calendar.",
+    a: "Send a booking request with the date, start time, hours, a meeting place (a public place, or your address for a home service) and a note. If the Phriend lists services, pick one. The Phriend accepts or declines, either side can cancel with a reason, and after the meetup either side marks it completed. Every booking can be added to your calendar.",
   },
   {
     q: "How do I pay?",
@@ -86,7 +86,7 @@ const FAQ: { q: string; a: string }[] = [
   },
   {
     q: "What do Phriends agree to?",
-    a: "Before a profile goes live, every Phriend ticks an agreement: 18 or older and ID-verified; legitimate activities only, nothing romantic, sexual or illegal; public places only and nobody who was not agreed in the chat; half at the start and half after, cash in person on a first meetup; and prudence if a client shows up with extra people not agreed in the chat. The full text is on the safety page.",
+    a: "Before a profile goes live, every Phriend ticks an agreement: 18 or older and ID-verified; legitimate activities only, nothing romantic, sexual or illegal; public places, or the client's home for a home service, and nobody who was not agreed in the chat; half at the start and half after, cash in person on a first meetup; and prudence if a client shows up with extra people not agreed in the chat. The full text is on the safety page.",
   },
   {
     q: "What are non-negotiables?",
@@ -120,7 +120,7 @@ const JSON_LD = JSON.stringify({
     {
       "@type": "HowTo",
       name: "How to book a local guide or pro on Phriend",
-      description: "Book a verified local guide or pro by the hour in four steps: browse, chat, book, meet in public.",
+      description: "Book a verified local guide or pro by the hour in four steps: browse, chat, book, meet.",
       url: `${SITE_URL}/#how-it-works`,
       step: CLIENT_STEPS.map((s, i) => ({ "@type": "HowToStep", position: i + 1, name: s.title, text: s.text })),
     },
@@ -293,7 +293,7 @@ export default async function Home() {
             ))}
             <li className="flex flex-col justify-between rounded-3xl bg-brand-soft p-6 md:col-span-2 lg:col-span-2">
               <p className="font-display text-2xl font-semibold text-ink">Ready when you are.</p>
-              <p className="mt-2 text-[15px] leading-relaxed text-body">Verified locals, public places, the price agreed in chat. Everything else is up to you and your Phriend.</p>
+              <p className="mt-2 text-[15px] leading-relaxed text-body">Verified locals, public places or your home, the price agreed in chat. Everything else is up to you and your Phriend.</p>
               <AppLink className="btn-primary mt-6 inline-flex w-fit items-center justify-center rounded-full px-6 py-3 font-bold" />
             </li>
           </ol>
@@ -425,7 +425,7 @@ export default async function Home() {
               </h2>
               <p className="mt-4 text-lg leading-relaxed">
                 Know your city, take good photos, speak three languages, or drive a clean car. Set up
-                your Phriend profile once, list your services, take bookings, meet in public, get paid.
+                your Phriend profile once, list your services, take bookings, meet clients, get paid.
               </p>
               <ul className="mt-6 space-y-3 text-[15px] font-semibold text-ink">
                 {[
@@ -496,7 +496,7 @@ export default async function Home() {
           <p id="what-is-phriend" className="mb-10 rounded-2xl border border-line bg-white p-5 text-[17px] leading-relaxed shadow-card sm:p-6">
             <strong className="text-ink">What is Phriend?</strong> Phriend is a Philippine app for booking ID-verified local pros by
             the hour: errands, pet care, events, lessons, photo shoots, tours, rides and more. Members are 18+, agree the price in
-            the chat, meet in public places, and pay in person.
+            the chat, meet in public places or at home for home services, and pay in person.
           </p>
           <div className="grid gap-10 lg:grid-cols-[0.7fr_1.3fr]">
             <div>

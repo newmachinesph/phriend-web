@@ -27,7 +27,7 @@ export const OCCASIONS: Occasion[] = [
     tips: [
       "Book hair and makeup and the photographer first: good ones fill their wedding season months ahead.",
       "Agree in the chat on the hours, the call time and what is delivered (edited photos, a same-day edit, a full video) so both sides have the record.",
-      "Meet at the venue or a public place for the ocular, never at a private home.",
+      "Do the ocular at the venue, so both sides see the space before the day.",
     ],
     faq: [
       { q: "Can I book several wedding pros together?", a: "Yes. Book each Phriend on their own, or book a team: several Phriends who sell one package together, with one chat, one price and one booking." },

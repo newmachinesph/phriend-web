@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { NodeIcon } from "@/components/services";
+import Image from "next/image";
+import { groupPhoto, NodeIcon } from "@/components/services";
 import { activityPath, getGroups, groupPath } from "@/lib/landing";
 import { breadcrumbJsonLd, pageMeta, POST_URL, SITE_URL } from "@/lib/site";
 
@@ -39,30 +40,37 @@ export default async function ServicesPage() {
         {count} services in {groups.length} groups. Every Phriend has passed an ID check, you agree the price in the chat, and you pay in person.
       </p>
 
-      <div className="mt-12 flex flex-col gap-10">
-        {groups.map((g) => (
-          <section key={g.slug} aria-labelledby={`g-${g.slug}`}>
-            <Link href={groupPath(g)} className="group inline-flex items-center gap-3">
-              <span className="grid size-11 place-items-center rounded-2xl bg-brand-soft text-brand">
-                <NodeIcon node={g.iconNode} size={22} aria-hidden="true" />
-              </span>
-              <h2 id={`g-${g.slug}`} className="font-display text-2xl font-semibold text-ink group-hover:text-brand-text">
-                {g.label}
-              </h2>
-            </Link>
-            <ul className="mt-4 flex flex-wrap gap-2">
-              {g.categories.map((c) => (
-                <li key={c.slug}>
-                  <Link href={activityPath(c)} className="inline-flex items-center gap-1.5 rounded-full border-2 border-line px-4 py-1.5 text-sm font-bold text-ink hover:border-brand">
-                    <NodeIcon node={c.iconNode} size={15} aria-hidden="true" />
-                    {c.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </section>
-        ))}
-      </div>
+      <ul className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {groups.map((g) => {
+          const photo = groupPhoto(g.slug);
+          return (
+            <li key={g.slug} className="overflow-hidden rounded-3xl border border-line bg-white shadow-card">
+              <Link href={groupPath(g)} className={`group relative flex h-40 items-end gap-3 px-5 pb-4 ${photo ? "text-white" : "bg-brand-soft text-ink"}`}>
+                {photo && (
+                  <>
+                    <Image src={photo} alt="" fill sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw" className="object-cover transition-transform duration-500 group-hover:scale-[1.03]" />
+                    <span aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/25 to-transparent" />
+                  </>
+                )}
+                <span className={`relative grid size-11 shrink-0 place-items-center rounded-2xl ${photo ? "bg-white/20 text-white backdrop-blur-sm" : "bg-white text-brand"}`}>
+                  <NodeIcon node={g.iconNode} size={22} aria-hidden="true" />
+                </span>
+                <h2 className="relative font-display text-xl font-semibold leading-tight drop-shadow-sm">{g.label}</h2>
+              </Link>
+              <ul className="flex flex-wrap gap-2 p-4">
+                {g.categories.map((c) => (
+                  <li key={c.slug}>
+                    <Link href={activityPath(c)} className="inline-flex items-center gap-1.5 rounded-full border border-line px-3 py-1.5 text-sm font-bold text-ink hover:border-brand">
+                      <NodeIcon node={c.iconNode} size={15} aria-hidden="true" />
+                      {c.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </li>
+          );
+        })}
+      </ul>
 
       <section className="mt-16 rounded-3xl bg-brand-soft p-6 sm:p-10">
         <h2 className="font-display text-2xl font-semibold text-ink sm:text-3xl">Offer a service</h2>

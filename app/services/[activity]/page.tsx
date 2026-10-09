@@ -3,7 +3,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowRight } from "lucide-react";
 import { Landing } from "@/components/landing";
-import { NodeIcon, ServiceCards } from "@/components/services";
+import Image from "next/image";
+import { groupPhoto, NodeIcon, ServiceCards } from "@/components/services";
 import { activityPath, activitySlug, appGroupUrl, findCategory, getCategories, getGroups, getPhriends, groupPath } from "@/lib/landing";
 import { pageMeta, POST_URL, SITE_URL } from "@/lib/site";
 
@@ -106,6 +107,11 @@ function GroupPage({ group, others }: { group: Group; others: Group[] }) {
           Offer one of these services
         </a>
       </div>
+      {groupPhoto(group.slug) && (
+        <div className="relative mt-10 aspect-[3/2] max-h-[440px] w-full overflow-hidden rounded-3xl bg-navy-soft sm:aspect-[21/9]">
+          <Image src={groupPhoto(group.slug)!} alt={`${group.label} in the Philippines`} fill priority sizes="(min-width: 1152px) 1088px, 100vw" className="object-cover" />
+        </div>
+      )}
 
       <section aria-labelledby="services-title" className="mt-14">
         <h2 id="services-title" className="font-display text-2xl font-semibold text-ink sm:text-3xl">

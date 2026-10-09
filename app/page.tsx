@@ -436,7 +436,7 @@ export default async function Home() {
                   "Get a notification and an email for every booking request and review",
                   "Keep 100% of what you earn, no commission",
                   "One dashboard for views, favorites, reviews, bookings, an earnings estimate and your private notes",
-                  "Your profile runs for 30 days; save it again to renew",
+                  "Your profile runs for 90 days; renew it in one tap",
                   "Verify once, get the badge everywhere",
                 ].map((t) => (
                   <li key={t} className="flex items-start gap-2.5">

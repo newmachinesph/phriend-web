@@ -125,7 +125,7 @@ export default function PrivacyPage() {
       <h2>5. How long we keep it</h2>
       <ul>
         <li>
-          <strong>Phriend profiles</strong> leave the feed after 30 days unless you save them again; the profile stays
+          <strong>Phriend profiles</strong> leave the feed after 90 days (or the period shown on your profile) unless you renew or save them again; the profile stays
           on your account until you delete it or your account.
         </li>
         <li>

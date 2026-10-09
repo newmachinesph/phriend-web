@@ -18,7 +18,7 @@ export const CONTACT_EMAIL = "support@phriend.app";
 export const LAST_UPDATED = "2026-10-09";
 
 export const SITE_NAME = "Phriend";
-export const SITE_TITLE = "Phriend: Local Guides & Pros";
+export const SITE_TITLE = "Phriend: Local Services & Pros";
 export const SITE_DESCRIPTION =
   "Book ID-verified local guides and pros across the Philippines: tours, photo shoots, lessons, hikes, errands and driving. Agreed in chat, paid in person.";
 

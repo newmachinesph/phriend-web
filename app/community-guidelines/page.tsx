@@ -42,7 +42,7 @@ export default function CommunityGuidelinesPage() {
         <li>Online sessions such as tutoring or language practice over video call</li>
       </ul>
       <p>
-        If your idea is not on the list but is a legal, professional service done in public or at the client's home, it is probably
+        If your idea is not on the list but is a legal, professional service done in public or at the client&apos;s home, it is probably
         fine. When in doubt, email <a href="mailto:support@phriend.app">support@phriend.app</a> before posting.
       </p>
 
@@ -86,7 +86,7 @@ export default function CommunityGuidelinesPage() {
           account not shared in the chat, sending payment links or QR codes outside the app, or requesting gift cards
           and crypto.
         </li>
-        <li>Meetups in hotel rooms, overnight stays or the Phriend's own place, and home visits for anything that is not a home service.</li>
+        <li>Meetups in hotel rooms, overnight stays or the Phriend&apos;s own place, and home visits for anything that is not a home service.</li>
         <li>Fake reviews, fake profiles, and multiple accounts for the same person.</li>
       </ul>
 

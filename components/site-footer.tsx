@@ -34,8 +34,8 @@ export function SiteFooter() {
               Book ID-verified local pros across the Philippines for errands, pet care, events, lessons, photo shoots, tours
               and more. Agree the price in chat, pay in person.
             </p>
-            {/* Google's badge, used as supplied: keep the proportions, no restyling (Play brand guidelines). */}
-            <a href={PLAY_URL} className="mt-5 inline-block rounded-md" aria-label="Get it on Google Play">
+            {/* Google's badge, used as supplied: keep the proportions, no restyling (Play brand guidelines). -ml-2 cancels the PNG's own 8px transparent margin so the badge lines up with the text. */}
+            <a href={PLAY_URL} className="-ml-2 mt-5 inline-block rounded-md" aria-label="Get it on Google Play">
               <Image src="/badges/google-play.png" alt="Get it on Google Play" width={646} height={250} className="h-12 w-auto" />
             </a>
           </div>

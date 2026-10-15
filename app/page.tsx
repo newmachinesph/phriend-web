@@ -134,8 +134,8 @@ function PhoneMockup() {
         {/* a real phone viewport (390x844), so the screenshot fills the frame at its own proportions and nothing is cropped */}
         <div className="aspect-[390/844] overflow-hidden rounded-[2.2rem] bg-white">
           <Image
-            src={cdn("/photos/shot-home-v7.png")}
-            alt="The Phriend home screen: a search bar, service categories and verified local pros with their hourly rate"
+            src="/screens/home-v8.png"
+            alt="The Phriend app home screen: a search bar, the service groups from errands to food and catering, and teams near you"
             width={390}
             height={844}
             loading="eager"

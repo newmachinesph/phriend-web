@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
 import { breadcrumbJsonLd, cdn, pageMeta } from "@/lib/site";
 import { getCategories } from "@/lib/landing";
 import { listDbPosts, readingMinutes } from "@/lib/blog-db";
 import { POSTS } from "./_posts";
+import { Container } from "@/components/ui";
 
 export const revalidate = 60; // articles published in Ops appear within a minute (a cached 404 for a draft too)
 
@@ -26,15 +26,15 @@ export default async function BlogIndex() {
   const db = (await listDbPosts()).map<Card>((p) => ({ slug: p.slug, title: p.title, description: p.description, date: p.publishedAt.slice(0, 10), readingMinutes: readingMinutes(p.bodyMd), tag: p.tags[0] ?? "Guide", label: labels.get(p.niche) ?? "Phriend", hero: { src: cdn(p.cover || "/blog/photographers-hero.jpg"), alt: p.title } }));
   const [latest, ...rest] = [...POSTS.map(fromStatic), ...db].sort((a, b) => b.date.localeCompare(a.date));
   return (
-    <main className="mx-auto w-full max-w-6xl px-5 py-14 sm:px-8 sm:py-20">
+    <Container as="main" className="py-14 sm:py-20">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: breadcrumbJsonLd("Blog", "/blog") }} />
       <p className="text-sm font-extrabold uppercase tracking-wider text-brand-text">Blog</p>
       <h1 className="mt-2 max-w-2xl font-display text-4xl font-semibold leading-tight text-ink sm:text-5xl">Guides for people who could be earning on Phriend.</h1>
       <p className="mt-4 max-w-2xl text-lg leading-relaxed">What clients book, what it pays, how a booking works, and how to stay safe while you do it.</p>
 
       {latest && (
-        <Link href={`/blog/${latest.slug}`} className="group mt-12 grid gap-6 rounded-3xl border border-line bg-white p-4 shadow-card transition-colors hover:border-brand md:grid-cols-[1.3fr_1fr] md:p-6">
-          <div className="relative aspect-[16/9] overflow-hidden rounded-2xl">
+        <Link href={`/blog/${latest.slug}`} className="group mt-12 grid gap-6 rounded-card border border-line bg-white p-4 transition-colors hover:border-brand md:grid-cols-[1.3fr_1fr] md:p-6">
+          <div className="relative aspect-[16/9] overflow-hidden rounded-card">
             <Image src={latest.hero.src} alt={latest.hero.alt} width={1600} height={900} sizes="(min-width: 768px) 640px, 100vw" className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]" priority />
           </div>
           <div className="flex flex-col justify-center">
@@ -44,9 +44,7 @@ export default async function BlogIndex() {
             <p className="mt-4 text-sm font-semibold text-muted">
               {fmt(latest.date)} · {latest.readingMinutes} min read
             </p>
-            <span className="mt-4 inline-flex items-center gap-1.5 font-bold text-brand-text">
-              Read the article <ArrowRight size={18} aria-hidden="true" />
-            </span>
+            <span className="mt-4 font-bold text-brand-text group-hover:underline">Read the article</span>
           </div>
         </Link>
       )}
@@ -55,8 +53,8 @@ export default async function BlogIndex() {
         <ul className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {rest.map((p) => (
             <li key={p.slug}>
-              <Link href={`/blog/${p.slug}`} className="group flex h-full flex-col rounded-3xl border border-line bg-white p-4 shadow-card transition-colors hover:border-brand">
-                <div className="relative aspect-[16/9] overflow-hidden rounded-2xl">
+              <Link href={`/blog/${p.slug}`} className="group flex h-full flex-col rounded-card border border-line bg-white p-4 transition-colors hover:border-brand">
+                <div className="relative aspect-[16/9] overflow-hidden rounded-card">
                   <Image src={p.hero.src} alt={p.hero.alt} width={1600} height={900} sizes="(min-width: 1024px) 360px, (min-width: 640px) 50vw, 100vw" className="h-full w-full object-cover" />
                 </div>
                 <p className="mt-4 text-xs font-extrabold uppercase tracking-wider text-brand-text">{p.label}</p>
@@ -69,6 +67,6 @@ export default async function BlogIndex() {
           ))}
         </ul>
       )}
-    </main>
+    </Container>
   );
 }

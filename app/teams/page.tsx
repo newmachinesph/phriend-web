@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
 import { TeamTile } from "@/components/teams";
 import { appTeamUrl, CITY_PAGES, findCity, getTeams, TEAMS_PER_PAGE } from "@/lib/landing";
 import { APP_URL, pageMeta, POST_URL, SITE_URL } from "@/lib/site";
+import { ButtonLink, Container } from "@/components/ui";
 
 // The page reads ?city= and ?page=, so it renders per request; the API call inside is cached for 10 minutes (see getTeams).
 export const metadata: Metadata = pageMeta({
@@ -51,7 +51,7 @@ export default async function TeamsPage({ searchParams }: { searchParams: Promis
   }).replace(/</g, "\\u003c"); // team names come from the API
 
   return (
-    <main id="main" className="mx-auto w-full max-w-6xl px-5 py-14 sm:px-8 sm:py-20">
+    <Container as="main" id="main" className="py-14 sm:py-20">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd }} />
       <nav aria-label="Breadcrumb" className="text-sm font-semibold text-muted">
         <Link href="/" className="hover:text-ink">
@@ -65,12 +65,10 @@ export default async function TeamsPage({ searchParams }: { searchParams: Promis
         Some days need more than one pro. A team books as one: one chat, one price, one booking. Every member is an ID-verified Phriend you can also book alone.
       </p>
       <div className="mt-6 flex flex-wrap gap-3">
-        <a href="#teams" className="btn-primary inline-flex items-center gap-2 rounded-full px-5 py-3 font-bold">
-          See the teams <ArrowRight size={18} aria-hidden="true" />
-        </a>
-        <a href="#start-a-team" className="inline-flex items-center gap-2 rounded-full border-2 border-line px-5 py-3 font-bold text-ink hover:border-brand">
+        <ButtonLink href="#teams">See the teams</ButtonLink>
+        <ButtonLink href="#start-a-team" variant="secondary">
           Start a team
-        </a>
+        </ButtonLink>
       </div>
 
       <section id="teams" aria-labelledby="teams-title" className="mt-14">
@@ -93,18 +91,16 @@ export default async function TeamsPage({ searchParams }: { searchParams: Promis
         </ul>
 
         {teams.length === 0 ? (
-          <div className="mt-6 max-w-2xl rounded-3xl border border-line bg-surface p-6 sm:p-8">
+          <div className="mt-6 max-w-2xl rounded-card border border-line bg-surface p-6 sm:p-8">
             <p className="font-display text-xl font-semibold text-ink">Teams are just getting started in {city ? city.name : "the Philippines"}.</p>
             <p className="mt-2 leading-relaxed">
               Teams are new on Phriend, and the first ones are being put together now. In the meantime you can book any of the Phriends{city ? ` in ${city.name}` : ""} on their own.
             </p>
             <div className="mt-5 flex flex-wrap gap-3">
-              <Link href={city ? `/${city.slug}` : "/services/tour-guide"} className="btn-primary inline-flex items-center gap-2 rounded-full px-5 py-3 font-bold">
-                Browse Phriends{city ? ` in ${city.name}` : ""} <ArrowRight size={18} aria-hidden="true" />
-              </Link>
-              <a href="#start-a-team" className="inline-flex items-center gap-2 rounded-full border-2 border-line px-5 py-3 font-bold text-ink hover:border-brand">
+              <ButtonLink href={city ? `/${city.slug}` : "/services/tour-guide"}>Browse Phriends{city ? ` in ${city.name}` : ""}</ButtonLink>
+              <ButtonLink href="#start-a-team" variant="secondary">
                 Start a team
-              </a>
+              </ButtonLink>
             </div>
           </div>
         ) : (
@@ -147,7 +143,7 @@ export default async function TeamsPage({ searchParams }: { searchParams: Promis
         </h2>
         <ol className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {STEPS.map((s, i) => (
-            <li key={s.title} className="rounded-3xl border border-line bg-white p-6 shadow-card">
+            <li key={s.title} className="rounded-card border border-line bg-white p-6">
               <span className="font-display text-3xl font-semibold text-line">0{i + 1}</span>
               <h3 className="mt-3 font-display text-xl font-semibold text-ink">{s.title}</h3>
               <p className="mt-2 text-[15px] leading-relaxed">{s.text}</p>
@@ -156,7 +152,7 @@ export default async function TeamsPage({ searchParams }: { searchParams: Promis
         </ol>
       </section>
 
-      <section id="start-a-team" aria-labelledby="start-title" className="mt-14 rounded-3xl bg-brand-soft p-6 sm:p-10">
+      <section id="start-a-team" aria-labelledby="start-title" className="mt-14 rounded-card bg-brand-soft p-6 sm:p-10">
         <h2 id="start-title" className="font-display text-2xl font-semibold text-ink sm:text-3xl">
           Start a team
         </h2>
@@ -164,14 +160,12 @@ export default async function TeamsPage({ searchParams }: { searchParams: Promis
           Already a Phriend? Invite other verified Phriends, name your team and set your packages: a group price, a fixed length and who comes along. Each member keeps their own listing and can still be booked alone.
         </p>
         <div className="mt-6 flex flex-wrap gap-3">
-          <a href={`${APP_URL}/manage/teams`} className="btn-primary inline-flex items-center gap-2 rounded-full px-6 py-3 font-bold">
-            Start a team <ArrowRight size={18} aria-hidden="true" />
-          </a>
-          <a href={POST_URL} className="inline-flex items-center gap-2 rounded-full border-2 border-line bg-white px-6 py-3 font-bold text-ink hover:border-brand">
+          <ButtonLink href={`${APP_URL}/manage/teams`}>Start a team</ButtonLink>
+          <ButtonLink href={POST_URL} variant="secondary">
             Become a Phriend
-          </a>
+          </ButtonLink>
         </div>
       </section>
-    </main>
+    </Container>
   );
 }

@@ -1,9 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, BadgeCheck, Star } from "lucide-react";
+import { BadgeCheck, Star } from "lucide-react";
 import { activityPath, appProfileUrl, CITY_PAGES, comboPath, LANDING_CTA, landingJsonLd, type Category, type CityPage, type Phriend, landingCopy } from "@/lib/landing";
 import { POST_URL } from "@/lib/site";
 import { OCCASIONS } from "@/lib/occasions";
+import { ButtonLink, Container } from "@/components/ui";
 
 const peso = (n: number) => `₱${n.toLocaleString("en-PH")}`;
 
@@ -11,7 +12,7 @@ const peso = (n: number) => `₱${n.toLocaleString("en-PH")}`;
 export function Landing({ category, city, phriends, path, others }: { category: Category; city?: CityPage; phriends: Phriend[]; path: string; others: Category[] }) {
   const copy = landingCopy(category, city, phriends);
   return (
-    <main id="main" className="mx-auto w-full max-w-6xl px-5 py-14 sm:px-8 sm:py-20">
+    <Container as="main" id="main" className="py-14 sm:py-20">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: landingJsonLd(category, path, phriends, copy, city) }} />
       <nav aria-label="Breadcrumb" className="text-sm font-semibold text-muted">
         <Link href="/" className="hover:text-ink">
@@ -31,12 +32,10 @@ export function Landing({ category, city, phriends, path, others }: { category: 
       <h1 className="mt-4 max-w-3xl font-display text-4xl font-semibold leading-tight text-ink sm:text-5xl">{copy.h1}</h1>
       <p className="mt-5 max-w-3xl text-lg leading-relaxed">{copy.intro}</p>
       <div className="mt-6 flex flex-wrap gap-3">
-        <a href={LANDING_CTA.browse(category)} className="inline-flex items-center gap-2 rounded-full bg-brand px-5 py-3 font-bold text-white shadow-card hover:bg-brand-deep">
-          Browse all {category.label} Phriends <ArrowRight size={18} aria-hidden="true" />
-        </a>
-        <a href={POST_URL} className="inline-flex items-center gap-2 rounded-full border-2 border-line px-5 py-3 font-bold text-ink hover:border-brand">
+        <ButtonLink href={LANDING_CTA.browse(category)}>Browse all {category.label} Phriends</ButtonLink>
+        <ButtonLink href={POST_URL} variant="secondary">
           Offer {category.label} as a Phriend
-        </a>
+        </ButtonLink>
       </div>
 
       <section aria-labelledby="phriends" className="mt-14">
@@ -55,7 +54,7 @@ export function Landing({ category, city, phriends, path, others }: { category: 
           <ul className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {phriends.map((p) => (
               <li key={p.id}>
-                <a href={appProfileUrl(p)} className="group block overflow-hidden rounded-3xl border border-line bg-white shadow-card transition-colors hover:border-brand">
+                <a href={appProfileUrl(p)} className="group block overflow-hidden rounded-card border border-line bg-white transition-colors hover:border-brand">
                   <div className="relative aspect-[3/4] overflow-hidden">
                     <Image src={p.imagePath[0]} alt={`${p.workName}, ${category.label} Phriend in ${p.city}`} width={480} height={640} sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw" className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]" />
                     {p.verified && (
@@ -163,6 +162,6 @@ export function Landing({ category, city, phriends, path, others }: { category: 
             ))}
         </ul>
       </section>
-    </main>
+    </Container>
   );
 }

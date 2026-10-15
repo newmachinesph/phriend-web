@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Ellipsis, Icon, type LucideProps } from "lucide-react";
+import { Ellipsis, Icon, type LucideProps } from "lucide-react";
 import { activityPath, groupPath, type Category, type CategoryGroup, type IconNode } from "@/lib/landing";
 
 type Group = CategoryGroup & { categories: Category[] };
@@ -18,6 +18,8 @@ const GROUP_PHOTOS = new Set([
 ]);
 export const groupPhoto = (slug: string) => (GROUP_PHOTOS.has(slug) ? `/groups/${slug}.jpg` : null);
 
+const list = (xs: string[]) => (xs.length <= 1 ? xs.join("") : `${xs.slice(0, -1).join(", ")} and ${xs[xs.length - 1]}`);
+
 /** The service groups as cards: the photo behind the icon and name, the first few services below on white. */
 export function ServiceGroups({ groups, limit }: { groups: Group[]; limit?: number }) {
   const shown = limit ? groups.slice(0, limit) : groups;
@@ -27,7 +29,7 @@ export function ServiceGroups({ groups, limit }: { groups: Group[]; limit?: numb
         const photo = groupPhoto(g.slug);
         return (
           <li key={g.slug}>
-            <Link href={groupPath(g)} className="group flex h-full flex-col overflow-hidden rounded-3xl border border-line bg-white shadow-card transition-colors hover:border-brand">
+            <Link href={groupPath(g)} className="group flex h-full flex-col overflow-hidden rounded-card border border-line bg-white transition-colors hover:border-brand">
               <div className={`relative flex h-40 items-end gap-3 px-5 pb-4 ${photo ? "text-white" : "bg-brand-soft text-ink"}`}>
                 {photo && (
                   <>
@@ -35,21 +37,16 @@ export function ServiceGroups({ groups, limit }: { groups: Group[]; limit?: numb
                     <span aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/25 to-transparent" />
                   </>
                 )}
-                <span className={`relative grid size-11 shrink-0 place-items-center rounded-2xl ${photo ? "bg-white/20 text-white backdrop-blur-sm" : "bg-white text-brand"}`}>
+                <span className={`relative grid size-11 shrink-0 place-items-center rounded-tile ${photo ? "bg-white/20 text-white backdrop-blur-sm" : "bg-white text-brand"}`}>
                   <NodeIcon node={g.iconNode} size={22} aria-hidden="true" />
                 </span>
                 <h3 className="relative font-display text-xl font-semibold leading-tight drop-shadow-sm">{g.label}</h3>
               </div>
-              <p className="flex-1 px-5 pt-4 text-[15px] leading-relaxed">
-                {g.categories
-                  .slice(0, 4)
-                  .map((c) => c.label)
-                  .join(" · ")}
-                {g.categories.length > 4 ? ` · +${g.categories.length - 4} more` : ""}
+              <p className="flex-1 px-5 py-4 text-[15px] leading-relaxed">
+                {g.categories.length > 4
+                  ? `${g.categories.slice(0, 4).map((c) => c.label).join(", ")} and ${g.categories.length - 4} more`
+                  : list(g.categories.map((c) => c.label))}
               </p>
-              <span className="inline-flex items-center gap-1.5 px-5 pb-5 pt-3 text-sm font-bold text-brand-text">
-                See {g.label.toLowerCase()} <ArrowRight size={16} aria-hidden="true" className="transition-transform group-hover:translate-x-0.5" />
-              </span>
             </Link>
           </li>
         );
@@ -64,12 +61,12 @@ export function ServiceCards({ categories }: { categories: Category[] }) {
     <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
       {categories.map((c) => (
         <li key={c.slug}>
-          <Link href={activityPath(c)} className="flex h-full flex-col rounded-3xl border border-line bg-white p-6 shadow-card transition-colors hover:border-brand">
-            <span className="grid size-11 place-items-center rounded-2xl bg-surface text-ink">
+          <Link href={activityPath(c)} className="flex h-full flex-col rounded-card border border-line bg-white p-6 transition-colors hover:border-brand">
+            <span className="grid size-11 place-items-center rounded-tile bg-surface text-ink">
               <NodeIcon node={c.iconNode} size={22} aria-hidden="true" />
             </span>
             <h3 className="mt-4 font-display text-xl font-semibold text-ink">{c.label}</h3>
-            {c.activities.length > 0 && <p className="mt-1.5 text-[15px] leading-relaxed">{c.activities.slice(0, 5).join(" · ")}</p>}
+            {c.activities.length > 0 && <p className="mt-1.5 text-[15px] leading-relaxed">{c.activities.slice(0, 5).join(", ")}</p>}
           </Link>
         </li>
       ))}

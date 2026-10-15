@@ -8,7 +8,7 @@ const peso = (n: number) => `₱${n.toLocaleString("en-PH")}`;
 export function TeamTile({ team: t }: { team: TeamCard }) {
   const roles = [...new Set(t.roles)];
   return (
-    <a href={appTeamUrl(t.slug)} className="group block h-full overflow-hidden rounded-3xl border border-line bg-white shadow-card transition-colors hover:border-brand">
+    <a href={appTeamUrl(t.slug)} className="group block h-full overflow-hidden rounded-card border border-line bg-white transition-colors hover:border-brand">
       {/* the avatars sit outside the cover's overflow-hidden box, so the half that hangs below it is not clipped */}
       <div className="relative">
         <div className="relative h-40 overflow-hidden bg-navy-soft">
@@ -39,7 +39,7 @@ export function TeamTile({ team: t }: { team: TeamCard }) {
         <p className="mt-0.5 flex items-center gap-1 text-sm text-muted">
           <MapPin size={14} className="text-brand" aria-hidden="true" /> {t.city}
         </p>
-        {roles.length > 0 && <p className="mt-1 text-sm">{roles.join(" · ")}</p>}
+        {roles.length > 0 && <p className="mt-1 text-sm">{roles.join(", ")}</p>}
         {t.priceFrom !== null && (
           <p className="mt-2 font-bold text-ink">
             from {peso(t.priceFrom)}

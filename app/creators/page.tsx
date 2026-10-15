@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import { ArrowRight, BadgeCheck, Clapperboard, Coffee, Download, Map as MapIcon, MessageCircle, ShoppingBag, Utensils, type LucideIcon } from "lucide-react";
+import { BadgeCheck, Clapperboard, Coffee, Download, Map as MapIcon, MessageCircle, ShoppingBag, Utensils, type LucideIcon } from "lucide-react";
 import { OverlayTool } from "@/components/overlay-tool";
 import { breadcrumbJsonLd, cdn, pageMeta, POST_URL } from "@/lib/site";
+import { ButtonLink, Container } from "@/components/ui";
 
 const TITLE = "Be the creator people book";
 const DESCRIPTION =
@@ -47,7 +48,7 @@ export default function CreatorsPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: breadcrumbJsonLd("Creators", "/creators") }} />
 
       <section className="overflow-hidden bg-navy-gradient text-white">
-        <div className="mx-auto grid w-full max-w-6xl items-center gap-12 px-5 pb-16 pt-14 sm:px-8 sm:pt-20 lg:grid-cols-[1.15fr_0.85fr] lg:pb-20">
+        <Container className="grid items-center gap-12 pb-16 pt-14 sm:pt-20 lg:grid-cols-[1.15fr_0.85fr] lg:pb-20">
           <div>
           <p className="text-sm font-extrabold uppercase tracking-wider text-mango">#BeMyPhriend · Creator collab</p>
           <h1 className="mt-3 font-display text-[44px] font-semibold leading-[1.02] tracking-tight sm:text-6xl">
@@ -59,13 +60,13 @@ export default function CreatorsPage() {
             the best comment wins a free session: a photo shoot, a guided tour, whatever you offer.
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <a href="#overlay" className="btn-primary inline-flex items-center justify-center gap-2 rounded-full px-7 py-3.5 text-lg font-bold">
-              Make your overlay <ArrowRight size={20} aria-hidden="true" />
-            </a>
+            <ButtonLink href="#overlay" className="text-lg">
+              Make your overlay
+            </ButtonLink>
             <a
               href={KIT_PDF}
               download
-              className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-white/30 px-7 py-3.5 text-lg font-bold text-white transition-colors hover:bg-white/10"
+              className="inline-flex items-center justify-center gap-2 rounded-control border-2 border-white/30 px-6 py-3 text-lg font-bold text-white transition-colors hover:bg-white/10"
             >
               <Download size={20} aria-hidden="true" /> Creator kit (PDF)
             </a>
@@ -81,7 +82,7 @@ export default function CreatorsPage() {
               height={1000}
               priority
               sizes="(min-width: 1024px) 420px, 90vw"
-              className="aspect-[4/5] w-full rounded-[2rem] object-cover shadow-float"
+              className="aspect-[4/5] w-full rounded-card object-cover shadow-float"
             />
             <Image
               src={cdn("/creators/og-card.png")}
@@ -92,19 +93,19 @@ export default function CreatorsPage() {
               className="absolute bottom-8 left-0 w-[42%] max-w-[190px] -rotate-6 drop-shadow-2xl"
             />
           </div>
-        </div>
+        </Container>
       </section>
 
       <section aria-labelledby="how-title">
-        <div className="mx-auto w-full max-w-6xl px-5 py-16 sm:px-8 sm:py-20">
+        <Container className="py-16 sm:py-20">
           <p className={eyebrow}>How it works</p>
           <h2 id="how-title" className={h2}>
             One video. One week. One winner.
           </h2>
           <ol className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {STEPS.map((s, i) => (
-              <li key={s.title} className="rounded-2xl border border-line bg-white p-5 shadow-card">
-                <span className="grid size-10 place-items-center rounded-xl bg-brand font-display text-lg font-bold text-white">{i + 1}</span>
+              <li key={s.title} className="rounded-card border border-line bg-white p-5">
+                <span className="grid size-10 place-items-center rounded-tile bg-brand font-display text-lg font-bold text-white">{i + 1}</span>
                 <h3 className="mt-3 font-extrabold text-ink">{s.title}</h3>
                 <p className="mt-1 text-[15px] leading-relaxed">{s.text}</p>
               </li>
@@ -115,14 +116,14 @@ export default function CreatorsPage() {
             Limiting who can win, for example women 18+ only? Say it in your caption before comments open, matching your &quot;Who can book
             you&quot; setting. Full rules are in the creator kit.
           </p>
-          <a href={POST_URL} className="btn-secondary mt-6 inline-flex items-center gap-2 rounded-full px-6 py-3 font-bold">
-            Become a Phriend <ArrowRight size={18} aria-hidden="true" />
-          </a>
-        </div>
+          <ButtonLink href={POST_URL} variant="secondary" className="mt-6">
+            Become a Phriend
+          </ButtonLink>
+        </Container>
       </section>
 
       <section aria-labelledby="bookings-title" className="bg-surface">
-        <div className="mx-auto w-full max-w-6xl px-5 py-16 sm:px-8 sm:py-20">
+        <Container className="py-16 sm:py-20">
           <p className={eyebrow}>What followers can book</p>
           <h2 id="bookings-title" className={h2}>
             Top 5 bookings that make good content.
@@ -130,18 +131,18 @@ export default function CreatorsPage() {
           <p className="mt-4 max-w-2xl leading-relaxed">List these on your profile. The winner&apos;s session turns into your next video.</p>
           <ul className="mt-8 grid grid-cols-2 gap-4 md:grid-cols-5">
             {TOP_BOOKINGS.map((b) => (
-              <li key={b.title} className="rounded-2xl border border-line bg-white p-5 text-center shadow-card">
+              <li key={b.title} className="rounded-card border border-line bg-white p-5 text-center">
                 <b.icon size={32} className="mx-auto text-brand" aria-hidden="true" />
                 <h3 className="mt-3 font-extrabold text-ink">{b.title}</h3>
                 <p className="mt-1 text-sm text-muted">{b.text}</p>
               </li>
             ))}
           </ul>
-        </div>
+        </Container>
       </section>
 
       <section id="overlay" aria-labelledby="overlay-title" className="scroll-mt-4">
-        <div className="mx-auto w-full max-w-6xl px-5 py-16 sm:px-8 sm:py-20">
+        <Container className="py-16 sm:py-20">
           <p className={eyebrow}>Overlay tool</p>
           <h2 id="overlay-title" className={h2}>
             Your Phriend card, ready for your video.
@@ -151,12 +152,12 @@ export default function CreatorsPage() {
             Your video never leaves your device.
           </p>
           <OverlayTool />
-        </div>
+        </Container>
       </section>
 
       <section aria-labelledby="help-title" className="bg-surface">
-        <div className="mx-auto w-full max-w-6xl px-5 py-16 sm:px-8 sm:py-20">
-          <div className="flex flex-col items-start justify-between gap-6 rounded-[2rem] border border-line bg-white p-8 shadow-card sm:p-12 lg:flex-row lg:items-center">
+        <Container className="py-16 sm:py-20">
+          <div className="flex flex-col items-start justify-between gap-6 rounded-card border border-line bg-white p-8 sm:p-12 lg:flex-row lg:items-center">
             <div>
               <p className={eyebrow}>We can help</p>
               <h2 id="help-title" className={h2}>
@@ -167,11 +168,11 @@ export default function CreatorsPage() {
                 collab and any questions.
               </p>
             </div>
-            <a href={MESSENGER} rel="noreferrer" className="btn-primary inline-flex shrink-0 items-center gap-2 rounded-full px-7 py-3.5 text-lg font-bold">
+            <a href={MESSENGER} rel="noreferrer" className="btn-primary inline-flex shrink-0 items-center gap-2 rounded-control px-6 py-3 text-lg font-extrabold">
               <MessageCircle size={20} aria-hidden="true" /> Message us
             </a>
           </div>
-        </div>
+        </Container>
       </section>
     </main>
   );

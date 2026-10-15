@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowRight } from "lucide-react";
 import { Landing } from "@/components/landing";
 import Image from "next/image";
 import { groupPhoto, NodeIcon, ServiceCards } from "@/components/services";
 import { activityPath, activitySlug, appGroupUrl, findCategory, getCategories, getGroups, getPhriends, groupPath } from "@/lib/landing";
 import { pageMeta, POST_URL, SITE_URL } from "@/lib/site";
+import { ButtonLink, Container } from "@/components/ui";
 
 export const revalidate = 600;
 export const dynamicParams = true;
@@ -76,7 +76,7 @@ function GroupPage({ group, others }: { group: Group; others: Group[] }) {
   }).replace(/</g, "\\u003c"); // labels come from the API
 
   return (
-    <main id="main" className="mx-auto w-full max-w-6xl px-5 py-14 sm:px-8 sm:py-20">
+    <Container as="main" id="main" className="py-14 sm:py-20">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd }} />
       <nav aria-label="Breadcrumb" className="text-sm font-semibold text-muted">
         <Link href="/" className="hover:text-ink">
@@ -90,7 +90,7 @@ function GroupPage({ group, others }: { group: Group; others: Group[] }) {
         <span className="text-ink">{group.label}</span>
       </nav>
       <div className="mt-4 flex items-center gap-4">
-        <span className="grid size-14 shrink-0 place-items-center rounded-2xl bg-brand-soft text-brand">
+        <span className="grid size-14 shrink-0 place-items-center rounded-tile bg-brand-soft text-brand">
           <NodeIcon node={group.iconNode} size={28} aria-hidden="true" />
         </span>
         <h1 className="font-display text-4xl font-semibold leading-tight text-ink sm:text-5xl">{group.label}</h1>
@@ -100,16 +100,14 @@ function GroupPage({ group, others }: { group: Group; others: Group[] }) {
         never holds your money and takes no cut.
       </p>
       <div className="mt-6 flex flex-wrap gap-3">
-        <a href={appGroupUrl(group)} className="btn-primary inline-flex items-center gap-2 rounded-full px-5 py-3 font-bold">
-          See who is available <ArrowRight size={18} aria-hidden="true" />
-        </a>
-        <a href={POST_URL} className="inline-flex items-center gap-2 rounded-full border-2 border-line px-5 py-3 font-bold text-ink hover:border-brand">
+        <ButtonLink href={appGroupUrl(group)}>See who is available</ButtonLink>
+        <ButtonLink href={POST_URL} variant="secondary">
           Offer one of these services
-        </a>
+        </ButtonLink>
       </div>
       {groupPhoto(group.slug) && (
-        <div className="relative mt-10 aspect-[3/2] max-h-[440px] w-full overflow-hidden rounded-3xl bg-navy-soft sm:aspect-[21/9]">
-          <Image src={groupPhoto(group.slug)!} alt={`${group.label} in the Philippines`} fill priority sizes="(min-width: 1152px) 1088px, 100vw" className="object-cover" />
+        <div className="relative mt-10 aspect-[3/2] max-h-[440px] w-full overflow-hidden rounded-card bg-navy-soft sm:aspect-[21/9]">
+          <Image src={groupPhoto(group.slug)!} alt={`${group.label} in the Philippines`} fill priority sizes="(min-width: 1280px) 1216px, 100vw" className="object-cover" />
         </div>
       )}
 
@@ -137,6 +135,6 @@ function GroupPage({ group, others }: { group: Group; others: Group[] }) {
           ))}
         </ul>
       </section>
-    </main>
+    </Container>
   );
 }

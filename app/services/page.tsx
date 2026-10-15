@@ -4,6 +4,7 @@ import Image from "next/image";
 import { groupPhoto, NodeIcon } from "@/components/services";
 import { activityPath, getGroups, groupPath } from "@/lib/landing";
 import { breadcrumbJsonLd, pageMeta, POST_URL, SITE_URL } from "@/lib/site";
+import { ButtonLink, Container } from "@/components/ui";
 
 export const revalidate = 3600;
 
@@ -25,7 +26,7 @@ export default async function ServicesPage() {
   }).replace(/</g, "\\u003c"); // labels come from the API
 
   return (
-    <main id="main" className="mx-auto w-full max-w-6xl px-5 py-14 sm:px-8 sm:py-20">
+    <Container as="main" id="main" className="py-14 sm:py-20">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: breadcrumbJsonLd("Services", "/services") }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd }} />
       <nav aria-label="Breadcrumb" className="text-sm font-semibold text-muted">
@@ -44,7 +45,7 @@ export default async function ServicesPage() {
         {groups.map((g) => {
           const photo = groupPhoto(g.slug);
           return (
-            <li key={g.slug} className="overflow-hidden rounded-3xl border border-line bg-white shadow-card">
+            <li key={g.slug} className="overflow-hidden rounded-card border border-line bg-white">
               <Link href={groupPath(g)} className={`group relative flex h-40 items-end gap-3 px-5 pb-4 ${photo ? "text-white" : "bg-brand-soft text-ink"}`}>
                 {photo && (
                   <>
@@ -52,7 +53,7 @@ export default async function ServicesPage() {
                     <span aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/25 to-transparent" />
                   </>
                 )}
-                <span className={`relative grid size-11 shrink-0 place-items-center rounded-2xl ${photo ? "bg-white/20 text-white backdrop-blur-sm" : "bg-white text-brand"}`}>
+                <span className={`relative grid size-11 shrink-0 place-items-center rounded-tile ${photo ? "bg-white/20 text-white backdrop-blur-sm" : "bg-white text-brand"}`}>
                   <NodeIcon node={g.iconNode} size={22} aria-hidden="true" />
                 </span>
                 <h2 className="relative font-display text-xl font-semibold leading-tight drop-shadow-sm">{g.label}</h2>
@@ -72,13 +73,13 @@ export default async function ServicesPage() {
         })}
       </ul>
 
-      <section className="mt-16 rounded-3xl bg-brand-soft p-6 sm:p-10">
+      <section className="mt-16 rounded-card bg-brand-soft p-6 sm:p-10">
         <h2 className="font-display text-2xl font-semibold text-ink sm:text-3xl">Offer a service</h2>
         <p className="mt-3 max-w-2xl text-lg leading-relaxed">Listing is free and you keep 100% of what you earn. Verify your ID, set your services and rates, and clients find you here.</p>
-        <a href={POST_URL} className="btn-primary mt-6 inline-flex items-center rounded-full px-6 py-3 font-bold">
+        <ButtonLink href={POST_URL} className="mt-6">
           Become a Phriend
-        </a>
+        </ButtonLink>
       </section>
-    </main>
+    </Container>
   );
 }

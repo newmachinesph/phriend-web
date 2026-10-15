@@ -2,10 +2,11 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowRight, Check } from "lucide-react";
+import { Check } from "lucide-react";
 import { activityPath, appCategoryUrl, getCategories } from "@/lib/landing";
 import { findOccasion, OCCASION_IMAGE, OCCASIONS, occasionImage } from "@/lib/occasions";
 import { APP_URL, pageMeta, POST_URL, SITE_URL } from "@/lib/site";
+import { ButtonLink, Container } from "@/components/ui";
 
 export const revalidate = 600;
 export const dynamicParams = false; // only the occasions in lib/occasions.ts
@@ -50,7 +51,7 @@ export default async function OccasionPage({ params }: { params: Promise<{ occas
   }).replace(/</g, "\\u003c"); // category labels come from the API
 
   return (
-    <main id="main" className="mx-auto w-full max-w-6xl px-5 py-14 sm:px-8 sm:py-20">
+    <Container as="main" id="main" className="py-14 sm:py-20">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd }} />
       <nav aria-label="Breadcrumb" className="text-sm font-semibold text-muted">
         <Link href="/" className="hover:text-ink">
@@ -66,15 +67,13 @@ export default async function OccasionPage({ params }: { params: Promise<{ occas
       <h1 className="mt-4 max-w-3xl font-display text-4xl font-semibold leading-tight text-ink sm:text-5xl">{o.title}</h1>
       <p className="mt-5 max-w-3xl text-lg leading-relaxed">{o.intro}</p>
       <div className="mt-6 flex flex-wrap gap-3">
-        <a href="#who-to-book" className="btn-primary inline-flex items-center gap-2 rounded-full px-5 py-3 font-bold">
-          Who to book <ArrowRight size={18} aria-hidden="true" />
-        </a>
-        <Link href="/teams" className="inline-flex items-center gap-2 rounded-full border-2 border-line px-5 py-3 font-bold text-ink hover:border-brand">
+        <ButtonLink href="#who-to-book">Who to book</ButtonLink>
+        <ButtonLink href="/teams" variant="secondary">
           Book a team
-        </Link>
+        </ButtonLink>
       </div>
-      <div className="relative mt-10 aspect-[3/2] max-h-[480px] w-full overflow-hidden rounded-3xl bg-navy-soft sm:aspect-[21/9]">
-        <Image src={occasionImage(o.slug)} alt={`${o.name} in the Philippines`} fill priority sizes="(min-width: 1152px) 1088px, 100vw" className="object-cover" />
+      <div className="relative mt-10 aspect-[3/2] max-h-[480px] w-full overflow-hidden rounded-card bg-navy-soft sm:aspect-[21/9]">
+        <Image src={occasionImage(o.slug)} alt={`${o.name} in the Philippines`} fill priority sizes="(min-width: 1280px) 1216px, 100vw" className="object-cover" />
       </div>
 
       <section id="who-to-book" aria-labelledby="book-title" className="mt-14">
@@ -83,13 +82,13 @@ export default async function OccasionPage({ params }: { params: Promise<{ occas
         </h2>
         <ul className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {book.map((c) => (
-            <li key={c.slug} className="flex flex-col rounded-3xl border border-line bg-white p-6 shadow-card">
+            <li key={c.slug} className="flex flex-col rounded-card border border-line bg-white p-6">
               <h3 className="font-display text-xl font-semibold text-ink">
                 <Link href={activityPath(c)} className="hover:text-brand-text">
                   {c.label}
                 </Link>
               </h3>
-              {c.activities.length > 0 && <p className="mt-2 flex-1 text-[15px] leading-relaxed">{c.activities.slice(0, 5).join(" · ")}</p>}
+              {c.activities.length > 0 && <p className="mt-2 flex-1 text-[15px] leading-relaxed">{c.activities.slice(0, 5).join(", ")}</p>}
               <div className="mt-4 flex flex-wrap gap-x-4 gap-y-1 text-sm font-bold">
                 <a href={appCategoryUrl(c)} className="text-brand-text hover:underline">
                   See who is available
@@ -149,20 +148,18 @@ export default async function OccasionPage({ params }: { params: Promise<{ occas
         </ul>
       </section>
 
-      <section className="mt-14 rounded-3xl bg-brand-soft p-6 sm:p-10">
+      <section className="mt-14 rounded-card bg-brand-soft p-6 sm:p-10">
         <h2 className="font-display text-2xl font-semibold text-ink sm:text-3xl">Do this for a living?</h2>
         <p className="mt-3 max-w-2xl text-lg leading-relaxed">
           Hosts, makeup artists, photographers and coordinators can list their services on Phriend for free and get booked for occasions like this one.
         </p>
         <div className="mt-6 flex flex-wrap gap-3">
-          <a href={POST_URL} className="btn-primary inline-flex items-center gap-2 rounded-full px-6 py-3 font-bold">
-            Become a Phriend <ArrowRight size={18} aria-hidden="true" />
-          </a>
-          <a href={APP_URL} className="inline-flex items-center gap-2 rounded-full border-2 border-line bg-white px-6 py-3 font-bold text-ink hover:border-brand">
+          <ButtonLink href={POST_URL}>Become a Phriend</ButtonLink>
+          <ButtonLink href={APP_URL} variant="secondary">
             Open the app
-          </a>
+          </ButtonLink>
         </div>
       </section>
-    </main>
+    </Container>
   );
 }

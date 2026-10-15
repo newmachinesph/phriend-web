@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import Image from "next/image";
-import Link from "next/link";
-import { ArrowRight, BadgeCheck, Download, Mail, MapPin, Wallet, type LucideIcon } from "lucide-react";
+import { BadgeCheck, Download, Mail, MapPin, Wallet, type LucideIcon } from "lucide-react";
 import { Logo } from "@/components/site-header";
 import { API_URL, APP_URL, apiHeaders, breadcrumbJsonLd, cdn, CONTACT_EMAIL, pageMeta, SITE_URL } from "@/lib/site";
+import { ButtonLink, Container } from "@/components/ui";
 
 export const metadata: Metadata = pageMeta({
   title: "Press kit: logos, facts and photos",
@@ -139,9 +139,9 @@ function AssetCard({
   children: ReactNode;
 }) {
   return (
-    <li className="overflow-hidden rounded-3xl border border-line bg-white shadow-card">
+    <li className="overflow-hidden rounded-card border border-line bg-white">
       <div className={`grid h-48 place-items-center p-6 ${dark ? "bg-navy" : "bg-surface"}`}>
-        {dark ? <div className="rounded-2xl bg-white px-6 py-4">{children}</div> : children}
+        {dark ? <div className="rounded-card bg-white px-6 py-4">{children}</div> : children}
       </div>
       <div className="flex flex-wrap items-center justify-between gap-3 p-5">
         <h3 className="font-extrabold text-ink">{title}</h3>
@@ -189,7 +189,7 @@ export default async function PressPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: breadcrumbJsonLd("Press kit", "/press") }} />
       {/* Hero + boilerplate */}
       <section className="bg-navy-gradient text-white">
-        <div className="mx-auto w-full max-w-6xl px-5 pb-16 pt-14 sm:px-8 sm:pt-20 lg:pb-20">
+        <Container className="pb-16 pt-14 sm:pt-20 lg:pb-20">
           <p className="text-sm font-extrabold uppercase tracking-wider text-brand-light">Press kit</p>
           <h1 className="mt-3 font-display text-[44px] font-semibold leading-[1.02] tracking-tight sm:text-6xl">
             Phriend press kit
@@ -219,19 +219,19 @@ export default async function PressPage() {
               <dd>2026, Philippines</dd>
             </div>
           </dl>
-        </div>
+        </Container>
       </section>
 
       {/* Fast facts */}
       <section id="facts" aria-labelledby="facts-title">
-        <div className="mx-auto w-full max-w-6xl px-5 py-16 sm:px-8 sm:py-20">
+        <Container className="py-16 sm:py-20">
           <p className={eyebrow}>Fast facts</p>
           <h2 id="facts-title" className={h2}>
             Phriend in numbers.
           </h2>
           <dl className="mt-8 grid grid-cols-2 gap-3 md:grid-cols-4">
             {facts(n).map((f) => (
-              <div key={f.label} className="rounded-2xl border border-line bg-white p-4 shadow-card">
+              <div key={f.label} className="rounded-card border border-line bg-white p-4">
                 <dt className="text-xs font-extrabold uppercase tracking-wider text-muted">{f.label}</dt>
                 <dd className="mt-1 text-xl font-extrabold text-ink">{f.value}</dd>
               </div>
@@ -247,12 +247,12 @@ export default async function PressPage() {
               </li>
             ))}
           </ul>
-        </div>
+        </Container>
       </section>
 
       {/* Brand assets */}
       <section id="brand" aria-labelledby="brand-title" className="bg-surface">
-        <div className="mx-auto w-full max-w-6xl px-5 py-16 sm:px-8 sm:py-20">
+        <Container className="py-16 sm:py-20">
           <p className={eyebrow}>Brand assets</p>
           <h2 id="brand-title" className={h2}>
             Logos, colors and type.
@@ -275,7 +275,7 @@ export default async function PressPage() {
           <h3 className="mt-12 font-display text-2xl font-semibold text-ink">Colors</h3>
           <ul className="mt-4 grid grid-cols-2 gap-4 md:grid-cols-4">
             {COLORS.map((c) => (
-              <li key={c.hex} className="overflow-hidden rounded-2xl border border-line bg-white shadow-card">
+              <li key={c.hex} className="overflow-hidden rounded-card border border-line bg-white">
                 <div className="h-20" style={{ background: c.hex }} />
                 <div className="p-4">
                   <p className="font-extrabold text-ink">{c.name}</p>
@@ -288,11 +288,11 @@ export default async function PressPage() {
 
           <h3 className="mt-12 font-display text-2xl font-semibold text-ink">Typography</h3>
           <ul className="mt-4 grid gap-4 sm:grid-cols-2">
-            <li className="rounded-2xl border border-line bg-white p-6 shadow-card">
+            <li className="rounded-card border border-line bg-white p-6">
               <p className="text-xs font-extrabold uppercase tracking-wider text-muted">Display · Fredoka</p>
               <p className="mt-3 font-display text-4xl font-semibold leading-tight text-ink">Book local guides and pros</p>
             </li>
-            <li className="rounded-2xl border border-line bg-white p-6 shadow-card">
+            <li className="rounded-card border border-line bg-white p-6">
               <p className="text-xs font-extrabold uppercase tracking-wider text-muted">Body · Nunito</p>
               <p className="mt-3 text-lg leading-relaxed">
                 Tours, photo shoots, lessons, hikes, errands and driving. Booked by the hour, met in public, paid in person.
@@ -310,12 +310,12 @@ export default async function PressPage() {
               </li>
             ))}
           </ul>
-        </div>
+        </Container>
       </section>
 
       {/* Product images */}
       <section id="images" aria-labelledby="images-title">
-        <div className="mx-auto w-full max-w-6xl px-5 py-16 sm:px-8 sm:py-20">
+        <Container className="py-16 sm:py-20">
           <p className={eyebrow}>Product images</p>
           <h2 id="images-title" className={h2}>
             Screenshots and lifestyle photos.
@@ -330,7 +330,7 @@ export default async function PressPage() {
             {SCREENSHOTS.map((s) => (
               <li key={s.src}>
                 <figure>
-                  <a href={s.src} download className="block overflow-hidden rounded-2xl border border-line bg-surface shadow-card">
+                  <a href={s.src} download className="block overflow-hidden rounded-card border border-line bg-surface">
                     <Image
                       src={s.src}
                       alt={s.alt}
@@ -353,7 +353,7 @@ export default async function PressPage() {
             {PHOTOS.map((p) => (
               <li key={p.src}>
                 <figure>
-                  <a href={p.src} download className="relative block aspect-[3/2] overflow-hidden rounded-2xl shadow-card">
+                  <a href={p.src} download className="relative block aspect-[3/2] overflow-hidden rounded-card">
                     <Image
                       src={p.src}
                       alt={p.alt}
@@ -370,19 +370,19 @@ export default async function PressPage() {
               </li>
             ))}
           </ul>
-        </div>
+        </Container>
       </section>
 
       {/* Safety and community stance */}
       <section id="stance" aria-labelledby="stance-title" className="bg-navy-soft">
-        <div className="mx-auto w-full max-w-6xl px-5 py-16 sm:px-8 sm:py-20">
+        <Container className="py-16 sm:py-20">
           <p className={eyebrow}>Safety and community</p>
           <h2 id="stance-title" className={h2}>
             Where Phriend stands.
           </h2>
           <ul className="mt-8 grid gap-4 md:grid-cols-3">
             {STANCE.map((s) => (
-              <li key={s.title} className="rounded-2xl border border-line bg-white p-5 shadow-card">
+              <li key={s.title} className="rounded-card border border-line bg-white p-5">
                 <s.icon size={22} className="text-brand" aria-hidden="true" />
                 <h3 className="mt-3 font-extrabold text-ink">{s.title}</h3>
                 <p className="mt-1 text-[15px] leading-relaxed">{s.text}</p>
@@ -390,32 +390,24 @@ export default async function PressPage() {
             ))}
           </ul>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <Link
-              href="/safety"
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-navy px-6 py-3 font-bold text-white transition-colors hover:bg-navy-light"
-            >
-              Safety and transaction rules <ArrowRight size={18} aria-hidden="true" />
-            </Link>
-            <Link
-              href="/community-guidelines"
-              className="btn-secondary inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 font-bold"
-            >
-              Community guidelines <ArrowRight size={18} aria-hidden="true" />
-            </Link>
+            <ButtonLink href="/safety">Safety and transaction rules</ButtonLink>
+            <ButtonLink href="/community-guidelines" variant="secondary">
+              Community guidelines
+            </ButtonLink>
           </div>
-        </div>
+        </Container>
       </section>
 
       {/* Quotable lines */}
       <section id="quotes" aria-labelledby="quotes-title">
-        <div className="mx-auto w-full max-w-6xl px-5 py-16 sm:px-8 sm:py-20">
+        <Container className="py-16 sm:py-20">
           <p className={eyebrow}>Quotable lines</p>
           <h2 id="quotes-title" className={h2}>
             Attribute to Phriend.
           </h2>
           <ul className="mt-8 grid gap-4 md:grid-cols-3">
             {QUOTES.map((q) => (
-              <li key={q} className="flex flex-col rounded-3xl border border-line bg-white p-6 shadow-card">
+              <li key={q} className="flex flex-col rounded-card border border-line bg-white p-6">
                 <figure className="flex h-full flex-col">
                   <blockquote className="flex-1 text-[17px] leading-relaxed text-ink">
                     <span aria-hidden="true" className="font-display text-4xl leading-none text-brand">
@@ -430,13 +422,13 @@ export default async function PressPage() {
               </li>
             ))}
           </ul>
-        </div>
+        </Container>
       </section>
 
       {/* Media contact */}
       <section id="contact" aria-labelledby="contact-title" className="bg-surface">
-        <div className="mx-auto w-full max-w-6xl px-5 py-16 sm:px-8 sm:py-20">
-          <div className="grid gap-8 rounded-[2rem] border border-line bg-white p-8 shadow-card sm:p-12 lg:grid-cols-[1.2fr_0.8fr]">
+        <Container className="py-16 sm:py-20">
+          <div className="grid gap-8 rounded-card border border-line bg-white p-8 sm:p-12 lg:grid-cols-[1.2fr_0.8fr]">
             <div>
               <p className={eyebrow}>Media contact</p>
               <h2 id="contact-title" className={h2}>
@@ -447,7 +439,7 @@ export default async function PressPage() {
               </p>
               <a
                 href={`mailto:${CONTACT_EMAIL}`}
-                className="btn-primary mt-6 inline-flex items-center gap-2 rounded-full px-7 py-3.5 text-lg font-bold"
+                className="btn-primary mt-6 inline-flex items-center gap-2 rounded-control px-6 py-3 text-lg font-extrabold"
               >
                 <Mail size={20} aria-hidden="true" />
                 {CONTACT_EMAIL}
@@ -469,7 +461,7 @@ export default async function PressPage() {
               </ul>
             </div>
           </div>
-        </div>
+        </Container>
       </section>
     </main>
   );

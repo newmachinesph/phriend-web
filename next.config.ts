@@ -3,6 +3,9 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   // Phriend photos on the landing pages come from the app's CDN.
   images: { remotePatterns: [{ protocol: "https", hostname: "cdn.phriend.app" }] },
+  // Hostinger counts threads against the account's process limit (shared by every site), and sharp would otherwise
+  // start half the server's cores worth of threads per process.
+  experimental: { imgOptConcurrency: 1 },
   // phriend.app/@name is the short form of a Phriend's vanity link; the app serves it.
   // Icons and logos keep their names across deploys: a day in the browser instead of a revalidation on every visit.
   async headers() {

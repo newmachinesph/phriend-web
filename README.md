@@ -75,7 +75,7 @@ scripts/      Maintenance scripts (CDN upload)
 
 ## Deployment
 
-A standard Next.js app that can be deployed to any host that supports Next.js; `vercel.json` pins the region.
+A standard Next.js app (`next build --webpack`, `next start`), deployed as a Hostinger Node.js web app that rebuilds on every push to `main`.
 
 ## License
 

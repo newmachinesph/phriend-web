@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev -p 3100",
     "build": "next build --webpack",
-    "start": "node --v8-pool-size=2 scripts/start.cjs start",
+    "start": "next start",
     "lint": "eslint"
   },
   "dependencies": {

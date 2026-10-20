@@ -116,13 +116,12 @@ export function ServiceTile({ item, icon }: { item: ServiceItem; icon?: IconNode
         </p>
         <p className="mt-auto flex min-w-0 items-center gap-1.5 pt-3 text-sm" title={p.workName}>
           {/* the initial sits under the photo, so a photo that fails to load still shows the initial */}
-          <span aria-hidden="true" className="relative grid size-6 shrink-0 place-items-center overflow-hidden rounded-full bg-surface text-xs font-bold text-ink">
+          <span aria-hidden="true" className="relative grid size-6 shrink-0 place-items-center overflow-hidden rounded-full bg-brand-soft text-xs font-bold text-brand-text">
             {p.workName.slice(0, 1)}
             {avatar && <Image src={avatar} alt="" width={24} height={24} className="absolute inset-0 size-6 object-cover" />}
           </span>
-          <span className="min-w-0 truncate">
-            by <b className="text-ink">{p.workName}</b>
-          </span>
+          {/* avatar, name, verified: no "by" before the provider (owner rule, same as the apps) */}
+          <b className="min-w-0 truncate text-ink">{p.workName}</b>
           {p.verified && <BadgeCheck size={14} className="shrink-0 fill-verify text-white" aria-label="Verified" />}
           <span className="ml-auto inline-flex shrink-0 items-center gap-1 font-bold text-body">
             <Star size={13} className="fill-mango text-mango" aria-hidden="true" /> {p.reviewCount ? p.rating.toFixed(1) : "New"}

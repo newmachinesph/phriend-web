@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Logo, NAV } from "@/components/site-header";
+import { Logo, navItems } from "@/components/site-header";
 import { AppLink } from "@/components/app-link";
 import { PLAY_URL, PROVIDER_URL } from "@/lib/site";
 import { Container } from "@/components/ui";
@@ -22,7 +22,8 @@ const SOCIAL = [
 
 const link = "rounded-md text-base font-semibold text-body transition-colors hover:text-brand-text";
 
-export function SiteFooter() {
+export async function SiteFooter() {
+  const nav = await navItems();
   return (
     <footer className="border-t border-line bg-surface">
       <Container className="py-14">
@@ -45,7 +46,7 @@ export function SiteFooter() {
             <h2 id="footer-product" className="font-extrabold text-ink">
               Product
             </h2>
-            {NAV.map((n) => (
+            {nav.map((n) => (
               <Link key={n.href} href={n.href} className={link}>
                 {n.label}
               </Link>

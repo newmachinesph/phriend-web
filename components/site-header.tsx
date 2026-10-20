@@ -3,6 +3,7 @@ import Link from "next/link";
 import { APP_URL, cdn } from "@/lib/site";
 import { ButtonLink, Container } from "@/components/ui";
 import { MobileMenu } from "@/components/mobile-menu";
+import { getFeatures } from "@/lib/features";
 
 export const NAV = [
   { href: "/services", label: "Services" },
@@ -14,6 +15,12 @@ export const NAV = [
   { href: "/#faq", label: "FAQ" },
   { href: "/blog", label: "Blog" },
 ] as const;
+
+/** The nav as the apps would show it: Teams only while Ops has the teams switch on. */
+export async function navItems() {
+  const { teams } = await getFeatures();
+  return teams ? NAV : NAV.filter((n) => n.href !== "/teams");
+}
 
 const LOGO_RATIO = 1774 / 470;
 
@@ -43,7 +50,8 @@ export function Logo({
   );
 }
 
-export function SiteHeader() {
+export async function SiteHeader() {
+  const nav = await navItems();
   return (
     <header className="sticky top-0 z-40 border-b border-line/70 bg-white/85 backdrop-blur-md">
       <Container className="flex h-16 items-center justify-between gap-4">
@@ -52,7 +60,7 @@ export function SiteHeader() {
         </Link>
 
         <nav aria-label="Primary" className="hidden items-center gap-5 whitespace-nowrap text-base font-bold text-ink lg:flex xl:gap-7">
-          {NAV.map((n) => (
+          {nav.map((n) => (
             <Link key={n.href} href={n.href} className="rounded-md py-1 transition-colors hover:text-brand-text">
               {n.label}
             </Link>
@@ -64,7 +72,7 @@ export function SiteHeader() {
             Open the app
           </ButtonLink>
           <MobileMenu>
-            {NAV.map((n) => (
+            {nav.map((n) => (
               <Link key={n.href} href={n.href} className="rounded-control px-3 py-2.5 font-bold text-ink hover:bg-surface">
                 {n.label}
               </Link>

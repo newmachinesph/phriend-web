@@ -133,7 +133,7 @@ export function OverlayTool() {
     ctx.fillStyle = C.navy; ctx.fillText(fitText(ctx, nameLine, w - 90 - rw, display(600), 32), 18, ty);
 
     ty += 34;
-    const byLine = c.service ? `by ${c.name} · ${c.city}` : c.city;
+    const byLine = c.service ? `${c.name} · ${c.city}` : c.city;
     icon(ctx, PATHS.pin, 16, ty - 18, 20, { stroke: C.orange, width: 2.4 });
     ctx.beginPath(); ctx.arc(26, ty - 18 + (10 * 20) / 24, 2.4, 0, Math.PI * 2); ctx.fillStyle = C.orange; ctx.fill();
     ctx.fillStyle = C.body; ctx.fillText(fitText(ctx, byLine, w - 60, sans(700), 20), 42, ty);

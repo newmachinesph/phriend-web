@@ -95,13 +95,11 @@ export function ServiceTile({ item, icon }: { item: ServiceItem; icon?: IconNode
   return (
     <a href={appServiceUrl(item)} title={item.title} className="group flex h-full min-w-0 flex-col overflow-hidden [contain:inline-size] rounded-card border border-line bg-white transition-colors hover:border-brand">
       <div className="relative aspect-[4/3] overflow-hidden bg-brand-soft">
-        {photo ? (
-          <Image src={photo} alt={item.title} fill sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw" className="object-cover transition-transform duration-500 group-hover:scale-[1.03]" />
-        ) : (
-          <span className="absolute inset-0 grid place-items-center text-brand">
-            <NodeIcon node={icon} size={44} aria-hidden="true" />
-          </span>
-        )}
+        {/* the category icon always sits underneath: a photo that fails to load (alt="") leaves it showing, never a broken image */}
+        <span className="absolute inset-0 grid place-items-center text-brand">
+          <NodeIcon node={icon} size={44} aria-hidden="true" />
+        </span>
+        {photo && <Image src={photo} alt="" fill sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw" className="object-cover transition-transform duration-500 group-hover:scale-[1.03]" />}
         {item.visitType && <span className="absolute left-2 top-2 rounded-full bg-white/90 px-2 py-0.5 text-xs font-bold text-ink">{VISIT[item.visitType]}</span>}
       </div>
       <div className="flex min-w-0 flex-1 flex-col p-4">
@@ -117,13 +115,11 @@ export function ServiceTile({ item, icon }: { item: ServiceItem; icon?: IconNode
           <span className="min-w-0 truncate">{serviceArea(item)}</span>
         </p>
         <p className="mt-auto flex min-w-0 items-center gap-1.5 pt-3 text-sm" title={p.workName}>
-          {avatar ? (
-            <Image src={avatar} alt="" width={24} height={24} className="size-6 shrink-0 rounded-full object-cover" />
-          ) : (
-            <span aria-hidden="true" className="grid size-6 shrink-0 place-items-center rounded-full bg-surface text-xs font-bold text-ink">
-              {p.workName.slice(0, 1)}
-            </span>
-          )}
+          {/* the initial sits under the photo, so a photo that fails to load still shows the initial */}
+          <span aria-hidden="true" className="relative grid size-6 shrink-0 place-items-center overflow-hidden rounded-full bg-surface text-xs font-bold text-ink">
+            {p.workName.slice(0, 1)}
+            {avatar && <Image src={avatar} alt="" width={24} height={24} className="absolute inset-0 size-6 object-cover" />}
+          </span>
           <span className="min-w-0 truncate">
             by <b className="text-ink">{p.workName}</b>
           </span>

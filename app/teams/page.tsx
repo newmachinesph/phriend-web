@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import { TeamTile } from "@/components/teams";
 import { appTeamUrl, CITY_PAGES, findCity, getTeams, TEAMS_PER_PAGE } from "@/lib/landing";
 import { pageMeta, PROVIDER_URL, SITE_URL } from "@/lib/site";
+import { getFeatures } from "@/lib/features";
 import { ButtonLink, Container } from "@/components/ui";
 
 // The page reads ?city= and ?page=, so it renders per request; the API call inside is cached for 10 minutes (see getTeams).
@@ -22,6 +24,8 @@ const STEPS = [
 const pill = "inline-block rounded-full border-2 px-4 py-1.5 text-sm font-bold";
 
 export default async function TeamsPage({ searchParams }: { searchParams: Promise<{ city?: string; page?: string }> }) {
+  // hidden like the nav entry while Ops has the teams switch off: a 404 (noindex), and out of the sitemap
+  if (!(await getFeatures()).teams) notFound();
   const sp = await searchParams;
   const city = typeof sp.city === "string" ? findCity(sp.city) : undefined;
   const page = Math.max(1, Math.floor(Number(sp.page)) || 1);

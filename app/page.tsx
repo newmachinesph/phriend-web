@@ -5,6 +5,7 @@ import { BadgeCheck, Briefcase, CalendarClock, CalendarDays, ChevronDown, Circle
 import { TeamTile } from "@/components/teams";
 import { ServiceGroups } from "@/components/services";
 import { getGroups, getTeams } from "@/lib/landing";
+import { getFeatures } from "@/lib/features";
 import { APP_URL, cdn, pageMeta, PROVIDER_URL, SITE_DESCRIPTION, SITE_URL } from "@/lib/site";
 import { ButtonLink, Container } from "@/components/ui";
 
@@ -185,7 +186,7 @@ function StepTile({ n, icon: Icon, title, text, className = "" }: { n: number; i
 const h2 = "font-display text-h2 font-bold text-ink";
 
 export default async function Home() {
-  const [{ teams }, groups] = await Promise.all([getTeams({ limit: 3 }), getGroups()]);
+  const [{ teams }, groups, features] = await Promise.all([getTeams({ limit: 3 }), getGroups(), getFeatures()]);
   const serviceCount = groups.reduce((n, g) => n + g.categories.length, 0);
   return (
     <main id="main" className="flex-1">
@@ -333,8 +334,8 @@ export default async function Home() {
         </Container>
       </section>
 
-      {/* Book a team: renders nothing until the API has live teams */}
-      {teams.length > 0 && (
+      {/* Book a team: renders nothing until Ops turns teams on and the API has live teams (/teams is a 404 until then) */}
+      {features.teams && teams.length > 0 && (
         <section aria-labelledby="teams-title">
           <Container className="py-16 sm:py-24">
             <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">

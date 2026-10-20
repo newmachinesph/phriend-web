@@ -6,6 +6,7 @@ import { Check } from "lucide-react";
 import { activityPath, appCategoryUrl, getCategories } from "@/lib/landing";
 import { findOccasion, OCCASION_IMAGE, OCCASIONS, occasionImage } from "@/lib/occasions";
 import { APP_URL, pageMeta, PROVIDER_URL, SITE_URL } from "@/lib/site";
+import { getFeatures } from "@/lib/features";
 import { ButtonLink, Container } from "@/components/ui";
 
 export const revalidate = 600;
@@ -24,7 +25,7 @@ export async function generateMetadata({ params }: { params: Promise<{ occasion:
 export default async function OccasionPage({ params }: { params: Promise<{ occasion: string }> }) {
   const o = findOccasion((await params).occasion);
   if (!o) notFound();
-  const categories = await getCategories();
+  const [categories, { teams: teamsOn }] = await Promise.all([getCategories(), getFeatures()]);
   const book = o.book.map((slug) => categories.find((c) => c.slug === slug)).filter((c) => c !== undefined); // a category Ops removed drops off
   const others = OCCASIONS.filter((x) => x.slug !== o.slug);
   const path = `/occasions/${o.slug}`;
@@ -68,9 +69,11 @@ export default async function OccasionPage({ params }: { params: Promise<{ occas
       <p className="mt-5 max-w-3xl text-lg leading-relaxed">{o.intro}</p>
       <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
         <ButtonLink href="#who-to-book">Who to book</ButtonLink>
-        <ButtonLink href="/teams" variant="secondary">
-          Team packages
-        </ButtonLink>
+        {teamsOn && (
+          <ButtonLink href="/teams" variant="secondary">
+            Team packages
+          </ButtonLink>
+        )}
       </div>
       <div className="relative mt-10 aspect-[3/2] max-h-[480px] w-full overflow-hidden rounded-card bg-navy-soft sm:aspect-[21/9]">
         <Image src={occasionImage(o.slug)} alt={`${o.name} in the Philippines`} fill priority sizes="(min-width: 1280px) 1216px, 100vw" className="object-cover" />

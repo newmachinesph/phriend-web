@@ -4,11 +4,12 @@ import { POSTS } from "./blog/_posts";
 import { listDbPosts } from "@/lib/blog-db";
 import { activitySlug, CITY_PAGES, comboPath, getCategories, getGroups, getServiceCounts, groupPath } from "@/lib/landing";
 import { OCCASIONS } from "@/lib/occasions";
+import { getFeatures } from "@/lib/features";
 
 const lastModified = new Date(LAST_UPDATED);
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const [categories, groups, dbPosts, counts] = await Promise.all([getCategories(), getGroups(), listDbPosts(), getServiceCounts()]);
+  const [categories, groups, dbPosts, counts, features] = await Promise.all([getCategories(), getGroups(), listDbPosts(), getServiceCounts(), getFeatures()]);
   // a landing page with no services is noindex (see generateMetadata), so it stays out until one is listed
   const listed = categories.filter((c) => (counts.all.get(c.slug) ?? 0) > 0);
   return [
@@ -16,7 +17,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${SITE_URL}/safety`, lastModified, changeFrequency: "monthly", priority: 0.8 },
     { url: `${SITE_URL}/community-guidelines`, lastModified, changeFrequency: "monthly", priority: 0.6 },
     { url: `${SITE_URL}/press`, lastModified, changeFrequency: "monthly", priority: 0.5 },
-    { url: `${SITE_URL}/teams`, lastModified, changeFrequency: "daily", priority: 0.7 },
+    // /teams is a 404 while Ops has the teams switch off (as the nav hides it), so it is listed only while it is on
+    ...(features.teams ? [{ url: `${SITE_URL}/teams`, lastModified, changeFrequency: "daily" as const, priority: 0.7 }] : []),
     { url: `${SITE_URL}/occasions`, lastModified, changeFrequency: "monthly", priority: 0.8 },
     ...OCCASIONS.map((o) => ({ url: `${SITE_URL}/occasions/${o.slug}`, lastModified, changeFrequency: "monthly" as const, priority: 0.8 })),
     { url: `${SITE_URL}/creators`, lastModified, changeFrequency: "monthly", priority: 0.6 },

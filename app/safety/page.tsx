@@ -160,7 +160,7 @@ export default function SafetyPage() {
         <p className="mb-2 font-extrabold text-ink">If you are in danger, call for help first and report to Phriend later.</p>
         <ul className="mb-0">
           <li>
-            <strong>911</strong>: national emergency hotline, connects to the Philippine National Police.
+            <strong>911</strong>: the national emergency hotline for police, fire and medical emergencies.
           </li>
           <li>
             <strong>PNP hotline</strong>: 911, or text 0998 598 8888.

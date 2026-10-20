@@ -2,7 +2,13 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   // Phriend photos on the landing pages come from the app's CDN.
-  images: { remotePatterns: [{ protocol: "https", hostname: "cdn.phriend.app" }] },
+  images: {
+    remotePatterns: [{ protocol: "https", hostname: "cdn.phriend.app" }],
+    // 480: the home phone mockup (272-300 CSS px) on a 1.75x phone needs ~480 px, which otherwise rounds up to 640
+    imageSizes: [32, 48, 64, 96, 128, 256, 384, 480],
+    // 60 for photos under a dark gradient (service group cards), 75 (the default) for everything else
+    qualities: [60, 75],
+  },
   // Hostinger counts threads against the account's process limit (shared by every site), and sharp would otherwise
   // start half the server's cores worth of threads per process.
   experimental: { imgOptConcurrency: 1 },

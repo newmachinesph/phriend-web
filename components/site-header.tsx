@@ -36,8 +36,9 @@ export function Logo({
       width={Math.round(height * LOGO_RATIO)}
       height={height}
       priority={priority}
-      className={`w-auto ${className}`}
-      style={{ height }}
+      className={className}
+      // Both sides pinned to the attributes: a CSS-only height with `w-auto` rounds the width and trips next/image's aspect-ratio warning.
+      style={{ width: Math.round(height * LOGO_RATIO), height }}
     />
   );
 }
@@ -50,7 +51,7 @@ export function SiteHeader() {
           <Logo height={32} priority />
         </Link>
 
-        <nav aria-label="Primary" className="hidden items-center gap-7 text-base font-bold text-ink md:flex">
+        <nav aria-label="Primary" className="hidden items-center gap-5 whitespace-nowrap text-base font-bold text-ink lg:flex xl:gap-7">
           {NAV.map((n) => (
             <Link key={n.href} href={n.href} className="rounded-md py-1 transition-colors hover:text-brand-text">
               {n.label}

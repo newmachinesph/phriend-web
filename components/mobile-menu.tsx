@@ -11,7 +11,7 @@ import { Menu, X } from "lucide-react";
 export function MobileMenu({ children }: { children: ReactNode }) {
   const ref = useRef<HTMLDetailsElement>(null);
   return (
-    <details ref={ref} className="group relative md:hidden">
+    <details ref={ref} className="group relative lg:hidden">
       <summary
         aria-label="Menu"
         className="grid size-11 cursor-pointer list-none place-items-center rounded-full bg-surface text-ink [&::-webkit-details-marker]:hidden"

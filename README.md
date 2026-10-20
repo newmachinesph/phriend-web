@@ -30,7 +30,7 @@ Marketing site for Phriend, a local-services marketplace in the Philippines wher
 - Next.js 16 (App Router), React 19, TypeScript
 - Tailwind CSS 4
 - lucide-react, marked, sanitize-html
-- `@next/third-parties` and Google Analytics (optional)
+- Google Analytics through `next/script` (optional, off when `NEXT_PUBLIC_GA_ID` is unset)
 
 ## Getting started
 

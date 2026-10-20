@@ -60,9 +60,9 @@ const USAGE = [
 
 const SCREENSHOTS: { src: string; alt: string; caption: string; size: string }[] = [
   {
-    src: "/screens/home-v8.png",
-    alt: "The Phriend app home screen: a search bar asking what you need help with, and the service groups from errands to food and catering",
-    caption: "Home: search and service groups",
+    src: "/screens/home-v9.png",
+    alt: "The Phriend app home screen: a search bar asking what you need help with, the service groups from errands to food and catering, and services near you",
+    caption: "Home: search, service groups and services near you",
     size: "PNG, 780×1688",
   },
 ];

@@ -129,8 +129,8 @@ function PhoneMockup() {
         {/* a real phone viewport (390x844), so the screenshot fills the frame at its own proportions and nothing is cropped */}
         <div className="aspect-[390/844] overflow-hidden rounded-[2.2rem] bg-white">
           <Image
-            src="/screens/home-v8.png"
-            alt="The Phriend app home screen: a search bar, the service groups from errands to food and catering, and teams near you"
+            src="/screens/home-v9.png"
+            alt="The Phriend app home screen: a search bar, the service groups from errands to food and catering, and services near you with their prices"
             width={390}
             height={844}
             loading="eager"
@@ -191,26 +191,26 @@ export default async function Home() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON_LD }} />
       {/* Hero */}
       <section className="bg-navy-gradient relative overflow-hidden text-white">
-        <Container className="grid items-center gap-12 pb-16 pt-14 sm:pt-20 lg:grid-cols-[1.1fr_0.9fr] lg:gap-8 lg:pb-24 lg:pt-24">
+        <Container className="grid items-center gap-10 pb-12 pt-10 sm:gap-12 sm:pb-16 sm:pt-20 lg:grid-cols-[1.1fr_0.9fr] lg:gap-8 lg:pb-24 lg:pt-24">
           <div className="max-w-xl">
             <h1 className="font-display text-display font-extrabold text-white">
               Local services, from verified providers
             </h1>
-            <p className="mt-5 text-lg leading-relaxed text-white/80 sm:text-xl">
-              Aircon cleaning, bookkeeping, tutoring, photo and video, driving, errands and more across the Philippines. Every service
-              shows its price, photos of the work, where it happens and when it is available. Book it and chat with the provider in the app.
+            <p className="mt-4 text-base leading-relaxed text-white/80 sm:mt-5 sm:text-lg">
+              Book trusted local pros for aircon cleaning, tutoring, photo and video, errands and more. See prices and photos, then book
+              in the app.
             </p>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <ButtonLink href={APP_URL} className="text-lg">
+            <div className="mt-6 flex flex-col gap-3 sm:mt-8 sm:flex-row">
+              <ButtonLink href={APP_URL} className="h-12 py-0 text-[0.9375rem] leading-5">
                 Find a service
               </ButtonLink>
-              <ButtonLink href={PROVIDER_URL} variant="secondary" className="text-lg">
+              <ButtonLink href={PROVIDER_URL} variant="secondary" className="h-12 py-0 text-[0.9375rem] leading-5">
                 List your services
               </ButtonLink>
             </div>
-            <ul className="mt-10 grid grid-cols-2 gap-x-4 gap-y-3 text-sm font-bold text-white sm:flex sm:flex-wrap sm:gap-x-6">
+            <ul className="mt-6 grid gap-2.5 text-sm font-semibold text-white sm:mt-8 sm:flex sm:flex-wrap sm:gap-x-6">
               {TRUST.map((t) => (
-                <li key={t.label} className="flex items-center gap-2">
+                <li key={t.label} className="flex items-center gap-2.5">
                   <t.icon size={18} className="shrink-0 text-brand-light" aria-hidden="true" />
                   {t.label}
                 </li>

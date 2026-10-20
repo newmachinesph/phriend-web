@@ -2,6 +2,7 @@ import "server-only";
 import { API_URL, apiHeaders } from "./site";
 import { marked } from "marked";
 import sanitizeHtml from "sanitize-html";
+import { isOnProduct } from "./blog-filter";
 
 /** Articles written in Ops (blog_posts table); only published rows reach the site. The photographers article stays in code. */
 type DbPost = {
@@ -17,15 +18,6 @@ type DbPost = {
   publishedAt: string; // ISO
   updatedAt: string;
 };
-
-/**
- * Articles written for the earlier product (people as the listing, companions, meetups, a third-party ID check) can stay
- * published in Ops until they are rewritten; the site leaves them out (list, page, sitemap) so it describes only the
- * services marketplace.
- */
-const OFF_PRODUCT = /\b(companions?|kasama|buddy|buddies|meetups?|hang ?outs?|didit|verification partner)\b|\bPhriends\b|\bthe Phriend\b|\bcompany for\b/i;
-const isOnProduct = (p: Pick<DbPost, "title" | "description" | "bodyMd" | "tags">) =>
-  !OFF_PRODUCT.test([p.title, p.description, (p.tags ?? []).join(" "), p.bodyMd].join("\n"));
 
 /** Published articles from the Phriend API (written in Ops). Empty when the API is unreachable: the blog then shows only the coded article. */
 export async function listDbPosts(): Promise<DbPost[]> {

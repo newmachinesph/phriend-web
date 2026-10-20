@@ -26,7 +26,7 @@ export default async function BlogIndex() {
   const db = (await listDbPosts()).map<Card>((p) => ({ slug: p.slug, title: p.title, description: p.description, date: p.publishedAt.slice(0, 10), readingMinutes: readingMinutes(p.bodyMd), tag: p.tags[0] ?? "Guide", label: labels.get(p.niche) ?? "Phriend", hero: { src: cdn(p.cover || "/blog/photographers-hero.jpg"), alt: p.title } }));
   const [latest, ...rest] = [...POSTS.map(fromStatic), ...db].sort((a, b) => b.date.localeCompare(a.date));
   return (
-    <Container as="main" className="py-14 sm:py-20">
+    <Container as="main" id="main" className="pb-14 pt-8 sm:py-20">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: breadcrumbJsonLd("Blog", "/blog") }} />
       <p className="text-sm font-extrabold uppercase tracking-wider text-brand-text">Blog</p>
       <h1 className="mt-2 max-w-2xl font-display text-h1 font-bold text-ink">Guides for people who could be earning on Phriend.</h1>

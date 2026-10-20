@@ -22,7 +22,7 @@ export function Legal({
   children: ReactNode;
 }) {
   return (
-    <main id="main" className="mx-auto w-full max-w-3xl flex-1 px-5 py-12 sm:px-8 sm:py-16">
+    <main id="main" className="mx-auto w-full max-w-3xl flex-1 px-5 pb-12 pt-8 sm:px-8 sm:py-16">
       {path && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: breadcrumbJsonLd(title, path) }} />}
       <header className="border-b border-line pb-8">
         <p className="text-sm font-extrabold uppercase tracking-wider text-brand-text">{eyebrow}</p>

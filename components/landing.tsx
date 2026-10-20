@@ -9,7 +9,7 @@ import { ButtonLink, Container } from "@/components/ui";
 export function Landing({ category, city, services, path, others }: { category: Category; city?: CityPage; services: ServiceItem[]; path: string; others: Category[] }) {
   const copy = landingCopy(category, city, services);
   return (
-    <Container as="main" id="main" className="py-14 sm:py-20">
+    <Container as="main" id="main" className="pb-14 pt-8 sm:py-20">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: landingJsonLd(category, path, services, copy, city) }} />
       <nav aria-label="Breadcrumb" className="text-sm font-semibold text-muted">
         <Link href="/" className="hover:text-ink">
@@ -28,7 +28,7 @@ export function Landing({ category, city, services, path, others }: { category: 
       </nav>
       <h1 className="mt-4 max-w-3xl font-display text-h1 font-bold text-ink">{copy.h1}</h1>
       <p className="mt-5 max-w-3xl text-lg leading-relaxed">{copy.intro}</p>
-      <div className="mt-6 flex flex-wrap gap-3">
+      <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
         <ButtonLink href={LANDING_CTA.browse(category)}>Browse all {category.label} services</ButtonLink>
         <ButtonLink href={PROVIDER_URL} variant="secondary">
           Offer {category.label} on Phriend

@@ -78,7 +78,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
   };
 
   return (
-    <main className="mx-auto w-full max-w-3xl px-5 py-12 sm:px-8 sm:py-16">
+    <main id="main" className="mx-auto w-full max-w-3xl px-5 pb-12 pt-8 sm:px-8 sm:py-16">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <BackToBlog />
       <header className="mt-6">
@@ -150,7 +150,7 @@ async function DbArticle({ post }: { post: NonNullable<Awaited<ReturnType<typeof
   };
   const category = post.niche ? await findCategory(post.niche) : undefined;
   return (
-    <main className="mx-auto w-full max-w-3xl px-5 py-12 sm:px-8 sm:py-16">
+    <main id="main" className="mx-auto w-full max-w-3xl px-5 pb-12 pt-8 sm:px-8 sm:py-16">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <BackToBlog />
       <header className="mt-6">

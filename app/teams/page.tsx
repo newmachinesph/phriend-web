@@ -51,7 +51,7 @@ export default async function TeamsPage({ searchParams }: { searchParams: Promis
   }).replace(/</g, "\\u003c"); // team names come from the API
 
   return (
-    <Container as="main" id="main" className="py-14 sm:py-20">
+    <Container as="main" id="main" className="pb-14 pt-8 sm:py-20">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd }} />
       <nav aria-label="Breadcrumb" className="text-sm font-semibold text-muted">
         <Link href="/" className="hover:text-ink">
@@ -64,7 +64,7 @@ export default async function TeamsPage({ searchParams }: { searchParams: Promis
       <p className="mt-5 max-w-3xl text-lg leading-relaxed">
         Some jobs need more than one provider: a wedding with photo, video and coordination, a tour with a guide, a driver and a photographer, a moving crew. A team sells these as packages and books as one: one chat, one price, one booking. Every member is a verified provider you can also book on their own.
       </p>
-      <div className="mt-6 flex flex-wrap gap-3">
+      <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
         <ButtonLink href="#teams">See the teams</ButtonLink>
         <ButtonLink href="#start-a-team" variant="secondary">
           Start a team
@@ -96,7 +96,7 @@ export default async function TeamsPage({ searchParams }: { searchParams: Promis
             <p className="mt-2 leading-relaxed">
               Teams are new on Phriend, and the first ones are being put together now. In the meantime you can book any of the services{city ? ` in ${city.name}` : ""} on their own.
             </p>
-            <div className="mt-5 flex flex-wrap gap-3">
+            <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
               <ButtonLink href={city ? `/${city.slug}` : "/services"}>Browse services{city ? ` in ${city.name}` : ""}</ButtonLink>
               <ButtonLink href="#start-a-team" variant="secondary">
                 Start a team
@@ -159,7 +159,7 @@ export default async function TeamsPage({ searchParams }: { searchParams: Promis
         <p className="mt-3 max-w-2xl text-lg leading-relaxed">
           Already a provider? Invite other verified providers, name your team and set your packages: a price, a fixed length and who comes along. Each member keeps their own services and can still be booked on their own.
         </p>
-        <div className="mt-6 flex flex-wrap gap-3">
+        <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
           <ButtonLink href={`${PROVIDER_URL}/manage/teams`}>Start a team</ButtonLink>
           <ButtonLink href={PROVIDER_URL} variant="secondary">
             List your services

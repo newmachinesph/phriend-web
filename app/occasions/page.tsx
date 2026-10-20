@@ -15,7 +15,7 @@ export const metadata: Metadata = { ...meta, openGraph: { ...meta.openGraph, ima
 
 export default function OccasionsPage() {
   return (
-    <Container as="main" id="main" className="py-14 sm:py-20">
+    <Container as="main" id="main" className="pb-14 pt-8 sm:py-20">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: breadcrumbJsonLd("Occasions", "/occasions") }} />
       <nav aria-label="Breadcrumb" className="text-sm font-semibold text-muted">
         <Link href="/" className="hover:text-ink">

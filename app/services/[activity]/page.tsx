@@ -76,7 +76,7 @@ function GroupPage({ group, others }: { group: Group; others: Group[] }) {
   }).replace(/</g, "\\u003c"); // labels come from the API
 
   return (
-    <Container as="main" id="main" className="py-14 sm:py-20">
+    <Container as="main" id="main" className="pb-14 pt-8 sm:py-20">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd }} />
       <nav aria-label="Breadcrumb" className="text-sm font-semibold text-muted">
         <Link href="/" className="hover:text-ink">
@@ -99,7 +99,7 @@ function GroupPage({ group, others }: { group: Group; others: Group[] }) {
         Book {list(names)} from verified providers across the Philippines. Each service shows its own price, photos of the work, visit type and area.
         Book and chat in the app, and pay the provider directly: Phriend never holds your money and takes no cut.
       </p>
-      <div className="mt-6 flex flex-wrap gap-3">
+      <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
         <ButtonLink href={appGroupUrl(group)}>See the services</ButtonLink>
         <ButtonLink href={PROVIDER_URL} variant="secondary">
           Offer one of these services

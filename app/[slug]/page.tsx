@@ -84,7 +84,7 @@ async function CityLanding({ city, categories }: { city: CityPage; categories: A
   }).replace(/</g, "\\u003c"); // titles come from the API
   const acts = categories.slice(0, 6).map((c) => c.label.toLowerCase());
   return (
-    <Container as="main" id="main" className="py-14 sm:py-20">
+    <Container as="main" id="main" className="pb-14 pt-8 sm:py-20">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd }} />
       <nav aria-label="Breadcrumb" className="text-sm font-semibold text-muted">
         <Link href="/" className="hover:text-ink">
@@ -103,7 +103,7 @@ async function CityLanding({ city, categories }: { city: CityPage; categories: A
         price, photos of the work and the area it covers. You book and chat in the app, use one of your saved addresses for an at-home service, and pay the
         provider directly, as you agree with them.
       </p>
-      <div className="mt-6 flex flex-wrap gap-3">
+      <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
         <ButtonLink href={`${APP_URL}/?city=${encodeURIComponent(city.name)}`}>Browse services in {city.name}</ButtonLink>
         <ButtonLink href={PROVIDER_URL} variant="secondary">
           Offer a service in {city.name}

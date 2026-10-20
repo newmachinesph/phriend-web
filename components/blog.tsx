@@ -101,7 +101,7 @@ export function ArticleCta({ category, headline = "Put your camera on Phriend th
       <p className="mt-3 max-w-xl text-white/80">
         Verify your identity, list your services with their prices and photos, and take bookings that fit around your day job. A person reviews each listing before it goes live.
       </p>
-      <div className="mt-6 flex flex-wrap gap-3">
+      <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
         <a href={PROVIDER_URL} className="btn-primary rounded-full px-6 py-3 font-bold">
           List your services <ArrowRight size={18} className="ml-1.5" aria-hidden="true" />
         </a>

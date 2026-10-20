@@ -146,7 +146,8 @@ function PhoneMockup() {
         className="absolute -left-14 top-[30%] hidden w-52 rounded-card border border-line bg-white p-3 text-xs leading-snug text-body shadow-float sm:block lg:-left-24"
       >
         <p className="mb-1 flex items-center gap-1.5 font-extrabold text-ink">
-          <Image src={cdn("/photos/kyla-1.jpg")} alt="Kyla" width={24} height={24} className="size-6 rounded-full object-cover" />
+          {/* an initial, not a face: the earlier persona photo was a lifestyle shot of a person, not a provider at work */}
+          <span className="grid size-6 place-items-center rounded-full bg-brand-soft text-xs font-extrabold text-brand-text">K</span>
           Kyla <BadgeCheck size={12} className="fill-verify text-white" />
           <span className="ml-auto font-bold text-muted">2:14 pm</span>
         </p>
@@ -154,7 +155,7 @@ function PhoneMockup() {
       </div>
       <div
         aria-hidden="true"
-        className="absolute -right-8 bottom-[18%] hidden rounded-card border border-line bg-white px-3 py-2.5 text-xs text-body shadow-float sm:block lg:-right-16"
+        className="absolute -right-8 bottom-[34%] hidden rounded-card border border-line bg-white px-3 py-2.5 text-xs text-body shadow-float sm:block lg:-right-16"
       >
         <p className="flex items-center gap-1.5 font-extrabold text-ink">
           <Zap size={14} className="text-success" />
@@ -372,7 +373,8 @@ export default async function Home() {
               <ButtonLink href="/safety" variant="secondary" className="mt-6">
                 Read the safety rules
               </ButtonLink>
-              <div className="relative mt-8 aspect-[4/5] max-w-sm overflow-hidden rounded-card">
+              {/* decorative: left out on phones, where it pushed the rules a full screen down */}
+              <div className="relative mt-8 hidden aspect-[4/5] max-w-sm overflow-hidden rounded-card sm:block">
                 <Image
                   src={cdn("/photos/life-verified.jpg")}
                   alt="A smiling woman in a cafe holding her phone and giving a thumbs up"

@@ -9,7 +9,7 @@ import { ButtonLink, Container } from "@/components/ui";
 export const metadata: Metadata = pageMeta({
   title: "Press kit: logos, facts and photos",
   description:
-    "Phriend press kit: boilerplate, fast facts, product features, logo downloads, brand colors, product images, trust and safety stance, quotable lines and media contact.",
+    "Phriend press kit: boilerplate, fast facts, features, logo downloads, brand colors, product images, trust and safety stance, quotes and media contact.",
   path: "/press",
 });
 

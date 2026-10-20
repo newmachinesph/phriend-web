@@ -7,7 +7,7 @@ import { ButtonLink, Container } from "@/components/ui";
 
 const TITLE = "Show your service, get it booked";
 const DESCRIPTION =
-  "For TikTok and Facebook Reels creators in the Philippines who offer a service: list it on Phriend, post one video of your work with your Phriend service card, and give one follower a free booking. Make your overlay here.";
+  "Creators in the Philippines who offer a service: list it on Phriend, post a TikTok or Reel with your service card, and give one follower a free booking.";
 const SHARE_TITLE = "Show your service, get it booked. One follower wins a free booking.";
 const SHARE_DESCRIPTION = "Post one video of your work with your Phriend service card. Your followers comment for a week and the best comment wins a free booking of your service: a photo shoot, a lesson, a cleaning, whatever you offer. #BookOnPhriend";
 // pageMeta sets the site-wide share image; this page has its own (app/creators/opengraph-image.tsx)

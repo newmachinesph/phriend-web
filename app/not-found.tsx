@@ -3,8 +3,9 @@ import Link from "next/link";
 import { APP_URL } from "@/lib/site";
 import { ButtonLink, Container } from "@/components/ui";
 
-// Next.js already adds noindex to a 404
-export const metadata: Metadata = { title: "Page not found" };
+// Next.js adds its own noindex to a 404. The layout's canonical ("/") and "index, follow" would still apply, so a 404
+// restates robots and declares no canonical or hreflang.
+export const metadata: Metadata = { title: "Page not found", robots: { index: false, follow: true }, alternates: { canonical: null } };
 
 const LINKS = [
   { href: "/services", label: "All services" },

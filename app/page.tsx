@@ -342,7 +342,7 @@ export default async function Home() {
                   Book a team.
                 </h2>
                 <p className="mt-3 text-[15px] leading-relaxed text-body">
-                  Some jobs need more than one provider. A team books as one: one chat, one price, one booking. Every member is a verified provider you can also book on their own.
+                  Weddings, events, tours and moves often need more than one provider. A team sells packages and books as one: one chat, one price, one booking. Every member is a verified provider you can also book on their own.
                 </p>
               </div>
               <Link href="/teams" className="font-bold text-brand-text hover:underline">

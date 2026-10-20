@@ -7,8 +7,8 @@ import { ButtonLink, Container } from "@/components/ui";
 
 // The page reads ?city= and ?page=, so it renders per request; the API call inside is cached for 10 minutes (see getTeams).
 export const metadata: Metadata = pageMeta({
-  title: "Teams: book several providers as one",
-  description: "Some jobs need more than one provider. A team books as one: one chat, one price, one booking. Every member is a verified provider.",
+  title: "Teams and packages: book several providers as one",
+  description: "Packages from teams of verified providers for weddings, events, tours and moves: one chat, one price, one booking.",
   path: "/teams",
 });
 
@@ -60,9 +60,9 @@ export default async function TeamsPage({ searchParams }: { searchParams: Promis
         {" › "}
         <span className="text-ink">Teams</span>
       </nav>
-      <h1 className="mt-4 max-w-3xl font-display text-4xl font-semibold leading-tight text-ink sm:text-5xl">Book a team of providers</h1>
+      <h1 className="mt-4 max-w-3xl font-display text-4xl font-semibold leading-tight text-ink sm:text-5xl">Packages from teams of providers</h1>
       <p className="mt-5 max-w-3xl text-lg leading-relaxed">
-        Some jobs need more than one provider. A team books as one: one chat, one price, one booking. Every member is a verified provider you can also book on their own.
+        Some jobs need more than one provider: a wedding with photo, video and coordination, a tour with a guide, a driver and a photographer, a moving crew. A team sells these as packages and books as one: one chat, one price, one booking. Every member is a verified provider you can also book on their own.
       </p>
       <div className="mt-6 flex flex-wrap gap-3">
         <ButtonLink href="#teams">See the teams</ButtonLink>

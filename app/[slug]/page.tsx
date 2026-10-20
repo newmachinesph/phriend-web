@@ -2,12 +2,13 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Landing } from "@/components/landing";
-import { activitySlug, appProfileUrl, CITY_PAGES, comboPath, findCategory, findCity, getCategories, getPhriends, type CityPage } from "@/lib/landing";
-import { APP_URL, pageMeta, POST_URL, SITE_NAME, SITE_URL } from "@/lib/site";
+import { ServiceTile } from "@/components/services";
+import { activitySlug, appServiceUrl, CITY_PAGES, comboPath, findCategory, findCity, getCategories, getServices, type CityPage } from "@/lib/landing";
+import { APP_URL, pageMeta, PROVIDER_URL, SITE_NAME, SITE_URL } from "@/lib/site";
 import { ButtonLink, Container } from "@/components/ui";
 
 /**
- * Two kinds of page share this segment: a city ("/manila") and an activity in a city ("/photographer-in-manila").
+ * Two kinds of page share this segment: a city ("/manila") and a service in a city ("/photographer-in-manila").
  * Anything else is a 404, so the static routes (blog, safety, terms…) keep their own folders.
  */
 export const revalidate = 600;
@@ -34,13 +35,13 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!r) return { title: "Not found", robots: { index: false } };
   if (r.category)
     return pageMeta({
-      title: `${r.category.label} pros in ${r.city.name}: book a local`.slice(0, 60),
-      description: `Book a verified local in ${r.city.name} for ${r.category.label.toLowerCase()} by the hour. ID-checked pros, public meetups, price agreed in the chat.`.slice(0, 150),
+      title: `${r.category.label} services in ${r.city.name}`.slice(0, 60),
+      description: `Book ${r.category.label.toLowerCase()} in ${r.city.name} from verified providers. Each service shows its price, photos and area. Book and chat in the app.`.slice(0, 150),
       path: comboPath(r.category, r.city),
     });
   return pageMeta({
-    title: `Local guides and pros in ${r.city.name}, by the hour`.slice(0, 60),
-    description: `Tours, photo shoots, lessons, hikes, driving and errands in ${r.city.name}. Every Phriend is ID-verified; meet in public, pay in cash when you meet.`.slice(0, 150),
+    title: `Local services in ${r.city.name}`.slice(0, 60),
+    description: `Aircon cleaning, repairs, tutoring, bookkeeping, photo and video, driving and errands in ${r.city.name}, from verified providers. Book in the app.`.slice(0, 150),
     path: `/${r.city.slug}`,
   });
 }
@@ -50,15 +51,15 @@ export default async function SlugPage({ params }: { params: Promise<{ slug: str
   if (!r) notFound();
   const categories = await getCategories();
   if (r.category) {
-    const phriends = await getPhriends({ category: r.category.slug, city: r.city.name });
-    return <Landing category={r.category} city={r.city} phriends={phriends} path={comboPath(r.category, r.city)} others={categories} />;
+    const services = await getServices({ category: r.category.slug, city: r.city.name });
+    return <Landing category={r.category} city={r.city} services={services} path={comboPath(r.category, r.city)} others={categories} />;
   }
   return <CityLanding city={r.city} categories={categories} />;
 }
 
-/** The city page: who is around, and every activity you can hire someone for there. */
+/** The city page: every kind of service you can book there, and the services on offer right now. */
 async function CityLanding({ city, categories }: { city: CityPage; categories: Awaited<ReturnType<typeof getCategories>> }) {
-  const phriends = await getPhriends({ city: city.name });
+  const services = await getServices({ city: city.name });
   const path = `/${city.slug}`;
   const jsonLd = JSON.stringify({
     "@context": "https://schema.org",
@@ -72,15 +73,15 @@ async function CityLanding({ city, categories }: { city: CityPage; categories: A
       },
       {
         "@type": "Service",
-        name: `Book a local guide or pro in ${city.name}`,
+        name: `Local services in ${city.name}`,
         serviceType: "Local services",
         provider: { "@type": "Organization", name: SITE_NAME, url: SITE_URL },
         areaServed: { "@type": "City", name: city.name, containedInPlace: { "@type": "Country", name: "Philippines" } },
         url: `${SITE_URL}${path}`,
       },
-      { "@type": "ItemList", name: `Phriends in ${city.name}`, itemListElement: phriends.map((p, i) => ({ "@type": "ListItem", position: i + 1, url: appProfileUrl(p), name: p.workName, image: p.imagePath[0] })) },
+      { "@type": "ItemList", name: `Services in ${city.name}`, itemListElement: services.map((s, i) => ({ "@type": "ListItem", position: i + 1, url: appServiceUrl(s), name: s.title })) },
     ],
-  });
+  }).replace(/</g, "\\u003c"); // titles come from the API
   const acts = categories.slice(0, 6).map((c) => c.label.toLowerCase());
   return (
     <Container as="main" id="main" className="py-14 sm:py-20">
@@ -92,23 +93,26 @@ async function CityLanding({ city, categories }: { city: CityPage; categories: A
         {" › "}
         <span className="text-ink">{city.name}</span>
       </nav>
-      <h1 className="mt-4 max-w-3xl font-display text-4xl font-semibold leading-tight text-ink sm:text-5xl">Local guides and pros in {city.name}</h1>
+      <h1 className="mt-4 max-w-3xl font-display text-4xl font-semibold leading-tight text-ink sm:text-5xl">Local services in {city.name}</h1>
       <p className="mt-5 max-w-3xl text-lg leading-relaxed">
-        {city.name} is {city.blurb}. On Phriend you book a verified local there by the hour, for {acts.slice(0, -1).join(", ")} and {acts[acts.length - 1]}, and dozens of other services.
+        {city.name} is {city.blurb}. On Phriend you book services there from verified providers, for {acts.slice(0, -1).join(", ")} and {acts[acts.length - 1]}, and dozens of
+        other kinds of work, plus online services that cover the whole country.
       </p>
       <p className="mt-3 max-w-3xl leading-relaxed">
-        Every Phriend confirmed their identity and age with a government ID, and a person approved their profile before it went live. You agree on the plan and the price in the chat, meet in a public place (or at your home for a home service), and pay half in cash when you meet and half after. Legitimate services only.
+        Every provider is verified by our team with a government ID and a selfie, and a person approves each listing before it goes live. Each service shows its
+        price, photos of the work and the area it covers. You book and chat in the app, use one of your saved addresses for an at-home service, and pay the
+        provider directly, as you agree with them.
       </p>
       <div className="mt-6 flex flex-wrap gap-3">
-        <ButtonLink href={`${APP_URL}/?city=${encodeURIComponent(city.name)}`}>Browse everyone in {city.name}</ButtonLink>
-        <ButtonLink href={POST_URL} variant="secondary">
-          Become a Phriend in {city.name}
+        <ButtonLink href={`${APP_URL}/?city=${encodeURIComponent(city.name)}`}>Browse services in {city.name}</ButtonLink>
+        <ButtonLink href={PROVIDER_URL} variant="secondary">
+          Offer a service in {city.name}
         </ButtonLink>
       </div>
 
       <section aria-labelledby="acts" className="mt-14">
         <h2 id="acts" className="font-display text-2xl font-semibold text-ink sm:text-3xl">
-          What you can book a Phriend for in {city.name}
+          What you can book in {city.name}
         </h2>
         <ul className="mt-6 grid gap-x-8 sm:grid-cols-2 lg:grid-cols-3">
           {categories.map((c) => (
@@ -117,7 +121,7 @@ async function CityLanding({ city, categories }: { city: CityPage; categories: A
                 <p className="font-bold text-ink group-hover:text-brand-text">
                   {c.label} in {city.name}
                 </p>
-                <p className="mt-0.5 text-sm text-muted">{c.activities.slice(0, 4).join(", ") || "Services by the hour"}</p>
+                <p className="mt-0.5 text-sm text-muted">{c.activities.slice(0, 4).join(", ") || "Local services"}</p>
               </Link>
             </li>
           ))}
@@ -126,23 +130,21 @@ async function CityLanding({ city, categories }: { city: CityPage; categories: A
 
       <section aria-labelledby="who" className="mt-14">
         <h2 id="who" className="font-display text-2xl font-semibold text-ink sm:text-3xl">
-          Phriends in {city.name} right now
+          Services in {city.name} right now
         </h2>
-        {phriends.length === 0 ? (
+        {services.length === 0 ? (
           <p className="mt-3 max-w-2xl leading-relaxed">
-            No Phriend in {city.name} yet. Be the first:{" "}
-            <a href={POST_URL} className="font-bold text-brand-text underline">
-              create your profile
+            No service in {city.name} yet. Be the first:{" "}
+            <a href={PROVIDER_URL} className="font-bold text-brand-text underline">
+              list your services
             </a>
             .
           </p>
         ) : (
-          <ul className="mt-6 flex flex-wrap gap-2">
-            {phriends.map((p) => (
-              <li key={p.id}>
-                <a href={appProfileUrl(p)} className="inline-flex items-center gap-2 rounded-full border-2 border-line px-3 py-1.5 text-sm font-bold text-ink hover:border-brand">
-                  {p.workName} <span className="font-semibold text-muted">₱{p.pricePerHour.toLocaleString("en-PH")}/hr</span>
-                </a>
+          <ul className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {services.map((s) => (
+              <li key={s.id}>
+                <ServiceTile item={s} icon={categories.find((c) => c.slug === s.category)?.iconNode} />
               </li>
             ))}
           </ul>
@@ -163,7 +165,7 @@ async function CityLanding({ city, categories }: { city: CityPage; categories: A
           ))}
           <li>
             <Link href={`/services/${activitySlug(categories[0]?.label ?? "eat and travel")}`} className="inline-block rounded-full bg-surface px-4 py-1.5 text-sm font-bold text-ink hover:bg-brand-soft">
-              All activities
+              All services
             </Link>
           </li>
         </ul>

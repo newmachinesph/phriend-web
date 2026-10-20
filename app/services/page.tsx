@@ -3,14 +3,14 @@ import Link from "next/link";
 import Image from "next/image";
 import { groupPhoto, NodeIcon } from "@/components/services";
 import { activityPath, getGroups, groupPath } from "@/lib/landing";
-import { breadcrumbJsonLd, pageMeta, POST_URL, SITE_URL } from "@/lib/site";
+import { breadcrumbJsonLd, pageMeta, PROVIDER_URL, SITE_URL } from "@/lib/site";
 import { ButtonLink, Container } from "@/components/ui";
 
 export const revalidate = 3600;
 
 export const metadata: Metadata = pageMeta({
-  title: "All services: book verified local pros",
-  description: "Every service on Phriend, from errands and pet care to weddings, lessons, tours and freelance work. Booked by the hour with ID-verified locals.",
+  title: "All services: local services from verified providers",
+  description: "Every service on Phriend, from aircon cleaning and appliance repair to bookkeeping, tutoring, photo and video, driving and errands. Verified providers.",
   path: "/services",
 });
 
@@ -36,9 +36,10 @@ export default async function ServicesPage() {
         {" › "}
         <span className="text-ink">Services</span>
       </nav>
-      <h1 className="mt-4 max-w-3xl font-display text-4xl font-semibold leading-tight text-ink sm:text-5xl">Every service, from verified locals</h1>
+      <h1 className="mt-4 max-w-3xl font-display text-4xl font-semibold leading-tight text-ink sm:text-5xl">Every service, from verified providers</h1>
       <p className="mt-5 max-w-3xl text-lg leading-relaxed">
-        {count} services in {groups.length} groups. Every Phriend has passed an ID check, you agree the price in the chat, and you pay in person.
+        {count} kinds of service in {groups.length} groups. Each service shows its price, photos, visit type and area; you book and chat with the provider in the
+        app, and pay the provider directly.
       </p>
 
       <ul className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
@@ -75,9 +76,12 @@ export default async function ServicesPage() {
 
       <section className="mt-16 rounded-card bg-brand-soft p-6 sm:p-10">
         <h2 className="font-display text-2xl font-semibold text-ink sm:text-3xl">Offer a service</h2>
-        <p className="mt-3 max-w-2xl text-lg leading-relaxed">Listing is free and you keep 100% of what you earn. Verify your ID, set your services and rates, and clients find you here.</p>
-        <ButtonLink href={POST_URL} className="mt-6">
-          Become a Phriend
+        <p className="mt-3 max-w-2xl text-lg leading-relaxed">
+          Listing is free and you keep 100% of what clients pay you. Verify your identity, list your services with their prices, photos, schedule and area at
+          provider.phriend.app, and clients find them here.
+        </p>
+        <ButtonLink href={PROVIDER_URL} className="mt-6">
+          List your services
         </ButtonLink>
       </section>
     </Container>

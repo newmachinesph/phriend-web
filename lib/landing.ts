@@ -1,24 +1,34 @@
-import { API_URL, APP_URL, apiHeaders, POST_URL, SITE_NAME, SITE_URL } from "@/lib/site";
+import { API_PLATFORM, API_URL, APP_URL, apiHeaders, PROVIDER_URL, SITE_NAME, SITE_URL } from "@/lib/site";
 
-/** Activity and city landing pages: live data from the app's public API, rendered on the marketing domain so it carries its authority. */
+/** Service and city landing pages: live data from the app's public API, rendered on the marketing domain so it carries its authority. */
 
 export type IconNode = [string, Record<string, string | number>][];
 export type Category = { slug: string; label: string; icon: string; activities: string[]; iconNode?: IconNode; group?: string | null };
 /** A service group (Errands & Home Help, Weddings & Events…), managed in Ops; the API sends only groups with a shown category. */
 export type CategoryGroup = { slug: string; label: string; icon: string; iconNode: IconNode };
-export type Phriend = {
-  id: number;
-  workName: string;
-  username?: string | null;
-  city: string;
-  imagePath: string[];
-  pricePerHour: number;
-  averageStarRating: number;
-  verified?: boolean;
-  activities?: string[];
-  languages: string[];
-  categories: string[];
+export type VisitType = "in_person" | "online" | "hybrid";
+export type Scope = "areas" | "city" | "nationwide";
+/** One service from GET /api/services (the shape phriend-ph lib/services.ts reads): `id` is "o<offeringId>", or "p<postId>" for a listing without services. */
+export type ServiceItem = {
+  id: string;
+  postId: number;
+  title: string;
+  description: string;
+  category: string | null;
+  price: number;
+  unit: "hour" | "session";
+  minHours: number | null;
+  photo: string | null;
+  visitType?: VisitType;
+  scope?: Scope;
+  city?: string | null;
+  coverage?: string[];
+  provider: { postId: number; workName: string; title?: string; photo: string | null; verified: boolean; rating: number; reviewCount: number; city: string };
+  /** Set only on a listing standing in for a service (see getServices): where it opens in the app. */
+  link?: string;
 };
+/** A listing from GET /api/phriends, read only to build services while the API has no service feed (see getServices). */
+type Listing = { id: number; workName: string; title?: string; city: string; imagePath: string[]; pricePerHour: number; averageStarRating: number; reviewCount?: number; verified?: boolean; categories: string[] };
 
 /** The cities with their own pages (the six the audit named first). */
 export const CITY_PAGES = [
@@ -43,15 +53,22 @@ export const activityPath = (c: Category) => `/services/${activitySlug(c.label)}
 export const comboPath = (c: Category, city: CityPage) => `/${activitySlug(c.label)}-in-${city.slug}`;
 /** The same page on the app (the friendly category path the app uses). */
 export const appCategoryUrl = (c: Category) => `${APP_URL}/${activitySlug(c.label)}`;
-export const appProfileUrl = (p: Phriend) => (p.username ? `${APP_URL}/@${p.username}` : `${APP_URL}/phriends/${p.id}`);
+/** One service's own page in the app. */
+export const appServiceUrl = (s: ServiceItem) => s.link ?? `${APP_URL}/services/${s.id}`;
 
-/** Categories and their groups in one call (the API sends both, in Ops order). */
+/** Groups the site never lists, whatever the API sends. */
+const EXCLUDED_GROUPS = new Set(["hangouts"]);
+
+/** Categories and their groups in one call (the API sends both, in Ops order), as the iOS app shows them. */
 export async function getCatalog(): Promise<{ categories: Category[]; groups: CategoryGroup[] }> {
   try {
-    const r = await fetch(`${API_URL}/api/categories`, { headers: apiHeaders(), next: { revalidate: 3600 } });
+    const r = await fetch(`${API_URL}/api/categories?platform=${API_PLATFORM}`, { headers: apiHeaders(), next: { revalidate: 3600 } });
     if (!r.ok) return { categories: [], groups: [] };
     const d = (await r.json()) as { categories?: Category[]; groups?: CategoryGroup[] };
-    return { categories: d.categories ?? [], groups: d.groups ?? [] };
+    return {
+      categories: (d.categories ?? []).filter((c) => !c.group || !EXCLUDED_GROUPS.has(c.group)),
+      groups: (d.groups ?? []).filter((g) => !EXCLUDED_GROUPS.has(g.slug)),
+    };
   } catch {
     return { categories: [], groups: [] };
   }
@@ -71,54 +88,89 @@ export async function findCategory(segment: string): Promise<Category | undefine
   return list.find((c) => activitySlug(c.label) === segment || c.slug === segment);
 }
 
-export async function getPhriends(q: { category?: string; city?: string }): Promise<Phriend[]> {
-  const sp = new URLSearchParams();
+const SERVICES_SHOWN = 12;
+
+/** A listing read as one service at its standard rate, the way the service feed itself shows a listing without services. */
+const listingService = (p: Listing, category: string | null, title: string): ServiceItem => ({
+  id: `p${p.id}`,
+  postId: p.id,
+  title,
+  description: "",
+  category,
+  price: p.pricePerHour,
+  unit: "hour",
+  minHours: null,
+  photo: null,
+  city: p.city,
+  provider: { postId: p.id, workName: p.workName, title: p.title, photo: p.imagePath[0] ?? null, verified: p.verified === true, rating: p.averageStarRating, reviewCount: p.reviewCount ?? 0, city: p.city },
+  link: `${APP_URL}/phriends/${p.id}`,
+});
+
+/** Services for a landing page, from the service feed. While the API does not serve /api/services yet, the listings stand in, one service each. */
+export async function getServices(q: { category?: string; city?: string }): Promise<ServiceItem[]> {
+  const sp = new URLSearchParams({ platform: API_PLATFORM });
   if (q.category) sp.set("category", q.category);
   if (q.city) sp.set("city", q.city);
-  try {
-    const r = await fetch(`${API_URL}/api/phriends?${sp}`, { headers: apiHeaders(), next: { revalidate: 600 } });
-    if (!r.ok) return [];
-    const d = (await r.json()) as { posts: Phriend[] };
-    return (d.posts ?? []).slice(0, 12);
-  } catch {
-    return [];
-  }
+  const get = async <T>(path: string): Promise<T | null> => {
+    try {
+      const r = await fetch(`${API_URL}${path}?${sp}`, { headers: apiHeaders(), next: { revalidate: 600 } });
+      return r.ok ? ((await r.json()) as T) : null;
+    } catch {
+      return null;
+    }
+  };
+  const feed = await get<{ items?: ServiceItem[] }>("/api/services");
+  if (feed?.items) return feed.items.slice(0, SERVICES_SHOWN);
+  const listings = (await get<{ posts?: Listing[] }>("/api/phriends"))?.posts ?? [];
+  if (!listings.length) return [];
+  const labels = new Map((await getCategories()).map((c) => [c.slug, c.label]));
+  return listings
+    .filter((p) => p.pricePerHour)
+    .slice(0, SERVICES_SHOWN)
+    .map((p) => {
+      const category = q.category ?? p.categories.find((c) => labels.has(c)) ?? null;
+      return listingService(p, category, (category && labels.get(category)) || "Services");
+    });
 }
 
 const peso = (n: number) => `₱${n.toLocaleString("en-PH")}`;
 const list = (xs: string[]) => (xs.length <= 1 ? xs.join("") : `${xs.slice(0, -1).join(", ")} and ${xs[xs.length - 1]}`);
 
-/** The page copy: several hundred words specific to the activity (and city), not a filter grid. */
-export function landingCopy(c: Category, city?: CityPage, phriends: Phriend[] = []) {
+/** The page copy: several hundred words specific to the service (and city), not a filter grid. */
+export function landingCopy(c: Category, city?: CityPage, services: ServiceItem[] = []) {
   const where = city ? city.name : "the Philippines";
+  const name = c.label.toLowerCase();
   const acts = c.activities.length ? c.activities : [c.label];
-  const prices = phriends.map((p) => p.pricePerHour).filter(Boolean);
-  const rate = prices.length ? `${peso(Math.min(...prices))} to ${peso(Math.max(...prices))} per hour` : "₱300 to ₱1,500 per hour, depending on the activity and the city";
-  const cities = [...new Set(phriends.map((p) => p.city))].slice(0, 5);
+  const prices = services.map((s) => s.price).filter(Boolean);
+  const from = prices.length ? `Services listed here currently start at ${peso(Math.min(...prices))}` : "";
+  const cities = [...new Set(services.map((s) => s.city || s.provider.city).filter(Boolean))].slice(0, 5);
+  const pricing = "Each service shows its price per job, per hour or per session, and any minimum booking, before you book.";
   return {
-    h1: city ? `${c.label} pros in ${city.name}` : `Book a local ${c.label} pro in the Philippines`,
+    h1: city ? `${c.label} services in ${city.name}` : `${c.label} services in the Philippines`,
     intro: city
-      ? `Need someone for ${c.label.toLowerCase()} in ${city.name}? Book a verified local by the hour for ${list(acts.slice(0, 3).map((a) => a.toLowerCase()))} and more. ${city.name} is ${city.blurb}, and a Phriend who lives there knows where to go, what it costs and how to get around. You agree on the plan and the price in the chat, meet in a public place (or at your home for a home service), and pay half in cash when you meet and half after.`
-      : `Book a verified local by the hour for ${c.label.toLowerCase()}: ${list(acts.slice(0, 4).map((a) => a.toLowerCase()))}. Every Phriend on this page confirmed their identity and age with a government ID, and a person approved their profile before it went live. You agree on the plan and the price in the chat, meet in a public place (or at your home for a home service), and pay half in cash when you meet and half after. Legitimate services only: nothing romantic, nothing sexual.`,
-    what: `A ${c.label} Phriend is a local who offers ${list(acts.map((a) => a.toLowerCase()))}. Each profile lists the services they offer with a price per hour or per session, the languages they speak, their non-negotiables and their weekly availability, so you know what you are booking before you send the request${cities.length ? `. Right now there are Phriends for ${c.label.toLowerCase()} in ${list(cities)}` : ""}.`,
+      ? `Need ${name} in ${city.name}? Browse services for ${list(acts.slice(0, 3).map((a) => a.toLowerCase()))} and more from verified providers who work there, plus online services that cover the whole country. ${city.name} is ${city.blurb}. Book the service and chat with the provider in the Phriend app, and pay the provider directly, as you agree with them.`
+      : `Book ${name} services from verified providers: ${list(acts.slice(0, 4).map((a) => a.toLowerCase()))}. Each service shows its own price, photos of the work, whether it is done online, in person or both, and the area it covers. Book it and chat with the provider in the Phriend app, and pay the provider directly, as you agree with them.`,
+    what: `${c.label} on Phriend covers ${list(acts.map((a) => a.toLowerCase()))}. Every service is listed on its own, with a price per job, per hour or per session, up to six photos of the work, a visit type (online, in person or hybrid), its own schedule and its own area: listed areas, a whole city, or nationwide for online work. The provider's profile shows their name, a title, the languages they speak, the Verified badge and the documents our team checked${cities.length ? `. Right now there are ${name} services based in ${list(cities)}` : ""}.`,
     how: [
-      `Browse the profiles below or open the full list in the app. Filter by city, language and rate, and read the reviews left by other members.`,
-      `Sign in and verify your ID (it takes about two minutes), then message the Phriend. Say what you have in mind, when, and where you want to meet.`,
-      `Send a booking request with the date, start time, number of hours and a meeting place: a public place, or your address for a home service. The Phriend accepts or declines, and it goes into your calendar.`,
-      `Meet up. Hand over 50% in cash when you arrive and the rest after. Then leave a review so the next member knows what to expect.`,
+      `Browse the services below or open the full list in the app. Compare prices, photos, visit type and area, and read the reviews.`,
+      `Message the provider in the app. Their FAQ answers reply instantly to the usual questions, like how to pay, the minimum booking and where they work.`,
+      `Send a booking request for a time in the service's schedule. For an at-home service, pick one of your saved addresses; online services need none. The provider accepts or declines, and it goes into your calendar.`,
+      `The work gets done, online or in person. Pay the provider directly, as you agreed, then leave a review so the next client knows what to expect.`,
     ],
-    rates: `Phriends for ${c.label.toLowerCase()} in ${where} currently charge ${rate}. The rate is per hour of work; food, tickets and fares are on you unless a service says otherwise. Phriend does not take a cut, so the rate you see is what the Phriend keeps.`,
-    safety: `Every member is ID-verified, meetups happen in public places or, for a home service, at your home, and the chat keeps the record of what was agreed. If someone shows up with extra people who were not agreed in the chat, do not proceed: leave and report. On a team booking, the teammates named on the booking are the agreed people; anyone else still is not. Never pay more than half upfront, and only to the account the Phriend shared in the chat.`,
+    rates: `Each provider sets the price of each service, per job, per hour or per session, depending on the work. ${from ? `${from} in ${where}. ` : ""}The price and any minimum booking show on the service before you book. Phriend does not take a cut, so what you pay goes to the provider.`,
+    safety: `Every provider is verified by our team with a government ID and a selfie, and document badges show which clearances, certificates or business documents were also checked. Agree the price and what is included in the chat, so both sides have the record. Payment goes to the provider directly: if you pay by e-wallet or bank, use only the account the provider gave you in the Phriend chat.`,
     faq: [
-      { q: `How much does a ${c.label.toLowerCase()} Phriend cost in ${where}?`, a: `Usually ${rate}. The rate is set by each Phriend and shown on their profile, together with the services they offer and any minimum booking.` },
-      { q: `How do I know the Phriend is who they say they are?`, a: `Every member verifies their identity and age with a government ID and a selfie before they can chat or book, and a person approves each Phriend profile before it shows. Verified profiles carry the badge.` },
+      { q: `How much does ${name} cost in ${where}?`, a: `${from ? `${from}. ` : ""}${pricing}` },
+      { q: `Can ${name} be done online?`, a: `Some ${name} services are online or hybrid; the visit type shows on each service. Online services can be booked from anywhere in the Philippines and need no address. For an at-home service, pick one of your saved addresses when you book.` },
+      { q: `How do I know the provider is who they say they are?`, a: `Our team checks every provider's government ID and a selfie before they get the Verified badge, and a person approves each listing before it shows. Document badges show the clearances, certificates or business documents that were also checked.` },
     ],
   };
 }
 
-/** JSON-LD for a landing page: breadcrumbs, the service offered, the Phriends listed, and the FAQ. */
-export function landingJsonLd(c: Category, path: string, phriends: Phriend[], copy: ReturnType<typeof landingCopy>, city?: CityPage) {
+/** JSON-LD for a landing page: breadcrumbs, the service offered, the services listed, and the FAQ. */
+export function landingJsonLd(c: Category, path: string, services: ServiceItem[], copy: ReturnType<typeof landingCopy>, city?: CityPage) {
   const url = `${SITE_URL}${path}`;
+  const prices = services.map((s) => s.price).filter(Boolean);
   const crumbs = [
     { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
     ...(city ? [{ "@type": "ListItem", position: 2, name: city.name, item: `${SITE_URL}/${city.slug}` }] : [{ "@type": "ListItem", position: 2, name: "Services", item: `${SITE_URL}/services/${activitySlug(c.label)}` }]),
@@ -131,24 +183,23 @@ export function landingJsonLd(c: Category, path: string, phriends: Phriend[], co
       {
         "@type": "Service",
         name: copy.h1,
-        serviceType: `${c.label} services, booked by the hour`,
+        serviceType: `${c.label} services`,
         provider: { "@type": "Organization", name: SITE_NAME, url: SITE_URL },
         areaServed: city ? { "@type": "City", name: city.name, containedInPlace: { "@type": "Country", name: "Philippines" } } : { "@type": "Country", name: "Philippines" },
         url,
-        ...(phriends.length ? { offers: { "@type": "AggregateOffer", priceCurrency: "PHP", lowPrice: Math.min(...phriends.map((p) => p.pricePerHour)), highPrice: Math.max(...phriends.map((p) => p.pricePerHour)), offerCount: phriends.length } } : {}),
+        ...(prices.length ? { offers: { "@type": "AggregateOffer", priceCurrency: "PHP", lowPrice: Math.min(...prices), highPrice: Math.max(...prices), offerCount: prices.length } } : {}),
       },
       {
         "@type": "ItemList",
-        name: `${c.label} Phriends${city ? ` in ${city.name}` : ""}`,
-        itemListElement: phriends.map((p, i) => ({ "@type": "ListItem", position: i + 1, url: appProfileUrl(p), name: p.workName, image: p.imagePath[0] })),
+        name: `${c.label} services${city ? ` in ${city.name}` : ""}`,
+        itemListElement: services.map((s, i) => ({ "@type": "ListItem", position: i + 1, url: appServiceUrl(s), name: s.title, ...(s.photo ? { image: s.photo } : {}) })),
       },
       { "@type": "FAQPage", mainEntity: copy.faq.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })) },
     ],
-  });
+  }).replace(/</g, "\\u003c"); // titles come from the API
 }
 
-export const LANDING_CTA = { browse: (c: Category) => appCategoryUrl(c), become: POST_URL };
-
+export const LANDING_CTA = { browse: (c: Category) => appCategoryUrl(c), become: PROVIDER_URL };
 /** Teams: the shapes GET /api/teams and /api/teams/{slug} return (types only; copied from phriend-ph lib/team-rules.ts). */
 export type TeamDeposit = 0 | 25 | 50;
 export type TeamMember = { postId: number; name: string; photo: string; username: string | null; role: string; lead: boolean };

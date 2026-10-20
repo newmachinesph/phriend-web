@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Ellipsis, Icon, type LucideProps } from "lucide-react";
-import { activityPath, groupPath, type Category, type CategoryGroup, type IconNode } from "@/lib/landing";
+import { BadgeCheck, Ellipsis, Icon, MapPin, Star, type LucideProps } from "lucide-react";
+import { activityPath, appServiceUrl, groupPath, type Category, type CategoryGroup, type IconNode, type ServiceItem } from "@/lib/landing";
 
 type Group = CategoryGroup & { categories: Category[] };
 
@@ -14,7 +14,7 @@ export function NodeIcon({ node, ...props }: { node?: IconNode } & Omit<LucidePr
 /** Groups with a photo (public/groups/<slug>.jpg, the same set the app uses); a group added in Ops later gets a tinted header. */
 const GROUP_PHOTOS = new Set([
   "errands", "repairs", "cleaning", "care", "pets", "events", "food", "performance", "photo-video", "beauty", "tutoring",
-  "lessons", "sports-fitness", "water-sports", "tours", "trips", "rides", "auto", "freelance", "hangouts", "others",
+  "lessons", "sports-fitness", "water-sports", "tours", "trips", "rides", "auto", "freelance", "others",
 ]);
 export const groupPhoto = (slug: string) => (GROUP_PHOTOS.has(slug) ? `/groups/${slug}.jpg` : null);
 
@@ -71,5 +71,66 @@ export function ServiceCards({ categories }: { categories: Category[] }) {
         </li>
       ))}
     </ul>
+  );
+}
+
+const VISIT = { in_person: "In person", online: "Online", hybrid: "Hybrid" } as const;
+const peso = (n: number) => `₱${n.toLocaleString("en-PH")}`;
+/** Only CDN photos go through next/image (next.config.ts allows that host); anything else falls back to the icon or initial. */
+const cdnPhoto = (url: string | null | undefined) => (url && url.startsWith("https://cdn.phriend.app/") ? url : null);
+
+/** Where a service happens, in a few words: "Nationwide", "Cebu City: Lahug, IT Park +2", "Makati". */
+export function serviceArea(s: ServiceItem) {
+  const city = s.city || s.provider.city;
+  if (s.scope === "nationwide") return "Nationwide";
+  if (s.scope === "areas" && s.coverage?.length) return `${city}: ${s.coverage.slice(0, 2).join(", ")}${s.coverage.length > 2 ? ` +${s.coverage.length - 2}` : ""}`;
+  return city;
+}
+
+/** One service on a landing page: its photo (or the category icon, never the person), title, price, area, and who offers it with a small round avatar. */
+export function ServiceTile({ item, icon }: { item: ServiceItem; icon?: IconNode }) {
+  const photo = cdnPhoto(item.photo);
+  const avatar = cdnPhoto(item.provider.photo);
+  const p = item.provider;
+  return (
+    <a href={appServiceUrl(item)} className="group flex h-full flex-col overflow-hidden rounded-card border border-line bg-white transition-colors hover:border-brand">
+      <div className="relative aspect-[4/3] overflow-hidden bg-brand-soft">
+        {photo ? (
+          <Image src={photo} alt={item.title} fill sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw" className="object-cover transition-transform duration-500 group-hover:scale-[1.03]" />
+        ) : (
+          <span className="absolute inset-0 grid place-items-center text-brand">
+            <NodeIcon node={icon} size={44} aria-hidden="true" />
+          </span>
+        )}
+        {item.visitType && <span className="absolute left-2 top-2 rounded-full bg-white/90 px-2 py-0.5 text-[11px] font-bold text-ink">{VISIT[item.visitType]}</span>}
+      </div>
+      <div className="flex flex-1 flex-col p-4">
+        <p className="line-clamp-2 font-display text-lg font-semibold leading-snug text-ink">{item.title}</p>
+        <p className="mt-1 font-bold text-ink">
+          {peso(item.price)}
+          <span className="text-xs font-semibold text-muted">{item.unit === "hour" ? "/hr" : " per job"}</span>
+        </p>
+        <p className="mt-0.5 flex items-center gap-1 text-sm text-muted">
+          <MapPin size={14} className="shrink-0 text-brand" aria-hidden="true" />
+          <span className="truncate">{serviceArea(item)}</span>
+        </p>
+        <p className="mt-auto flex items-center gap-1.5 pt-3 text-sm">
+          {avatar ? (
+            <Image src={avatar} alt="" width={24} height={24} className="size-6 shrink-0 rounded-full object-cover" />
+          ) : (
+            <span aria-hidden="true" className="grid size-6 shrink-0 place-items-center rounded-full bg-surface text-xs font-bold text-ink">
+              {p.workName.slice(0, 1)}
+            </span>
+          )}
+          <span className="min-w-0 truncate">
+            by <b className="text-ink">{p.workName}</b>
+          </span>
+          {p.verified && <BadgeCheck size={14} className="shrink-0 fill-verify text-white" aria-label="Verified" />}
+          <span className="ml-auto inline-flex shrink-0 items-center gap-1 font-bold text-body">
+            <Star size={13} className="fill-mango text-mango" aria-hidden="true" /> {p.reviewCount ? p.rating.toFixed(1) : "New"}
+          </span>
+        </p>
+      </div>
+    </a>
   );
 }

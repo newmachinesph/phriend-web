@@ -1,19 +1,16 @@
-import Image from "next/image";
 import Link from "next/link";
-import { BadgeCheck, Star } from "lucide-react";
-import { activityPath, appProfileUrl, CITY_PAGES, comboPath, LANDING_CTA, landingJsonLd, type Category, type CityPage, type Phriend, landingCopy } from "@/lib/landing";
-import { POST_URL } from "@/lib/site";
+import { activityPath, CITY_PAGES, comboPath, LANDING_CTA, landingJsonLd, type Category, type CityPage, type ServiceItem, landingCopy } from "@/lib/landing";
+import { PROVIDER_URL } from "@/lib/site";
 import { OCCASIONS } from "@/lib/occasions";
+import { ServiceTile } from "@/components/services";
 import { ButtonLink, Container } from "@/components/ui";
 
-const peso = (n: number) => `₱${n.toLocaleString("en-PH")}`;
-
-/** One activity (or activity-in-city) landing page: several hundred words of real copy, the live Phriends, and the schema. */
-export function Landing({ category, city, phriends, path, others }: { category: Category; city?: CityPage; phriends: Phriend[]; path: string; others: Category[] }) {
-  const copy = landingCopy(category, city, phriends);
+/** One service (or service-in-city) landing page: several hundred words of real copy, the live services, and the schema. */
+export function Landing({ category, city, services, path, others }: { category: Category; city?: CityPage; services: ServiceItem[]; path: string; others: Category[] }) {
+  const copy = landingCopy(category, city, services);
   return (
     <Container as="main" id="main" className="py-14 sm:py-20">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: landingJsonLd(category, path, phriends, copy, city) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: landingJsonLd(category, path, services, copy, city) }} />
       <nav aria-label="Breadcrumb" className="text-sm font-semibold text-muted">
         <Link href="/" className="hover:text-ink">
           Home
@@ -32,51 +29,29 @@ export function Landing({ category, city, phriends, path, others }: { category: 
       <h1 className="mt-4 max-w-3xl font-display text-4xl font-semibold leading-tight text-ink sm:text-5xl">{copy.h1}</h1>
       <p className="mt-5 max-w-3xl text-lg leading-relaxed">{copy.intro}</p>
       <div className="mt-6 flex flex-wrap gap-3">
-        <ButtonLink href={LANDING_CTA.browse(category)}>Browse all {category.label} Phriends</ButtonLink>
-        <ButtonLink href={POST_URL} variant="secondary">
-          Offer {category.label} as a Phriend
+        <ButtonLink href={LANDING_CTA.browse(category)}>Browse all {category.label} services</ButtonLink>
+        <ButtonLink href={PROVIDER_URL} variant="secondary">
+          Offer {category.label} on Phriend
         </ButtonLink>
       </div>
 
-      <section aria-labelledby="phriends" className="mt-14">
-        <h2 id="phriends" className="font-display text-2xl font-semibold text-ink sm:text-3xl">
-          {category.label} Phriends{city ? ` in ${city.name}` : ""} right now
+      <section aria-labelledby="services" className="mt-14">
+        <h2 id="services" className="font-display text-2xl font-semibold text-ink sm:text-3xl">
+          {category.label} services{city ? ` in ${city.name}` : ""} right now
         </h2>
-        {phriends.length === 0 ? (
+        {services.length === 0 ? (
           <p className="mt-3 max-w-2xl leading-relaxed">
-            No {category.label.toLowerCase()} Phriend {city ? `in ${city.name} ` : ""}yet. Be the first:{" "}
-            <a href={POST_URL} className="font-bold text-brand-text underline">
-              create your profile
+            No {category.label.toLowerCase()} service {city ? `in ${city.name} ` : ""}yet. Offer one:{" "}
+            <a href={PROVIDER_URL} className="font-bold text-brand-text underline">
+              list your services
             </a>{" "}
-            and clients in {city ? city.name : "your city"} will find you here.
+            and clients in {city ? city.name : "your city"} will find them here.
           </p>
         ) : (
           <ul className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {phriends.map((p) => (
-              <li key={p.id}>
-                <a href={appProfileUrl(p)} className="group block overflow-hidden rounded-card border border-line bg-white transition-colors hover:border-brand">
-                  <div className="relative aspect-[3/4] overflow-hidden">
-                    <Image src={p.imagePath[0]} alt={`${p.workName}, ${category.label} Phriend in ${p.city}`} width={480} height={640} sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw" className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]" />
-                    {p.verified && (
-                      <span className="absolute left-2 top-2 inline-flex items-center gap-1 rounded-full bg-white/90 px-2 py-0.5 text-[11px] font-bold text-verify">
-                        <BadgeCheck size={14} aria-hidden="true" /> Verified
-                      </span>
-                    )}
-                  </div>
-                  <div className="p-4">
-                    <p className="flex items-center justify-between font-display text-lg font-semibold text-ink">
-                      {p.workName}
-                      <span className="inline-flex items-center gap-1 text-sm font-bold text-body">
-                        <Star size={14} className="fill-mango text-mango" aria-hidden="true" /> {p.averageStarRating.toFixed(1)}
-                      </span>
-                    </p>
-                    <p className="text-sm text-muted">{p.city}</p>
-                    <p className="mt-1 font-bold text-ink">
-                      {peso(p.pricePerHour)}
-                      <span className="text-xs font-semibold text-muted">/hr</span>
-                    </p>
-                  </div>
-                </a>
+            {services.map((s) => (
+              <li key={s.id}>
+                <ServiceTile item={s} icon={category.iconNode} />
               </li>
             ))}
           </ul>
@@ -84,7 +59,7 @@ export function Landing({ category, city, phriends, path, others }: { category: 
       </section>
 
       <section className="article mt-14 max-w-3xl">
-        <h2>What a {category.label} Phriend does</h2>
+        <h2>What {category.label.toLowerCase()} covers</h2>
         <p>{copy.what}</p>
         <h2>How a booking works</h2>
         <ol>
@@ -94,7 +69,7 @@ export function Landing({ category, city, phriends, path, others }: { category: 
         </ol>
         <h2>What it costs</h2>
         <p>{copy.rates}</p>
-        <h2>Staying safe</h2>
+        <h2>Trust and safety</h2>
         <p>{copy.safety}</p>
         <h2>Questions people ask</h2>
         <dl>
@@ -109,7 +84,7 @@ export function Landing({ category, city, phriends, path, others }: { category: 
 
       <section aria-labelledby="cities" className="mt-14">
         <h2 id="cities" className="font-display text-2xl font-semibold text-ink">
-          {category.label} Phriends by city
+          {category.label} by city
         </h2>
         <ul className="mt-4 flex flex-wrap gap-2">
           {CITY_PAGES.filter((c) => c.slug !== city?.slug).map((c) => (
@@ -148,7 +123,7 @@ export function Landing({ category, city, phriends, path, others }: { category: 
 
       <section aria-labelledby="more" className="mt-14">
         <h2 id="more" className="font-display text-2xl font-semibold text-ink">
-          Other things you can hire a Phriend for{city ? ` in ${city.name}` : ""}
+          Other services{city ? ` in ${city.name}` : ""}
         </h2>
         <ul className="mt-4 flex flex-wrap gap-2">
           {others

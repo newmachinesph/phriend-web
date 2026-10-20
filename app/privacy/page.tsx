@@ -111,7 +111,8 @@ export default function PrivacyPage() {
           address.
         </li>
         <li>
-          <strong>Cloudflare R2</strong>: storage of uploaded photos.
+          <strong>Cloudflare R2</strong>: storage of uploaded photos and, in private storage that has no public
+          address, of verification documents.
         </li>
         <li>
           <strong>Neon</strong>: database hosting.
@@ -135,14 +136,23 @@ export default function PrivacyPage() {
           on your account until you delete it or your account.
         </li>
         <li>
-          <strong>Verification data</strong> is retained only as long as needed to confirm the result and handle
-          disputes, then deleted from our private storage.
+          <strong>Verification documents</strong>: a document our team approved is kept while your account exists, as
+          the record behind your badge. The files of a document that was rejected, or replaced by a newer upload, are
+          deleted from our private storage 30 days after that decision or replacement; the record of the decision (the
+          kind of document, its status and dates) stays. When you delete your account, all your verification documents,
+          files and records, are deleted. For accounts verified before Phriend&apos;s own document check, a one-way hash
+          of the verified ID stays after the account is deleted, so a new account made with the same ID is flagged to
+          our team.
         </li>
         <li>
-          <strong>Account data</strong> is kept while your account is active. When you delete your account, your
-          account, provider profile, services, photos, saved addresses, favorites, reviews, bookings, notes, job posts and reports are removed right
-          away, except the moderation log, which keeps a record of any action taken on the account. Chat messages are
-          delivered and stored by Ably under its message retention; deleting your account does not itself erase them.
+          <strong>Account data</strong> is kept while your account is active. When you delete your account, your name,
+          profile photo, sign-in links, work and chat photos, verification documents, saved addresses, favorites and
+          chat settings are deleted right away, and your provider profile, services and job posts are taken down. Reviews
+          and reports about you, the record of your bookings, and the messages the other member can still read stay,
+          shown as &ldquo;Deleted account&rdquo;, and the moderation log keeps a record of any action taken on the
+          account. Chat messages are delivered and stored by Ably under its message retention; deleting your account
+          does not itself erase them. The details are on the <Link href="/delete-account">Delete your account</Link>{" "}
+          page.
         </li>
         <li>
           <strong>Logs</strong> are kept for up to 90 days.

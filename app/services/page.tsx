@@ -6,7 +6,7 @@ import { activityPath, getGroups, groupPath } from "@/lib/landing";
 import { breadcrumbJsonLd, pageMeta, PROVIDER_URL, SITE_URL } from "@/lib/site";
 import { ButtonLink, Container } from "@/components/ui";
 
-export const revalidate = 3600;
+export const revalidate = 60; // category, group and platform hiding set in Ops shows within a minute (lib/landing.ts getCatalog)
 
 export const metadata: Metadata = pageMeta({
   title: "All services: local services from verified providers",

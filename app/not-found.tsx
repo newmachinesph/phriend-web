@@ -3,7 +3,8 @@ import Link from "next/link";
 import { APP_URL } from "@/lib/site";
 import { ButtonLink, Container } from "@/components/ui";
 
-export const metadata: Metadata = { title: "Page not found", robots: { index: false } };
+// Next.js already adds noindex to a 404
+export const metadata: Metadata = { title: "Page not found" };
 
 const LINKS = [
   { href: "/services", label: "All services" },

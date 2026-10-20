@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import { BadgeCheck, Camera, Download, GraduationCap, Map as MapIcon, MessageCircle, PartyPopper, Wrench, type LucideIcon } from "lucide-react";
+import { BadgeCheck, Camera, GraduationCap, Map as MapIcon, MessageCircle, PartyPopper, Wrench, type LucideIcon } from "lucide-react";
 import { OverlayTool } from "@/components/overlay-tool";
 import { breadcrumbJsonLd, cdn, pageMeta, PROVIDER_URL } from "@/lib/site";
 import { ButtonLink, Container } from "@/components/ui";
@@ -21,7 +21,6 @@ export const metadata: Metadata = {
   twitter: { card: "summary_large_image", title: SHARE_TITLE, description: SHARE_DESCRIPTION, images: [OG.url] },
 };
 
-const KIT_PDF = cdn("/creators/Phriend-Creator-Collab-Kit.pdf");
 const MESSENGER = "https://m.me/phriendapp";
 
 const STEPS = [
@@ -63,12 +62,13 @@ export default function CreatorsPage() {
             <ButtonLink href="#overlay" className="text-lg">
               Make your overlay
             </ButtonLink>
+            {/* the earlier creator kit PDF described the old product; questions and the full rules go to Messenger until a new kit is made */}
             <a
-              href={KIT_PDF}
-              download
+              href={MESSENGER}
+              rel="noreferrer"
               className="inline-flex items-center justify-center gap-2 rounded-control border-2 border-white/30 px-6 py-3 text-lg font-bold text-white transition-colors hover:bg-white/10"
             >
-              <Download size={20} aria-hidden="true" /> Creator kit (PDF)
+              <MessageCircle size={20} aria-hidden="true" /> Ask us on Messenger
             </a>
           </div>
           </div>
@@ -106,7 +106,7 @@ export default function CreatorsPage() {
           <p className="mt-6 flex items-start gap-2.5 text-base font-semibold text-ink">
             <BadgeCheck size={20} className="mt-0.5 shrink-0 text-brand" aria-hidden="true" />
             The prize is one booking of a service you list, at its listed price. Say where you work in your caption before comments open, so
-            the winner is someone you can serve. Full rules are in the creator kit.
+            the winner is someone you can serve. Message us for the full rules.
           </p>
           <ButtonLink href={PROVIDER_URL} variant="secondary" className="mt-6">
             List your services

@@ -2,26 +2,117 @@
 import localFont from "next/font/local";
 
 // Inter (body and UI) and Plus Jakarta Sans (headings), self-hosted from ./fonts (copies of phriend-ui/fonts, see its
-// README for how they were made). Each is ONE variable woff2 holding Google's "latin" subset plus ₱ (U+20B1) and ★:
-// with next/font/google the peso sign sat in the 84 KB latin-ext file, which every page with a price fetched at high
-// priority, and builds had to reach fonts.googleapis.com. Glyphs, kerning and figures are the ones Google served.
+// README for how they were made). Each family has three faces cut from Google Fonts' own variable fonts:
+// - "latin-peso": Google's "latin" subset plus ₱ (U+20B1) and ★, preloaded. With next/font/google the peso sign sat in
+//   the 84 KB latin-ext file, which every page with a price fetched at high priority.
+// - "latin-ext" (Łukasz, Đặng, Ñ is already latin) and "vietnamese" (Nguyễn): Google's subsets minus what the faces
+//   before them hold, so the unicode-ranges are disjoint, nothing is preloaded, and the browser fetches one only when
+//   the page shows one of its characters. Without them such names fell back to Arial mid-word.
+// next/font/local cannot give each src its own unicode-range, so each face is its own call. The family name is the
+// const's name: the latin calls are named `inter` / `jakarta` (both bundlers then call the family that, webpack in
+// builds and Turbopack in dev), and the extra faces join it by naming it in `declarations`. The exported `variable`
+// carries the extra faces' classes so their CSS ships with the page. Font loader options must be literals, hence the
+// repeated ranges (each face's own cmap).
 // The weight ranges match the faces next/font/google declared (Inter 400-700, Jakarta 600-800), so a heavier class
 // (font-extrabold, font-black) still renders at the top weight, as before.
 
-export const inter = localFont({
+const inter = localFont({
   src: "./fonts/inter-latin-peso.woff2",
   weight: "400 700",
   style: "normal",
   variable: "--font-inter",
   display: "swap",
   adjustFontFallback: "Arial",
+  declarations: [
+    {
+      prop: "unicode-range",
+      value:
+        "U+0000,U+0020-007E,U+00A0-00AC,U+00AE-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+2002,U+2009,U+200B,U+2013-2014,U+2018-201A,U+201C-201E,U+2022,U+2026,U+2032-2033,U+2039-203A,U+2044,U+20AC,U+20B1,U+2122,U+2191,U+2193,U+2212,U+2605,U+FEFF",
+    },
+  ],
 });
 
-export const jakarta = localFont({
+const interLatinExt = localFont({
+  src: "./fonts/inter-latin-ext.woff2",
+  weight: "400 700",
+  style: "normal",
+  variable: "--font-inter-latin-ext",
+  display: "swap",
+  preload: false,
+  adjustFontFallback: false,
+  declarations: [
+    { prop: "font-family", value: "inter" },
+    {
+      prop: "unicode-range",
+      value:
+        "U+0100-0130,U+0132-0148,U+014A-0151,U+0154-01C3,U+01C5-0254,U+0256-027B,U+027E-0284,U+0286-0290,U+0292-02A4,U+02A6-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+1D00,U+1D0D,U+1D1B,U+1D43,U+1D47-1D49,U+1D4D,U+1D4F-1D50,U+1D52,U+1D56-1D58,U+1D5B,U+1D62-1D65,U+1D9C,U+1DA0,U+1DBB,U+1DBF,U+1E00-1E9B,U+1E9D-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20AF,U+20B2-20B5,U+20B8-20BA,U+20BC-20BF,U+2113,U+2C7C,U+2C7F,U+A7FF",
+    },
+  ],
+});
+
+const interVietnamese = localFont({
+  src: "./fonts/inter-vietnamese.woff2",
+  weight: "400 700",
+  style: "normal",
+  variable: "--font-inter-vietnamese",
+  display: "swap",
+  preload: false,
+  adjustFontFallback: false,
+  declarations: [
+    { prop: "font-family", value: "inter" },
+    { prop: "unicode-range", value: "U+1EA0-1EF1" },
+  ],
+});
+
+const jakarta = localFont({
   src: "./fonts/plus-jakarta-sans-latin-peso.woff2",
   weight: "600 800",
   style: "normal",
   variable: "--font-jakarta",
   display: "swap",
   adjustFontFallback: "Arial",
+  declarations: [
+    {
+      prop: "unicode-range",
+      value:
+        "U+000D,U+0020-007E,U+00A0-00AC,U+00AE-00FF,U+0102,U+0131,U+0152-0153,U+02C6,U+02DA,U+02DC,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+2002,U+2009,U+200B,U+2013-2014,U+2018-201A,U+201C-201E,U+2022,U+2026,U+2032-2033,U+2039-203A,U+2044,U+20AC,U+20B1,U+2122,U+2191,U+2193,U+2212,U+2215,U+2605",
+    },
+  ],
 });
+
+const jakartaLatinExt = localFont({
+  src: "./fonts/plus-jakarta-sans-latin-ext.woff2",
+  weight: "600 800",
+  style: "normal",
+  variable: "--font-jakarta-latin-ext",
+  display: "swap",
+  preload: false,
+  adjustFontFallback: false,
+  declarations: [
+    { prop: "font-family", value: "jakarta" },
+    {
+      prop: "unicode-range",
+      value:
+        "U+0100-0101,U+0103-0130,U+0132-0148,U+014A-0151,U+0154-017E,U+018F,U+0192,U+01A0-01A1,U+01AF-01B0,U+01C4-01CC,U+01E6-01E7,U+01EA-01EB,U+01FA-021B,U+022A-022D,U+0230-0233,U+0237,U+0259,U+02C7,U+02DD,U+1E08-1E09,U+1E0C-1E0F,U+1E14-1E17,U+1E1C-1E1D,U+1E20-1E21,U+1E24-1E25,U+1E2A-1E2B,U+1E2E-1E2F,U+1E36-1E37,U+1E3A-1E3B,U+1E42-1E49,U+1E4C-1E53,U+1E5A-1E5B,U+1E5E-1E69,U+1E6C-1E6F,U+1E78-1E7B,U+1E80-1E85,U+1E8E-1E8F,U+1E92-1E93,U+1E97,U+1E9E,U+1EF2-1EF9,U+2020,U+20A1,U+20A3-20A4,U+20A6-20AB,U+20AD-20AE,U+20B2-20B5,U+20B8-20BA,U+20BC-20BF,U+2113",
+    },
+  ],
+});
+
+const jakartaVietnamese = localFont({
+  src: "./fonts/plus-jakarta-sans-vietnamese.woff2",
+  weight: "600 800",
+  style: "normal",
+  variable: "--font-jakarta-vietnamese",
+  display: "swap",
+  preload: false,
+  adjustFontFallback: false,
+  declarations: [
+    { prop: "font-family", value: "jakarta" },
+    { prop: "unicode-range", value: "U+1EA0-1EF1" },
+  ],
+});
+
+/** Each app's <html> adds `inter.variable` and `jakarta.variable`: the CSS variable plus the on-demand faces. */
+const interFaces = { ...inter, variable: `${inter.variable} ${interLatinExt.variable} ${interVietnamese.variable}` };
+const jakartaFaces = { ...jakarta, variable: `${jakarta.variable} ${jakartaLatinExt.variable} ${jakartaVietnamese.variable}` };
+export { interFaces as inter, jakartaFaces as jakarta };

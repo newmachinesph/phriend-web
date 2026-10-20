@@ -32,7 +32,6 @@ export function TeamTile({ team: t }: { team: TeamCard }) {
           {t.rating !== null && (
             <span className="inline-flex shrink-0 items-center gap-1 text-sm font-bold text-body">
               <Star size={14} className="fill-mango text-mango" aria-hidden="true" /> {t.rating.toFixed(1)}
-              <span className="font-medium text-muted">({t.reviewCount})</span>
             </span>
           )}
         </p>

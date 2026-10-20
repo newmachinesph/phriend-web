@@ -58,7 +58,7 @@ export const appServiceUrl = (s: ServiceItem) => `${APP_URL}/services/${s.id}`;
 const CATALOG_REVALIDATE_S = 60;
 
 /** Categories and their groups in one call (the API sends both, in Ops order), as the iOS app shows them. */
-export async function getCatalog(): Promise<{ categories: Category[]; groups: CategoryGroup[] }> {
+async function getCatalog(): Promise<{ categories: Category[]; groups: CategoryGroup[] }> {
   try {
     const r = await fetch(`${API_URL}/api/categories?platform=${API_PLATFORM}`, { headers: apiHeaders(), next: { revalidate: CATALOG_REVALIDATE_S } });
     if (!r.ok) return { categories: [], groups: [] };
@@ -169,22 +169,7 @@ export function landingJsonLd(c: Category, path: string, services: ServiceItem[]
 }
 
 export const LANDING_CTA = { browse: (c: Category) => appCategoryUrl(c), become: PROVIDER_URL };
-/** Teams: the shapes GET /api/teams and /api/teams/{slug} return (types only; copied from phriend-ph lib/team-rules.ts). */
-export type TeamDeposit = 0 | 25 | 50;
-export type TeamMember = { postId: number; name: string; photo: string; username: string | null; role: string; lead: boolean };
-export type TeamPackage = {
-  id: number;
-  title: string;
-  description: string;
-  photo: string | null;
-  price: number;
-  hours: number;
-  includedGuests: number;
-  maxGuests: number;
-  extraGuestFee: number;
-  memberPostIds: number[];
-  bookable?: boolean;
-};
+/** Teams: the card shape GET /api/teams returns (types only; copied from phriend-ph lib/team-rules.ts). */
 export type TeamCard = {
   id: number;
   slug: string;

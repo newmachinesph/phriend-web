@@ -18,26 +18,6 @@ export function Figure({ src, alt, caption, priority = false }: { src: string; a
   );
 }
 
-/** Two app screenshots side by side in phone frames, with a caption under each. */
-export function PhoneShots({ shots }: { shots: { src: string; alt: string; caption: string }[] }) {
-  return (
-    <div className="my-10 rounded-3xl bg-navy-gradient px-6 py-10 sm:px-10">
-      <div className="mx-auto grid max-w-2xl gap-8 sm:grid-cols-2">
-        {shots.map((s) => (
-          <figure key={s.src} className="mx-auto w-full max-w-[260px]">
-            <div className="rounded-[2.2rem] bg-[#081a3f] p-2.5 shadow-float">
-              <div className="relative aspect-[390/780] overflow-hidden rounded-[1.8rem] bg-white">
-                <Image src={s.src} alt={s.alt} width={390} height={780} sizes="260px" className="h-full w-full object-cover object-top" />
-              </div>
-            </div>
-            <figcaption className="mt-4 text-center text-sm font-bold text-white/85">{s.caption}</figcaption>
-          </figure>
-        ))}
-      </div>
-    </div>
-  );
-}
-
 export function Callout({ title, children }: { title: string; children: ReactNode }) {
   return (
     <aside className="my-8 rounded-2xl border-2 border-brand/30 bg-brand-soft px-6 py-5">

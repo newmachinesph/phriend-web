@@ -1,6 +1,6 @@
 # phriend-web
 
-Marketing site for Phriend, a local-services marketplace in the Philippines where ID-verified adults offer guiding, photo and video, tutoring, driving and errand services by the hour. Live at [phriend.app](https://phriend.app).
+Marketing site for Phriend, a local-services marketplace in the Philippines where clients book services from verified providers: aircon cleaning and repair, bookkeeping and tax filing, tutoring, photo and video, driving, errands and more, each priced per job, hour or session. Live at [phriend.app](https://phriend.app).
 
 ## Part of Phriend
 
@@ -12,6 +12,7 @@ Marketing site for Phriend, a local-services marketplace in the Philippines wher
 | phriend-api | FastAPI service (api.phriend.app) |
 | phriend-admin | Ops moderation portal |
 | phriend-expo | Android/iOS app |
+| provider.phriend.app | Provider site (Phriend Provider) |
 
 ## What's on the site
 

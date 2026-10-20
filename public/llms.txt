@@ -1,100 +1,80 @@
 # Phriend
 
-> Phriend is a Philippine app for booking ID-verified local guides and pros by the hour: city and food tours, photo and video shoots, tutoring and lessons, hiking guides, drivers, errand helpers and more. Members are 18+, ID-verified, meet in public places or, for a home service, at the client's home, and pay each other directly: 50% in cash on a first meetup, 50% after.
+> Phriend is a Philippine marketplace for booking local services from verified providers: aircon cleaning and repair, appliance check-ups, bookkeeping and tax filing, tutoring, photography and video, driving, errands and deliveries, moving help, tour guiding, event coordination and more. Clients browse services, each with its own price (per job, per hour or per session), photos of the work, visit type, schedule and area. Booking and chat happen in the app; payment is agreed with the provider and paid to them directly.
 
 - Website: https://phriend.app
-- App (runs in the browser, installable as a PWA): https://web.phriend.app
+- Client app: Phriend (Android, iOS) and https://web.phriend.app in the browser
+- Provider app: https://provider.phriend.app (the Phriend Provider app is coming to the app stores)
 - Contact: support@phriend.app
 - Launched 2026 in the Philippines. Nationwide, Metro Manila first.
-- Full text of the FAQ, safety rules and community guidelines: https://phriend.app/llms-full.txt
+- Full text of the FAQ, trust and safety rules and community guidelines: https://phriend.app/llms-full.txt
 
 ## What Phriend is
 
-- A listing, chat and booking platform. Adults publish a "Phriend profile" offering local services and activities by the hour, with their own services and rates; other adults search, chat, book a time and meet in public.
-- Not a dating app. Romantic or sexual services, compensated dating and escort services are banned and get an account removed immediately.
-- Not a party to any meetup or payment. Phriend holds no money, processes no payments and, at the time of writing, takes no commission.
-- No install needed. It runs at web.phriend.app on any phone; add it to the home screen for chat, bookings and in-app notifications. Sign in with Google, or with an email address and password (verified by a 6-digit code).
-
-## Who it is for
-
-- Clients: anyone 18+ in the Philippines who needs a local service: a tour guide, a photographer, a tutor, a hiking guide, a driver, an errand runner, event coverage or on-site help.
-- Phriends: locals 18+ who want a side income from what they already have: their city, free time, skills and stories. They set their own rate and hours and keep 100% of what they earn.
+- A services marketplace. Clients browse services, not people. Each service has its own price per job, per hour or per session, up to 6 photos of the work, a visit type (online/remote, in person or hybrid), its own schedule and its own area (listed areas, a whole city, or nationwide for online work).
+- Providers keep a lean profile: one round face photo, a name, a title such as "Online Bookkeeper", a short About me, the languages they speak, their services, a Verified badge, and document badges for what Phriend's team checked.
+- Not a party to any booking or payment. Phriend holds no money, processes no payments and, at the time of writing, takes no commission.
+- For legitimate services only. Sexual or romantic services, dating and escort services are banned and get an account removed immediately.
 
 ## How it works
 
 Clients:
-1. Browse by city, language, activity, area, keyword and rate, then narrow by sub-activity. Every profile shows the verified badge, reviews with photos, the Phriend's non-negotiables and their services and rates. Favorite profiles follow your account.
-2. Chat in the app (Google or email sign-in) and agree on the plan, so both sides have a record.
-3. Book: pick a service if one is listed, then send a request with the date, start time, hours (1 to 8, up to 60 days ahead), a meeting place (a public place, or the client's address for a home service) and a note. The Phriend accepts or declines. Add it to Google Calendar or download the .ics.
-4. Meet (in public, or at your home for a home service), pay the 50% downpayment (cash in person on a first meetup, e-wallet only for repeat trusted Phriends), settle the rest after, then leave a review with up to 4 photos.
+1. Browse services by what you need and where. Each one shows its price, photos of the work, whether it is online, in person or hybrid, the area it covers and the provider's badges.
+2. Chat with the provider in the app. Their FAQ answers reply instantly to the usual questions: how to pay, the minimum booking, where they work.
+3. Book a time from the service's own schedule and, for an at-home service, pick one of your saved addresses. Online services need no address. The provider accepts or declines.
+4. Get it done, online or in person. Pay the provider directly, as you agreed with them, then leave a review.
 
-Phriends:
-1. Verify you are 18+ with a quick ID check through Didit (PhilID, passport, driver's license or UMID plus a selfie). Verification is required before a profile goes live.
-2. Accept the seven-point Phriend agreement, then write a profile: up to 8 photos, city, activities and sub-activities, languages, non-negotiables, an hourly rate (up to ₱3,000) and up to 12 services with their own price per hour or per session (₱50 to ₱50,000), a minimum of 1 to 12 hours and an optional photo. It stays live for 30 days; save it again to renew.
-3. Set your weekly availability and lock out busy dates up to a year ahead. Accept or decline booking requests; they arrive in the app and by email.
-4. Meet clients, get paid directly in cash, track it all in the Manage dashboard.
+Providers (at provider.phriend.app):
+1. Verify your identity with a government ID and a selfie. Add an NBI clearance, police clearance, barangay certificate, certificates, business documents or proof of address to earn a badge for each one our team checks. Not all are required.
+2. Set up a lean profile: one face photo, your name, a title, a short About me (no emojis) and your languages.
+3. List each service with its own price per job, hour or session, up to 6 photos of your work, a visit type, a schedule and an area. A person reviews each listing before it goes live.
+4. Accept booking requests, chat with clients and set FAQ answers that reply instantly. Clients pay you directly; you keep 100%.
 
 ## Features
 
-- Search and favorites: filters for city, language, activity, area, keyword and rate, sub-activity chips, favorites that follow the account, share a profile link.
-- Bookings: a client picks a service, a date, start time, 1 to 8 hours, a meeting place (a public place, or the client's address for a home service) and a note, up to 60 days ahead; the Phriend accepts or declines; either side can cancel with a reason and mark the meetup completed once its time has passed. Every booking has "Add to Google Calendar" and an .ics download.
-- Schedule: Phriends set weekly days and hours and lock out dates up to a year ahead. Requests outside those hours, on a locked-out date or over an accepted booking are refused.
-- Services and rates: on top of the hourly rate, a Phriend lists up to 12 services, each with its own price per hour or per session, a minimum number of hours and an optional photo.
-- Manage dashboard (Phriends): profile views, favorites, reviews, bookings by status, an earnings estimate (cash, paid in person), private notes that can be linked to a booking, and an activity log.
-- Chat: photos, emojis, saved replies, delete for everyone, archive, block, typing and online indicators. Offensive language is refused: two warnings, then mutes of 1 hour, 24 hours, 7 days and 30 days.
-- Reviews: any signed-in member can review a Phriend with a star rating, text and up to 4 photos, one review per member per Phriend; reviews show on the profile.
-- Gigs: clients post what they need (activity, city, budget per hour, date, details); Phriends with a live profile mark interest and chat; anyone can report a gig.
-- Notifications: an in-app bell and an email for every booking request, acceptance, decline, cancellation and completion, and for every new review.
-- Account: Google or email sign-in (email accounts confirm a 6-digit code; passwords are stored only as scrypt hashes); members delete their own account by typing DELETE, which removes the profile, photos, favorites, reviews, bookings, notes and gigs.
-- Safety: ID verification through Didit before a profile goes live, sample profiles marked as samples and unbookable, moderation by our moderators with an AI first pass on reports, profiles and gigs, a human review queue and an audit log.
-- Payments: none in the app. 50% in cash on a first meetup, 50% after. E-wallets only for repeat, trusted Phriends.
+- Services first: browse services, each with its own price, photos, visit type, schedule and area.
+- Online, in person or hybrid: online services cover the whole country; in-person ones list the areas they cover, or a whole city.
+- Saved addresses: save Home, Work and any other address for at-home services. An address is shared with a provider only for a booking at it.
+- Bookings: pick a time from the service's schedule; accept, decline or cancel with a reason; add it to your calendar.
+- Chat: photos, read receipts and typing indicators; archive or block anyone.
+- Instant FAQ answers: providers set answers to the usual questions and the chat replies with them right away.
+- Verified and document badges: Verified means our team checked a government ID and a selfie; document badges show what else was checked.
+- Reviews: a star rating, a few words and photos, left after a booking.
+- Post a job: describe what you need with a budget and a date; providers reply in the chat.
+- Teams: a few verified providers offering a service together, with packages and one group chat.
+- Notifications: a bell in the app and an email for every message, booking update and review.
+- Account: sign in with Google or email; delete your account yourself at any time.
 
 ## The rules (short version)
 
-1. Public places, or the client's home for a home service (repairs, cleaning, moving, tutoring, pet care and the like); the client decides. Never a hotel room, an overnight stay or the Phriend's own place.
-2. Only the people agreed in the chat (on a team booking, the teammates named on the booking). If someone arrives with extra people not agreed in chat: do not proceed, cancel, leave, report. Any downpayment is refunded in full.
-3. Pay 50% at the start and 50% after. On a first meetup the downpayment is cash, in person, when you meet. Never more than half upfront.
-4. E-wallets (GCash, Maya) or bank transfer only for repeat Phriends you have already met and trust, and only to the account shared in the chat. Anything else is a scam.
-5. ID verification through Didit: government ID plus selfie, 18+ check. Verified profiles show a badge. Phriends also pin non-negotiables (public meet-up only, no physical contact, cash downpayment on arrival, daytime only, no alcohol, no smoking, groups agreed in chat, no client vehicles, ID check on arrival, no overnight or out-of-town) to their profile.
-6. Tell someone your plan, keep location sharing on, leave if something feels off.
-7. Report a profile or a gig (up to 4 photos as evidence) and block from the chat. Reports get an AI first pass; unclear cases go to one of our moderators; serious cases go to the authorities.
-8. Late: more than 30 minutes late without notice, the other side may cancel; a late Phriend refunds the downpayment. Cancel at least 24 hours ahead, in the app with a reason.
-9. Emergencies: call 911 (Philippine National Police) first, report to Phriend after.
+1. Book verified providers, and check the document badges that matter for the job.
+2. Agree the price, the time and what is included in the chat and the booking, so both sides have the record.
+3. Payment is agreed with the provider and paid to them directly: cash, e-wallet or bank transfer. Never pay more upfront than was agreed in the chat, never a fee on top, and only to the account the provider gave you in the chat.
+4. Every service says where it happens: online, at the client's place, at the provider's place, or either. Never in hotel rooms or as overnight stays.
+5. Late more than 30 minutes without notice: the other side may cancel; a provider who is late or cancels late refunds anything already paid. Cancel at least 24 hours ahead, in the app with a reason.
+6. Report a profile or a job post (up to 4 photos as evidence) and block from the chat. Reports get an automated first pass; unclear cases go to a moderator; serious cases go to the authorities.
+7. Emergencies: call 911 first, report to Phriend after.
 
-Allowed: food tours, cafe and restaurant guiding, city tours, day trips, beach and island trips, hiking and trail guiding, personal training, photography and videography work, event and wedding coverage and on-site help, driving and airport transfers, tutoring, lessons, language practice, errands, queueing, hospital and elderly assistance, dog walking and pet sitting, online tutoring or language sessions.
+Allowed: aircon, appliance, plumbing, electrical and handyman work; home cleaning, laundry and moving help; bookkeeping, tax filing, virtual assistance, design and consulting; tutoring and lessons, online or in person; photography and video; event coordination, hosting, hair and makeup, catering; driving, airport transfers, errands, deliveries and queueing; tour and trip guiding; hospital and senior care help; pet care; car wash, detailing and mechanics.
 
-Banned: any sexual or romantic service, compensated dating, escort services, drugs, alcohol involving minors, anything illegal under Philippine law, harassment, impersonation, off-platform payment scams, private-place meetups, fake reviews and multiple accounts.
-
-## Teams
-
-- A team is a group of ID-verified Phriends who offer a service together: for example a guide, a photographer and a driver for one day out. One team page, one group chat, one price per group, one booking. Every member keeps their own profile and can still be booked alone.
-- Teams are listed at https://phriend.app/teams (filter by city); each team page is in the app at https://web.phriend.app/teams/<slug>. The list may be empty while teams are being set up.
-- The team lead is responsible for the team page, its members and its payment terms being accurate. Every member follows the same rules as on their own profile. One booking covers the members named on it; anyone else is not part of it.
-- Payment is unchanged: a downpayment of at most 50%, in cash, in person, handed to the team lead, who splits it with the team. Phriend never holds money. Either side can cancel as with any booking; if a member cannot make it, the lead cancels or rebooks.
+Banned: any sexual or romantic service, dating or escort services, listings that sell a person's company rather than a service, drugs, anything illegal under Philippine law, harassment, impersonation, payment scams, fake reviews and multiple accounts.
 
 ## Pricing
 
-- Phriend charges members nothing: no commission, no booking fees, no in-app payments. Bookings are made in the app; money never moves through it.
-- Phriends list their own rates per hour or per session, typically ₱300 to ₱1,500 (PHP) per hour depending on the activity, the city and the Phriend.
-- Payment split: 50% downpayment, 50% after the meetup. First meetup: cash in person; e-wallet only for repeat, trusted Phriends.
-
-## Facts
-
-- Founded 2026, Philippines. 46 activity categories with sub-activities. Age: 18+ only.
-- Limits: hourly rate ₱0 to ₱3,000; services ₱50 to ₱50,000, up to 12 per Phriend, minimum 1 to 12 hours; bookings 1 to 8 hours, up to 60 days ahead; lockouts up to a year ahead; 8 photos per profile, 4 per review, 4 per report; profiles live 30 days per save.
-- Sign-in: Google, or email and password. Identity verification: Didit. Chat delivery: Ably. Photo storage: Cloudflare R2. Database: Neon. Moderation AI: OpenAI. Rate limiting: Upstash.
-- Brand: navy #0d2251, orange #fe6138, mango #ffb627. Fonts: Fredoka (display), Nunito (body).
+- Phriend charges members nothing: no commission, no booking fees, no in-app payments.
+- Each provider prices each service per job, per hour or per session. The price and any minimum booking show on the service before you book.
 
 ## Links
 
 - Home: https://phriend.app
-- Safety and transaction rules: https://phriend.app/safety
+- Services: https://phriend.app/services
+- Trust, safety and transaction rules: https://phriend.app/safety
 - Community guidelines: https://phriend.app/community-guidelines
 - Terms of Use: https://phriend.app/terms
 - Privacy Policy: https://phriend.app/privacy
 - Teams: https://phriend.app/teams
-- Press kit (boilerplate, logos, photos, quotes): https://phriend.app/press
+- Press kit: https://phriend.app/press
 - Open the app: https://web.phriend.app
-- Become a Phriend: https://web.phriend.app/earn
+- List your services: https://provider.phriend.app
 - Facebook: https://facebook.com/phriendapp
 - Instagram: https://instagram.com/phriendapp

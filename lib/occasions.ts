@@ -4,7 +4,7 @@ import { cdn } from "@/lib/site";
  * Occasion pages (/occasions/<slug>): the services people book for one event, grouped. Each lists category slugs from the API;
  * a slug Ops deletes or renames simply drops off the page. The copy is written per occasion so no two pages read alike.
  */
-export type Occasion = {
+type Occasion = {
   slug: string;
   name: string;
   title: string; // <title>, under 60 characters with the site name

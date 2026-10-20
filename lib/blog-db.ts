@@ -4,7 +4,7 @@ import { marked } from "marked";
 import sanitizeHtml from "sanitize-html";
 
 /** Articles written in Ops (blog_posts table); only published rows reach the site. The photographers article stays in code. */
-export type DbPost = {
+type DbPost = {
   id: number;
   slug: string;
   title: string;
@@ -24,7 +24,7 @@ export type DbPost = {
  * services marketplace.
  */
 const OFF_PRODUCT = /\b(companions?|kasama|buddy|buddies|meetups?|hang ?outs?|didit|verification partner)\b|\bPhriends\b|\bthe Phriend\b|\bcompany for\b/i;
-export const isOnProduct = (p: Pick<DbPost, "title" | "description" | "bodyMd" | "tags">) =>
+const isOnProduct = (p: Pick<DbPost, "title" | "description" | "bodyMd" | "tags">) =>
   !OFF_PRODUCT.test([p.title, p.description, (p.tags ?? []).join(" "), p.bodyMd].join("\n"));
 
 /** Published articles from the Phriend API (written in Ops). Empty when the API is unreachable: the blog then shows only the coded article. */

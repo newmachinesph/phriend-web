@@ -7,11 +7,11 @@ export const API_URL = (process.env.API_URL ?? "https://api.phriend.app").replac
 /** Server-to-server calls carry this so the API's origin gate lets the site's server through (see phriend-api app/security/gate.py). */
 export const apiHeaders = (): HeadersInit => (process.env.API_SERVER_KEY ? { "x-phriend-app": process.env.API_SERVER_KEY } : {});
 /** Static site images and files live on the CDN under site/ (upload with scripts/upload-to-cdn.mjs). Dynamic OG images and canvas inputs stay in public/. */
-export const CDN_URL = "https://cdn.phriend.app/site";
+const CDN_URL = "https://cdn.phriend.app/site";
 /** "/blog/x.jpg" -> the CDN copy; full URLs pass through (Ops covers may be either). */
 export const cdn = (path: string) => (/^https?:\/\//.test(path) ? path : `${CDN_URL}${path.startsWith("/") ? "" : "/"}${path}`);
 /** The Android app on Google Play: an extra. The web app (APP_URL) is the default on every phone. */
-export const ANDROID_PACKAGE = "app.phriend.mobile";
+const ANDROID_PACKAGE = "app.phriend.mobile";
 export const PLAY_URL = `https://play.google.com/store/apps/details?id=${ANDROID_PACKAGE}`;
 /** Providers list services, manage bookings, earnings and verification here (the Phriend Provider app is not in the stores yet). */
 export const PROVIDER_URL = "https://provider.phriend.app";

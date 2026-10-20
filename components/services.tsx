@@ -80,7 +80,7 @@ const VISIT = { in_person: "In person", online: "Online", hybrid: "Hybrid" } as 
 const cdnPhoto = (url: string | null | undefined) => (url && url.startsWith("https://cdn.phriend.app/") ? url : null);
 
 /** Where a service happens, in a few words: "Nationwide", "Cebu City: Lahug, IT Park +2", "Makati". */
-export function serviceArea(s: ServiceItem) {
+function serviceArea(s: ServiceItem) {
   const city = s.city || s.provider.city;
   if (s.scope === "nationwide") return "Nationwide";
   if (s.scope === "areas" && s.coverage?.length) return `${city}: ${s.coverage.slice(0, 2).join(", ")}${s.coverage.length > 2 ? ` +${s.coverage.length - 2}` : ""}`;

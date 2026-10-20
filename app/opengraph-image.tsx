@@ -7,10 +7,10 @@ export const alt = OG_IMAGE.alt;
 export const size = { width: OG_IMAGE.width, height: OG_IMAGE.height };
 export const contentType = "image/png";
 
-// Static 700 instances from Google Fonts: Satori ignores variable-font axes, and Fredoka[wdth,wght]'s default instance is Light (300).
+// Static instances (Plus Jakarta Sans Bold, Inter SemiBold): Satori ignores variable-font axes and would draw the default instance.
 const read = (p: string) => readFileSync(join(process.cwd(), "public", p));
-const fredoka = read("fonts/Fredoka-Bold.ttf");
-const nunito = read("fonts/Nunito-Bold.ttf"); // Fredoka has no ₱ glyph; Nunito is the site body font anyway.
+const jakarta = read("fonts/PlusJakartaSans-Bold.ttf");
+const inter = read("fonts/Inter-SemiBold.ttf");
 const logo = `data:image/png;base64,${read("brand/logo-mark.png").toString("base64")}`;
 
 export default function Image() {
@@ -26,7 +26,7 @@ export default function Image() {
           padding: "64px 88px",
           background: "#0d2251",
           color: "#ffffff",
-          fontFamily: "Fredoka",
+          fontFamily: "Plus Jakarta Sans",
         }}
       >
         <div style={{ display: "flex", alignItems: "center", gap: 28 }}>
@@ -52,7 +52,7 @@ export default function Image() {
           <div style={{ color: "#fe6138" }}>verified pros</div>
         </div>
 
-        <div style={{ display: "flex", flexDirection: "column", gap: 12, fontFamily: "Nunito" }}>
+        <div style={{ display: "flex", flexDirection: "column", gap: 12, fontFamily: "Inter" }}>
           <div style={{ fontSize: 30, color: "rgba(255,255,255,0.8)" }}>Priced per job, hour or session · booked in the app</div>
           <div style={{ fontSize: 26, color: "#ff8a66" }}>phriend.app</div>
         </div>
@@ -61,8 +61,8 @@ export default function Image() {
     {
       ...size,
       fonts: [
-        { name: "Fredoka", data: fredoka, weight: 700, style: "normal" },
-        { name: "Nunito", data: nunito, weight: 700, style: "normal" },
+        { name: "Plus Jakarta Sans", data: jakarta, weight: 700, style: "normal" },
+        { name: "Inter", data: inter, weight: 600, style: "normal" },
       ],
     },
   );

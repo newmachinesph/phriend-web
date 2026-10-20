@@ -1,21 +1,21 @@
 import type { Metadata, Viewport } from "next";
 import Script from "next/script";
-import { Fredoka, Nunito } from "next/font/google";
+import { Inter, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { APP_URL, cdn, CONTACT_EMAIL, pageMeta, SITE_DESCRIPTION, SITE_NAME, SITE_TITLE, SITE_URL } from "@/lib/site";
 
-const nunito = Nunito({
+const inter = Inter({
   subsets: ["latin"],
-  variable: "--font-nunito",
-  weight: ["400", "500", "600", "700", "800", "900"],
+  variable: "--font-inter",
+  display: "swap",
 });
 
-const fredoka = Fredoka({
+const jakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
-  variable: "--font-fredoka",
-  weight: ["500", "600", "700"],
+  variable: "--font-jakarta",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -74,7 +74,7 @@ const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en-PH" className={`${nunito.variable} ${fredoka.variable} h-full antialiased`}>
+    <html lang="en-PH" className={`${inter.variable} ${jakarta.variable} h-full antialiased`}>
       <head>
         <link rel="dns-prefetch" href={APP_URL} />
       </head>

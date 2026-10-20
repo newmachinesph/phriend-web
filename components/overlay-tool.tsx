@@ -174,7 +174,7 @@ export function OverlayTool() {
   // fonts, logo and sample frame, then the preview loop
   useEffect(() => {
     const css = getComputedStyle(document.documentElement);
-    media.current.fonts = { display: css.getPropertyValue("--font-fredoka").trim() || "sans-serif", sans: css.getPropertyValue("--font-nunito").trim() || "sans-serif" };
+    media.current.fonts = { display: css.getPropertyValue("--font-jakarta").trim() || "sans-serif", sans: css.getPropertyValue("--font-inter").trim() || "sans-serif" };
     const { display, sans } = media.current.fonts;
     Promise.all([`600 30px ${display}`, `700 22px ${display}`, `700 20px ${sans}`, `800 20px ${sans}`, `900 30px ${sans}`].map((f) => document.fonts.load(f))).catch(() => {});
     loadImg("/brand/logo-mark.svg").then((i) => (media.current.logo = i)).catch(() => {});

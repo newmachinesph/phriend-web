@@ -22,8 +22,8 @@
   --color-success: #1fa971;
   --color-danger: #e5484d;
   --color-white: #ffffff;
-  --font-sans: var(--font-nunito), ui-sans-serif, system-ui, sans-serif;
-  --font-display: var(--font-fredoka), var(--font-nunito), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-jakarta), var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --radius-card: 12px;
   --radius-control: 10px;
   --radius-tile: 8px;

@@ -287,11 +287,11 @@ export default async function PressPage() {
           <h3 className="mt-12 font-display text-2xl font-semibold text-ink">Typography</h3>
           <ul className="mt-4 grid gap-4 sm:grid-cols-2">
             <li className="rounded-card border border-line bg-white p-6">
-              <p className="text-xs font-extrabold uppercase tracking-wider text-muted">Display · Fredoka</p>
+              <p className="text-xs font-extrabold uppercase tracking-wider text-muted">Display · Plus Jakarta Sans</p>
               <p className="mt-3 font-display text-4xl font-semibold leading-tight text-ink">Local services, verified pros</p>
             </li>
             <li className="rounded-card border border-line bg-white p-6">
-              <p className="text-xs font-extrabold uppercase tracking-wider text-muted">Body · Nunito</p>
+              <p className="text-xs font-extrabold uppercase tracking-wider text-muted">Body · Inter</p>
               <p className="mt-3 text-lg leading-relaxed">
                 Aircon cleaning, bookkeeping, tutoring, photo and video, driving and errands. Booked in the app, paid to the provider.
               </p>

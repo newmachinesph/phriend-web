@@ -51,7 +51,7 @@ const FEATURES: { title: string; text: string }[] = [
   { title: "Post a job", text: "Describe what you need with a budget and a date. Providers reply in the chat." },
   { title: "Phriend Provider", text: "Providers list services and manage bookings, earnings and verification at provider.phriend.app." },
   { title: "Notifications", text: "A bell in the app and an email for every message, booking update and review." },
-  { title: "Your account", text: "Sign in with Google or email. Delete your account yourself at any time; everything goes with it." },
+  { title: "Your account", text: "Sign in with Google or email. Delete your account yourself at any time, from your profile." },
 ];
 
 const FAQ: { q: string; a: string }[] = [
@@ -101,7 +101,7 @@ const FAQ: { q: string; a: string }[] = [
   },
   {
     q: "How do I delete my account?",
-    a: "Open My profile, tap Delete account and type DELETE. It permanently removes your account, provider profile, services, photos, favorites, reviews, bookings, notes and job posts. It cannot be undone.",
+    a: "Open My profile, tap Delete account and type DELETE. Your name, photos, verification documents, saved addresses and favorites are deleted right away, and your provider profile, services and job posts are taken down. Reviews about you and the record of your bookings stay, shown as Deleted account. It cannot be undone; the Delete your account page has the details.",
   },
 ];
 

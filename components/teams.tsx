@@ -1,8 +1,8 @@
 import Image from "next/image";
 import { BadgeCheck, MapPin, Star } from "lucide-react";
 import { appTeamUrl, type TeamCard } from "@/lib/landing";
+import { peso } from "@/lib/price";
 
-const peso = (n: number) => `₱${n.toLocaleString("en-PH")}`;
 
 /** One team on a list: cover, member avatars, roles, rating and the lowest package price. Links to the team in the app. */
 export function TeamTile({ team: t }: { team: TeamCard }) {

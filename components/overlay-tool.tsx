@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState, type FormEvent, type PointerEvent } from "react";
 import { Download, Film, Loader2, Upload } from "lucide-react";
 import type { CreatorCard } from "@/lib/creator-card";
+import { peso } from "@/lib/price";
 
 const W = 1080;
 const H = 1920;
@@ -31,7 +32,6 @@ const loadImg = (src: string) =>
     i.onerror = err;
     i.src = src;
   });
-const peso = (n: number) => "₱" + n.toLocaleString("en-PH");
 
 function icon(ctx: CanvasRenderingContext2D, d: string, x: number, y: number, size: number, o: { fill?: string; stroke?: string; width?: number }) {
   const p = new Path2D(d);

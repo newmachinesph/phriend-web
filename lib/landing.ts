@@ -1,4 +1,5 @@
 import { API_PLATFORM, API_URL, APP_URL, apiHeaders, PROVIDER_URL, SITE_NAME, SITE_URL } from "@/lib/site";
+import { peso } from "@/lib/price";
 
 /** Service and city landing pages: live data from the app's public API, rendered on the marketing domain so it carries its authority. */
 
@@ -102,7 +103,6 @@ export async function getServices(q: { category?: string; city?: string }): Prom
   }
 }
 
-const peso = (n: number) => `₱${n.toLocaleString("en-PH")}`;
 const list = (xs: string[]) => (xs.length <= 1 ? xs.join("") : `${xs.slice(0, -1).join(", ")} and ${xs[xs.length - 1]}`);
 
 /** The page copy: several hundred words specific to the service (and city), not a filter grid. */

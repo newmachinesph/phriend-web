@@ -3,6 +3,7 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 import { ArrowRight, type LucideIcon } from "lucide-react";
 import { APP_URL, PROVIDER_URL } from "@/lib/site";
+import { peso } from "@/lib/price";
 
 /** Building blocks for blog articles: figures, phone mockups, callouts, steps and the closing call to action. */
 
@@ -67,7 +68,6 @@ export function Steps({ steps }: { steps: { icon: LucideIcon; title: string; tex
 
 /** Worked earnings examples: a service, how it is priced, and the take-home. Phriend takes no cut, so the take-home is the total. */
 export function RateTable({ rows }: { rows: { service: string; pricing: string; total: number }[] }) {
-  const peso = (n: number) => `₱${n.toLocaleString("en-PH")}`;
   return (
     <div className="my-10 overflow-hidden rounded-3xl border border-line shadow-card">
       <table className="w-full text-left text-base">

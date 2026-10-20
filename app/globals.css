@@ -1,14 +1,18 @@
 @import "tailwindcss";
 
 @import "./phriend-ui.css";
+@import "./phriend-type.css";
 
 /*
  * The type scale (AGENT-RULES "TYPE SCALE", the same numbers as the apps). Phones (< 640px): page h1 22/28, headline
  * 20/26, section and card titles 16/22, body 15/21, secondary 13/18, captions 12/16. From 640px the headings grow with
  * clamp() to h1 32/38 (the home hero to 44/50) and body is 16/24, secondary 14/20. Headings are Plus Jakarta Sans 700
- * with slight negative tracking; everything else is Inter.
+ * with slight negative tracking; everything else is Inter. The shared sizes (text-xs/sm/base/lg and the roles) come from
+ * phriend-type.css (phriend-ui); the site keeps its own heading sizes below, and a looser text-lg (18/28, 16/24 on
+ * phones) because it sets lead paragraphs in it.
  */
 @theme {
+  --text-lg--line-height: 1.75rem;
   --text-display: clamp(1.75rem, 1.05rem + 2.6vw, 2.75rem);
   --text-display--line-height: 1.17;
   --text-display--letter-spacing: -0.02em;
@@ -23,10 +27,6 @@
 }
 @media (width < 40rem) {
   :root {
-    --text-base: 0.9375rem;
-    --text-base--line-height: 1.3125rem;
-    --text-sm: 0.8125rem;
-    --text-sm--line-height: 1.125rem;
     --text-lg: 1rem;
     --text-lg--line-height: 1.5rem;
     --text-xl: 1.125rem;

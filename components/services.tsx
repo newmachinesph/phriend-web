@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { BadgeCheck, Ellipsis, Icon, MapPin, Star, type LucideProps } from "lucide-react";
 import { activityPath, appServiceUrl, groupPath, type Category, type CategoryGroup, type IconNode, type ServiceItem } from "@/lib/landing";
+import { peso } from "@/lib/price";
 
 type Group = CategoryGroup & { categories: Category[] };
 
@@ -75,7 +76,6 @@ export function ServiceCards({ categories }: { categories: Category[] }) {
 }
 
 const VISIT = { in_person: "In person", online: "Online", hybrid: "Hybrid" } as const;
-const peso = (n: number) => `₱${n.toLocaleString("en-PH")}`;
 /** Only CDN photos go through next/image (next.config.ts allows that host); anything else falls back to the icon or initial. */
 const cdnPhoto = (url: string | null | undefined) => (url && url.startsWith("https://cdn.phriend.app/") ? url : null);
 

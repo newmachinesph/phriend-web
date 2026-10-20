@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import { Landing } from "@/components/landing";
 import { ServiceTile } from "@/components/services";
 import { activitySlug, appServiceUrl, CITY_PAGES, comboPath, findCategory, findCity, getCategories, getServices, type CityPage } from "@/lib/landing";
-import { APP_URL, pageMeta, PROVIDER_URL, SITE_NAME, SITE_URL } from "@/lib/site";
+import { APP_URL, NOINDEX_FOLLOW, pageMeta, PROVIDER_URL, SITE_NAME, SITE_URL } from "@/lib/site";
 import { ButtonLink, Container } from "@/components/ui";
 
 /**
@@ -33,12 +33,18 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const r = await parse((await params).slug);
   if (!r) return { title: "Not found", robots: { index: false } };
-  if (r.category)
-    return pageMeta({
-      title: `${r.category.label} services in ${r.city.name}`.slice(0, 60),
-      description: `Book ${r.category.label.toLowerCase()} in ${r.city.name} from verified providers. Each service shows its price, photos and area. Book and chat in the app.`.slice(0, 150),
-      path: comboPath(r.category, r.city),
-    });
+  if (r.category) {
+    // the same (cached) request the page renders from: no services listed means noindex, and the sitemap leaves it out
+    const services = await getServices({ category: r.category.slug, city: r.city.name });
+    return {
+      ...pageMeta({
+        title: `${r.category.label} services in ${r.city.name}`.slice(0, 60),
+        description: `Book ${r.category.label.toLowerCase()} in ${r.city.name} from verified providers. Each service shows its price, photos and area. Book and chat in the app.`.slice(0, 150),
+        path: comboPath(r.category, r.city),
+      }),
+      ...(services.length ? {} : { robots: NOINDEX_FOLLOW }),
+    };
+  }
   return pageMeta({
     title: `Local services in ${r.city.name}`.slice(0, 60),
     description: `Aircon cleaning, repairs, tutoring, bookkeeping, photo and video, driving and errands in ${r.city.name}, from verified providers. Book in the app.`.slice(0, 150),
@@ -134,10 +140,14 @@ async function CityLanding({ city, categories }: { city: CityPage; categories: A
         </h2>
         {services.length === 0 ? (
           <p className="mt-3 max-w-2xl leading-relaxed">
-            No service in {city.name} yet. Be the first:{" "}
-            <a href={PROVIDER_URL} className="font-bold text-brand-text underline">
-              list your services
-            </a>
+            No services in {city.name} yet. See{" "}
+            <a href="#other-cities" className="font-bold text-brand-text underline">
+              other cities
+            </a>{" "}
+            or{" "}
+            <Link href="/services" className="font-bold text-brand-text underline">
+              all services
+            </Link>
             .
           </p>
         ) : (

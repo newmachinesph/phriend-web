@@ -46,6 +46,9 @@ export function pageMeta({ title, description, path }: { title?: string; descrip
   };
 }
 
+/** A page that answers 200 and stays linked but has nothing to list yet (a landing page with no services): out of the index, links still followed. */
+export const NOINDEX_FOLLOW = { index: false, follow: true } as const satisfies Metadata["robots"];
+
 /** Home › Page breadcrumb JSON-LD for inner pages. */
 export function breadcrumbJsonLd(name: string, path: string) {
   return JSON.stringify({

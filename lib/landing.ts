@@ -87,20 +87,70 @@ export async function findCategory(segment: string): Promise<Category | undefine
 }
 
 const SERVICES_SHOWN = 12;
+/** How long a feed page is kept: the landing pages, the sitemap and the city pages share these cached requests. */
+const FEED_REVALIDATE_S = 600;
+/** The deepest page of the feed the sitemap reads for one filter (24 a page). */
+const MAX_FEED_PAGES = 20;
 
-/** Services for a landing page, from the service feed (services only: a listing without a service is not in it). Empty when the API is unreachable. */
-export async function getServices(q: { category?: string; city?: string }): Promise<ServiceItem[]> {
+type FeedQuery = { category?: string; city?: string };
+type FeedPage = { total: number; items: ServiceItem[] };
+
+/** One page of GET /api/services; null when the API is unreachable. Page 1 is the exact request a landing page makes, so one cached answer serves both. */
+async function feedPage(q: FeedQuery, page = 1): Promise<FeedPage | null> {
   const sp = new URLSearchParams({ platform: API_PLATFORM });
   if (q.category) sp.set("category", q.category);
   if (q.city) sp.set("city", q.city);
+  if (page > 1) sp.set("page", String(page));
   try {
-    const r = await fetch(`${API_URL}/api/services?${sp}`, { headers: apiHeaders(), next: { revalidate: 600 } });
-    if (!r.ok) return [];
-    const feed = (await r.json()) as { items?: ServiceItem[] };
-    return (feed.items ?? []).filter((s) => s.id.startsWith("o")).slice(0, SERVICES_SHOWN);
+    const r = await fetch(`${API_URL}/api/services?${sp}`, { headers: apiHeaders(), next: { revalidate: FEED_REVALIDATE_S } });
+    if (!r.ok) return null;
+    const feed = (await r.json()) as { total?: number; items?: ServiceItem[] };
+    const items = feed.items ?? [];
+    return { total: feed.total ?? items.length, items };
   } catch {
-    return [];
+    return null;
   }
+}
+
+/** The feed lists services only ("o<offeringId>"); anything else is skipped. */
+const isService = (s: ServiceItem) => s.id.startsWith("o");
+
+/** Services for a landing page, from the service feed (services only: a listing without a service is not in it). Empty when the API is unreachable. */
+export async function getServices(q: FeedQuery): Promise<ServiceItem[]> {
+  return ((await feedPage(q))?.items ?? []).filter(isService).slice(0, SERVICES_SHOWN);
+}
+
+/** Every service the feed returns for a filter, all pages; null when any page fails. */
+async function allServices(q: FeedQuery): Promise<ServiceItem[] | null> {
+  const first = await feedPage(q);
+  if (!first) return null;
+  const pages = first.items.length ? Math.min(MAX_FEED_PAGES, Math.ceil(first.total / first.items.length)) : 1;
+  const rest = await Promise.all(Array.from({ length: pages - 1 }, (_, i) => feedPage(q, i + 2)));
+  if (rest.some((p) => !p)) return null;
+  return [first, ...rest].flatMap((p) => p!.items).filter(isService);
+}
+
+function countByCategory(items: ServiceItem[]): ReadonlyMap<string, number> {
+  const counts = new Map<string, number>();
+  for (const s of items) if (s.category) counts.set(s.category, (counts.get(s.category) ?? 0) + 1);
+  return counts;
+}
+
+/** Services per category, nationwide and per city page; filled from the same feed the landing pages read. */
+export type ServiceCounts = { all: ReadonlyMap<string, number>; byCity: ReadonlyMap<string, ReadonlyMap<string, number>> };
+
+/**
+ * Counts for the sitemap: 7 filters (none, then each city) instead of one request per landing page. The feed's category
+ * filter is an exact match applied with the city filter, so a category's count in a city feed equals what
+ * /api/services?category=&city= returns for that combo page. Empty when the API is unreachable (the pages are empty
+ * and noindex then too).
+ */
+export async function getServiceCounts(): Promise<ServiceCounts> {
+  const [all, ...perCity] = await Promise.all([allServices({}), ...CITY_PAGES.map((c) => allServices({ city: c.name }))]);
+  return {
+    all: countByCategory(all ?? []),
+    byCity: new Map(CITY_PAGES.map((c, i) => [c.slug, countByCategory(perCity[i] ?? [])])),
+  };
 }
 
 const list = (xs: string[]) => (xs.length <= 1 ? xs.join("") : `${xs.slice(0, -1).join(", ")} and ${xs[xs.length - 1]}`);
@@ -108,7 +158,7 @@ const list = (xs: string[]) => (xs.length <= 1 ? xs.join("") : `${xs.slice(0, -1
 /** Lowercase a label mid-sentence, keeping acronyms (TV, BIR, DJ), inner capitals (TikTok, K-pop) and proper nouns. */
 const PROPER = /^(Filipino|Christmas|Korean|Mandarin|Japanese|English|Tagalog|Cebuano|Chinese|Spanish)$/;
 const keepCase = (w: string) => /^[A-Z0-9]{2,}$/.test(w) || /[a-z][A-Z]/.test(w) || /^[A-Z]-/.test(w) || PROPER.test(w);
-const inSentence = (label: string) => label.split(" ").map((w) => (keepCase(w) ? w : w.toLowerCase())).join(" ");
+export const inSentence = (label: string) => label.split(" ").map((w) => (keepCase(w) ? w : w.toLowerCase())).join(" ");
 
 /** The page copy: several hundred words specific to the service (and city), not a filter grid. */
 export function landingCopy(c: Category, city?: CityPage, services: ServiceItem[] = []) {

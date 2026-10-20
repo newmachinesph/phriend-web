@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { activityPath, CITY_PAGES, comboPath, LANDING_CTA, landingJsonLd, type Category, type CityPage, type ServiceItem, landingCopy } from "@/lib/landing";
+import { activityPath, CITY_PAGES, comboPath, inSentence, LANDING_CTA, landingJsonLd, type Category, type CityPage, type ServiceItem, landingCopy } from "@/lib/landing";
 import { PROVIDER_URL } from "@/lib/site";
 import { OCCASIONS } from "@/lib/occasions";
 import { ServiceTile } from "@/components/services";
@@ -41,11 +41,32 @@ export function Landing({ category, city, services, path, others }: { category: 
         </h2>
         {services.length === 0 ? (
           <p className="mt-3 max-w-2xl leading-relaxed">
-            No {category.label.toLowerCase()} service {city ? `in ${city.name} ` : ""}yet. Offer one:{" "}
-            <a href={PROVIDER_URL} className="font-bold text-brand-text underline">
-              list your services
-            </a>{" "}
-            and clients in {city ? city.name : "your city"} will find them here.
+            No {inSentence(category.label)} services {city ? `in ${city.name} ` : "listed "}yet.{" "}
+            {city ? (
+              <>
+                See{" "}
+                <Link href={activityPath(category)} className="font-bold text-brand-text underline">
+                  {inSentence(category.label)} across the Philippines
+                </Link>{" "}
+                or{" "}
+                <a href="#cities" className="font-bold text-brand-text underline">
+                  other cities
+                </a>
+                .
+              </>
+            ) : (
+              <>
+                See{" "}
+                <a href="#more" className="font-bold text-brand-text underline">
+                  other services
+                </a>{" "}
+                or{" "}
+                <Link href="/services" className="font-bold text-brand-text underline">
+                  all services
+                </Link>
+                .
+              </>
+            )}
           </p>
         ) : (
           <ul className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">

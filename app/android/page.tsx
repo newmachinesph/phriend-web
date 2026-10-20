@@ -1,13 +1,17 @@
 import type { Metadata } from "next";
 import { ArrowRight } from "lucide-react";
 import { ContinueInWebApp } from "@/components/app-link";
-import { breadcrumbJsonLd, pageMeta, PLAY_URL } from "@/lib/site";
+import { breadcrumbJsonLd, NOINDEX_FOLLOW, pageMeta, PLAY_URL } from "@/lib/site";
 
-export const metadata: Metadata = pageMeta({
-  title: "Phriend for Android",
-  description: "Phriend runs in your phone's browser at web.phriend.app, on Android too. Add it to your home screen; an early Android app is also on Google Play.",
-  path: "/android",
-});
+// Not in the sitemap and noindex: the page only catches old links (?to=), and the home page FAQ already covers Android and Google Play.
+export const metadata: Metadata = {
+  ...pageMeta({
+    title: "Phriend for Android",
+    description: "Phriend runs in your phone's browser at web.phriend.app, on Android too. Add it to your home screen; an early Android app is also on Google Play.",
+    path: "/android",
+  }),
+  robots: NOINDEX_FOLLOW,
+};
 
 /** Kept for old links (web.phriend.app used to send Android browsers here): the web app is the default on Android too. */
 export default function AndroidPage() {

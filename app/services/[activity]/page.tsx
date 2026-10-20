@@ -5,7 +5,7 @@ import { Landing } from "@/components/landing";
 import Image from "next/image";
 import { groupPhoto, NodeIcon, ServiceCards } from "@/components/services";
 import { activityPath, activitySlug, appGroupUrl, findCategory, getCategories, getGroups, getServices, groupPath } from "@/lib/landing";
-import { pageMeta, PROVIDER_URL, SITE_URL } from "@/lib/site";
+import { NOINDEX_FOLLOW, pageMeta, PROVIDER_URL, SITE_URL } from "@/lib/site";
 import { ButtonLink, Container } from "@/components/ui";
 
 export const revalidate = 600;
@@ -34,11 +34,16 @@ export async function generateMetadata({ params }: { params: Promise<{ activity:
   }
   const category = await findCategory(segment);
   if (!category) return { title: "Not found", robots: { index: false } };
-  return pageMeta({
-    title: `${category.label} services in the Philippines`.slice(0, 60),
-    description: `Book ${category.label.toLowerCase()} from verified providers. Each service shows its price, photos, visit type and area. Book and chat in the app.`.slice(0, 150),
-    path: `/services/${activitySlug(category.label)}`,
-  });
+  // the same (cached) request the page renders from: no services listed means noindex, and the sitemap leaves it out
+  const services = await getServices({ category: category.slug });
+  return {
+    ...pageMeta({
+      title: `${category.label} services in the Philippines`.slice(0, 60),
+      description: `Book ${category.label.toLowerCase()} from verified providers. Each service shows its price, photos, visit type and area. Book and chat in the app.`.slice(0, 150),
+      path: `/services/${activitySlug(category.label)}`,
+    }),
+    ...(services.length ? {} : { robots: NOINDEX_FOLLOW }),
+  };
 }
 
 export default async function ActivityPage({ params }: { params: Promise<{ activity: string }> }) {

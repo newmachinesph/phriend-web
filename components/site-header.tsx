@@ -1,8 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Menu, X } from "lucide-react";
 import { APP_URL, cdn } from "@/lib/site";
 import { ButtonLink, Container } from "@/components/ui";
+import { MobileMenu } from "@/components/mobile-menu";
 
 export const NAV = [
   { href: "/services", label: "Services" },
@@ -62,29 +62,16 @@ export function SiteHeader() {
           <ButtonLink href={APP_URL} size="sm" className="hidden sm:inline-flex">
             Open the app
           </ButtonLink>
-          {/* ponytail: native <details> menu, no client JS. It stays open after tapping a same-page link; swap for a client component if that bites. */}
-          <details className="group relative md:hidden">
-            <summary
-              aria-label="Menu"
-              className="grid size-11 cursor-pointer list-none place-items-center rounded-full bg-surface text-ink [&::-webkit-details-marker]:hidden"
-            >
-              <Menu className="group-open:hidden" aria-hidden="true" />
-              <X className="hidden group-open:block" aria-hidden="true" />
-            </summary>
-            <nav
-              aria-label="Mobile"
-              className="absolute right-0 mt-2 flex w-60 flex-col gap-1 rounded-card border border-line bg-white p-2 shadow-float"
-            >
-              {NAV.map((n) => (
-                <Link key={n.href} href={n.href} className="rounded-control px-3 py-2.5 font-bold text-ink hover:bg-surface">
-                  {n.label}
-                </Link>
-              ))}
-              <ButtonLink href={APP_URL} size="sm" className="mt-1">
-                Open the app
-              </ButtonLink>
-            </nav>
-          </details>
+          <MobileMenu>
+            {NAV.map((n) => (
+              <Link key={n.href} href={n.href} className="rounded-control px-3 py-2.5 font-bold text-ink hover:bg-surface">
+                {n.label}
+              </Link>
+            ))}
+            <ButtonLink href={APP_URL} size="sm" className="mt-1">
+              Open the app
+            </ButtonLink>
+          </MobileMenu>
         </div>
       </Container>
     </header>

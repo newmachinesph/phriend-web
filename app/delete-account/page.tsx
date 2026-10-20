@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Callout, Legal } from "@/components/legal";
-import { APP_URL, CONTACT_EMAIL, LAST_UPDATED, pageMeta } from "@/lib/site";
+import { APP_URL, CONTACT_EMAIL, LAST_UPDATED, PROVIDER_URL, pageMeta } from "@/lib/site";
 
 export const metadata: Metadata = pageMeta({
   title: "Delete your Phriend account",
@@ -18,7 +18,7 @@ export default function DeleteAccountPage() {
       path="/delete-account"
       updated={LAST_UPDATED}
       intro="You can delete your Phriend account and its data at any time, from the app or by emailing us. This page explains both routes and exactly what is removed."
-      summary={`Open Profile → Delete account in the Phriend app, or email ${CONTACT_EMAIL} from your account address. Your account, profile, photos, favorites, bookings, notes and gigs are removed right away.`}
+      summary={`Open Profile → Delete account in the Phriend app, or email ${CONTACT_EMAIL} from your account address. Your account, profile, services, photos, saved addresses, favorites, bookings, notes and job posts are removed right away.`}
     >
       <h2>1. Delete it yourself, in the app</h2>
       <ol>
@@ -38,10 +38,14 @@ export default function DeleteAccountPage() {
       <h2>3. Delete only some of your data</h2>
       <p>You do not have to close your account to remove things. Signed in, you can delete:</p>
       <ul>
-        <li>Your whole Phriend listing, from <strong>Earn</strong> &rarr; <strong>Delete my profile</strong></li>
-        <li>Individual photos, from the photo grid on your listing</li>
+        <li>
+          Your provider profile or any one service, in the Phriend Provider app or at{" "}
+          <a href={PROVIDER_URL}>provider.phriend.app</a>
+        </li>
+        <li>Individual work photos, from the photo grid on each service</li>
+        <li>Saved addresses, from <strong>Profile</strong> &rarr; <strong>Addresses</strong></li>
         <li>Messages you sent, by long-pressing them in a chat</li>
-        <li>Gigs you posted, meetup notes, favorites and blocked members</li>
+        <li>Job posts you posted, booking notes, favorites and blocked members</li>
         <li>Your push notification token, by turning notifications off in <strong>Settings</strong></li>
       </ul>
 
@@ -49,9 +53,11 @@ export default function DeleteAccountPage() {
       <p>Deleted immediately and permanently:</p>
       <ul>
         <li>Your account, name, email address and profile photo</li>
-        <li>Your Phriend profile, listing photos, services, rates and availability</li>
-        <li>Your favorites, bookings, meetup notes, gigs and saved preferences</li>
-        <li>Your identity verification data, deleted by our verification provider (Didit) on our instruction</li>
+        <li>Your provider profile, services, work photos, prices, schedules, areas and FAQ answers</li>
+        <li>Your saved addresses, favorites, bookings, booking notes, job posts and saved preferences</li>
+        <li>
+          Your identity verification data and documents, deleted from our private storage
+        </li>
       </ul>
 
       <h2>5. What stays, and why</h2>
@@ -75,7 +81,7 @@ export default function DeleteAccountPage() {
 
       <Callout>
         Deleting is final. Your verified ID is remembered, so a new account created with the same ID is flagged and
-        refused. If you only want a break, set your Phriend profile to resting instead.
+        refused. If you only want a break, pause your services instead.
       </Callout>
 
       <p>

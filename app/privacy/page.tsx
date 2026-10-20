@@ -21,7 +21,8 @@ export default function PrivacyPage() {
     >
       <h2>1. Who is responsible</h2>
       <p>
-        Phriend is the personal information controller for data processed through phriend.app and web.phriend.app. Our
+        Phriend is the personal information controller for data processed through phriend.app, web.phriend.app,
+        provider.phriend.app and the Phriend and Phriend Provider apps. Our
         Data Protection Officer can be reached at <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>.
       </p>
 
@@ -33,14 +34,20 @@ export default function PrivacyPage() {
           hash), plus the display name, gender, birth date and avatar you set.
         </li>
         <li>
-          <strong>Phriend profile data</strong>: name or nickname, age, gender, city and area, languages, activities and
-          sub-activities, non-negotiables, hourly rate, services and their prices, working hours, weekly availability
-          and lockout dates, bio, and up to 8 photos you upload.
+          <strong>Provider profile and service data</strong>: your name, a face photo, a title, an About me, the
+          languages you speak and your base city; for each service, its title, description, price, up to 6 photos, visit
+          type, schedule, area and lockout dates; and the FAQ answers you set for the chat. Profiles created before the
+          current version may also hold an age, gender, activities, non-negotiables, an hourly rate, working hours and up
+          to 8 photos. Age and gender are never shown to other members.
         </li>
         <li>
-          <strong>Bookings, reviews, favorites, gigs and notes</strong>: the date, time, hours, place, note and status
-          of each booking request; the reviews you write, with up to 4 photos; the profiles you favorite; the gigs you
-          post; and your private notes, which only you can read.
+          <strong>Saved addresses</strong>: the addresses you save for at-home services (Home, Work and others). An
+          address is shared with a provider only for a booking you make at that address.
+        </li>
+        <li>
+          <strong>Bookings, reviews, favorites, job posts and notes</strong>: the date, time, hours, address or place,
+          note and status of each booking request; the reviews you write, with up to 4 photos; the profiles and services
+          you favorite; the job posts (gigs) you post; and your private notes, which only you can read.
         </li>
         <li>
           <strong>Chat messages</strong>: the messages, images and payment account details you exchange with other
@@ -49,9 +56,10 @@ export default function PrivacyPage() {
         </li>
         <li>
           <strong>Identity verification data</strong>: if you verify, you submit a government ID and a selfie to
-          Didit, our verification partner. Didit checks them and keeps the images. Phriend receives and stores
-          Didit&apos;s decision record: the result, a session reference and the details Didit read from your ID, not
-          the ID or selfie images.
+          Phriend. Phriend&apos;s team reviews each provider&apos;s documents (the government ID and selfie, plus any
+          optional clearances and certificates: NBI clearance, police clearance, barangay certificate, certificates,
+          business documents and proof of address) and records the result. The documents are stored privately: only our
+          reviewers can open them, and every access is logged.
         </li>
         <li>
           <strong>Device and usage data</strong>: IP address, browser and device type, pages viewed, approximate
@@ -59,18 +67,18 @@ export default function PrivacyPage() {
         </li>
         <li>
           <strong>Reports and support</strong>: the reason and up to 4 photos you attach when you report a profile or
-          a gig, and anything you send support.
+          a job post, and anything you send support.
         </li>
       </ul>
 
       <h2>3. Why we use it</h2>
       <p>We process your data to:</p>
       <ul>
-        <li>run your account and show your Phriend profile to other members (performance of our contract with you);</li>
+        <li>run your account and show your provider profile and services to other members (performance of our contract with you);</li>
         <li>deliver chat and booking requests between members;</li>
         <li>verify age and identity, prevent fraud, and keep minors off the Service (legal obligation and legitimate interest);</li>
         <li>
-          review reports, profiles and gigs, including an automated first pass, enforce the terms and community
+          review reports, profiles, services, documents and job posts, including an automated first pass, enforce the terms and community
           guidelines, and cooperate with lawful requests;
         </li>
         <li>keep the Service secure and working, limit abusive request rates, and fix bugs;</li>
@@ -95,10 +103,7 @@ export default function PrivacyPage() {
           <strong>Ably</strong>: real-time chat delivery.
         </li>
         <li>
-          <strong>Didit</strong>: identity and age verification.
-        </li>
-        <li>
-          <strong>OpenAI</strong>: the automated first-pass review of reports, Phriend profiles and gigs run by our
+          <strong>OpenAI</strong>: the automated first-pass review of reports, provider profiles, services and job posts run by our
           moderators.
         </li>
         <li>
@@ -116,7 +121,8 @@ export default function PrivacyPage() {
         </li>
       </ul>
       <p>
-        Other members see your profile, your Phriend profile and the messages you send them. We may also disclose data when Philippine
+        Other members see your profile, your provider profile and services, and the messages you send them; a provider
+        also sees the address you pick for a booking with them. We may also disclose data when Philippine
         law, a court order or a lawful law-enforcement request requires it, or to protect members&apos; safety. Some
         processors store data outside the Philippines under contractual safeguards consistent with the Data Privacy
         Act.
@@ -125,16 +131,16 @@ export default function PrivacyPage() {
       <h2>5. How long we keep it</h2>
       <ul>
         <li>
-          <strong>Phriend profiles</strong> leave the feed after 90 days (or the period shown on your profile) unless you renew or save them again; the profile stays
+          <strong>Provider profiles</strong> leave the feed after 90 days (or the period shown on your profile) unless you renew or save them again; the profile stays
           on your account until you delete it or your account.
         </li>
         <li>
           <strong>Verification data</strong> is retained only as long as needed to confirm the result and handle
-          disputes, then deleted by Didit on our instruction.
+          disputes, then deleted from our private storage.
         </li>
         <li>
           <strong>Account data</strong> is kept while your account is active. When you delete your account, your
-          account, Phriend profile, photos, favorites, reviews, bookings, notes, gigs and reports are removed right
+          account, provider profile, services, photos, saved addresses, favorites, reviews, bookings, notes, job posts and reports are removed right
           away, except the moderation log, which keeps a record of any action taken on the account. Chat messages are
           delivered and stored by Ably under its message retention; deleting your account does not itself erase them.
         </li>
@@ -193,7 +199,8 @@ export default function PrivacyPage() {
       <p>
         Data is encrypted in transit, Google sign-in never gives us a password and email passwords are stored only as
         scrypt hashes, production access is
-        limited to the people who need it, and ID documents never pass through our own servers. If a breach affects you we will notify you and the National
+        limited to the people who need it, and verification documents are kept in private storage that only our reviewers
+        can open, with every access logged. If a breach affects you we will notify you and the National
         Privacy Commission as the law requires.
       </p>
 

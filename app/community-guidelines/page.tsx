@@ -6,7 +6,7 @@ import { LAST_UPDATED, pageMeta } from "@/lib/site";
 export const metadata: Metadata = pageMeta({
   title: "Community guidelines: what Phriend allows",
   description:
-    "What's allowed on Phriend and what isn't: legitimate local services and activities only. No romantic or sexual services, no dating, no escort services.",
+    "What's allowed on Phriend and what isn't: legitimate local services only. No sexual or romantic services, no dating or escort services, no scams.",
   path: "/community-guidelines",
 });
 
@@ -17,33 +17,33 @@ export default function CommunityGuidelinesPage() {
       title="Community guidelines"
       path="/community-guidelines"
       updated={LAST_UPDATED}
-      summary="Phriend is for legitimate local services and activities booked by the hour between adults, in public places or at the client's home for home services: guided tours, photo and video shoots, tutoring and lessons, hiking, driving, errands and the like. Any sexual or romantic service, compensated dating, escort services, drugs, private-place meetups, scams and impersonation are banned and get an account removed immediately, with a report to the authorities where the law requires it."
-      intro="Phriend is for legitimate local services: work and activities you book by the hour, done in public or at the client's home, between adults. This page says exactly what that means."
+      summary="Phriend is for legitimate local services between adults, done online or in person: aircon cleaning and repairs, appliance check-ups, bookkeeping and tax filing, tutoring, photo and video, driving, errands and the like. Any sexual or romantic service, compensated dating, escort services, drugs, scams and impersonation are banned and get an account removed immediately, with a report to the authorities where the law requires it."
+      intro="Phriend is for legitimate local services: work you book from a verified provider, done online or in person, between adults. This page says exactly what that means."
     >
       <h2>1. What Phriend is for</h2>
       <p>
-        A Phriend is a local you book and pay by the hour for a service or an activity: a tour, a shoot, a lesson, a
-        hike, a drive, an errand. The relationship is professional and public. If you would not do it in front of your
-        parents or a police officer, it does not belong on Phriend.
+        A service on Phriend is work you book from a provider: a repair, a cleaning, a lesson, a shoot, a tax filing, a
+        drive, an errand. The relationship is professional. If you would not do it in front of your parents or a police
+        officer, it does not belong on Phriend.
       </p>
 
-      <h2>2. Allowed activities</h2>
+      <h2>2. Allowed services</h2>
       <ul>
-        <li>Food tours, market and street-food guiding, cooking lessons</li>
-        <li>City tours, local guiding, out-of-town day trips, beach and island trips</li>
-        <li>Hiking and trail guiding, camping, personal training, sports coaching</li>
+        <li>Aircon cleaning and repair, appliance check-ups and repair, plumbing, electrical and handyman work</li>
+        <li>Home cleaning, laundry and ironing, moving help</li>
+        <li>Bookkeeping, tax filing, virtual assistance, graphic design, social media management and consulting</li>
+        <li>Tutoring, lessons, language classes and coaching, online or in person</li>
         <li>Photography, videography and content creation work</li>
-        <li>Event, wedding and convention coverage, hosting and on-site help</li>
-        <li>Driving, riding and airport transfers</li>
-        <li>Tutoring, lessons, language practice, consulting and coaching</li>
-        <li>Errands, shopping runs, queueing, moving and delivery help</li>
-        <li>Hospital and clinic assistance, elderly care help, waiting-room assistance</li>
-        <li>Dog walking and pet sitting</li>
-        <li>Online sessions such as tutoring or language practice over video call</li>
+        <li>Event coordination, hosting, hair and makeup, catering and baking</li>
+        <li>Driving, airport transfers, errands, deliveries and queueing</li>
+        <li>Tour guiding, hiking and trip guiding</li>
+        <li>Hospital and clinic assistance, senior care help</li>
+        <li>Pet care, grooming and dog training</li>
+        <li>Car wash and detailing, mechanics and motorcycle repair</li>
       </ul>
       <p>
-        If your idea is not on the list but is a legal, professional service done in public or at the client&apos;s home, it is probably
-        fine. When in doubt, email <a href="mailto:support@phriend.app">support@phriend.app</a> before posting.
+        If your service is not on the list but is a legal, professional service, it is probably fine. When in doubt, email{" "}
+        <a href="mailto:support@phriend.app">support@phriend.app</a> before listing it.
       </p>
 
       <h2>3. Prohibited</h2>
@@ -59,10 +59,10 @@ export default function CommunityGuidelinesPage() {
         </li>
         <li>
           <strong>Escort services</strong> of any kind, including &quot;overnight&quot; bookings, trips with shared
-          rooms, or hotel meetups.
+          rooms, or hotel-room bookings.
         </li>
         <li>
-          <strong>Drugs</strong>: buying, selling, using or being under the influence during a meetup.
+          <strong>Drugs</strong>: buying, selling, using or being under the influence during a booking.
         </li>
         <li>
           <strong>Alcohol with minors.</strong> Phriend is 18+, and any listing built around drinking that targets or
@@ -82,47 +82,54 @@ export default function CommunityGuidelinesPage() {
           or a Phriend staff member.
         </li>
         <li>
-          <strong>Off-platform payment scams</strong>: asking for more than 50% upfront, asking for payment to an
-          account not shared in the chat, sending payment links or QR codes outside the app, or requesting gift cards
-          and crypto.
+          <strong>Off-platform payment scams</strong>: asking for more upfront than was agreed in the chat, adding fees
+          nobody agreed, asking for payment to an account not shared in the chat, sending payment links or QR codes
+          outside the app, or requesting gift cards and crypto.
         </li>
-        <li>Meetups in hotel rooms, overnight stays or the Phriend&apos;s own place, and home visits for anything that is not a home service.</li>
+        <li>
+          <strong>Listings that sell a person&apos;s company rather than a service</strong>, and any booking where the
+          service is a pretext for something else, including hotel-room bookings and overnight stays.
+        </li>
         <li>Fake reviews, fake profiles, and multiple accounts for the same person.</li>
       </ul>
 
       <h2>4. Profiles and photos</h2>
       <ul>
-        <li>Use recent photos of yourself. No swimsuit, lingerie or suggestive photos.</li>
-        <li>Describe what you actually offer, at the rate you actually charge.</li>
-        <li>No phone numbers, social handles or payment details in your public Phriend profile. Share them in the chat instead.</li>
+        <li>
+          Use a recent, clear photo of your face for your profile, and real photos of your own work on your services. No
+          swimsuit, lingerie or suggestive photos.
+        </li>
+        <li>Describe what you actually offer, at the price you actually charge.</li>
+        <li>No emojis in your title, About me or service descriptions.</li>
+        <li>
+          No phone numbers, social handles or payment details in your public profile or services. Share them in the chat
+          instead.
+        </li>
       </ul>
 
       <h2>5. Teams</h2>
       <p>
-        A team is a few ID-verified Phriends who offer a service together, for example a guide, a photographer and a
-        driver for one day out. Every member follows the same rules as on their own profile.
+        A team is a few verified providers who offer a service together, for example a photographer, a videographer and
+        a host for one event. Every member follows the same rules as on their own profile.
       </p>
       <ul>
         <li>
           The team lead is responsible for the team page: the members, roles, prices and payment terms must be real and
           accurate.
         </li>
+        <li>One booking covers the members named on it.</li>
         <li>
-          One booking covers the members named on it. If anyone else turns up, do not proceed: leave and report, as on
-          any booking.
-        </li>
-        <li>
-          The downpayment, at most 50% and paid in cash, in person, goes to the team lead, and the team splits it
-          among themselves. Phriend never holds the money.
+          Payment is agreed with the team lead in the chat and paid to the team directly, and the team splits it among
+          themselves. Phriend never holds the money.
         </li>
         <li>Either side can cancel as with any booking. If a member cannot make it, the team lead cancels or rebooks.</li>
       </ul>
 
       <h2>6. Zero tolerance for objectionable content and abusive behaviour</h2>
       <p>
-        <strong>Objectionable content and abusive behaviour are not tolerated on Phriend.</strong> Profiles, photos,
-        gigs and chat messages pass an automated filter, and a person approves every Phriend profile before it goes
-        live. Any member can report a profile, gig, review or message from the report button in the app, or by email to{" "}
+        <strong>Objectionable content and abusive behaviour are not tolerated on Phriend.</strong> Profiles, services,
+        photos, job posts and chat messages pass an automated filter, and a person approves every listing before it goes
+        live. Any member can report a profile, job post, review or message from the report button in the app, or by email to{" "}
         <a href="mailto:support@phriend.app">support@phriend.app</a>, and can block another member instantly from the
         chat. <strong>We review every report within 24 hours</strong>, remove the offending content, and remove the
         account of any member who breaks these rules. There is no warning for the items in section 3.
@@ -145,9 +152,9 @@ export default function CommunityGuidelinesPage() {
 
       <h2>8. Reporting</h2>
       <p>
-        Use the report button on any profile or gig, or email <a href="mailto:support@phriend.app">support@phriend.app</a>.
+        Use the report button on any profile or job post, or email <a href="mailto:support@phriend.app">support@phriend.app</a>.
         Tell us the profile name and what happened. Reports are confidential. See the{" "}
-        <Link href="/safety">safety and transaction rules</Link> for what to do in an emergency.
+        <Link href="/safety">trust, safety and transaction rules</Link> for what to do in an emergency.
       </p>
     </Legal>
   );

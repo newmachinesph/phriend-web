@@ -6,7 +6,7 @@ import { CONTACT_EMAIL, LAST_UPDATED, pageMeta } from "@/lib/site";
 export const metadata: Metadata = pageMeta({
   title: "Terms of Use for the Phriend platform",
   description:
-    "Terms for using Phriend, a platform for adults in the Philippines to book local services and activities by the hour. Not a party to any booking or payment.",
+    "Terms for using Phriend, a platform for adults in the Philippines to book local services from verified providers. Not a party to any booking or payment.",
   path: "/terms",
 });
 
@@ -17,7 +17,7 @@ export default function TermsPage() {
       title="Terms of Use"
       path="/terms"
       updated={LAST_UPDATED}
-      summary="Phriend is a listing, messaging and booking platform for adults (18+) in the Philippines to book local services and activities by the hour: guided tours, photo and video shoots, tutoring and lessons, hikes, driving, errands and similar work. Phriend is not a party to any booking or payment, holds no money, takes no commission, and is not liable for any loss, injury, dispute or unpaid balance between members. You use the service at your own risk, and your prudence is your protection."
+      summary="Phriend is a listing, messaging and booking platform for adults (18+) in the Philippines to book local services from verified providers: aircon cleaning and repair, appliance check-ups, bookkeeping and tax filing, tutoring, photo and video, driving, errands and similar work. Phriend is not a party to any booking or payment, holds no money, takes no commission, and is not liable for any loss, injury, dispute or unpaid balance between members. You use the service at your own risk, and your prudence is your protection."
       intro="Please read these terms before using Phriend. By creating an account or using the app you agree to them. If you do not agree, do not use Phriend."
     >
       <Callout tone="verify">
@@ -29,19 +29,21 @@ export default function TermsPage() {
 
       <h2>1. Who we are and what Phriend is</h2>
       <p>
-        Phriend (&quot;Phriend&quot;, &quot;we&quot;, &quot;us&quot;) operates the website phriend.app and the web app at
-        web.phriend.app (together, the &quot;Service&quot;). The Service is a listing, messaging and booking platform where adults
-        in the Philippines can publish a Phriend profile offering local services and activities by the hour, such as guided
-        tours, photo and video shoots, tutoring and lessons, hiking guiding, driving and errands
-        (&quot;Phriends&quot;), and other adults can find them and book them (&quot;clients&quot;). Both are
-        &quot;members&quot;.
+        Phriend (&quot;Phriend&quot;, &quot;we&quot;, &quot;us&quot;) operates the website phriend.app, the web apps at
+        web.phriend.app and provider.phriend.app, and the Phriend and Phriend Provider apps (together, the
+        &quot;Service&quot;). The Service is a listing, messaging and booking platform where adults in the Philippines can
+        list local services, each with its own price, photos, visit type, schedule and area, such as aircon cleaning and
+        repair, bookkeeping and tax filing, tutoring, photo and video, driving and errands (&quot;providers&quot;), and
+        other adults can find those services and book them (&quot;clients&quot;). Both are &quot;members&quot;.
       </p>
 
       <h2>2. Eligibility</h2>
       <p>
         You must be of legal age in the Philippines to use the Service. Republic Act No. 6809 sets the age of majority
-        at <strong>18 years</strong>. By using the Service you confirm you are 18 or older. Publishing a Phriend profile
-        requires verifying your identity and age through our verification partner, Didit; any member may verify. We
+        at <strong>18 years</strong>. By using the Service you confirm you are 18 or older. Listing services requires
+        verifying your identity and age: Phriend&apos;s team reviews a government ID and a selfie, stored privately; any
+        member may verify. Providers may also submit optional documents, such as an NBI clearance, certificates or
+        business documents, which show as badges once our team approves them. We
         may suspend or remove accounts that we reasonably believe belong to a minor.
       </p>
 
@@ -49,7 +51,7 @@ export default function TermsPage() {
       <p>
         You sign in with your Google account or with your email and a password; keep them secure, because you are
         responsible for everything done under
-        your Phriend account. One person, one account, one Phriend profile, with accurate information. Tell us at{" "}
+        your Phriend account. One person, one account, one provider profile, with accurate information. Tell us at{" "}
         <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a> if you think your account has been used without your
         permission.
       </p>
@@ -57,15 +59,16 @@ export default function TermsPage() {
       <h2>4. Phriend is a platform, not a party</h2>
       <p>
         <strong>
-          Phriend only provides the platform. We are not a party to any agreement, meetup, payment or other
+          Phriend only provides the platform. We are not a party to any agreement, booking, payment or other
           arrangement between members.
         </strong>{" "}
-        We do not employ Phriends, act as anyone&apos;s agent, or vouch for any member. Identity verification confirms
-        that an ID matched a face on a given day; it is not a background check or a guarantee of behaviour.
+        We do not employ providers, act as anyone&apos;s agent, or vouch for any member. Identity verification confirms
+        that an ID matched a face on a given day, and a document badge confirms that our team checked that document; neither
+        is a guarantee of anyone&apos;s work or behaviour.
       </p>
       <p>
-        You decide whom to meet, where, for how long and for how much. You are responsible for your own safety, for
-        following the <Link href="/safety">safety and transaction rules</Link>, and for obeying the law.
+        You decide whom to book, for what, when and for how much. You are responsible for your own safety, for
+        following the <Link href="/safety">trust, safety and transaction rules</Link>, and for obeying the law.
       </p>
 
       <h2>5. Payments</h2>
@@ -75,34 +78,36 @@ export default function TermsPage() {
         not process payments and, at the time of writing, does not charge a commission.
       </p>
       <p>
-        We recommend, and the safety rules require, <strong>50% at the start of the meetup and 50% after</strong>, with
-        the downpayment deducted from the total and never more than 50% paid in advance. On a{" "}
-        <strong>first meetup the downpayment is handed over in cash, in person, when the members meet</strong>.
-        E-wallets such as GCash or Maya, or bank transfer, are for repeat Phriends the client has already met and
-        trusts, for convenience, and only ever to the account the other member has shared in the chat. Phriend is not
-        responsible for refunds, disputes, chargebacks, unpaid balances or losses arising from payments between
-        members. Be prudent: your prudence is your protection.
+        <strong>Payment is agreed with the provider and paid to them directly</strong>: the amount, any deposit, the
+        method and the timing are set in the chat and the booking. No member may ask for more upfront than was agreed in
+        the chat, for a fee on top of the agreed price, or for payment to an account other than the one shared in the
+        chat. Phriend is not responsible for refunds, disputes, chargebacks, unpaid balances or losses arising from
+        payments between members. Be prudent: your prudence is your protection.
       </p>
 
-      <h2>6. Meetups and conduct</h2>
+      <h2>6. Services and conduct</h2>
       <ul>
-        <li>Meetups take place in public places, or at the client&apos;s home when the client books a home service (for example repairs, cleaning, moving, tutoring or pet care). The client decides whether to invite a Phriend into their home. Meetups never take place in hotel rooms, overnight, or at the Phriend&apos;s own place.</li>
+        <li>
+          Each service states how and where it is done: online, at the client&apos;s address, at the provider&apos;s place,
+          or either, and the area it covers. The client decides whether to book a service at their address. Bookings never
+          take place in hotel rooms or as overnight stays.
+        </li>
         <li>
           The Service is for <strong>legitimate local services and activities</strong> as described in the{" "}
           <Link href="/community-guidelines">community guidelines</Link>.
         </li>
         <li>Treat other members with respect. No harassment, threats, discrimination or hate speech.</li>
-        <li>Agree on the plan, hours and rate in the chat and in the booking request so both sides have a record.</li>
+        <li>Agree on the work, the time and the price in the chat and in the booking request so both sides have a record.</li>
         <li>
-          Before a Phriend profile goes live, the member accepts the seven-point Phriend agreement shown in the app,
-          which restates these rules, the payment terms and this platform-only status.
+          Before their services go live, a provider accepts the provider agreement shown in the app, which restates these
+          rules, the payment terms and this platform-only status.
         </li>
       </ul>
 
       <h2>7. Teams</h2>
       <p>
-        A team is a group of ID-verified Phriends offering a service together, with one team page, packages and a group
-        chat. Each member keeps their own Phriend profile and can still be booked alone.
+        A team is a group of verified providers offering a service together, with one team page, packages and a group
+        chat. Each member keeps their own provider profile and services, and can still be booked alone.
       </p>
       <ul>
         <li>
@@ -111,13 +116,13 @@ export default function TermsPage() {
         </li>
         <li>
           Every member follows the same rules as on their own profile: these terms, the{" "}
-          <Link href="/safety">safety and transaction rules</Link> and the{" "}
+          <Link href="/safety">trust, safety and transaction rules</Link> and the{" "}
           <Link href="/community-guidelines">community guidelines</Link>.
         </li>
         <li>One booking covers the members named on it. Anyone else is not part of the booking.</li>
         <li>
-          The downpayment, at most 50% and paid in cash, in person, is handed to the team lead, and the team splits it
-          among themselves. Phriend never holds the money and is not a party to how a team divides it.
+          Payment is agreed with the team lead in the chat and paid to the team directly, and the team splits it among
+          themselves. Phriend never holds the money and is not a party to how a team divides it.
         </li>
         <li>
           Either side can cancel a team booking as with any booking. If a member cannot make it, the team lead cancels
@@ -130,19 +135,19 @@ export default function TermsPage() {
       <ul>
         <li>offer, request or arrange sexual or romantic services, compensated dating or escort services;</li>
         <li>do anything illegal under the laws of the Republic of the Philippines;</li>
-        <li>arrange private, residential or hotel-room meetups;</li>
+        <li>list a person&apos;s company rather than a service, or use a service as a pretext for anything else, including hotel-room bookings and overnight stays;</li>
         <li>request payment outside the rules in section 5, or run any payment scam;</li>
         <li>impersonate any person or organisation, or use another person&apos;s photos or ID;</li>
         <li>post false, misleading or infringing content, fake reviews, or operate multiple accounts;</li>
         <li>scrape, copy, reverse engineer or interfere with the Service or its security;</li>
-        <li>contact members for advertising, recruitment or anything unrelated to a legitimate meetup.</li>
+        <li>contact members for advertising, recruitment or anything unrelated to a legitimate booking.</li>
       </ul>
 
       <h2>8b. Zero tolerance for objectionable content and abusive behaviour</h2>
       <p>
-        <strong>Objectionable content and abusive behaviour are not tolerated on Phriend.</strong> Profiles, photos,
-        gigs and chat messages pass an automated filter, and a person approves every Phriend profile before it goes
-        live. Any member can report a profile, gig, review or message from the report button in the app, or by email to{" "}
+        <strong>Objectionable content and abusive behaviour are not tolerated on Phriend.</strong> Profiles, services,
+        photos, job posts and chat messages pass an automated filter, and a person approves every listing before it goes
+        live. Any member can report a profile, job post, review or message from the report button in the app, or by email to{" "}
         <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>, and can block another member instantly from the chat.{" "}
         <strong>We review every report within 24 hours</strong>, remove the offending content, and remove the account of
         any member who breaks these terms or the <Link href="/community-guidelines">community guidelines</Link>. There
@@ -153,7 +158,7 @@ export default function TermsPage() {
       <p>
         You keep ownership of the photos and text you upload. By uploading them you give Phriend a worldwide,
         non-exclusive, royalty-free licence to host, store, display, resize and distribute that content within the
-        Service so other members can see your Phriend profile. The licence ends when you delete the content or your
+        Service so other members can see your profile and services. The licence ends when you delete the content or your
         account, except for short-lived backup copies or where the law requires retention. You confirm you have the
         right to post what you upload.
       </p>
@@ -161,8 +166,8 @@ export default function TermsPage() {
       <h2>10. Termination</h2>
       <p>
         You can delete your account at any time from your profile screen by typing DELETE; this permanently removes
-        your account, Phriend profile, photos, favorites, reviews, bookings, notes and gigs. We may hide your Phriend
-        profile or gig, mute you in chat, cancel a booking, or suspend or remove your account if you breach these
+        your account, provider profile, services, photos, saved addresses, favorites, reviews, bookings, notes and job
+        posts. We may hide your profile, a service or a job post, mute you in chat, cancel a booking, or suspend or remove your account if you breach these
         terms, the community guidelines or the safety rules, if we receive a credible report about you, or if the law
         requires it. Breaches involving sexual or romantic services, minors,
         scams or violence mean immediate removal and, where required, a report to the authorities.
@@ -176,14 +181,14 @@ export default function TermsPage() {
       <p>
         <strong>
           To the fullest extent permitted by Philippine law, Phriend, its owners, staff and partners are not liable for
-          any meetup, payment, damage, injury, loss, theft, dispute or other harm arising from your use of the Service
+          any booking, service, payment, damage, injury, loss, theft, dispute or other harm arising from your use of the Service
           or from any interaction with another member, online or offline.
         </strong>{" "}
         Where liability cannot be excluded, it is limited to the amount you paid Phriend in the 12 months before the
         claim, which at present is nothing.
       </p>
       <p>
-        In plain words: Phriend is a platform only. It is not a party to any meetup or payment and is not liable for
+        In plain words: Phriend is a platform only. It is not a party to any booking or payment and is not liable for
         any loss, injury, dispute, unpaid balance or harm between members. You use the Service at your own risk, and
         your prudence is your protection.
       </p>
@@ -192,7 +197,7 @@ export default function TermsPage() {
       <p>
         You agree to indemnify and hold harmless Phriend, its owners, staff and partners from any claims, damages,
         losses and expenses, including reasonable legal fees, arising from your use of the Service, your content, your
-        meetups, or your breach of these terms or of the law.
+        bookings and services, or your breach of these terms or of the law.
       </p>
 
       <h2>13. Changes to the Service and these terms</h2>

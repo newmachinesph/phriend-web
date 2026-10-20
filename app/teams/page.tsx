@@ -144,7 +144,7 @@ export default async function TeamsPage({ searchParams }: { searchParams: Promis
         <ol className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {STEPS.map((s, i) => (
             <li key={s.title} className="rounded-card border border-line bg-white p-6">
-              <span className="font-display text-3xl font-semibold text-line">0{i + 1}</span>
+              <span className="font-display text-3xl font-semibold text-muted">0{i + 1}</span>
               <h3 className="mt-3 font-display text-h3 font-bold text-ink">{s.title}</h3>
               <p className="mt-2 text-base leading-relaxed">{s.text}</p>
             </li>

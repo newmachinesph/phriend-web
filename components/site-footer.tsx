@@ -84,7 +84,7 @@ export function SiteFooter() {
           </nav>
         </div>
 
-        <p className="mt-12 flex flex-wrap justify-between gap-x-6 gap-y-2 border-t border-line pt-6 text-sm font-semibold text-muted">
+        <p className="mt-12 flex flex-wrap justify-between gap-x-6 gap-y-2 border-t border-line pt-6 text-sm font-semibold text-body">
           <span>© 2026 Phriend. Made in the Philippines.</span>
         </p>
       </Container>

@@ -174,7 +174,7 @@ function StepTile({ n, icon: Icon, title, text, className = "" }: { n: number; i
         <span className="grid size-11 place-items-center rounded-tile bg-brand-soft text-brand">
           <Icon size={22} aria-hidden="true" />
         </span>
-        <span className="font-display text-3xl font-semibold text-line">0{n}</span>
+        <span className="font-display text-3xl font-semibold text-muted">0{n}</span>
       </div>
       <h3 className="mt-5 font-display text-h2 font-bold text-ink">{title}</h3>
       <p className="mt-2 text-base leading-relaxed">{text}</p>

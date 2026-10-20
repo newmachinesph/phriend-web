@@ -56,7 +56,7 @@ export function Steps({ steps }: { steps: { icon: LucideIcon; title: string; tex
             <span className="grid size-12 place-items-center rounded-2xl bg-brand-soft text-brand-text">
               <s.icon size={24} strokeWidth={2} aria-hidden="true" />
             </span>
-            <span className="font-display text-3xl font-semibold text-line">{String(i + 1).padStart(2, "0")}</span>
+            <span className="font-display text-3xl font-semibold text-muted">{String(i + 1).padStart(2, "0")}</span>
           </div>
           <h3 className="mt-6 font-display text-h3 font-bold text-ink">{s.title}</h3>
           <p className="mt-3 text-base leading-relaxed text-body">{s.text}</p>

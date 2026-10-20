@@ -71,6 +71,11 @@ body {
   outline-offset: 2px;
 }
 
+/* muted (#6a748f) is 4.3:1 on the surface grey, under AA for small text: a step darker there (5.2:1) */
+.bg-surface .text-muted {
+  color: color-mix(in oklab, var(--color-muted) 82%, var(--color-ink));
+}
+
 /* In @layer components so utility classes on the same element (hidden, block, w-full) override these. */
 @layer components {
   .bg-navy-gradient {

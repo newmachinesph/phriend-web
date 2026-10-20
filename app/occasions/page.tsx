@@ -30,11 +30,11 @@ export default function OccasionsPage() {
         and the questions that come up most. Every provider is verified, and every service shows its price.
       </p>
       <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {OCCASIONS.map((o) => (
+        {OCCASIONS.map((o, i) => (
           <li key={o.slug}>
             <Link href={`/occasions/${o.slug}`} className="group flex h-full flex-col overflow-hidden rounded-card border border-line bg-white transition-colors hover:border-brand">
               <div className="relative h-44 overflow-hidden bg-navy-soft">
-                <Image src={occasionImage(o.slug)} alt={`${o.name} in the Philippines`} fill sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw" className="object-cover transition-transform duration-500 group-hover:scale-[1.03]" />
+                <Image src={occasionImage(o.slug)} alt={`${o.name} in the Philippines`} fill priority={i === 0} sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw" className="object-cover transition-transform duration-500 group-hover:scale-[1.03]" />
               </div>
               <div className="flex flex-1 flex-col p-6">
                 <h2 className="font-display text-h3 font-bold text-ink">{o.name}</h2>

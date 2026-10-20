@@ -40,9 +40,9 @@ export function ServiceGroups({ groups, limit }: { groups: Group[]; limit?: numb
                 <span className={`relative grid size-11 shrink-0 place-items-center rounded-tile ${photo ? "bg-white/20 text-white backdrop-blur-sm" : "bg-white text-brand"}`}>
                   <NodeIcon node={g.iconNode} size={22} aria-hidden="true" />
                 </span>
-                <h3 className="relative font-display text-xl font-semibold leading-tight drop-shadow-sm">{g.label}</h3>
+                <h3 className="relative font-display text-h3 font-bold drop-shadow-sm">{g.label}</h3>
               </div>
-              <p className="flex-1 px-5 py-4 text-[15px] leading-relaxed">
+              <p className="flex-1 px-5 py-4 text-base leading-relaxed">
                 {g.categories.length > 4
                   ? `${g.categories.slice(0, 4).map((c) => c.label).join(", ")} and ${g.categories.length - 4} more`
                   : list(g.categories.map((c) => c.label))}
@@ -65,8 +65,8 @@ export function ServiceCards({ categories }: { categories: Category[] }) {
             <span className="grid size-11 place-items-center rounded-tile bg-surface text-ink">
               <NodeIcon node={c.iconNode} size={22} aria-hidden="true" />
             </span>
-            <h3 className="mt-4 font-display text-xl font-semibold text-ink">{c.label}</h3>
-            {c.activities.length > 0 && <p className="mt-1.5 text-[15px] leading-relaxed">{c.activities.slice(0, 5).join(", ")}</p>}
+            <h3 className="mt-4 font-display text-h3 font-bold text-ink">{c.label}</h3>
+            {c.activities.length > 0 && <p className="mt-1.5 text-base leading-relaxed">{c.activities.slice(0, 5).join(", ")}</p>}
           </Link>
         </li>
       ))}
@@ -102,13 +102,15 @@ export function ServiceTile({ item, icon }: { item: ServiceItem; icon?: IconNode
             <NodeIcon node={icon} size={44} aria-hidden="true" />
           </span>
         )}
-        {item.visitType && <span className="absolute left-2 top-2 rounded-full bg-white/90 px-2 py-0.5 text-[11px] font-bold text-ink">{VISIT[item.visitType]}</span>}
+        {item.visitType && <span className="absolute left-2 top-2 rounded-full bg-white/90 px-2 py-0.5 text-xs font-bold text-ink">{VISIT[item.visitType]}</span>}
       </div>
       <div className="flex min-w-0 flex-1 flex-col p-4">
         <p className="line-clamp-2 font-display text-lg font-semibold leading-snug text-ink wrap-anywhere">{item.title}</p>
-        <p className="mt-1 whitespace-nowrap font-bold text-ink">
-          {peso(item.price)}
-          <span className="text-xs font-semibold text-muted">{item.unit === "hour" ? "/hr" : " per job"}</span>
+        {/* up to ₱1,000,000: the amount never breaks, the unit drops to the next line when the tile is narrow */}
+        <p className="mt-1 font-bold text-ink">
+          <span className="whitespace-nowrap">{peso(item.price)}</span>
+          <wbr />
+          <span className="whitespace-nowrap text-xs font-semibold text-muted">{item.unit === "hour" ? "/hr" : " per job"}</span>
         </p>
         <p className="mt-0.5 flex min-w-0 items-center gap-1 text-sm text-muted" title={serviceArea(item)}>
           <MapPin size={14} className="shrink-0 text-brand" aria-hidden="true" />

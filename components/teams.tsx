@@ -13,10 +13,10 @@ export function TeamTile({ team: t }: { team: TeamCard }) {
       <div className="relative">
         <div className="relative h-40 overflow-hidden bg-navy-soft">
           <Image src={t.photo} alt={`${t.name}, a team in ${t.city}`} width={640} height={320} sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw" className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]" />
-          <span className="absolute left-2 top-2 inline-flex items-center gap-1 rounded-full bg-white/90 px-2 py-0.5 text-[11px] font-bold text-verify">
+          <span className="absolute left-2 top-2 inline-flex items-center gap-1 rounded-full bg-white/90 px-2 py-0.5 text-xs font-bold text-verify">
             <BadgeCheck size={14} aria-hidden="true" /> Verified members
           </span>
-          <span className="absolute bottom-2 right-2 rounded-full bg-ink/80 px-2 py-0.5 text-[11px] font-bold text-white">{t.memberCount} members</span>
+          <span className="absolute bottom-2 right-2 rounded-full bg-ink/80 px-2 py-0.5 text-xs font-bold text-white">{t.memberCount} members</span>
         </div>
         {t.avatars.length > 0 && (
           <span className="absolute bottom-0 left-3 z-10 flex translate-y-1/2" aria-hidden="true">
@@ -41,9 +41,10 @@ export function TeamTile({ team: t }: { team: TeamCard }) {
         </p>
         {roles.length > 0 && <p className="mt-1 line-clamp-2 text-sm">{roles.join(", ")}</p>}
         {t.priceFrom !== null && (
-          <p className="mt-2 whitespace-nowrap font-bold text-ink">
-            from {peso(t.priceFrom)}
-            <span className="text-xs font-semibold text-muted"> per package</span>
+          <p className="mt-2 font-bold text-ink">
+            <span className="whitespace-nowrap">from {peso(t.priceFrom)}</span>
+            <wbr />
+            <span className="whitespace-nowrap text-xs font-semibold text-muted"> per package</span>
           </p>
         )}
       </div>

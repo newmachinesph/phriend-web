@@ -140,9 +140,12 @@ export function OverlayTool() {
 
     ty += 40;
     const price = peso(c.rate);
-    ctx.fillStyle = C.navy; ctx.font = sans(900)(30); ctx.fillText(price, 18, ty);
-    const pwid = ctx.measureText(price).width;
-    ctx.fillStyle = C.body; ctx.font = sans(800)(17); ctx.fillText(c.unit === "session" ? " per job" : "/hr.", 21 + pwid, ty);
+    const unit = c.unit === "session" ? " per job" : "/hr.";
+    ctx.font = sans(800)(17); const uw = ctx.measureText(unit).width;
+    // up to ₱1,000,000: the amount shrinks to fit beside its unit
+    ctx.fillStyle = C.navy; const priceText = fitText(ctx, price, w - 39 - uw, sans(900), 30); ctx.fillText(priceText, 18, ty);
+    const pwid = ctx.measureText(priceText).width;
+    ctx.fillStyle = C.body; ctx.font = sans(800)(17); ctx.fillText(unit, 21 + pwid, ty);
 
     const by = ty + 20;
     ctx.fillStyle = C.orange; ctx.beginPath(); ctx.roundRect(14, by, w - 28, 54, 27); ctx.fill();
@@ -340,7 +343,7 @@ export function OverlayTool() {
     // one grid so phones get link box, preview, options, download; desktop keeps the preview in its own sticky column
     <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,420px)] lg:gap-x-8">
       <form onSubmit={lookUp} className="rounded-3xl border border-line bg-white p-5 shadow-card sm:p-6 lg:col-start-1">
-        <label htmlFor="profile-link" className="font-display text-xl font-semibold text-ink">
+        <label htmlFor="profile-link" className="font-display text-h3 font-bold text-ink">
           1. Paste your Phriend link
         </label>
         <div className="mt-3 flex flex-col gap-2 sm:flex-row">
@@ -386,7 +389,7 @@ export function OverlayTool() {
 
       <fieldset disabled={!card} className="grid gap-4 rounded-3xl border border-line bg-white p-5 shadow-card disabled:opacity-60 sm:grid-cols-2 sm:p-6 lg:col-start-1">
         <legend className="sr-only">Card options</legend>
-        <p className="font-display text-xl font-semibold text-ink sm:col-span-2">2. Place your card</p>
+        <p className="font-display text-h3 font-bold text-ink sm:col-span-2">2. Place your card</p>
         <label className={`${label} sm:col-span-2`}>
           Card tag (leave empty to hide)
           <input type="text" maxLength={24} value={tag} onChange={(e) => setTag(e.target.value)} className={input} />
@@ -417,7 +420,7 @@ export function OverlayTool() {
       </fieldset>
 
       <div className="grid gap-3 self-start rounded-3xl border border-line bg-white p-5 shadow-card sm:p-6 lg:col-start-1">
-        <p className="font-display text-xl font-semibold text-ink">3. Download</p>
+        <p className="font-display text-h3 font-bold text-ink">3. Download</p>
         <button type="button" disabled={!card} onClick={() => exportPng("overlay")} className={`btn-primary ${btn}`}>
           <Download size={18} aria-hidden="true" />
           Transparent overlay PNG (1080×1920)

@@ -25,11 +25,6 @@ export function Chip({ on, className, ...p }: ComponentProps<"span"> & { on?: bo
   return <span className={chip(on, className)} {...p} />;
 }
 
-/** A pill that navigates (a city, a service, a filter); `on` marks the current one. */
-export function ChipLink({ on, className, ...p }: ComponentProps<typeof Link> & { on?: boolean }) {
-  return <Link aria-current={on ? "page" : undefined} className={cx(chip(on, className), "hover:border-ink")} {...p} />;
-}
-
 type Look = { variant?: "primary" | "secondary"; size?: "sm" | "md" };
 const look = ({ variant = "primary", size = "md" }: Look, className?: string) =>
   cx(variant === "primary" ? "btn-primary" : "btn-secondary", "rounded-control font-extrabold", size === "sm" ? "px-4 py-2 text-sm" : "px-6 py-3", className);

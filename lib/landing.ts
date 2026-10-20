@@ -52,18 +52,19 @@ export const appCategoryUrl = (c: Category) => `${APP_URL}/${activitySlug(c.labe
 /** One service's own page in the app. */
 export const appServiceUrl = (s: ServiceItem) => `${APP_URL}/services/${s.id}`;
 
-/** Groups the site never lists, whatever the API sends. */
-const EXCLUDED_GROUPS = new Set(["hangouts"]);
+/** Ops tells admins "changes reach the apps within a minute": the directory follows the category, group and platform
+ * hiding set in Ops (hidden groups never arrive) within the same minute. */
+const CATALOG_REVALIDATE_S = 60;
 
 /** Categories and their groups in one call (the API sends both, in Ops order), as the iOS app shows them. */
 export async function getCatalog(): Promise<{ categories: Category[]; groups: CategoryGroup[] }> {
   try {
-    const r = await fetch(`${API_URL}/api/categories?platform=${API_PLATFORM}`, { headers: apiHeaders(), next: { revalidate: 3600 } });
+    const r = await fetch(`${API_URL}/api/categories?platform=${API_PLATFORM}`, { headers: apiHeaders(), next: { revalidate: CATALOG_REVALIDATE_S } });
     if (!r.ok) return { categories: [], groups: [] };
     const d = (await r.json()) as { categories?: Category[]; groups?: CategoryGroup[] };
     return {
-      categories: (d.categories ?? []).filter((c) => !c.group || !EXCLUDED_GROUPS.has(c.group)),
-      groups: (d.groups ?? []).filter((g) => !EXCLUDED_GROUPS.has(g.slug)),
+      categories: d.categories ?? [],
+      groups: d.groups ?? [],
     };
   } catch {
     return { categories: [], groups: [] };

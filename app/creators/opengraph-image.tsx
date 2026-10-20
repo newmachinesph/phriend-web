@@ -1,10 +1,11 @@
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { ImageResponse } from "next/og";
+import { asJpeg } from "@/lib/og-jpeg";
 
 export const alt = "Show your service, get it booked: Phriend creator collab, one follower wins a free booking";
 export const size = { width: 1200, height: 630 };
-export const contentType = "image/png";
+export const contentType = "image/jpeg"; // a photo card: JPEG is ~10x smaller than the PNG (lib/og-jpeg.ts)
 
 const read = (p: string) => readFileSync(join(process.cwd(), "public", p));
 const jakarta = read("fonts/PlusJakartaSans-Bold.ttf");
@@ -13,8 +14,8 @@ const uri = (p: string, type: string) => `data:${type};base64,${read(p).toString
 const logo = uri("brand/logo-mark.png", "image/png");
 const hero = uri("creators/og-hero.jpg", "image/jpeg"); // AI-generated creator, not a real member
 /** Share card for /creators: the campaign line on navy, the creator photo on the right. */
-export default function Image() {
-  return new ImageResponse(
+export default async function Image() {
+  return asJpeg(new ImageResponse(
     (
       <div style={{ width: "100%", height: "100%", display: "flex", position: "relative", background: "#0d2251", color: "#fff", fontFamily: "Plus Jakarta Sans" }}>
         {/* eslint-disable-next-line @next/next/no-img-element -- Satori renders plain <img> */}
@@ -58,5 +59,5 @@ export default function Image() {
         { name: "Inter", data: inter, weight: 600, style: "normal" },
       ],
     },
-  );
+  ));
 }

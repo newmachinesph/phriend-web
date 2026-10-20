@@ -1,6 +1,7 @@
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { ImageResponse } from "next/og";
+import { asJpeg } from "@/lib/og-jpeg";
 import { cdn } from "@/lib/site";
 import { findCategory } from "@/lib/landing";
 import { findDbPost, readingMinutes } from "@/lib/blog-db";
@@ -8,7 +9,7 @@ import { POSTS, findPost } from "../_posts";
 
 export const alt = "Phriend blog";
 export const size = { width: 1200, height: 630 };
-export const contentType = "image/png";
+export const contentType = "image/jpeg"; // a photo card: JPEG is ~10x smaller than the PNG (lib/og-jpeg.ts)
 // A share card was rendered again on every request (1.2 MB, about 0.6 s). Static posts are built once; an Ops post
 // is cached for an hour.
 export const revalidate = 3600;
@@ -31,7 +32,7 @@ export default async function Image({ params }: { params: Promise<{ slug: string
   const category = db?.niche ? await findCategory(db.niche) : undefined;
   const kicker = post ? `${post.category.label} · Side income` : db ? `${category?.label ?? "Phriend"} · ${db.tags[0] ?? "Guide"}` : "For providers · Side income";
   const minutes = post?.readingMinutes ?? (db ? readingMinutes(db.bodyMd) : null);
-  return new ImageResponse(
+  return asJpeg(new ImageResponse(
     (
       <div style={{ width: "100%", height: "100%", display: "flex", position: "relative", background: "#0d2251", color: "#fff", fontFamily: "Plus Jakarta Sans" }}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -65,5 +66,5 @@ export default async function Image({ params }: { params: Promise<{ slug: string
         { name: "Inter", data: inter, weight: 600, style: "normal" },
       ],
     },
-  );
+  ));
 }

@@ -24,9 +24,9 @@ const STEPS = [
 const pill = "inline-block rounded-full border-2 px-4 py-1.5 text-sm font-bold";
 
 export default async function TeamsPage({ searchParams }: { searchParams: Promise<{ city?: string; page?: string }> }) {
+  const sp = await searchParams; // first: reading it keeps the page per request, also while it answers 404 below
   // hidden like the nav entry while Ops has the teams switch off: a 404 (noindex), and out of the sitemap
   if (!(await getFeatures()).teams) notFound();
-  const sp = await searchParams;
   const city = typeof sp.city === "string" ? findCity(sp.city) : undefined;
   const page = Math.max(1, Math.floor(Number(sp.page)) || 1);
   const { teams, total } = await getTeams({ city: city?.name, page });

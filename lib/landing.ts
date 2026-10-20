@@ -8,7 +8,7 @@ export type Category = { slug: string; label: string; icon: string; activities: 
 export type CategoryGroup = { slug: string; label: string; icon: string; iconNode: IconNode };
 export type VisitType = "in_person" | "online" | "hybrid";
 export type Scope = "areas" | "city" | "nationwide";
-/** One service from GET /api/services (the shape phriend-ph lib/services.ts reads): `id` is "o<offeringId>", or "p<postId>" for a listing without services. */
+/** One service from GET /api/services (the shape phriend-ph lib/services.ts reads): `id` is "o<offeringId>". */
 export type ServiceItem = {
   id: string;
   postId: number;
@@ -24,11 +24,7 @@ export type ServiceItem = {
   city?: string | null;
   coverage?: string[];
   provider: { postId: number; workName: string; title?: string; photo: string | null; verified: boolean; rating: number; reviewCount: number; city: string };
-  /** Set only on a listing standing in for a service (see getServices): where it opens in the app. */
-  link?: string;
 };
-/** A listing from GET /api/phriends, read only to build services while the API has no service feed (see getServices). */
-type Listing = { id: number; workName: string; title?: string; city: string; imagePath: string[]; pricePerHour: number; averageStarRating: number; reviewCount?: number; verified?: boolean; categories: string[] };
 
 /** The cities with their own pages (the six the audit named first). */
 export const CITY_PAGES = [
@@ -54,7 +50,7 @@ export const comboPath = (c: Category, city: CityPage) => `/${activitySlug(c.lab
 /** The same page on the app (the friendly category path the app uses). */
 export const appCategoryUrl = (c: Category) => `${APP_URL}/${activitySlug(c.label)}`;
 /** One service's own page in the app. */
-export const appServiceUrl = (s: ServiceItem) => s.link ?? `${APP_URL}/services/${s.id}`;
+export const appServiceUrl = (s: ServiceItem) => `${APP_URL}/services/${s.id}`;
 
 /** Groups the site never lists, whatever the API sends. */
 const EXCLUDED_GROUPS = new Set(["hangouts"]);
@@ -90,47 +86,19 @@ export async function findCategory(segment: string): Promise<Category | undefine
 
 const SERVICES_SHOWN = 12;
 
-/** A listing read as one service at its standard rate, the way the service feed itself shows a listing without services. */
-const listingService = (p: Listing, category: string | null, title: string): ServiceItem => ({
-  id: `p${p.id}`,
-  postId: p.id,
-  title,
-  description: "",
-  category,
-  price: p.pricePerHour,
-  unit: "hour",
-  minHours: null,
-  photo: null,
-  city: p.city,
-  provider: { postId: p.id, workName: p.workName, title: p.title, photo: p.imagePath[0] ?? null, verified: p.verified === true, rating: p.averageStarRating, reviewCount: p.reviewCount ?? 0, city: p.city },
-  link: `${APP_URL}/phriends/${p.id}`,
-});
-
-/** Services for a landing page, from the service feed. While the API does not serve /api/services yet, the listings stand in, one service each. */
+/** Services for a landing page, from the service feed (services only: a listing without a service is not in it). Empty when the API is unreachable. */
 export async function getServices(q: { category?: string; city?: string }): Promise<ServiceItem[]> {
   const sp = new URLSearchParams({ platform: API_PLATFORM });
   if (q.category) sp.set("category", q.category);
   if (q.city) sp.set("city", q.city);
-  const get = async <T>(path: string): Promise<T | null> => {
-    try {
-      const r = await fetch(`${API_URL}${path}?${sp}`, { headers: apiHeaders(), next: { revalidate: 600 } });
-      return r.ok ? ((await r.json()) as T) : null;
-    } catch {
-      return null;
-    }
-  };
-  const feed = await get<{ items?: ServiceItem[] }>("/api/services");
-  if (feed?.items) return feed.items.slice(0, SERVICES_SHOWN);
-  const listings = (await get<{ posts?: Listing[] }>("/api/phriends"))?.posts ?? [];
-  if (!listings.length) return [];
-  const labels = new Map((await getCategories()).map((c) => [c.slug, c.label]));
-  return listings
-    .filter((p) => p.pricePerHour)
-    .slice(0, SERVICES_SHOWN)
-    .map((p) => {
-      const category = q.category ?? p.categories.find((c) => labels.has(c)) ?? null;
-      return listingService(p, category, (category && labels.get(category)) || "Services");
-    });
+  try {
+    const r = await fetch(`${API_URL}/api/services?${sp}`, { headers: apiHeaders(), next: { revalidate: 600 } });
+    if (!r.ok) return [];
+    const feed = (await r.json()) as { items?: ServiceItem[] };
+    return (feed.items ?? []).filter((s) => s.id.startsWith("o")).slice(0, SERVICES_SHOWN);
+  } catch {
+    return [];
+  }
 }
 
 const peso = (n: number) => `₱${n.toLocaleString("en-PH")}`;

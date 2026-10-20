@@ -79,7 +79,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
 
   return (
     <main id="main" className="mx-auto w-full max-w-3xl px-5 pb-12 pt-8 sm:px-8 sm:py-16">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }} />
       <BackToBlog />
       <header className="mt-6">
         <p className="text-sm font-extrabold uppercase tracking-wider text-brand-text">
@@ -151,7 +151,7 @@ async function DbArticle({ post }: { post: NonNullable<Awaited<ReturnType<typeof
   const category = post.niche ? await findCategory(post.niche) : undefined;
   return (
     <main id="main" className="mx-auto w-full max-w-3xl px-5 pb-12 pt-8 sm:px-8 sm:py-16">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }} />
       <BackToBlog />
       <header className="mt-6">
         <p className="text-sm font-extrabold uppercase tracking-wider text-brand-text">{post.tags[0] ?? "Guide"}</p>

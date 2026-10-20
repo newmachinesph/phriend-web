@@ -10,6 +10,7 @@ const LEGAL = [
   { href: "/privacy", label: "Privacy Policy" },
   { href: "/safety", label: "Safety rules" },
   { href: "/community-guidelines", label: "Community guidelines" },
+  { href: "/delete-account", label: "Delete your account" },
 ] as const;
 
 // Only accounts that exist are rendered; add the TikTok URL here once that page is live.

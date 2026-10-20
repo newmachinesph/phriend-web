@@ -18,15 +18,19 @@ export default function DeleteAccountPage() {
       path="/delete-account"
       updated={LAST_UPDATED}
       intro="You can delete your Phriend account and its data at any time, from the app or by emailing us. This page explains both routes and exactly what is removed."
-      summary={`Open Profile → Delete account in the Phriend app, or email ${CONTACT_EMAIL} from your account address. Your name, photos, verification documents, saved addresses and favorites are deleted right away, and your profile, services and job posts are taken down.`}
+      summary={`Open Account → Delete account in the Phriend app, or email ${CONTACT_EMAIL} from your account address. Your name, photos, verification documents, saved addresses and favorites are deleted right away, and your profile, services and job posts are taken down.`}
     >
       <h2>1. Delete it yourself, in the app</h2>
       <ol>
         <li>Open the Phriend app (or <a href={APP_URL}>web.phriend.app</a>) and sign in.</li>
-        <li>Go to the <strong>Profile</strong> tab and scroll to the bottom.</li>
+        <li>Go to the <strong>Account</strong> tab and scroll to the bottom.</li>
         <li>Tap <strong>Delete account</strong>, choose a reason, type <code>DELETE</code> to confirm.</li>
         <li>Tap <strong>Delete forever</strong>. You are signed out on every device immediately.</li>
       </ol>
+      <p>
+        Providers follow the same steps in the Phriend Provider app or at <a href={PROVIDER_URL}>provider.phriend.app</a>:{" "}
+        <strong>Account</strong> &rarr; <strong>Delete account</strong>.
+      </p>
 
       <h2>2. Or ask us to do it</h2>
       <p>
@@ -43,7 +47,7 @@ export default function DeleteAccountPage() {
           <a href={PROVIDER_URL}>provider.phriend.app</a>
         </li>
         <li>Individual work photos, from the photo grid on each service</li>
-        <li>Saved addresses, from <strong>Profile</strong> &rarr; <strong>Addresses</strong></li>
+        <li>Saved addresses, from <strong>Account</strong> &rarr; <strong>Saved addresses</strong></li>
         <li>Messages you sent, by long-pressing them in a chat</li>
         <li>Job posts you posted, booking notes, favorites and blocked members</li>
         <li>Your push notification token, by turning notifications off in <strong>Settings</strong></li>
@@ -100,7 +104,7 @@ export default function DeleteAccountPage() {
       </ul>
 
       <Callout>
-        Deleting is final: a closed account cannot be reopened. If you only want a break, pause your services instead.
+        Deleting is final: a closed account cannot be reopened. Providers who only want a break can pause their services instead.
       </Callout>
 
       <p>

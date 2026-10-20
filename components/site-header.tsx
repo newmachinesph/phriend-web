@@ -50,7 +50,7 @@ export function SiteHeader() {
           <Logo height={32} priority />
         </Link>
 
-        <nav aria-label="Primary" className="hidden items-center gap-7 text-[15px] font-bold text-ink md:flex">
+        <nav aria-label="Primary" className="hidden items-center gap-7 text-base font-bold text-ink md:flex">
           {NAV.map((n) => (
             <Link key={n.href} href={n.href} className="rounded-md py-1 transition-colors hover:text-brand-text">
               {n.label}

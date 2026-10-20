@@ -175,13 +175,13 @@ function StepTile({ n, icon: Icon, title, text, className = "" }: { n: number; i
         </span>
         <span className="font-display text-3xl font-semibold text-line">0{n}</span>
       </div>
-      <h3 className="mt-5 font-display text-2xl font-semibold text-ink">{title}</h3>
-      <p className="mt-2 text-[15px] leading-relaxed">{text}</p>
+      <h3 className="mt-5 font-display text-h2 font-bold text-ink">{title}</h3>
+      <p className="mt-2 text-base leading-relaxed">{text}</p>
     </li>
   );
 }
 
-const h2 = "font-display text-3xl font-semibold leading-tight text-ink sm:text-4xl lg:text-5xl";
+const h2 = "font-display text-h2 font-bold text-ink";
 
 export default async function Home() {
   const [{ teams }, groups] = await Promise.all([getTeams({ limit: 3 }), getGroups()]);
@@ -193,7 +193,7 @@ export default async function Home() {
       <section className="bg-navy-gradient relative overflow-hidden text-white">
         <Container className="grid items-center gap-12 pb-16 pt-14 sm:pt-20 lg:grid-cols-[1.1fr_0.9fr] lg:gap-8 lg:pb-24 lg:pt-24">
           <div className="max-w-xl">
-            <h1 className="font-display text-[44px] font-semibold leading-[1.02] tracking-tight text-white sm:text-6xl lg:text-[64px]">
+            <h1 className="font-display text-display font-extrabold text-white">
               Local services, from verified providers
             </h1>
             <p className="mt-5 text-lg leading-relaxed text-white/80 sm:text-xl">
@@ -208,7 +208,7 @@ export default async function Home() {
                 List your services
               </ButtonLink>
             </div>
-            <ul className="mt-10 grid grid-cols-2 gap-x-4 gap-y-3 text-[14px] font-bold text-white sm:flex sm:flex-wrap sm:gap-x-6">
+            <ul className="mt-10 grid grid-cols-2 gap-x-4 gap-y-3 text-sm font-bold text-white sm:flex sm:flex-wrap sm:gap-x-6">
               {TRUST.map((t) => (
                 <li key={t.label} className="flex items-center gap-2">
                   <t.icon size={18} className="shrink-0 text-brand-light" aria-hidden="true" />
@@ -229,7 +229,7 @@ export default async function Home() {
               <h2 id="services-title" className={h2}>
                 What do you need done?
               </h2>
-              <p className="mt-3 text-[15px] leading-relaxed text-body">
+              <p className="mt-3 text-base leading-relaxed text-body">
                 {serviceCount} kinds of service in {groups.length} groups, from aircon cleaning and appliance check-ups to bookkeeping, tutoring, photo and
                 video, driving and errands. Pick one to see the services on offer.
               </p>
@@ -270,16 +270,16 @@ export default async function Home() {
             <li className="flex flex-col justify-between rounded-card bg-navy p-6 text-white md:col-span-2 lg:col-span-1">
               <Users size={28} className="text-brand-light" aria-hidden="true" />
               <div className="mt-10">
-                <h3 className="font-display text-2xl font-semibold">Need something done?</h3>
-                <p className="mt-2 text-[15px] leading-relaxed text-white/85">From a search to a booked service in a few minutes.</p>
+                <h3 className="font-display text-h2 font-bold">Need something done?</h3>
+                <p className="mt-2 text-base leading-relaxed text-white/85">From a search to a booked service in a few minutes.</p>
               </div>
             </li>
             {CLIENT_STEPS.map((s, i) => (
               <StepTile key={s.title} n={i + 1} {...s} className={i === CLIENT_STEPS.length - 1 ? "lg:col-span-2" : ""} />
             ))}
             <li className="flex flex-col justify-between rounded-card bg-brand-soft p-6 md:col-span-2 lg:col-span-2">
-              <p className="font-display text-2xl font-semibold text-ink">Start with a search.</p>
-              <p className="mt-2 text-[15px] leading-relaxed text-body">
+              <p className="font-display text-h2 font-bold text-ink">Start with a search.</p>
+              <p className="mt-2 text-base leading-relaxed text-body">
                 Every provider is verified by our team, and every service shows its price before you book.
               </p>
               <ButtonLink href={APP_URL} className="mt-6 w-fit">
@@ -292,16 +292,16 @@ export default async function Home() {
             <li className="flex flex-col justify-between rounded-card bg-brand-soft p-6 text-ink md:col-span-2 lg:col-span-1">
               <Wallet size={28} className="text-brand" aria-hidden="true" />
               <div className="mt-10">
-                <h3 className="font-display text-2xl font-semibold">Offer a service?</h3>
-                <p className="mt-2 text-[15px] leading-relaxed text-body">Set your prices, your hours and your area, and keep everything clients pay you.</p>
+                <h3 className="font-display text-h2 font-bold">Offer a service?</h3>
+                <p className="mt-2 text-base leading-relaxed text-body">Set your prices, your hours and your area, and keep everything clients pay you.</p>
               </div>
             </li>
             {PROVIDER_STEPS.map((s, i) => (
               <StepTile key={s.title} n={i + 1} {...s} className={i === PROVIDER_STEPS.length - 1 ? "lg:col-span-2" : ""} />
             ))}
             <li className="flex flex-col justify-between rounded-card bg-navy p-6 text-white md:col-span-2 lg:col-span-2">
-              <p className="font-display text-2xl font-semibold">List your services.</p>
-              <p className="mt-2 text-[15px] leading-relaxed text-white/85">
+              <p className="font-display text-h2 font-bold">List your services.</p>
+              <p className="mt-2 text-base leading-relaxed text-white/85">
                 Providers work in Phriend Provider, on the web at provider.phriend.app: list services, manage bookings, earnings and verification.
               </p>
               <ButtonLink href={PROVIDER_URL} className="mt-6 w-fit">
@@ -325,7 +325,7 @@ export default async function Home() {
             {FEATURES.map((f) => (
               <div key={f.title} className="border-t border-line py-5">
                 <dt className="font-extrabold text-ink">{f.title}</dt>
-                <dd className="mt-1 text-[15px] leading-relaxed">{f.text}</dd>
+                <dd className="mt-1 text-base leading-relaxed">{f.text}</dd>
               </div>
             ))}
           </dl>
@@ -341,7 +341,7 @@ export default async function Home() {
                 <h2 id="teams-title" className={h2}>
                   Book a team.
                 </h2>
-                <p className="mt-3 text-[15px] leading-relaxed text-body">
+                <p className="mt-3 text-base leading-relaxed text-body">
                   Weddings, events, tours and moves often need more than one provider. A team sells packages and books as one: one chat, one price, one booking. Every member is a verified provider you can also book on their own.
                 </p>
               </div>
@@ -389,7 +389,7 @@ export default async function Home() {
                   <r.icon size={22} className="mt-0.5 shrink-0 text-brand-text" aria-hidden="true" />
                   <div>
                     <h3 className="font-extrabold text-ink">{r.title}</h3>
-                    <p className="mt-1 text-[15px] leading-relaxed">{r.text}</p>
+                    <p className="mt-1 text-base leading-relaxed">{r.text}</p>
                   </div>
                 </li>
               ))}
@@ -410,7 +410,7 @@ export default async function Home() {
                 Clean aircons, keep books, teach, shoot photos and video, drive or run errands? List each service with its own price, photos,
                 schedule and area, then take bookings and chat with clients in Phriend Provider.
               </p>
-              <ul className="mt-6 space-y-3 text-[15px] font-semibold text-ink">
+              <ul className="mt-6 space-y-3 text-base font-semibold text-ink">
                 {[
                   "Each service with its own price per job, per hour or per session",
                   "Up to six photos of your work on every service",
@@ -445,7 +445,7 @@ export default async function Home() {
                 />
               </div>
               <div className="rounded-card border border-line bg-surface p-6 sm:p-8">
-                <h3 className="font-display text-3xl font-semibold text-ink sm:text-4xl">Providers keep 100%</h3>
+                <h3 className="font-display text-h2 font-bold text-ink">Providers keep 100%</h3>
                 <p className="mt-3 leading-relaxed">
                   Phriend takes no commission yet. Providers set their own prices, clients book in the app, and payment is agreed with
                   the provider and paid to them directly.
@@ -472,7 +472,7 @@ export default async function Home() {
       {/* FAQ */}
       <section id="faq" aria-labelledby="faq-title" className="bg-surface">
         <Container className="py-16 sm:py-24">
-          <p id="what-is-phriend" className="mb-10 max-w-4xl rounded-card border border-line bg-white p-5 text-[17px] leading-relaxed sm:p-6">
+          <p id="what-is-phriend" className="mb-10 max-w-4xl rounded-card border border-line bg-white p-5 text-lg leading-relaxed sm:p-6">
             <strong className="text-ink">What is Phriend?</strong> Phriend is a marketplace for local services in the Philippines.
             Clients browse services, each with its own price, photos, visit type, schedule and area, then book and chat with the
             provider in the app and pay the provider directly. Every provider is verified by our team.
@@ -493,7 +493,7 @@ export default async function Home() {
             <div className="flex max-w-3xl flex-col gap-3">
               {FAQ.map((f) => (
                 <details key={f.q} className="group rounded-card border border-line bg-white">
-                  <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-4 text-[17px] font-extrabold text-ink [&::-webkit-details-marker]:hidden">
+                  <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-4 text-lg font-extrabold text-ink [&::-webkit-details-marker]:hidden">
                     {f.q}
                     <ChevronDown size={20} className="shrink-0 text-muted transition-transform group-open:rotate-180" aria-hidden="true" />
                   </summary>
@@ -509,7 +509,7 @@ export default async function Home() {
       <section aria-labelledby="cta-title">
         <Container className="py-16 sm:py-24">
           <div className="bg-navy-gradient overflow-hidden rounded-card px-6 py-14 text-center text-white sm:px-12 sm:py-20">
-            <h2 id="cta-title" className="font-display text-3xl font-semibold leading-tight sm:text-5xl">
+            <h2 id="cta-title" className="font-display text-h2 font-bold">
               Ready to get it done?
             </h2>
             <p className="mx-auto mt-4 max-w-xl text-lg text-white/85">

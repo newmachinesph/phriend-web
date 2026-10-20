@@ -93,7 +93,7 @@ function GroupPage({ group, others }: { group: Group; others: Group[] }) {
         <span className="grid size-14 shrink-0 place-items-center rounded-tile bg-brand-soft text-brand">
           <NodeIcon node={group.iconNode} size={28} aria-hidden="true" />
         </span>
-        <h1 className="font-display text-4xl font-semibold leading-tight text-ink sm:text-5xl">{group.label}</h1>
+        <h1 className="font-display text-h1 font-bold text-ink">{group.label}</h1>
       </div>
       <p className="mt-5 max-w-3xl text-lg leading-relaxed">
         Book {list(names)} from verified providers across the Philippines. Each service shows its own price, photos of the work, visit type and area.
@@ -112,7 +112,7 @@ function GroupPage({ group, others }: { group: Group; others: Group[] }) {
       )}
 
       <section aria-labelledby="services-title" className="mt-14">
-        <h2 id="services-title" className="font-display text-2xl font-semibold text-ink sm:text-3xl">
+        <h2 id="services-title" className="font-display text-h2 font-bold text-ink">
           What {group.label} covers
         </h2>
         <div className="mt-6">
@@ -121,7 +121,7 @@ function GroupPage({ group, others }: { group: Group; others: Group[] }) {
       </section>
 
       <section aria-labelledby="more-title" className="mt-14">
-        <h2 id="more-title" className="font-display text-2xl font-semibold text-ink sm:text-3xl">
+        <h2 id="more-title" className="font-display text-h2 font-bold text-ink">
           Other service groups
         </h2>
         <ul className="mt-5 flex flex-wrap gap-2">

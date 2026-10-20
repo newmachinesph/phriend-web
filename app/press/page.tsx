@@ -113,7 +113,7 @@ const QUOTES = [
 ];
 
 const eyebrow = "text-sm font-extrabold uppercase tracking-wider text-brand-text";
-const h2 = "mt-2 font-display text-3xl font-semibold leading-tight text-ink sm:text-4xl";
+const h2 = "mt-2 font-display text-h2 font-bold text-ink";
 const pill =
   "inline-flex items-center gap-1.5 rounded-full border-2 border-line bg-white px-3.5 py-1.5 text-sm font-bold text-ink transition-colors hover:border-brand hover:bg-brand-soft";
 
@@ -181,13 +181,13 @@ export default async function PressPage() {
       <section className="bg-navy-gradient text-white">
         <Container className="pb-16 pt-14 sm:pt-20 lg:pb-20">
           <p className="text-sm font-extrabold uppercase tracking-wider text-brand-light">Press kit</p>
-          <h1 className="mt-3 font-display text-[44px] font-semibold leading-[1.02] tracking-tight sm:text-6xl">
+          <h1 className="mt-3 font-display text-display font-extrabold">
             Phriend press kit
           </h1>
           <p id="boilerplate" className="mt-6 max-w-3xl text-lg leading-relaxed text-white/85">
             {BOILERPLATE}
           </p>
-          <dl className="mt-8 flex flex-wrap gap-x-8 gap-y-3 text-[15px] font-bold">
+          <dl className="mt-8 flex flex-wrap gap-x-8 gap-y-3 text-base font-bold">
             <div className="flex gap-2">
               <dt className="text-white/60">Website</dt>
               <dd>
@@ -236,8 +236,8 @@ export default async function PressPage() {
             ))}
           </dl>
 
-          <h3 className="mt-12 font-display text-2xl font-semibold text-ink">Product</h3>
-          <ul className="mt-4 max-w-3xl space-y-3 text-[15px] font-semibold text-ink">
+          <h3 className="mt-12 font-display text-h2 font-bold text-ink">Product</h3>
+          <ul className="mt-4 max-w-3xl space-y-3 text-base font-semibold text-ink">
             {product(n).map((p) => (
               <li key={p} className="flex items-start gap-2.5">
                 <BadgeCheck size={20} className="mt-0.5 shrink-0 text-brand" aria-hidden="true" />
@@ -270,7 +270,7 @@ export default async function PressPage() {
             </AssetCard>
           </ul>
 
-          <h3 className="mt-12 font-display text-2xl font-semibold text-ink">Colors</h3>
+          <h3 className="mt-12 font-display text-h2 font-bold text-ink">Colors</h3>
           <ul className="mt-4 grid grid-cols-2 gap-4 md:grid-cols-4">
             {COLORS.map((c) => (
               <li key={c.hex} className="overflow-hidden rounded-card border border-line bg-white">
@@ -284,11 +284,11 @@ export default async function PressPage() {
             ))}
           </ul>
 
-          <h3 className="mt-12 font-display text-2xl font-semibold text-ink">Typography</h3>
+          <h3 className="mt-12 font-display text-h2 font-bold text-ink">Typography</h3>
           <ul className="mt-4 grid gap-4 sm:grid-cols-2">
             <li className="rounded-card border border-line bg-white p-6">
               <p className="text-xs font-extrabold uppercase tracking-wider text-muted">Display · Plus Jakarta Sans</p>
-              <p className="mt-3 font-display text-4xl font-semibold leading-tight text-ink">Local services, verified pros</p>
+              <p className="mt-3 font-display text-h1 font-bold text-ink">Local services, verified pros</p>
             </li>
             <li className="rounded-card border border-line bg-white p-6">
               <p className="text-xs font-extrabold uppercase tracking-wider text-muted">Body · Inter</p>
@@ -299,8 +299,8 @@ export default async function PressPage() {
           </ul>
           <p className="mt-3 text-sm text-muted">Both typefaces are free on Google Fonts.</p>
 
-          <h3 className="mt-12 font-display text-2xl font-semibold text-ink">Usage rules</h3>
-          <ul className="mt-4 space-y-3 text-[15px] font-semibold text-ink">
+          <h3 className="mt-12 font-display text-h2 font-bold text-ink">Usage rules</h3>
+          <ul className="mt-4 space-y-3 text-base font-semibold text-ink">
             {USAGE.map((u) => (
               <li key={u} className="flex items-start gap-2.5">
                 <BadgeCheck size={20} className="mt-0.5 shrink-0 text-brand" aria-hidden="true" />
@@ -323,7 +323,7 @@ export default async function PressPage() {
             links to the original file.
           </p>
 
-          <h3 className="mt-10 font-display text-2xl font-semibold text-ink">App screenshots</h3>
+          <h3 className="mt-10 font-display text-h2 font-bold text-ink">App screenshots</h3>
           <ul className="mt-4 grid max-w-3xl grid-cols-2 gap-4 sm:grid-cols-4">
             {SCREENSHOTS.map((s) => (
               <li key={s.src}>
@@ -346,7 +346,7 @@ export default async function PressPage() {
             ))}
           </ul>
 
-          <h3 className="mt-10 font-display text-2xl font-semibold text-ink">Lifestyle photos</h3>
+          <h3 className="mt-10 font-display text-h2 font-bold text-ink">Lifestyle photos</h3>
           <ul className="mt-4 grid gap-4 sm:grid-cols-3">
             {PHOTOS.map((p) => (
               <li key={p.src}>
@@ -383,7 +383,7 @@ export default async function PressPage() {
               <li key={s.title} className="rounded-card border border-line bg-white p-5">
                 <s.icon size={22} className="text-brand" aria-hidden="true" />
                 <h3 className="mt-3 font-extrabold text-ink">{s.title}</h3>
-                <p className="mt-1 text-[15px] leading-relaxed">{s.text}</p>
+                <p className="mt-1 text-base leading-relaxed">{s.text}</p>
               </li>
             ))}
           </ul>
@@ -407,7 +407,7 @@ export default async function PressPage() {
             {QUOTES.map((q) => (
               <li key={q} className="flex flex-col rounded-card border border-line bg-white p-6">
                 <figure className="flex h-full flex-col">
-                  <blockquote className="flex-1 text-[17px] leading-relaxed text-ink">
+                  <blockquote className="flex-1 text-lg leading-relaxed text-ink">
                     <span aria-hidden="true" className="font-display text-4xl leading-none text-brand">
                       &ldquo;
                     </span>
@@ -445,7 +445,7 @@ export default async function PressPage() {
             </div>
             <div>
               <h3 className="text-sm font-extrabold uppercase tracking-wider text-ink">Social</h3>
-              <ul className="mt-3 space-y-2 text-[15px] font-bold">
+              <ul className="mt-3 space-y-2 text-base font-bold">
                 <li>
                   <a href="https://facebook.com/phriendapp" rel="noreferrer" className="text-brand-text underline underline-offset-4">
                     facebook.com/phriendapp

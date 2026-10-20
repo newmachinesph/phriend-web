@@ -60,7 +60,7 @@ export default async function TeamsPage({ searchParams }: { searchParams: Promis
         {" › "}
         <span className="text-ink">Teams</span>
       </nav>
-      <h1 className="mt-4 max-w-3xl font-display text-4xl font-semibold leading-tight text-ink sm:text-5xl">Packages from teams of providers</h1>
+      <h1 className="mt-4 max-w-3xl font-display text-h1 font-bold text-ink">Packages from teams of providers</h1>
       <p className="mt-5 max-w-3xl text-lg leading-relaxed">
         Some jobs need more than one provider: a wedding with photo, video and coordination, a tour with a guide, a driver and a photographer, a moving crew. A team sells these as packages and books as one: one chat, one price, one booking. Every member is a verified provider you can also book on their own.
       </p>
@@ -72,7 +72,7 @@ export default async function TeamsPage({ searchParams }: { searchParams: Promis
       </div>
 
       <section id="teams" aria-labelledby="teams-title" className="mt-14">
-        <h2 id="teams-title" className="font-display text-2xl font-semibold text-ink sm:text-3xl">
+        <h2 id="teams-title" className="font-display text-h2 font-bold text-ink">
           Teams{city ? ` in ${city.name}` : ""}
         </h2>
         <ul className="mt-4 flex flex-wrap gap-2" aria-label="Filter by city">
@@ -92,7 +92,7 @@ export default async function TeamsPage({ searchParams }: { searchParams: Promis
 
         {teams.length === 0 ? (
           <div className="mt-6 max-w-2xl rounded-card border border-line bg-surface p-6 sm:p-8">
-            <p className="font-display text-xl font-semibold text-ink">Teams are just getting started in {city ? city.name : "the Philippines"}.</p>
+            <p className="font-display text-h3 font-bold text-ink">Teams are just getting started in {city ? city.name : "the Philippines"}.</p>
             <p className="mt-2 leading-relaxed">
               Teams are new on Phriend, and the first ones are being put together now. In the meantime you can book any of the services{city ? ` in ${city.name}` : ""} on their own.
             </p>
@@ -138,22 +138,22 @@ export default async function TeamsPage({ searchParams }: { searchParams: Promis
       </section>
 
       <section aria-labelledby="how-title" className="mt-14">
-        <h2 id="how-title" className="font-display text-2xl font-semibold text-ink sm:text-3xl">
+        <h2 id="how-title" className="font-display text-h2 font-bold text-ink">
           How a team booking works
         </h2>
         <ol className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {STEPS.map((s, i) => (
             <li key={s.title} className="rounded-card border border-line bg-white p-6">
               <span className="font-display text-3xl font-semibold text-line">0{i + 1}</span>
-              <h3 className="mt-3 font-display text-xl font-semibold text-ink">{s.title}</h3>
-              <p className="mt-2 text-[15px] leading-relaxed">{s.text}</p>
+              <h3 className="mt-3 font-display text-h3 font-bold text-ink">{s.title}</h3>
+              <p className="mt-2 text-base leading-relaxed">{s.text}</p>
             </li>
           ))}
         </ol>
       </section>
 
       <section id="start-a-team" aria-labelledby="start-title" className="mt-14 rounded-card bg-brand-soft p-6 sm:p-10">
-        <h2 id="start-title" className="font-display text-2xl font-semibold text-ink sm:text-3xl">
+        <h2 id="start-title" className="font-display text-h2 font-bold text-ink">
           Start a team
         </h2>
         <p className="mt-3 max-w-2xl text-lg leading-relaxed">

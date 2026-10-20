@@ -19,7 +19,7 @@ const SOCIAL = [
   { href: "", label: "TikTok" },
 ] as const;
 
-const link = "rounded-md text-[15px] font-semibold text-body transition-colors hover:text-brand-text";
+const link = "rounded-md text-base font-semibold text-body transition-colors hover:text-brand-text";
 
 export function SiteFooter() {
   return (
@@ -30,7 +30,7 @@ export function SiteFooter() {
             <Link href="/" aria-label="Phriend home" className="inline-block rounded-md">
               <Logo height={36} />
             </Link>
-            <p className="mt-3 text-[15px] leading-relaxed">
+            <p className="mt-3 text-base leading-relaxed">
               Local services across the Philippines, from aircon cleaning and tutoring to bookkeeping, photo and video. Verified
               providers, booked and chatted in the app.
             </p>

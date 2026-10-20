@@ -29,7 +29,7 @@ export default async function BlogIndex() {
     <Container as="main" className="py-14 sm:py-20">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: breadcrumbJsonLd("Blog", "/blog") }} />
       <p className="text-sm font-extrabold uppercase tracking-wider text-brand-text">Blog</p>
-      <h1 className="mt-2 max-w-2xl font-display text-4xl font-semibold leading-tight text-ink sm:text-5xl">Guides for people who could be earning on Phriend.</h1>
+      <h1 className="mt-2 max-w-2xl font-display text-h1 font-bold text-ink">Guides for people who could be earning on Phriend.</h1>
       <p className="mt-4 max-w-2xl text-lg leading-relaxed">What clients book, what it pays, how a booking works, and how to get booked more often.</p>
 
       {latest && (
@@ -39,7 +39,7 @@ export default async function BlogIndex() {
           </div>
           <div className="flex flex-col justify-center">
             <p className="text-sm font-extrabold uppercase tracking-wider text-brand-text">{latest.tag} · {latest.label}</p>
-            <h2 className="mt-2 font-display text-2xl font-semibold leading-tight text-ink sm:text-3xl">{latest.title}</h2>
+            <h2 className="mt-2 font-display text-h2 font-bold text-ink">{latest.title}</h2>
             <p className="mt-3 leading-relaxed">{latest.description}</p>
             <p className="mt-4 text-sm font-semibold text-muted">
               {fmt(latest.date)} · {latest.readingMinutes} min read
@@ -58,7 +58,7 @@ export default async function BlogIndex() {
                   <Image src={p.hero.src} alt={p.hero.alt} width={1600} height={900} sizes="(min-width: 1024px) 360px, (min-width: 640px) 50vw, 100vw" className="h-full w-full object-cover" />
                 </div>
                 <p className="mt-4 truncate text-xs font-extrabold uppercase tracking-wider text-brand-text">{p.label}</p>
-                <h2 title={p.title} className="mt-1 line-clamp-3 font-display text-xl font-semibold leading-tight text-ink">{p.title}</h2>
+                <h2 title={p.title} className="mt-1 line-clamp-3 font-display text-h3 font-bold text-ink">{p.title}</h2>
                 <p className="mt-auto pt-3 text-sm font-semibold text-muted">
                   {fmt(p.date)} · {p.readingMinutes} min read
                 </p>

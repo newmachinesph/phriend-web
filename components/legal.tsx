@@ -26,7 +26,7 @@ export function Legal({
       {path && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: breadcrumbJsonLd(title, path) }} />}
       <header className="border-b border-line pb-8">
         <p className="text-sm font-extrabold uppercase tracking-wider text-brand-text">{eyebrow}</p>
-        <h1 className="mt-2 font-display text-4xl font-semibold leading-tight text-ink sm:text-5xl">{title}</h1>
+        <h1 className="mt-2 font-display text-h1 font-bold text-ink">{title}</h1>
         {updated && (
           <p className="mt-3 text-sm font-bold text-muted">
             Last updated{" "}
@@ -35,7 +35,7 @@ export function Legal({
         )}
         {intro && <p className="mt-5 text-lg leading-relaxed">{intro}</p>}
         {summary && (
-          <p id="in-short" className="mt-5 rounded-2xl border border-brand/30 bg-brand-soft px-5 py-4 text-[15px] leading-relaxed">
+          <p id="in-short" className="mt-5 rounded-2xl border border-brand/30 bg-brand-soft px-5 py-4 text-base leading-relaxed">
             <strong className="text-ink">In short:</strong> {summary}
           </p>
         )}
@@ -51,5 +51,5 @@ export function Callout({ tone = "brand", children }: { tone?: "brand" | "verify
     brand: "border-brand/30 bg-brand-soft",
     verify: "border-verify/30 bg-verify-soft",
   };
-  return <div className={`my-6 rounded-2xl border px-5 py-4 text-[15px] leading-relaxed ${tones[tone]}`}>{children}</div>;
+  return <div className={`my-6 rounded-2xl border px-5 py-4 text-base leading-relaxed ${tones[tone]}`}>{children}</div>;
 }

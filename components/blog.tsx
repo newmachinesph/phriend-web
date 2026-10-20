@@ -41,7 +41,7 @@ export function Callout({ title, children }: { title: string; children: ReactNod
   return (
     <aside className="my-8 rounded-2xl border-2 border-brand/30 bg-brand-soft px-6 py-5">
       <p className="text-sm font-extrabold uppercase tracking-wider text-brand-text">{title}</p>
-      <div className="mt-2 text-[17px] leading-relaxed text-ink">{children}</div>
+      <div className="mt-2 text-lg leading-relaxed text-ink">{children}</div>
     </aside>
   );
 }
@@ -57,8 +57,8 @@ export function Steps({ steps }: { steps: { icon: LucideIcon; title: string; tex
             </span>
             <span className="font-display text-3xl font-semibold text-line">{String(i + 1).padStart(2, "0")}</span>
           </div>
-          <h3 className="mt-6 font-display text-xl font-semibold text-ink">{s.title}</h3>
-          <p className="mt-3 text-[15px] leading-relaxed text-body">{s.text}</p>
+          <h3 className="mt-6 font-display text-h3 font-bold text-ink">{s.title}</h3>
+          <p className="mt-3 text-base leading-relaxed text-body">{s.text}</p>
         </li>
       ))}
     </ol>
@@ -70,7 +70,7 @@ export function RateTable({ rows }: { rows: { service: string; pricing: string; 
   const peso = (n: number) => `₱${n.toLocaleString("en-PH")}`;
   return (
     <div className="my-10 overflow-hidden rounded-3xl border border-line shadow-card">
-      <table className="w-full text-left text-[15px]">
+      <table className="w-full text-left text-base">
         <thead className="bg-surface text-xs font-extrabold uppercase tracking-wider text-muted">
           <tr>
             <th className="px-5 py-3">Service</th>
@@ -97,7 +97,7 @@ export function ArticleCta({ category, headline = "Put your camera on Phriend th
   return (
     <div className="mt-14 rounded-3xl bg-navy-gradient px-6 py-10 text-white sm:px-10">
       <p className="text-sm font-extrabold uppercase tracking-wider text-brand-light">Ready when you are</p>
-      <h2 className="mt-2 font-display text-3xl font-semibold leading-tight sm:text-4xl">{headline}</h2>
+      <h2 className="mt-2 font-display text-h2 font-bold">{headline}</h2>
       <p className="mt-3 max-w-xl text-white/80">
         Verify your identity, list your services with their prices and photos, and take bookings that fit around your day job. A person reviews each listing before it goes live.
       </p>

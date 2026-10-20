@@ -16,7 +16,7 @@ export default function AndroidPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: breadcrumbJsonLd("Phriend for Android", "/android") }} />
       <section aria-labelledby="android-title">
         <div className="mx-auto w-full max-w-2xl px-5 py-16 text-center sm:px-8 sm:py-24">
-          <h1 id="android-title" className="font-display text-4xl font-semibold text-ink sm:text-5xl">
+          <h1 id="android-title" className="font-display text-h1 font-bold text-ink">
             Phriend works right in your browser
           </h1>
           <p className="mt-5 text-lg leading-relaxed text-body">
@@ -27,11 +27,11 @@ export default function AndroidPage() {
             <ContinueInWebApp className="btn-primary inline-flex items-center justify-center gap-2 rounded-full px-7 py-3.5 text-lg font-bold">
               Open Phriend <ArrowRight size={20} aria-hidden="true" />
             </ContinueInWebApp>
-            <a href={PLAY_URL} className="text-[15px] font-semibold text-muted underline underline-offset-4 hover:text-ink">
+            <a href={PLAY_URL} className="text-base font-semibold text-muted underline underline-offset-4 hover:text-ink">
               Prefer an app? Try the early Android app on Google Play
             </a>
           </div>
-          <p className="mt-10 text-[15px] leading-relaxed text-muted">
+          <p className="mt-10 text-base leading-relaxed text-muted">
             Already have Phriend on your home screen? Keep using it: that is the web app, and it is always up to date.
           </p>
         </div>

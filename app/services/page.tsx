@@ -36,7 +36,7 @@ export default async function ServicesPage() {
         {" › "}
         <span className="text-ink">Services</span>
       </nav>
-      <h1 className="mt-4 max-w-3xl font-display text-4xl font-semibold leading-tight text-ink sm:text-5xl">Every service, from verified providers</h1>
+      <h1 className="mt-4 max-w-3xl font-display text-h1 font-bold text-ink">Every service, from verified providers</h1>
       <p className="mt-5 max-w-3xl text-lg leading-relaxed">
         {count} kinds of service in {groups.length} groups. Each service shows its price, photos, visit type and area; you book and chat with the provider in the
         app, and pay the provider directly.
@@ -57,7 +57,7 @@ export default async function ServicesPage() {
                 <span className={`relative grid size-11 shrink-0 place-items-center rounded-tile ${photo ? "bg-white/20 text-white backdrop-blur-sm" : "bg-white text-brand"}`}>
                   <NodeIcon node={g.iconNode} size={22} aria-hidden="true" />
                 </span>
-                <h2 className="relative font-display text-xl font-semibold leading-tight drop-shadow-sm">{g.label}</h2>
+                <h2 className="relative font-display text-h3 font-bold drop-shadow-sm">{g.label}</h2>
               </Link>
               <ul className="flex flex-wrap gap-2 p-4">
                 {g.categories.map((c) => (
@@ -75,7 +75,7 @@ export default async function ServicesPage() {
       </ul>
 
       <section className="mt-16 rounded-card bg-brand-soft p-6 sm:p-10">
-        <h2 className="font-display text-2xl font-semibold text-ink sm:text-3xl">Offer a service</h2>
+        <h2 className="font-display text-h2 font-bold text-ink">Offer a service</h2>
         <p className="mt-3 max-w-2xl text-lg leading-relaxed">
           Listing is free and you keep 100% of what clients pay you. Verify your identity, list your services with their prices, photos, schedule and area at
           provider.phriend.app, and clients find them here.

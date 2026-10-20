@@ -26,7 +26,7 @@ export function Landing({ category, city, services, path, others }: { category: 
         {" › "}
         <span className="text-ink">{category.label}</span>
       </nav>
-      <h1 className="mt-4 max-w-3xl font-display text-4xl font-semibold leading-tight text-ink sm:text-5xl">{copy.h1}</h1>
+      <h1 className="mt-4 max-w-3xl font-display text-h1 font-bold text-ink">{copy.h1}</h1>
       <p className="mt-5 max-w-3xl text-lg leading-relaxed">{copy.intro}</p>
       <div className="mt-6 flex flex-wrap gap-3">
         <ButtonLink href={LANDING_CTA.browse(category)}>Browse all {category.label} services</ButtonLink>
@@ -36,7 +36,7 @@ export function Landing({ category, city, services, path, others }: { category: 
       </div>
 
       <section aria-labelledby="services" className="mt-14">
-        <h2 id="services" className="font-display text-2xl font-semibold text-ink sm:text-3xl">
+        <h2 id="services" className="font-display text-h2 font-bold text-ink">
           {category.label} services{city ? ` in ${city.name}` : ""} right now
         </h2>
         {services.length === 0 ? (
@@ -83,7 +83,7 @@ export function Landing({ category, city, services, path, others }: { category: 
       </section>
 
       <section aria-labelledby="cities" className="mt-14">
-        <h2 id="cities" className="font-display text-2xl font-semibold text-ink">
+        <h2 id="cities" className="font-display text-h2 font-bold text-ink">
           {category.label} by city
         </h2>
         <ul className="mt-4 flex flex-wrap gap-2">
@@ -106,7 +106,7 @@ export function Landing({ category, city, services, path, others }: { category: 
 
       {OCCASIONS.some((o) => o.book.includes(category.slug)) && (
         <section aria-labelledby="occasions" className="mt-14">
-          <h2 id="occasions" className="font-display text-2xl font-semibold text-ink">
+          <h2 id="occasions" className="font-display text-h2 font-bold text-ink">
             Often booked for
           </h2>
           <ul className="mt-4 flex flex-wrap gap-2">
@@ -122,7 +122,7 @@ export function Landing({ category, city, services, path, others }: { category: 
       )}
 
       <section aria-labelledby="more" className="mt-14">
-        <h2 id="more" className="font-display text-2xl font-semibold text-ink">
+        <h2 id="more" className="font-display text-h2 font-bold text-ink">
           Other services{city ? ` in ${city.name}` : ""}
         </h2>
         <ul className="mt-4 flex flex-wrap gap-2">

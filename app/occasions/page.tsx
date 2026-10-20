@@ -24,7 +24,7 @@ export default function OccasionsPage() {
         {" › "}
         <span className="text-ink">Occasions</span>
       </nav>
-      <h1 className="mt-4 max-w-3xl font-display text-4xl font-semibold leading-tight text-ink sm:text-5xl">Book the services for your occasion</h1>
+      <h1 className="mt-4 max-w-3xl font-display text-h1 font-bold text-ink">Book the services for your occasion</h1>
       <p className="mt-5 max-w-3xl text-lg leading-relaxed">
         Weddings, debuts, birthdays and company events each need a different set of services. Pick one to see what to book, what to agree on beforehand,
         and the questions that come up most. Every provider is verified, and every service shows its price.
@@ -37,8 +37,8 @@ export default function OccasionsPage() {
                 <Image src={occasionImage(o.slug)} alt={`${o.name} in the Philippines`} fill sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw" className="object-cover transition-transform duration-500 group-hover:scale-[1.03]" />
               </div>
               <div className="flex flex-1 flex-col p-6">
-                <h2 className="font-display text-xl font-semibold text-ink">{o.name}</h2>
-                <p className="mt-2 line-clamp-3 flex-1 text-[15px] leading-relaxed">{o.intro}</p>
+                <h2 className="font-display text-h3 font-bold text-ink">{o.name}</h2>
+                <p className="mt-2 line-clamp-3 flex-1 text-base leading-relaxed">{o.intro}</p>
                 <span className="mt-4 font-bold text-brand-text group-hover:underline">Who to book</span>
               </div>
             </Link>

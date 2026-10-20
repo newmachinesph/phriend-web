@@ -85,7 +85,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
         <p className="text-sm font-extrabold uppercase tracking-wider text-brand-text">
           {post.tags[0]} · {post.category.label}
         </p>
-        <h1 className="mt-2 font-display text-4xl font-semibold leading-[1.1] text-ink sm:text-5xl">{post.title}</h1>
+        <h1 className="mt-2 font-display text-h1 font-bold text-ink">{post.title}</h1>
         <p className="mt-4 text-lg leading-relaxed text-body">{post.description}</p>
         <p className="mt-4 text-sm font-semibold text-muted">
           By Phriend · {fmt(post.date)} · {post.readingMinutes} min read
@@ -155,7 +155,7 @@ async function DbArticle({ post }: { post: NonNullable<Awaited<ReturnType<typeof
       <BackToBlog />
       <header className="mt-6">
         <p className="text-sm font-extrabold uppercase tracking-wider text-brand-text">{post.tags[0] ?? "Guide"}</p>
-        <h1 className="mt-2 font-display text-4xl font-semibold leading-[1.1] text-ink sm:text-5xl">{post.title}</h1>
+        <h1 className="mt-2 font-display text-h1 font-bold text-ink">{post.title}</h1>
         {post.description && <p className="mt-4 text-lg leading-relaxed text-body">{post.description}</p>}
         <p className="mt-4 text-sm font-semibold text-muted">
           By Phriend · {fmt(post.publishedAt.slice(0, 10))} · {readingMinutes(post.bodyMd)} min read

@@ -40,7 +40,7 @@ const TOP_BOOKINGS: { icon: LucideIcon; title: string; text: string }[] = [
 ];
 
 const eyebrow = "text-sm font-extrabold uppercase tracking-wider text-brand-text";
-const h2 = "mt-2 font-display text-3xl font-semibold leading-tight text-ink sm:text-4xl";
+const h2 = "mt-2 font-display text-h2 font-bold text-ink";
 
 export default function CreatorsPage() {
   return (
@@ -51,7 +51,7 @@ export default function CreatorsPage() {
         <Container className="grid items-center gap-12 pb-16 pt-14 sm:pt-20 lg:grid-cols-[1.15fr_0.85fr] lg:pb-20">
           <div>
           <p className="text-sm font-extrabold uppercase tracking-wider text-mango">#BookOnPhriend · Creator collab</p>
-          <h1 className="mt-3 font-display text-[44px] font-semibold leading-[1.02] tracking-tight sm:text-6xl">
+          <h1 className="mt-3 font-display text-display font-extrabold">
             Show your service, <br className="hidden sm:block" />
             <span className="text-brand-light">get it booked.</span>
           </h1>
@@ -99,11 +99,11 @@ export default function CreatorsPage() {
               <li key={s.title} className="rounded-card border border-line bg-white p-5">
                 <span className="grid size-10 place-items-center rounded-tile bg-brand font-display text-lg font-bold text-white">{i + 1}</span>
                 <h3 className="mt-3 font-extrabold text-ink">{s.title}</h3>
-                <p className="mt-1 text-[15px] leading-relaxed">{s.text}</p>
+                <p className="mt-1 text-base leading-relaxed">{s.text}</p>
               </li>
             ))}
           </ol>
-          <p className="mt-6 flex items-start gap-2.5 text-[15px] font-semibold text-ink">
+          <p className="mt-6 flex items-start gap-2.5 text-base font-semibold text-ink">
             <BadgeCheck size={20} className="mt-0.5 shrink-0 text-brand" aria-hidden="true" />
             The prize is one booking of a service you list, at its listed price. Say where you work in your caption before comments open, so
             the winner is someone you can serve. Full rules are in the creator kit.

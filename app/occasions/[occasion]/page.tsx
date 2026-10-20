@@ -64,7 +64,7 @@ export default async function OccasionPage({ params }: { params: Promise<{ occas
         {" › "}
         <span className="text-ink">{o.name}</span>
       </nav>
-      <h1 className="mt-4 max-w-3xl font-display text-4xl font-semibold leading-tight text-ink sm:text-5xl">{o.title}</h1>
+      <h1 className="mt-4 max-w-3xl font-display text-h1 font-bold text-ink">{o.title}</h1>
       <p className="mt-5 max-w-3xl text-lg leading-relaxed">{o.intro}</p>
       <div className="mt-6 flex flex-wrap gap-3">
         <ButtonLink href="#who-to-book">Who to book</ButtonLink>
@@ -77,18 +77,18 @@ export default async function OccasionPage({ params }: { params: Promise<{ occas
       </div>
 
       <section id="who-to-book" aria-labelledby="book-title" className="mt-14">
-        <h2 id="book-title" className="font-display text-2xl font-semibold text-ink sm:text-3xl">
+        <h2 id="book-title" className="font-display text-h2 font-bold text-ink">
           Who to book for a {o.name.toLowerCase()}
         </h2>
         <ul className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {book.map((c) => (
             <li key={c.slug} className="flex flex-col rounded-card border border-line bg-white p-6">
-              <h3 className="font-display text-xl font-semibold text-ink">
+              <h3 className="font-display text-h3 font-bold text-ink">
                 <Link href={activityPath(c)} className="hover:text-brand-text">
                   {c.label}
                 </Link>
               </h3>
-              {c.activities.length > 0 && <p className="mt-2 flex-1 text-[15px] leading-relaxed">{c.activities.slice(0, 5).join(", ")}</p>}
+              {c.activities.length > 0 && <p className="mt-2 flex-1 text-base leading-relaxed">{c.activities.slice(0, 5).join(", ")}</p>}
               <div className="mt-4 flex flex-wrap gap-x-4 gap-y-1 text-sm font-bold">
                 <a href={appCategoryUrl(c)} className="text-brand-text hover:underline">
                   See the services
@@ -104,24 +104,24 @@ export default async function OccasionPage({ params }: { params: Promise<{ occas
 
       <section aria-labelledby="tips-title" className="mt-14 grid gap-8 lg:grid-cols-2">
         <div>
-          <h2 id="tips-title" className="font-display text-2xl font-semibold text-ink sm:text-3xl">
+          <h2 id="tips-title" className="font-display text-h2 font-bold text-ink">
             Before you book
           </h2>
           <ul className="mt-5 space-y-3">
             {o.tips.map((t) => (
-              <li key={t} className="flex gap-3 text-[16px] leading-relaxed">
+              <li key={t} className="flex gap-3 text-base leading-relaxed">
                 <Check size={20} aria-hidden="true" className="mt-0.5 shrink-0 text-brand" />
                 {t}
               </li>
             ))}
-            <li className="flex gap-3 text-[16px] leading-relaxed">
+            <li className="flex gap-3 text-base leading-relaxed">
               <Check size={20} aria-hidden="true" className="mt-0.5 shrink-0 text-brand" />
               Pay the provider directly, as you agree with them in the chat. Phriend never holds the money.
             </li>
           </ul>
         </div>
         <div>
-          <h2 className="font-display text-2xl font-semibold text-ink sm:text-3xl">Questions</h2>
+          <h2 className="font-display text-h2 font-bold text-ink">Questions</h2>
           <dl className="mt-5 space-y-5">
             {o.faq.map((f) => (
               <div key={f.q}>
@@ -134,7 +134,7 @@ export default async function OccasionPage({ params }: { params: Promise<{ occas
       </section>
 
       <section aria-labelledby="more-title" className="mt-14">
-        <h2 id="more-title" className="font-display text-2xl font-semibold text-ink sm:text-3xl">
+        <h2 id="more-title" className="font-display text-h2 font-bold text-ink">
           Other occasions
         </h2>
         <ul className="mt-5 flex flex-wrap gap-2">
@@ -149,7 +149,7 @@ export default async function OccasionPage({ params }: { params: Promise<{ occas
       </section>
 
       <section className="mt-14 rounded-card bg-brand-soft p-6 sm:p-10">
-        <h2 className="font-display text-2xl font-semibold text-ink sm:text-3xl">Do this for a living?</h2>
+        <h2 className="font-display text-h2 font-bold text-ink">Do this for a living?</h2>
         <p className="mt-3 max-w-2xl text-lg leading-relaxed">
           Hosts, makeup artists, photographers and coordinators can list their services on Phriend for free and get booked for occasions like this one.
         </p>

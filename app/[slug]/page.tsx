@@ -93,7 +93,7 @@ async function CityLanding({ city, categories }: { city: CityPage; categories: A
         {" › "}
         <span className="text-ink">{city.name}</span>
       </nav>
-      <h1 className="mt-4 max-w-3xl font-display text-4xl font-semibold leading-tight text-ink sm:text-5xl">Local services in {city.name}</h1>
+      <h1 className="mt-4 max-w-3xl font-display text-h1 font-bold text-ink">Local services in {city.name}</h1>
       <p className="mt-5 max-w-3xl text-lg leading-relaxed">
         {city.name} is {city.blurb}. On Phriend you book services there from verified providers, for {acts.slice(0, -1).join(", ")} and {acts[acts.length - 1]}, and dozens of
         other kinds of work, plus online services that cover the whole country.
@@ -111,7 +111,7 @@ async function CityLanding({ city, categories }: { city: CityPage; categories: A
       </div>
 
       <section aria-labelledby="acts" className="mt-14">
-        <h2 id="acts" className="font-display text-2xl font-semibold text-ink sm:text-3xl">
+        <h2 id="acts" className="font-display text-h2 font-bold text-ink">
           What you can book in {city.name}
         </h2>
         <ul className="mt-6 grid gap-x-8 sm:grid-cols-2 lg:grid-cols-3">
@@ -129,7 +129,7 @@ async function CityLanding({ city, categories }: { city: CityPage; categories: A
       </section>
 
       <section aria-labelledby="who" className="mt-14">
-        <h2 id="who" className="font-display text-2xl font-semibold text-ink sm:text-3xl">
+        <h2 id="who" className="font-display text-h2 font-bold text-ink">
           Services in {city.name} right now
         </h2>
         {services.length === 0 ? (
@@ -152,7 +152,7 @@ async function CityLanding({ city, categories }: { city: CityPage; categories: A
       </section>
 
       <section aria-labelledby="other-cities" className="mt-14">
-        <h2 id="other-cities" className="font-display text-2xl font-semibold text-ink">
+        <h2 id="other-cities" className="font-display text-h2 font-bold text-ink">
           Other cities
         </h2>
         <ul className="mt-4 flex flex-wrap gap-2">

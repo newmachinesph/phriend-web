@@ -13,17 +13,20 @@ export const cdn = (path: string) => (/^https?:\/\//.test(path) ? path : `${CDN_
 /** The Android app on Google Play: an extra. The web app (APP_URL) is the default on every phone. */
 export const ANDROID_PACKAGE = "app.phriend.mobile";
 export const PLAY_URL = `https://play.google.com/store/apps/details?id=${ANDROID_PACKAGE}`;
-export const POST_URL = `${APP_URL}/earn`;
+/** Providers list services, manage bookings, earnings and verification here (the Phriend Provider app is not in the stores yet). */
+export const PROVIDER_URL = "https://provider.phriend.app";
+/** The platform the site asks the API for: the iOS store policy, so the site lists exactly what the App Store build shows. */
+export const API_PLATFORM = "ios";
 export const CONTACT_EMAIL = "support@phriend.app";
-export const LAST_UPDATED = "2026-10-10";
+export const LAST_UPDATED = "2026-10-20";
 
 export const SITE_NAME = "Phriend";
-export const SITE_TITLE = "Phriend: Local Services & Pros";
+export const SITE_TITLE = "Phriend: Book Local Services in the Philippines";
 export const SITE_DESCRIPTION =
-  "Book ID-verified local guides and pros across the Philippines: tours, photo shoots, lessons, hikes, errands and driving. Agreed in chat, paid in person.";
+  "Book local services from verified providers across the Philippines: aircon cleaning, bookkeeping, tutoring, photo and video, driving, errands and more.";
 
 /** Rendered by app/opengraph-image.tsx; listed here because a page-level `openGraph` drops the file-convention image (see pageMeta). */
-export const OG_IMAGE = { url: "/opengraph-image", width: 1200, height: 630, alt: "Phriend: local guides & pros" };
+export const OG_IMAGE = { url: "/opengraph-image", width: 1200, height: 630, alt: "Phriend: local services from verified providers" };
 
 /** Per-page metadata. Next replaces nested `openGraph` and `alternates` wholesale per segment, so each page restates the shared bits here. */
 export function pageMeta({ title, description, path }: { title?: string; description: string; path: string }): Metadata {

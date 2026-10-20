@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Logo, NAV } from "@/components/site-header";
 import { AppLink } from "@/components/app-link";
-import { PLAY_URL, POST_URL } from "@/lib/site";
+import { PLAY_URL, PROVIDER_URL } from "@/lib/site";
 import { Container } from "@/components/ui";
 
 const LEGAL = [
@@ -31,8 +31,8 @@ export function SiteFooter() {
               <Logo height={36} />
             </Link>
             <p className="mt-3 text-[15px] leading-relaxed">
-              Book ID-verified local pros across the Philippines for errands, pet care, events, lessons, photo shoots, tours
-              and more. Agree the price in chat, pay in person.
+              Local services across the Philippines, from aircon cleaning and tutoring to bookkeeping, photo and video. Verified
+              providers, booked and chatted in the app.
             </p>
             {/* Google's badge, used as supplied: keep the proportions, no restyling (Play brand guidelines). -ml-2 cancels the PNG's own 8px transparent margin so the badge lines up with the text. */}
             <a href={PLAY_URL} className="-ml-2 mt-5 inline-block rounded-md" aria-label="Get it on Google Play">
@@ -50,8 +50,8 @@ export function SiteFooter() {
               </Link>
             ))}
             <AppLink className={link} />
-            <a href={POST_URL} className={link}>
-              Become a Phriend
+            <a href={PROVIDER_URL} className={link}>
+              List your services
             </a>
           </nav>
 

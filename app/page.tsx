@@ -1,112 +1,107 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { BadgeCheck, CalendarClock, CalendarDays, ChevronDown, Flag, Lock, MapPin, MessageCircle, PenLine, Search, ShieldCheck, Users, UserX, Wallet, type LucideIcon } from "lucide-react";
+import { BadgeCheck, Briefcase, CalendarClock, CalendarDays, ChevronDown, CircleCheck, FileCheck, Flag, Lock, MessageCircle, PenLine, Search, Tag, Users, Wallet, Zap, type LucideIcon } from "lucide-react";
 import { TeamTile } from "@/components/teams";
 import { ServiceGroups } from "@/components/services";
 import { getGroups, getTeams } from "@/lib/landing";
-import { APP_URL, cdn, pageMeta, POST_URL, SITE_DESCRIPTION, SITE_URL } from "@/lib/site";
+import { APP_URL, cdn, pageMeta, PROVIDER_URL, SITE_DESCRIPTION, SITE_URL } from "@/lib/site";
 import { ButtonLink, Container } from "@/components/ui";
 
 export const metadata: Metadata = pageMeta({ description: SITE_DESCRIPTION, path: "/" });
 
 const TRUST: { icon: LucideIcon; label: string }[] = [
-  { icon: BadgeCheck, label: "Everyone is ID-verified" },
-  { icon: MapPin, label: "Public places, or your home for home services" },
-  { icon: Wallet, label: "Agree the price in chat, pay in person" },
+  { icon: BadgeCheck, label: "Verified providers" },
+  { icon: Tag, label: "Priced per job, hour or session" },
+  { icon: MessageCircle, label: "Book and chat in the app" },
 ];
 
 const CLIENT_STEPS: { icon: LucideIcon; title: string; text: string }[] = [
-  { icon: Search, title: "Browse", text: "Filter by city, activity, language and rate. Every profile shows the verified badge, reviews and the Phriend's services with prices." },
-  { icon: MessageCircle, title: "Chat", text: "Sign in, verify your ID in a couple of minutes, then agree on the plan in the chat so both sides have the record." },
-  { icon: CalendarDays, title: "Book", text: "Send the date, start time, hours and a meeting place: a public place, or your address for a home service. The Phriend accepts or declines, and it goes in your calendar." },
-  { icon: MapPin, title: "Meet", text: "Meet up (or welcome them home for a home service), pay half in cash when they arrive and the rest after. Then leave a review." },
+  { icon: Search, title: "Browse", text: "Search services by what you need and where. Each one shows its price, up to six photos of the work, whether it is online, in person or hybrid, and the provider's badges." },
+  { icon: MessageCircle, title: "Chat", text: "Message the provider in the app. Their FAQ answers reply instantly to the usual questions: how to pay, the minimum booking, where they work." },
+  { icon: CalendarDays, title: "Book", text: "Pick a time from the service's own schedule and, for an at-home service, one of your saved addresses. Online services need none. The provider accepts or declines." },
+  { icon: CircleCheck, title: "Get it done", text: "The work happens online or in person. Pay the provider directly, as you agreed with them, then leave a review." },
 ];
 
-const PHRIEND_STEPS: { icon: LucideIcon; title: string; text: string }[] = [
-  { icon: BadgeCheck, title: "Verify", text: "A quick ID check confirms you are 18 or older. Every member verifies, and a profile cannot go live without it." },
-  { icon: PenLine, title: "Profile", text: "Claim your @username, add photos, pick activities and non-negotiables, set your rate and services. A person approves it, usually within a day." },
-  { icon: CalendarClock, title: "Schedule", text: "Set your weekly availability and lock out busy dates. Requests arrive in the app and by email; accept or decline with one tap." },
-  { icon: Wallet, title: "Earn", text: "Meet in public or at the client's home for a home service, and get paid in cash, directly. Your dashboard tracks bookings, reviews and earnings. Phriend takes no cut." },
+const PROVIDER_STEPS: { icon: LucideIcon; title: string; text: string }[] = [
+  { icon: BadgeCheck, title: "Verify", text: "Verify your identity with a government ID and a selfie. Add clearances, certificates or business documents to earn a badge for each one our team checks." },
+  { icon: PenLine, title: "Profile", text: "Keep it lean: one round face photo, your name, a title like \"Online Bookkeeper\", a short About me and the languages you speak." },
+  { icon: Briefcase, title: "Services", text: "List each service with its own price per job, hour or session, up to six photos of your work, a visit type, a schedule and an area." },
+  { icon: CalendarClock, title: "Bookings", text: "Accept requests, chat with clients and let your FAQ answers reply instantly. Clients pay you directly; your bookings and earnings are tracked in one place." },
 ];
 
 const RULES: { icon: LucideIcon; title: string; text: string }[] = [
-  { icon: MapPin, title: "Public places, or your home", text: "Malls, cafes, parks, trails and venues, or your own home when you book a home service. Never a hotel room, an overnight stay or the Phriend's own place." },
-  { icon: UserX, title: "Extra people not agreed in chat", text: "If someone arrives with people not agreed in the chat, do not proceed. Leave and report. On a team booking, the teammates named on the booking are agreed; anyone else is not." },
-  { icon: Wallet, title: "Half before, half after", text: "50% in cash when you meet, 50% after. E-wallets only for repeat Phriends you trust." },
-  { icon: Lock, title: "Pay only the shared account", text: "Send money only to the account shared in the chat. Anything else is a scam." },
-  { icon: BadgeCheck, title: "ID verification", text: "Everyone verifies their identity and age before they get the badge or a profile goes live." },
-  { icon: Users, title: "Tell someone your plan", text: "Share where you are going, who you are meeting and when you expect to be back." },
-  { icon: Flag, title: "Report and block", text: "Report a profile or a gig, block a member from the chat. Every profile is reviewed by a person before it shows." },
+  { icon: BadgeCheck, title: "Verified providers", text: "Our team checks a government ID and a selfie before a provider gets the Verified badge, and a person approves every listing before it shows." },
+  { icon: FileCheck, title: "Document badges", text: "NBI clearance, police clearance, barangay certificate, certificates, business documents and proof of address each earn a badge once our team checks them. Not every provider needs every one." },
+  { icon: MessageCircle, title: "The chat is the record", text: "The price, the time and what is included are agreed in the chat and the booking, so both sides can see what was agreed." },
+  { icon: Wallet, title: "Pay the provider, as agreed", text: "Payment is agreed with the provider and paid to them directly. Phriend never holds your money." },
+  { icon: Lock, title: "Only the provider's own account", text: "Paying by e-wallet or bank? Send money only to the account the provider gave you in the Phriend chat. Anything else is a scam." },
+  { icon: Flag, title: "Report and block", text: "Report a profile or a job post, and block anyone from the chat. Every report is reviewed by a person." },
 ];
 
 const FEATURES: { title: string; text: string }[] = [
-  { title: "Search and favorites", text: "Filter by city, activity, language and rate. Favorite profiles and share a Phriend's @username link." },
-  { title: "Bookings", text: "Pick a service, date, time and a public place or the client's address. Accept, decline or cancel with a reason, and add it to your calendar." },
-  { title: "Schedule", text: "Phriends set weekly hours and lock out dates. Requests outside those hours are refused automatically." },
-  { title: "Services and rates", text: "An hourly rate, plus services with their own price per hour or per session and a minimum booking." },
-  { title: "Chat", text: "Photos, emoji reactions, read receipts, saved replies and typing indicators. Archive or block anyone." },
-  { title: "Reviews", text: "A star rating, a few words and photos. It shows once the Phriend approves it." },
-  { title: "Manage dashboard", text: "Profile views, favorites, reviews to approve, bookings by status, earnings and private notes." },
-  { title: "Gigs board", text: "Post what you need with a budget and date. Phriends apply in the chat with the gig pinned as the subject." },
-  { title: "Notifications", text: "A bell in the app and an email for every message, booking update, review and profile decision." },
-  { title: "Safety", text: "Everyone is ID-verified. Profiles, photos and reports get an automated check, and a person approves each profile." },
+  { title: "Services first", text: "Browse services, not profiles. Each one has its own price, photos of the work, visit type, schedule and area." },
+  { title: "Online, in person or hybrid", text: "Online services cover the whole country. In-person ones list the areas they cover, or a whole city." },
+  { title: "Saved addresses", text: "Save Home, Work and any other address for at-home services. Online services need no address." },
+  { title: "Bookings", text: "Pick a time from the service's schedule. Accept, decline or cancel with a reason, and add it to your calendar." },
+  { title: "Chat", text: "Message the provider in the app, with photos, read receipts and typing indicators. Archive or block anyone." },
+  { title: "Instant FAQ answers", text: "Providers set answers to the usual questions, like how to pay, the minimum booking or where they work, and the chat replies with them right away." },
+  { title: "Verified and document badges", text: "Verified means our team checked a government ID and a selfie. Document badges show what else was checked." },
+  { title: "Reviews", text: "A star rating, a few words and photos, left after a booking." },
+  { title: "Post a job", text: "Describe what you need with a budget and a date. Providers reply in the chat." },
+  { title: "Phriend Provider", text: "Providers list services and manage bookings, earnings and verification at provider.phriend.app." },
+  { title: "Notifications", text: "A bell in the app and an email for every message, booking update and review." },
   { title: "Your account", text: "Sign in with Google or email. Delete your account yourself at any time; everything goes with it." },
-  { title: "Cash, in person", text: "Money never moves in the app. Half in cash when you meet, half after. Never more than half upfront." },
 ];
 
 const FAQ: { q: string; a: string }[] = [
   {
     q: "What can I book on Phriend?",
-    a: "Local services and activities, by the hour: guided city and food tours, photo and video shoots, tutoring and lessons, hiking and trail guiding, personal training, driving and airport transfers, errands and queueing, event coverage and on-site help. Phriend is not a dating service. Romantic or sexual services, compensated dating and escort services are banned and get an account removed immediately.",
+    a: "Local services, each listed with its own price: aircon cleaning and repair, appliance check-ups, bookkeeping and tax filing, tutoring, photography and video, driving, errands and deliveries, moving help, tour guiding, event coordination and more. Some are done in person, some online, some both. Phriend is for legitimate services only; anything sexual or illegal gets an account removed immediately.",
   },
   {
-    q: "How do bookings work?",
-    a: "Send a booking request with the date, start time, hours, a meeting place (a public place, or your address for a home service) and a note. If the Phriend lists services, pick one. The Phriend accepts or declines, either side can cancel with a reason, and after the meetup either side marks it completed. Every booking can be added to your calendar.",
+    q: "How does booking work?",
+    a: "Open a service, pick a time from its schedule and, for an at-home service, one of your saved addresses (online services need none). Add a note and send the request; the provider accepts or declines. Either side can cancel with a reason, and every booking can be added to your calendar.",
   },
   {
     q: "How do I pay?",
-    a: "Directly between members, never through Phriend. On a first meetup, hand over 50% in cash when you meet and pay the rest after. E-wallets and bank transfers are for repeat Phriends you already trust, and only to the account shared in the chat. Never pay more than half upfront.",
+    a: "Payment is agreed with the provider and paid to them directly: cash, e-wallet or bank transfer, whatever you agree. Phriend never holds your money. If you pay by e-wallet or bank, send only to the account the provider gave you in the Phriend chat.",
   },
   {
-    q: "What if my Phriend brings someone else?",
-    a: "Do not proceed. If the other member arrives with people who were not agreed in the chat, be prudent: cancel the meetup, leave, and report the profile. The same applies to a client who shows up with extra people. On a team booking, the teammates named on the booking are the agreed people; anyone else still is not. A cancellation for this reason is refunded in full.",
+    q: "How are prices set?",
+    a: "Each provider prices each service: per job, per hour or per session. The price, and any minimum booking, shows on the service before you book.",
   },
   {
     q: "Does Phriend take a commission?",
-    a: "Not yet. Members agree on a rate per hour, typically between ₱300 and ₱1,500 depending on the activity and the city, and keep all of it. If this changes we will announce it well ahead of time.",
+    a: "Not yet. Providers keep everything clients pay them. If this changes we will announce it well ahead of time.",
   },
   {
-    q: "Can I set my own rates and services?",
-    a: "Yes. Set your hourly rate and list services with their own price per hour or per session, a minimum booking if you want one, and a photo. You also set your weekly availability and lock out busy dates. Phriend takes no cut, so what you list is what you keep.",
+    q: "What does the Verified badge mean?",
+    a: "Our team checked the provider's government ID and a selfie. Document badges show what else was checked: NBI clearance, police clearance, barangay certificate, certificates, business documents or proof of address. Not every provider has every badge, and each one only shows after our team reviews the document.",
   },
   {
-    q: "How does verification work?",
-    a: "Members submit a government ID and a selfie through our identity verification partner. It takes about two minutes and confirms the member is 18 or older; the verified badge then shows on their profile. Everyone verifies: you need it to chat, book, review or post a gig, and a Phriend profile cannot go live without it. Details are on the safety and privacy pages.",
+    q: "What are FAQ answers?",
+    a: "Answers a provider writes to the questions clients ask most, such as how to pay, the minimum booking or where they work. Ask in the chat and the answer arrives instantly; the provider can follow up from there.",
   },
   {
-    q: "What do Phriends agree to?",
-    a: "Before a profile goes live, every Phriend ticks an agreement: 18 or older and ID-verified; legitimate activities only, nothing romantic, sexual or illegal; public places, or the client's home for a home service, and nobody who was not agreed in the chat; half at the start and half after, cash in person on a first meetup; and prudence if a client shows up with extra people not agreed in the chat. The full text is on the safety page.",
+    q: "Do online services need an address?",
+    a: "No. Online and remote services happen over video call, phone or shared files and can be booked from anywhere in the Philippines. For at-home services, save as many addresses as you need, like Home and Work, and pick one when you book.",
   },
   {
-    q: "What are non-negotiables?",
-    a: "Rules a Phriend pins to the top of their profile so clients agree before they chat. They pick from: public meet-up only, no physical contact, cash downpayment on arrival, daytime only, no alcohol, no smoking, groups must be agreed in chat, no riding in client vehicles, ID check on arrival, and no overnight or out-of-town.",
+    q: "How do I offer my services?",
+    a: "Go to provider.phriend.app (the Phriend Provider app is coming to the app stores). Verify your identity, set up a short profile with one face photo, a title, an About me and your languages, then list your services with their prices, photos, schedule and area. A person reviews each listing before it goes live.",
   },
   {
-    q: "What are gigs?",
-    a: "A gig is a request a client posts: what they need, the activity, city, budget per hour and date. Phriends with a live profile apply in the chat, with the gig pinned as the subject of that conversation. Anyone can report a gig, and you can edit or delete the gigs you posted.",
-  },
-  {
-    q: "What if my Phriend is late or cancels?",
-    a: "You may cancel if the other member is more than 30 minutes late without notice, and a late Phriend refunds any downpayment already paid in full. Cancellations should happen at least 24 hours before the meetup. The full rules are on the safety page.",
+    q: "What if the provider is late or cancels?",
+    a: "You may cancel if the other side is more than 30 minutes late without notice, and anything already paid to a provider who is late or cancels late is refunded in full. Cancel at least 24 hours ahead. The full rules are on the safety page.",
   },
   {
     q: "Do I need to install anything?",
-    a: "No. Phriend runs in the browser at web.phriend.app on any phone, Android or iPhone. Add it to your home screen and it works like an app, with chat, bookings and in-app notifications. An early Android app is also on Google Play if you prefer one.",
+    a: "No. Phriend runs in the browser at web.phriend.app on any phone or computer; add it to your home screen and it works like an app. On Android you can also get the Phriend app from Google Play.",
   },
   {
     q: "How do I delete my account?",
-    a: "Open My profile, tap Delete account and type DELETE. It permanently removes your account, Phriend profile, photos, favorites, reviews, bookings, notes and gigs. It cannot be undone.",
+    a: "Open My profile, tap Delete account and type DELETE. It permanently removes your account, provider profile, services, photos, favorites, reviews, bookings, notes and job posts. It cannot be undone.",
   },
 ];
 
@@ -119,8 +114,8 @@ const JSON_LD = JSON.stringify({
     },
     {
       "@type": "HowTo",
-      name: "How to book a local guide or pro on Phriend",
-      description: "Book a verified local guide or pro by the hour in four steps: browse, chat, book, meet.",
+      name: "How to book a local service on Phriend",
+      description: "Book a local service from a verified provider in four steps: browse, chat, book, get it done.",
       url: `${SITE_URL}/#how-it-works`,
       step: CLIENT_STEPS.map((s, i) => ({ "@type": "HowToStep", position: i + 1, name: s.title, text: s.text })),
     },
@@ -155,17 +150,17 @@ function PhoneMockup() {
           Kyla <BadgeCheck size={12} className="fill-verify text-white" />
           <span className="ml-auto font-bold text-muted">2:14 pm</span>
         </p>
-        <p>Free this Saturday for a Binondo food crawl? ₱350/hr, we meet at Ongpin.</p>
+        <p>Monthly books and BIR filing for your shop: ₱2,500 per job, done online. Send your receipts here.</p>
       </div>
       <div
         aria-hidden="true"
         className="absolute -right-8 bottom-[18%] hidden rounded-card border border-line bg-white px-3 py-2.5 text-xs text-body shadow-float sm:block lg:-right-16"
       >
         <p className="flex items-center gap-1.5 font-extrabold text-ink">
-          <ShieldCheck size={14} className="text-success" />
-          Price agreed in chat
+          <Zap size={14} className="text-success" />
+          Instant FAQ answer
         </p>
-        <p className="mt-0.5 text-muted">Paid in person when you meet</p>
+        <p className="mt-0.5 text-muted">How to pay, minimum booking, where they work</p>
       </div>
     </div>
   );
@@ -199,18 +194,18 @@ export default async function Home() {
         <Container className="grid items-center gap-12 pb-16 pt-14 sm:pt-20 lg:grid-cols-[1.1fr_0.9fr] lg:gap-8 lg:pb-24 lg:pt-24">
           <div className="max-w-xl">
             <h1 className="font-display text-[44px] font-semibold leading-[1.02] tracking-tight text-white sm:text-6xl lg:text-[64px]">
-              Book a verified local pro, by the hour
+              Local services, from verified providers
             </h1>
             <p className="mt-5 text-lg leading-relaxed text-white/80 sm:text-xl">
-              Errands, pet care, events, lessons, photo shoots, rides and more, all from ID-verified locals across the Philippines. You
-              agree the price in the chat and pay in person.
+              Aircon cleaning, bookkeeping, tutoring, photo and video, driving, errands and more across the Philippines. Every service
+              shows its price, photos of the work, where it happens and when it is available. Book it and chat with the provider in the app.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <ButtonLink href={APP_URL} className="text-lg">
-                Find a local pro
+                Find a service
               </ButtonLink>
-              <ButtonLink href={POST_URL} variant="secondary" className="text-lg">
-                Become a Phriend
+              <ButtonLink href={PROVIDER_URL} variant="secondary" className="text-lg">
+                List your services
               </ButtonLink>
             </div>
             <ul className="mt-10 grid grid-cols-2 gap-x-4 gap-y-3 text-[14px] font-bold text-white sm:flex sm:flex-wrap sm:gap-x-6">
@@ -235,8 +230,8 @@ export default async function Home() {
                 What do you need done?
               </h2>
               <p className="mt-3 text-[15px] leading-relaxed text-body">
-                {serviceCount} services in {groups.length} groups, from errands and pet care to weddings, lessons, tours and freelance work. Pick one to see who
-                is available.
+                {serviceCount} kinds of service in {groups.length} groups, from aircon cleaning and appliance check-ups to bookkeeping, tutoring, photo and
+                video, driving and errands. Pick one to see the services on offer.
               </p>
             </div>
             <Link href="/services" className="font-bold text-brand-text hover:underline">
@@ -261,10 +256,10 @@ export default async function Home() {
             </div>
             <div className="relative aspect-[3/2] overflow-hidden rounded-card lg:aspect-[2/1]">
               <Image
-                src={cdn("/photos/life-food-trip.jpg")}
-                alt="A food-tour guide and their client laughing over grilled skewers at a night street-food stall, a jeepney behind them"
-                width={1536}
-                height={1024}
+                src="/groups/repairs.jpg"
+                alt="A technician cleaning a split-type aircon unit in a condo living room, his tool bag on a step ladder"
+                width={1280}
+                height={720}
                 sizes="(min-width: 1280px) 600px, (min-width: 1024px) 50vw, 100vw"
                 className="h-full w-full object-cover"
               />
@@ -275,8 +270,8 @@ export default async function Home() {
             <li className="flex flex-col justify-between rounded-card bg-navy p-6 text-white md:col-span-2 lg:col-span-1">
               <Users size={28} className="text-brand-light" aria-hidden="true" />
               <div className="mt-10">
-                <h3 className="font-display text-2xl font-semibold">Need a local pro?</h3>
-                <p className="mt-2 text-[15px] leading-relaxed text-white/85">From scrolling to a booked meet-up in an afternoon.</p>
+                <h3 className="font-display text-2xl font-semibold">Need something done?</h3>
+                <p className="mt-2 text-[15px] leading-relaxed text-white/85">From a search to a booked service in a few minutes.</p>
               </div>
             </li>
             {CLIENT_STEPS.map((s, i) => (
@@ -285,10 +280,10 @@ export default async function Home() {
             <li className="flex flex-col justify-between rounded-card bg-brand-soft p-6 md:col-span-2 lg:col-span-2">
               <p className="font-display text-2xl font-semibold text-ink">Start with a search.</p>
               <p className="mt-2 text-[15px] leading-relaxed text-body">
-                Every pro is ID-verified. You meet in a public place, or at your home for a home service.
+                Every provider is verified by our team, and every service shows its price before you book.
               </p>
               <ButtonLink href={APP_URL} className="mt-6 w-fit">
-                Find a local pro
+                Find a service
               </ButtonLink>
             </li>
           </ol>
@@ -297,20 +292,20 @@ export default async function Home() {
             <li className="flex flex-col justify-between rounded-card bg-brand-soft p-6 text-ink md:col-span-2 lg:col-span-1">
               <Wallet size={28} className="text-brand" aria-hidden="true" />
               <div className="mt-10">
-                <h3 className="font-display text-2xl font-semibold">Want to be a Phriend?</h3>
-                <p className="mt-2 text-[15px] leading-relaxed text-body">Set your rate, pick your hours, keep everything you earn.</p>
+                <h3 className="font-display text-2xl font-semibold">Offer a service?</h3>
+                <p className="mt-2 text-[15px] leading-relaxed text-body">Set your prices, your hours and your area, and keep everything clients pay you.</p>
               </div>
             </li>
-            {PHRIEND_STEPS.map((s, i) => (
-              <StepTile key={s.title} n={i + 1} {...s} className={i === PHRIEND_STEPS.length - 1 ? "lg:col-span-2" : ""} />
+            {PROVIDER_STEPS.map((s, i) => (
+              <StepTile key={s.title} n={i + 1} {...s} className={i === PROVIDER_STEPS.length - 1 ? "lg:col-span-2" : ""} />
             ))}
             <li className="flex flex-col justify-between rounded-card bg-navy p-6 text-white md:col-span-2 lg:col-span-2">
               <p className="font-display text-2xl font-semibold">List your services.</p>
               <p className="mt-2 text-[15px] leading-relaxed text-white/85">
-                Verify once, set your rate and weekly hours, and take bookings in the app. You get paid in person and keep 100%.
+                Providers work in Phriend Provider, on the web at provider.phriend.app: list services, manage bookings, earnings and verification.
               </p>
-              <ButtonLink href={POST_URL} className="mt-6 w-fit">
-                Become a Phriend
+              <ButtonLink href={PROVIDER_URL} className="mt-6 w-fit">
+                Go to provider.phriend.app
               </ButtonLink>
             </li>
           </ol>
@@ -322,9 +317,9 @@ export default async function Home() {
         <Container className="grid gap-10 py-16 sm:py-24 lg:grid-cols-[0.8fr_1.2fr]">
           <div className="max-w-md self-start lg:sticky lg:top-24">
             <h2 id="features-title" className={h2}>
-              From first message to review, in one app.
+              From first message to finished job, in one app.
             </h2>
-            <p className="mt-4 text-lg leading-relaxed">Bookings, schedules and chat happen in the app. Money never does.</p>
+            <p className="mt-4 text-lg leading-relaxed">Booking, chat and scheduling happen in the app. Payment goes straight to the provider.</p>
           </div>
           <dl className="grid gap-x-10 sm:grid-cols-2">
             {FEATURES.map((f) => (
@@ -347,7 +342,7 @@ export default async function Home() {
                   Book a team.
                 </h2>
                 <p className="mt-3 text-[15px] leading-relaxed text-body">
-                  Some days need more than one pro. A team books as one: one chat, one price, one booking. Every member is an ID-verified Phriend you can also book alone.
+                  Some jobs need more than one provider. A team books as one: one chat, one price, one booking. Every member is a verified provider you can also book on their own.
                 </p>
               </div>
               <Link href="/teams" className="font-bold text-brand-text hover:underline">
@@ -371,9 +366,9 @@ export default async function Home() {
           <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr]">
             <div>
               <h2 id="safety-title" className={h2}>
-                Safety rules for both sides
+                Trust, built in
               </h2>
-              <p className="mt-4 text-lg leading-relaxed">The rules are short and strict, and they apply to clients and Phriends alike.</p>
+              <p className="mt-4 text-lg leading-relaxed">Providers are checked by our team, what you agree is on record, and anything wrong is one tap from a report.</p>
               <ButtonLink href="/safety" variant="secondary" className="mt-6">
                 Read the safety rules
               </ButtonLink>
@@ -403,28 +398,29 @@ export default async function Home() {
         </Container>
       </section>
 
-      {/* For Phriends + pricing */}
-      <section id="for-phriends" aria-labelledby="phriends-title">
+      {/* For providers + pricing */}
+      <section id="for-providers" aria-labelledby="providers-title">
         <Container className="py-16 sm:py-24">
           <div className="grid gap-10 lg:grid-cols-2 lg:items-center">
             <div>
-              <h2 id="phriends-title" className={h2}>
-                Turn free time into a side gig.
+              <h2 id="providers-title" className={h2}>
+                Offer your services on Phriend.
               </h2>
               <p className="mt-4 text-lg leading-relaxed">
-                Know your city, take good photos or drive a clean car? Set up your Phriend profile once, list your services and rates, then take bookings, meet clients and get paid.
+                Clean aircons, keep books, teach, shoot photos and video, drive or run errands? List each service with its own price, photos,
+                schedule and area, then take bookings and chat with clients in Phriend Provider.
               </p>
               <ul className="mt-6 space-y-3 text-[15px] font-semibold text-ink">
                 {[
-                  "List your services with your own rate per hour or per session",
-                  "Pin your non-negotiables to the top of your profile",
-                  "Set your weekly schedule and lock out the dates you are busy",
-                  "Accept or decline booking requests, cancel with a reason if you must",
-                  "Get a notification and an email for every booking request and review",
-                  "Keep 100% of what you earn, no commission",
-                  "One dashboard for views, favorites, reviews, bookings, an earnings estimate and your private notes",
-                  "Your profile runs for 90 days; renew it in one tap",
-                  "Verify once, get the badge everywhere",
+                  "Each service with its own price per job, per hour or per session",
+                  "Up to six photos of your work on every service",
+                  "Online, in person or hybrid, with its own schedule",
+                  "Listed areas, a whole city, or nationwide for online work",
+                  "FAQ answers that reply to clients instantly in the chat",
+                  "A Verified badge and a badge for every document our team checks",
+                  "Bookings, earnings and verification in one place",
+                  "Clients pay you directly, and Phriend takes no cut",
+                  "The Phriend Provider app is coming to the stores; until then, use provider.phriend.app",
                 ].map((t) => (
                   <li key={t} className="flex items-start gap-2.5">
                     <BadgeCheck size={20} className="mt-0.5 shrink-0 text-brand" aria-hidden="true" />
@@ -432,40 +428,40 @@ export default async function Home() {
                   </li>
                 ))}
               </ul>
-              <ButtonLink href={POST_URL} className="mt-8 text-lg">
-                Become a Phriend
+              <ButtonLink href={PROVIDER_URL} className="mt-8 text-lg">
+                Go to provider.phriend.app
               </ButtonLink>
             </div>
 
             <div className="flex flex-col gap-4">
               <div className="relative aspect-[3/2] overflow-hidden rounded-card">
                 <Image
-                  src={cdn("/photos/life-hiking.jpg")}
-                  alt="Three people taking a selfie on a hilltop trail above rice terraces and the sea"
-                  width={1536}
-                  height={1024}
+                  src="/groups/freelance.jpg"
+                  alt="A bookkeeper working on a laptop at a desk by a window over the city, a notebook and an iced coffee beside her"
+                  width={1280}
+                  height={720}
                   sizes="(min-width: 1280px) 600px, (min-width: 1024px) 50vw, 100vw"
                   className="h-full w-full object-cover"
                 />
               </div>
               <div className="rounded-card border border-line bg-surface p-6 sm:p-8">
-                <h3 className="font-display text-3xl font-semibold text-ink sm:text-4xl">Phriends keep 100%</h3>
+                <h3 className="font-display text-3xl font-semibold text-ink sm:text-4xl">Providers keep 100%</h3>
                 <p className="mt-3 leading-relaxed">
-                  Phriend takes no cut yet. Phriends list their own rates, members confirm the plan in the chat and the booking, and pay
-                  each other directly: cash on a first meetup, GCash, Maya or bank transfer for repeat Phriends they already trust.
+                  Phriend takes no commission yet. Providers set their own prices, clients book in the app, and payment is agreed with
+                  the provider and paid to them directly.
                 </p>
                 <dl className="mt-6 grid grid-cols-2 gap-4">
                   <div className="rounded-tile bg-white p-4">
-                    <dt className="text-sm font-bold text-muted">Typical rate</dt>
-                    <dd className="mt-1 text-xl font-extrabold text-ink">₱300 to ₱1,500 an hour</dd>
+                    <dt className="text-sm font-bold text-muted">Pricing</dt>
+                    <dd className="mt-1 text-xl font-extrabold text-ink">Per job, per hour or per session</dd>
                   </div>
                   <div className="rounded-tile bg-white p-4">
                     <dt className="text-sm font-bold text-muted">Payment</dt>
-                    <dd className="mt-1 text-xl font-extrabold text-ink">Agreed in chat, paid in person</dd>
+                    <dd className="mt-1 text-xl font-extrabold text-ink">Agreed with the provider, paid directly</dd>
                   </div>
                 </dl>
                 <p className="mt-4 text-sm text-muted">
-                  Rates depend on the activity, the city and the Phriend. Bookings happen in the app; payments never do.
+                  Each provider prices each service. Bookings happen in the app; payments go to the provider.
                 </p>
               </div>
             </div>
@@ -477,9 +473,9 @@ export default async function Home() {
       <section id="faq" aria-labelledby="faq-title" className="bg-surface">
         <Container className="py-16 sm:py-24">
           <p id="what-is-phriend" className="mb-10 max-w-4xl rounded-card border border-line bg-white p-5 text-[17px] leading-relaxed sm:p-6">
-            <strong className="text-ink">What is Phriend?</strong> Phriend is a Philippine app for booking ID-verified local pros by
-            the hour: errands, pet care, events, lessons, photo shoots, tours, rides and more. Members are 18+, agree the price in
-            the chat, meet in public places or at home for home services, and pay in person.
+            <strong className="text-ink">What is Phriend?</strong> Phriend is a marketplace for local services in the Philippines.
+            Clients browse services, each with its own price, photos, visit type, schedule and area, then book and chat with the
+            provider in the app and pay the provider directly. Every provider is verified by our team.
           </p>
           <div className="grid gap-10 lg:grid-cols-[0.7fr_1.3fr]">
             <div>
@@ -514,17 +510,17 @@ export default async function Home() {
         <Container className="py-16 sm:py-24">
           <div className="bg-navy-gradient overflow-hidden rounded-card px-6 py-14 text-center text-white sm:px-12 sm:py-20">
             <h2 id="cta-title" className="font-display text-3xl font-semibold leading-tight sm:text-5xl">
-              Ready to book someone local?
+              Ready to get it done?
             </h2>
             <p className="mx-auto mt-4 max-w-xl text-lg text-white/85">
-              Open the app, pick your city and message a Phriend. Browsing is free, and so is listing your services.
+              Open the app, search for the service you need and message the provider. Browsing is free, and so is listing your services.
             </p>
             <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
               <ButtonLink href={APP_URL} className="text-lg">
                 Open the app
               </ButtonLink>
-              <ButtonLink href={POST_URL} variant="secondary" className="text-lg">
-                Become a Phriend
+              <ButtonLink href={PROVIDER_URL} variant="secondary" className="text-lg">
+                List your services
               </ButtonLink>
             </div>
           </div>

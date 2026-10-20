@@ -48,12 +48,12 @@ export default function Image() {
         </div>
 
         <div style={{ display: "flex", flexDirection: "column", fontSize: 104, lineHeight: 1.02, letterSpacing: -3 }}>
-          <div>Local guides</div>
-          <div style={{ color: "#fe6138" }}>&amp; pros</div>
+          <div>Local services,</div>
+          <div style={{ color: "#fe6138" }}>verified pros</div>
         </div>
 
         <div style={{ display: "flex", flexDirection: "column", gap: 12, fontFamily: "Nunito" }}>
-          <div style={{ fontSize: 30, color: "rgba(255,255,255,0.8)" }}>Verified locals · public meet-ups · ₱300–1,500 per hour</div>
+          <div style={{ fontSize: 30, color: "rgba(255,255,255,0.8)" }}>Priced per job, hour or session · booked in the app</div>
           <div style={{ fontSize: 26, color: "#ff8a66" }}>phriend.app</div>
         </div>
       </div>

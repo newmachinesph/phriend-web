@@ -131,23 +131,38 @@ body {
 
 /* Blog articles: same idea as .legal, tuned for reading. In @layer components so utility classes on embedded cards, figures and tables override these. */
 @layer components {
+  /* reading size: 16/26 on phones, 17/30 from 640px; headings on the shared h2 token so they never outgrow the page h1 */
   .article {
-    font-size: 1.0625rem;
-    line-height: 1.8;
+    font-size: 1rem;
+    line-height: 1.625;
     color: var(--color-body);
   }
   .article .lead {
-    font-size: 1.25rem;
-    line-height: 1.65;
+    font-size: 1.0625rem;
+    line-height: 1.6;
     color: var(--color-ink);
   }
   .article h2 {
-    margin: 2.75rem 0 0.875rem;
+    margin: 2.25rem 0 0.75rem;
     font-family: var(--font-display);
-    font-size: 1.75rem;
-    font-weight: 600;
-    line-height: 1.2;
+    font-size: var(--text-h2);
+    font-weight: 700;
+    line-height: var(--text-h2--line-height);
+    letter-spacing: var(--text-h2--letter-spacing);
     color: var(--color-ink);
+  }
+  @media (width >= 40rem) {
+    .article {
+      font-size: 1.0625rem;
+      line-height: 1.75;
+    }
+    .article .lead {
+      font-size: 1.25rem;
+      line-height: 1.6;
+    }
+    .article h2 {
+      margin-top: 2.75rem;
+    }
   }
   .article p {
     margin-bottom: 1.125rem;

@@ -6,8 +6,8 @@ import { breadcrumbJsonLd, pageMeta } from "@/lib/site";
 import { Container } from "@/components/ui";
 
 const meta = pageMeta({
-  title: "Book pros for weddings, debuts and parties",
-  description: "Plan a wedding, debut, birthday, baptism, graduation or company event with ID-verified local pros: hosts, makeup, photo, video and more.",
+  title: "Book services for weddings, debuts and parties",
+  description: "Plan a wedding, debut, birthday, baptism, graduation or company event with verified providers: hosts, makeup, photo, video, catering and more.",
   path: "/occasions",
 });
 const shareImage = { url: occasionImage("occasions"), ...OCCASION_IMAGE, alt: "Planning a Filipino celebration" };
@@ -24,10 +24,10 @@ export default function OccasionsPage() {
         {" › "}
         <span className="text-ink">Occasions</span>
       </nav>
-      <h1 className="mt-4 max-w-3xl font-display text-4xl font-semibold leading-tight text-ink sm:text-5xl">Book the pros for your occasion</h1>
+      <h1 className="mt-4 max-w-3xl font-display text-4xl font-semibold leading-tight text-ink sm:text-5xl">Book the services for your occasion</h1>
       <p className="mt-5 max-w-3xl text-lg leading-relaxed">
-        Weddings, debuts, birthdays and company events each need a different crew. Pick one to see who to book, what to agree on beforehand, and the
-        questions that come up most. Every Phriend is ID-verified and booked by the hour.
+        Weddings, debuts, birthdays and company events each need a different set of services. Pick one to see what to book, what to agree on beforehand,
+        and the questions that come up most. Every provider is verified, and every service shows its price.
       </p>
       <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {OCCASIONS.map((o) => (

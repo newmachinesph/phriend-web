@@ -2,21 +2,21 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { TeamTile } from "@/components/teams";
 import { appTeamUrl, CITY_PAGES, findCity, getTeams, TEAMS_PER_PAGE } from "@/lib/landing";
-import { APP_URL, pageMeta, POST_URL, SITE_URL } from "@/lib/site";
+import { pageMeta, PROVIDER_URL, SITE_URL } from "@/lib/site";
 import { ButtonLink, Container } from "@/components/ui";
 
 // The page reads ?city= and ?page=, so it renders per request; the API call inside is cached for 10 minutes (see getTeams).
 export const metadata: Metadata = pageMeta({
-  title: "Teams: book several local pros as one",
-  description: "Some days need more than one pro. A team books as one: one chat, one price, one booking. Every member is an ID-verified Phriend.",
+  title: "Teams: book several providers as one",
+  description: "Some jobs need more than one provider. A team books as one: one chat, one price, one booking. Every member is a verified provider.",
   path: "/teams",
 });
 
 const STEPS = [
-  { title: "Pick a team", text: "Browse the teams in your city. Each one lists its members and their roles, its packages and what it costs per group." },
-  { title: "Choose a package", text: "A package has a fixed length, a group price and the members who come along. Pick one and the number of guests." },
-  { title: "Send one booking request", text: "Give the date, start time and a meeting place (a public place, or your address for a home service). The team lead accepts or declines for everyone, and the team has one group chat with you." },
-  { title: "Meet, pay in person", text: "The downpayment is at most 50%, in cash, handed to the team lead when you meet. Phriend never holds the money. Then leave a review." },
+  { title: "Pick a team", text: "Browse the teams in your city. Each one lists its members and their roles, its packages and what each package costs." },
+  { title: "Choose a package", text: "A package has a fixed length, a price and the members who come along. Pick one and the number of guests." },
+  { title: "Send one booking request", text: "Give the date, the start time and the address or venue. The team lead accepts or declines for everyone, and the team has one group chat with you." },
+  { title: "Pay the team, as agreed", text: "Payment is agreed with the team lead in the chat and paid to the team directly. Phriend never holds the money. Then leave a review." },
 ] as const;
 
 const pill = "inline-block rounded-full border-2 px-4 py-1.5 text-sm font-bold";
@@ -60,9 +60,9 @@ export default async function TeamsPage({ searchParams }: { searchParams: Promis
         {" › "}
         <span className="text-ink">Teams</span>
       </nav>
-      <h1 className="mt-4 max-w-3xl font-display text-4xl font-semibold leading-tight text-ink sm:text-5xl">Book a team of local pros</h1>
+      <h1 className="mt-4 max-w-3xl font-display text-4xl font-semibold leading-tight text-ink sm:text-5xl">Book a team of providers</h1>
       <p className="mt-5 max-w-3xl text-lg leading-relaxed">
-        Some days need more than one pro. A team books as one: one chat, one price, one booking. Every member is an ID-verified Phriend you can also book alone.
+        Some jobs need more than one provider. A team books as one: one chat, one price, one booking. Every member is a verified provider you can also book on their own.
       </p>
       <div className="mt-6 flex flex-wrap gap-3">
         <ButtonLink href="#teams">See the teams</ButtonLink>
@@ -94,10 +94,10 @@ export default async function TeamsPage({ searchParams }: { searchParams: Promis
           <div className="mt-6 max-w-2xl rounded-card border border-line bg-surface p-6 sm:p-8">
             <p className="font-display text-xl font-semibold text-ink">Teams are just getting started in {city ? city.name : "the Philippines"}.</p>
             <p className="mt-2 leading-relaxed">
-              Teams are new on Phriend, and the first ones are being put together now. In the meantime you can book any of the Phriends{city ? ` in ${city.name}` : ""} on their own.
+              Teams are new on Phriend, and the first ones are being put together now. In the meantime you can book any of the services{city ? ` in ${city.name}` : ""} on their own.
             </p>
             <div className="mt-5 flex flex-wrap gap-3">
-              <ButtonLink href={city ? `/${city.slug}` : "/services/tour-guide"}>Browse Phriends{city ? ` in ${city.name}` : ""}</ButtonLink>
+              <ButtonLink href={city ? `/${city.slug}` : "/services"}>Browse services{city ? ` in ${city.name}` : ""}</ButtonLink>
               <ButtonLink href="#start-a-team" variant="secondary">
                 Start a team
               </ButtonLink>
@@ -157,12 +157,12 @@ export default async function TeamsPage({ searchParams }: { searchParams: Promis
           Start a team
         </h2>
         <p className="mt-3 max-w-2xl text-lg leading-relaxed">
-          Already a Phriend? Invite other verified Phriends, name your team and set your packages: a group price, a fixed length and who comes along. Each member keeps their own listing and can still be booked alone.
+          Already a provider? Invite other verified providers, name your team and set your packages: a price, a fixed length and who comes along. Each member keeps their own services and can still be booked on their own.
         </p>
         <div className="mt-6 flex flex-wrap gap-3">
-          <ButtonLink href={`${APP_URL}/manage/teams`}>Start a team</ButtonLink>
-          <ButtonLink href={POST_URL} variant="secondary">
-            Become a Phriend
+          <ButtonLink href={`${PROVIDER_URL}/manage/teams`}>Start a team</ButtonLink>
+          <ButtonLink href={PROVIDER_URL} variant="secondary">
+            List your services
           </ButtonLink>
         </div>
       </section>

@@ -10,7 +10,7 @@ const nextConfig: NextConfig = {
   // Icons and logos keep their names across deploys: a day in the browser instead of a revalidation on every visit.
   async headers() {
     const headers = [{ key: "Cache-Control", value: "public, max-age=86400, stale-while-revalidate=604800" }];
-    return ["/icon.png", "/icon.svg", "/apple-icon.png", "/brand/:path*", "/creators/sample-frame.jpg"].map((source) => ({ source, headers }));
+    return ["/icon.png", "/icon.svg", "/apple-icon.png", "/brand/:path*"].map((source) => ({ source, headers }));
   },
   async redirects() {
     return [

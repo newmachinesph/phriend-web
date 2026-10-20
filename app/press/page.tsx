@@ -1,43 +1,42 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import Image from "next/image";
-import { BadgeCheck, Download, Mail, MapPin, Wallet, type LucideIcon } from "lucide-react";
+import { BadgeCheck, Download, FileCheck, Mail, Wallet, type LucideIcon } from "lucide-react";
 import { Logo } from "@/components/site-header";
-import { API_URL, APP_URL, apiHeaders, breadcrumbJsonLd, cdn, CONTACT_EMAIL, pageMeta, SITE_URL } from "@/lib/site";
+import { API_PLATFORM, API_URL, APP_URL, apiHeaders, breadcrumbJsonLd, cdn, CONTACT_EMAIL, pageMeta, PROVIDER_URL, SITE_URL } from "@/lib/site";
 import { ButtonLink, Container } from "@/components/ui";
 
 export const metadata: Metadata = pageMeta({
   title: "Press kit: logos, facts and photos",
   description:
-    "Phriend press kit: boilerplate, fast facts, product features, logo downloads, brand colors, product images, safety stance, quotable lines and media contact.",
+    "Phriend press kit: boilerplate, fast facts, product features, logo downloads, brand colors, product images, trust and safety stance, quotable lines and media contact.",
   path: "/press",
 });
 
 const BOILERPLATE =
-  "Phriend is a Philippine app for booking ID-verified local guides and pros by the hour: city and food tours, photo and video shoots, tutoring and lessons, hiking guides, drivers, errand helpers and more. Members are 18 and older, ID-verified through Didit, meet in public places or, for a home service, at the client's home, and pay 50% upfront, 50% after: cash in person on a first meetup, e-wallet only once they already trust each other. Phriend is a platform only and is not a party to the meetups. It launched in 2026 in the Philippines. The company site is phriend.app and the app runs in the browser at web.phriend.app.";
+  "Phriend is a local services marketplace in the Philippines. Clients browse services, not profiles: aircon cleaning and repair, appliance check-ups, bookkeeping and tax filing, tutoring, photography and video, driving, errands and deliveries, moving help, tour guiding, event coordination and more. Each service has its own price per job, per hour or per session, photos of the work, a visit type (online, in person or hybrid), its own schedule and its own area. Clients book and chat with the provider in the app and pay the provider directly, as agreed. Every provider is verified by Phriend's team, with document badges for the clearances and permits checked. Phriend launched in 2026. The client app is Phriend, also on the web at web.phriend.app; providers work in Phriend Provider at provider.phriend.app.";
 
 const facts = (n: number): { label: string; value: string }[] => [
   { label: "Founded", value: "2026" },
   { label: "Based in", value: "Metro Manila, nationwide" },
-  { label: "Activity categories", value: `${n}+` },
-  { label: "Typical rate", value: "₱300 to ₱1,500 / hr" },
-  { label: "ID verification", value: "Didit" },
-  { label: "Meet-ups", value: "Public places, or the client's home for home services" },
-  { label: "Age", value: "18+ only" },
+  { label: "Service categories", value: `${n}+` },
+  { label: "Pricing", value: "Per job, per hour or per session" },
+  { label: "Visit types", value: "Online, in person or hybrid" },
+  { label: "Verification", value: "Checked by Phriend's team" },
+  { label: "Commission", value: "None yet" },
 ];
 
 const product = (n: number) => [
-  `Profiles: ${n}+ activity categories with sub-activities, up to 8 photos, languages, non-negotiables pinned to the top, an hourly rate, and a seven-point Phriend agreement plus ID verification before a profile goes live. Profiles run for 30 days and are renewed by saving them again.`,
-  "Bookings: a client picks a service, a date, start time, 1 to 8 hours, a public meeting place and a note, up to 60 days ahead; the Phriend accepts or declines; either side can cancel with a reason and mark the meetup completed afterwards. Every booking has Add to Google Calendar and an .ics download.",
-  "Schedule: Phriends set weekly days and hours and lock out dates up to a year ahead. Requests outside those hours, on a locked-out date or over an accepted booking are refused.",
-  "Services and rates: each Phriend lists up to 12 services with their own price per hour or per session, a minimum number of hours and an optional photo.",
-  "Manage dashboard for Phriends: profile views, favorites, reviews, bookings by status, an earnings estimate (cash, paid in person), private notes linkable to a booking, and an activity log.",
-  "Reviews: any signed-in member can review a Phriend with a star rating, text and up to 4 photos, one review per member per Phriend.",
-  "Gigs: clients post what they need with an activity, city, budget per hour, date and details; Phriends with a live profile mark interest and chat; gigs can be reported.",
-  "Chat: photos, emojis, saved replies, delete for everyone, archive, block, typing and online indicators, and a profanity filter that warns twice, then mutes for escalating periods.",
-  "Notifications: an in-app bell and an email for every booking update and new review. Members delete their own account in the app by typing DELETE.",
-  "Safety: Google or email sign-in, ID verification through Didit, sample profiles marked as samples and unbookable, and moderation with an AI first pass on reports, profiles and gigs, a human review queue and an audit log.",
-  "Payments: none in the app. 50% in cash on a first meetup, 50% after; e-wallets only for repeat, trusted Phriends.",
+  `Services: ${n}+ service categories. Each service has its own price per job, per hour or per session, up to 6 photos of the work, a visit type (online, in person or hybrid), its own schedule and its own area: listed areas, a whole city, or nationwide for online work.`,
+  "Provider profiles: lean on purpose. One round face photo, a name, a title such as \"Online Bookkeeper\", a short About me without emojis, the languages spoken, the provider's services, a Verified badge and document badges.",
+  "Verification: Phriend's team checks a government ID and a selfie for the Verified badge, and reviews optional documents for their own badges: NBI clearance, police clearance, barangay certificate, certificates, business documents and proof of address.",
+  "Bookings: a client picks a time from the service's schedule and, for an at-home service, one of their saved addresses (Home, Work and more); online services need none. The provider accepts or declines; either side can cancel with a reason. Every booking can be added to a calendar.",
+  "Chat: client and provider chat in the app, with photos, read receipts, archive and block. Providers set FAQ answers (how to pay, minimum booking, where they work) that reply instantly in the chat.",
+  "Reviews: a star rating, text and up to 4 photos after a booking.",
+  "Job posts: clients describe what they need with a budget and a date; providers reply in the chat.",
+  "Phriend Provider: a separate provider app (coming to the app stores) and provider.phriend.app, where providers list services and manage bookings, earnings and verification.",
+  "Moderation: every listing is approved by a person; reports get an automated first pass, a human review queue and an audit log.",
+  "Payments: none in the app. Payment is agreed with the provider and paid to them directly.",
 ];
 
 const MARK_FILES = [
@@ -59,67 +58,58 @@ const USAGE = [
   "Do not use the logo or the name to imply that Phriend endorses, sponsors or partners with a product, person or event.",
 ];
 
-const SCREENSHOTS: { src: string; alt: string; caption: string }[] = [
+const SCREENSHOTS: { src: string; alt: string; caption: string; size: string }[] = [
   {
-    src: cdn("/photos/shot-home-v7.png"),
-    alt: "The Phriend home screen: a search bar, service categories and verified local pros with their hourly rate",
-    caption: "Home: search and verified pros",
-  },
-  {
-    src: cdn("/photos/shot-post-v7.png"),
-    alt: "A tour guide's listing showing photos, the services they offer, the city and the hourly rate, with a Book button",
-    caption: "Listing: services, rate, booking",
-  },
-  {
-    src: cdn("/photos/shot-hiking-v7.png"),
-    alt: "A hiking guide's listing with trail photos, the routes they guide and the hourly rate",
-    caption: "Listing: a hiking guide",
+    src: "/screens/home-v8.png",
+    alt: "The Phriend app home screen: a search bar asking what you need help with, and the service groups from errands to food and catering",
+    caption: "Home: search and service groups",
+    size: "PNG, 780×1688",
   },
 ];
 
 const PHOTOS: { src: string; alt: string; caption: string; size: string }[] = [
   {
-    src: cdn("/photos/life-food-trip.jpg"),
-    alt: "A food-tour guide and their client laughing over grilled skewers at a night street-food stall, a jeepney behind them",
-    caption: "Night street-food trip",
-    size: "JPG, 1536×1024",
+    src: "/groups/repairs.jpg",
+    alt: "A technician cleaning a split-type aircon unit in a condo living room, his tool bag on a step ladder",
+    caption: "Aircon cleaning at home",
+    size: "JPG, 1280×720",
   },
   {
-    src: cdn("/photos/life-hiking.jpg"),
-    alt: "Three people taking a selfie on a hilltop trail above rice terraces and the sea",
-    caption: "Hiking day with a Phriend",
-    size: "JPG, 1536×1024",
+    src: "/groups/freelance.jpg",
+    alt: "A bookkeeper working on a laptop at a desk by a window over the city, a notebook and an iced coffee beside her",
+    caption: "Online bookkeeping",
+    size: "JPG, 1280×720",
   },
   {
-    src: cdn("/photos/life-verified.jpg"),
-    alt: "A smiling woman in a cafe holding her phone and giving a thumbs up",
-    caption: "Verified and ready to meet",
-    size: "JPG, 1024×1536, portrait",
+    src: "/groups/tutoring.jpg",
+    alt: "A tutor going over math notes with a high-school student at a table by the window, a laptop showing a graph",
+    caption: "Tutoring session",
+    size: "JPG, 1280×720",
   },
 ];
 
 const STANCE: { icon: LucideIcon; title: string; text: string }[] = [
   {
     icon: BadgeCheck,
-    title: "Verified members, 18+ only",
-    text: "Members submit a government ID and a selfie through Didit before they get the badge. Phriend is strictly 18+ and strictly a services marketplace: dating, romantic or sexual services get an account removed.",
+    title: "Verified providers",
+    text: "Phriend's team checks a government ID and a selfie before a provider gets the Verified badge, and a person approves every listing. Phriend is strictly a marketplace for legitimate services; anything sexual or illegal gets an account removed.",
   },
   {
-    icon: MapPin,
-    title: "Public places, agreed people",
-    text: "Every meetup happens in a public place, and who is coming is agreed in the chat (on a team booking, the teammates named on the booking are the agreed people). If the other member arrives with anyone else not agreed in chat, the rule is simple: be prudent, do not proceed, leave and report.",
+    icon: FileCheck,
+    title: "Documents, shown as badges",
+    text: "Providers can add an NBI clearance, a police clearance, a barangay certificate, certificates, business documents or proof of address. Each one our team checks shows as its own badge, so clients see exactly what was verified.",
   },
   {
     icon: Wallet,
-    title: "Cash first, platform only",
-    text: "On a first meetup the client pays 50% in cash on arrival and 50% after, never more than half upfront. Phriend does not process payments, is not a party to any meetup and is not liable for what happens between members.",
+    title: "Paid directly, platform only",
+    text: "Payment is agreed with the provider and paid to them directly. Phriend does not process payments, is not a party to any booking and takes no commission yet.",
   },
 ];
 
 const QUOTES = [
-  "Paying a local to show you the best lechon in Cebu is not strange. Tour guides, photographers and tutors have always worked this way. Phriend puts them on one screen.",
-  "We wrote the rules before we wrote the code: public places, verified IDs, half in cash when you meet, leave if something is off. Safety is the product.",
-  "For many Filipinos this is a side income built on what they already have: their city, their free time and their stories. Phriend takes no cut, so they keep all of it.",
+  "Finding a good aircon technician or a bookkeeper still runs on Facebook groups and a cousin's number. Phriend puts the service, the price and the photos of the work on one screen.",
+  "Clients browse services, not people. Every service says what it costs, where it is done and when, so the first message is about the job.",
+  "For many Filipinos a skill is a second income: fixing, teaching, shooting, filing taxes. Phriend takes no cut, so providers keep all of it.",
 ];
 
 const eyebrow = "text-sm font-extrabold uppercase tracking-wider text-brand-text";
@@ -174,11 +164,11 @@ function Mark({ height }: { height: number }) {
 /** Live category count from the app, refreshed hourly, so the numbers never drift from the product. */
 async function categoryCount() {
   try {
-    const res = await fetch(`${API_URL}/api/categories`, { headers: apiHeaders(), next: { revalidate: 3600 } });
+    const res = await fetch(`${API_URL}/api/categories?platform=${API_PLATFORM}`, { headers: apiHeaders(), next: { revalidate: 3600 } });
     const d = (await res.json()) as { categories?: unknown[] };
-    return d.categories?.length || 46;
+    return d.categories?.length || 60;
   } catch {
-    return 46;
+    return 60;
   }
 }
 
@@ -211,6 +201,14 @@ export default async function PressPage() {
               <dd>
                 <a href={APP_URL} className="underline underline-offset-4 hover:text-brand-light">
                   web.phriend.app
+                </a>
+              </dd>
+            </div>
+            <div className="flex gap-2">
+              <dt className="text-white/60">Providers</dt>
+              <dd>
+                <a href={PROVIDER_URL} className="underline underline-offset-4 hover:text-brand-light">
+                  provider.phriend.app
                 </a>
               </dd>
             </div>
@@ -290,12 +288,12 @@ export default async function PressPage() {
           <ul className="mt-4 grid gap-4 sm:grid-cols-2">
             <li className="rounded-card border border-line bg-white p-6">
               <p className="text-xs font-extrabold uppercase tracking-wider text-muted">Display · Fredoka</p>
-              <p className="mt-3 font-display text-4xl font-semibold leading-tight text-ink">Book local guides and pros</p>
+              <p className="mt-3 font-display text-4xl font-semibold leading-tight text-ink">Local services, verified pros</p>
             </li>
             <li className="rounded-card border border-line bg-white p-6">
               <p className="text-xs font-extrabold uppercase tracking-wider text-muted">Body · Nunito</p>
               <p className="mt-3 text-lg leading-relaxed">
-                Tours, photo shoots, lessons, hikes, errands and driving. Booked by the hour, met in public, paid in person.
+                Aircon cleaning, bookkeeping, tutoring, photo and video, driving and errands. Booked in the app, paid to the provider.
               </p>
             </li>
           </ul>
@@ -334,14 +332,14 @@ export default async function PressPage() {
                     <Image
                       src={s.src}
                       alt={s.alt}
-                      width={430}
-                      height={900}
+                      width={390}
+                      height={844}
                       sizes="(min-width: 640px) 192px, 45vw"
                       className="h-auto w-full"
                     />
                   </a>
                   <figcaption className="mt-2 text-sm font-semibold text-muted">
-                    {s.caption} · PNG, 1720×3600
+                    {s.caption} · {s.size}
                   </figcaption>
                 </figure>
               </li>
@@ -357,8 +355,8 @@ export default async function PressPage() {
                     <Image
                       src={p.src}
                       alt={p.alt}
-                      width={1536}
-                      height={1024}
+                      width={1280}
+                      height={720}
                       sizes="(min-width: 1024px) 352px, (min-width: 640px) 33vw, 100vw"
                       className="h-full w-full object-cover"
                     />
@@ -376,7 +374,7 @@ export default async function PressPage() {
       {/* Safety and community stance */}
       <section id="stance" aria-labelledby="stance-title" className="bg-navy-soft">
         <Container className="py-16 sm:py-20">
-          <p className={eyebrow}>Safety and community</p>
+          <p className={eyebrow}>Trust and safety</p>
           <h2 id="stance-title" className={h2}>
             Where Phriend stands.
           </h2>
@@ -390,7 +388,7 @@ export default async function PressPage() {
             ))}
           </ul>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <ButtonLink href="/safety">Safety and transaction rules</ButtonLink>
+            <ButtonLink href="/safety">Trust and safety rules</ButtonLink>
             <ButtonLink href="/community-guidelines" variant="secondary">
               Community guidelines
             </ButtonLink>

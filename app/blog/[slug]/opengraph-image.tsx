@@ -29,7 +29,7 @@ export default async function Image({ params }: { params: Promise<{ slug: string
   const headline = post?.ogTitle ?? post?.title ?? db?.title ?? "Guides for people who could be earning on Phriend";
   // The kicker and read time mirror the blog index card: static posts carry a category, Ops posts a niche and tags.
   const category = db?.niche ? await findCategory(db.niche) : undefined;
-  const kicker = post ? `${post.category.label} · Side income` : db ? `${category?.label ?? "Phriend"} · ${db.tags[0] ?? "Guide"}` : "For Phriends · Side income";
+  const kicker = post ? `${post.category.label} · Side income` : db ? `${category?.label ?? "Phriend"} · ${db.tags[0] ?? "Guide"}` : "For providers · Side income";
   const minutes = post?.readingMinutes ?? (db ? readingMinutes(db.bodyMd) : null);
   return new ImageResponse(
     (

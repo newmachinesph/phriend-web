@@ -1,14 +1,16 @@
 import { profileKey } from "@/lib/profile-link";
 import { API_URL, APP_URL, apiHeaders } from "@/lib/site";
 
-/** What the creator overlay draws. The photo is inlined as a data URI so the browser canvas stays exportable. */
+/** What the creator overlay draws: the provider's first service. The photo is inlined as a data URI so the browser canvas stays exportable. */
 export type CreatorCard = {
   id: number;
   name: string;
-  /** The service the card advertises (first activity, else first category). */
+  /** The service the card advertises (the first listed service, else the profile title, else the first activity or category). */
   service: string | null;
   city: string;
+  /** The service's price and unit ("session" reads "per job", as in the app); the listing's standard rate when it has no service. */
   rate: number;
+  unit: "hour" | "session";
   rating: number;
   reviewCount: number;
   verified: boolean;
@@ -61,7 +63,9 @@ export async function getCreatorCard(link: string): Promise<Result> {
   if (res.status === 404) return { ok: false, status: 404, error: "No live profile at that link. Check the link, and make sure your profile is posted and not on a break." };
   if (!res.ok) return { ok: false, status: 502, error: "We couldn't load that profile just now. Try again in a minute." };
 
-  const post = ((await res.json().catch(() => null)) as { post?: Record<string, unknown> } | null)?.post;
+  const data = (await res.json().catch(() => null)) as { post?: Record<string, unknown>; offerings?: Record<string, unknown>[] } | null;
+  const post = data?.post;
+  const first = Array.isArray(data?.offerings) ? data.offerings[0] : undefined;
   const id = num(post?.id);
   const name = str(post?.workName);
   if (!post || !id || !name) return { ok: false, status: 502, error: "We couldn't read that profile. Try again in a minute." };
@@ -73,15 +77,17 @@ export async function getCreatorCard(link: string): Promise<Result> {
     card: {
       id,
       name,
-      service: firstStr(post.activities) ?? firstStr(post.categories),
+      service: str(first?.title) || str(post.title) || firstStr(post.activities) || firstStr(post.categories),
       city: str(post.city),
-      rate: num(post.pricePerHour) ?? 0,
+      rate: (first ? num(first.price) : null) ?? num(post.pricePerHour) ?? 0,
+      unit: first?.unit === "session" ? "session" : "hour",
       rating: num(post.averageStarRating) ?? 0,
       reviewCount: num(post.reviewCount) ?? 0,
       verified: post.verified === true,
       username,
       profileUrl: username ? `${APP_URL}/@${username}` : `${APP_URL}/phriends/${id}`,
-      photo: await inlinePhoto(Array.isArray(post.imagePath) ? post.imagePath[0] : null),
+      // the service's own photo first: the card shows the work, the provider's face only when there is none
+      photo: await inlinePhoto(str(first?.photo) || (Array.isArray(first?.photos) ? first.photos[0] : null) || (Array.isArray(post.imagePath) ? post.imagePath[0] : null)),
     },
   };
 }

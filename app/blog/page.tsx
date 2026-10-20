@@ -10,8 +10,8 @@ import { Container } from "@/components/ui";
 export const revalidate = 60; // articles published in Ops appear within a minute (a cached 404 for a draft too)
 
 export const metadata: Metadata = pageMeta({
-  title: "Blog: side-income guides for Filipino locals",
-  description: "Guides for people who could earn on Phriend: photographers, tour guides, tutors, fitness coaches and more. What clients book, what to charge, how to stay safe.",
+  title: "Blog: guides for Filipino service providers",
+  description: "Guides for people who could offer their services on Phriend: photographers, tutors, bookkeepers, technicians and more. What clients book and what to charge.",
   path: "/blog",
 });
 
@@ -30,7 +30,7 @@ export default async function BlogIndex() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: breadcrumbJsonLd("Blog", "/blog") }} />
       <p className="text-sm font-extrabold uppercase tracking-wider text-brand-text">Blog</p>
       <h1 className="mt-2 max-w-2xl font-display text-4xl font-semibold leading-tight text-ink sm:text-5xl">Guides for people who could be earning on Phriend.</h1>
-      <p className="mt-4 max-w-2xl text-lg leading-relaxed">What clients book, what it pays, how a booking works, and how to stay safe while you do it.</p>
+      <p className="mt-4 max-w-2xl text-lg leading-relaxed">What clients book, what it pays, how a booking works, and how to get booked more often.</p>
 
       {latest && (
         <Link href={`/blog/${latest.slug}`} className="group mt-12 grid gap-6 rounded-card border border-line bg-white p-4 transition-colors hover:border-brand md:grid-cols-[1.3fr_1fr] md:p-6">

@@ -10,7 +10,7 @@ const H = 1920;
 const SAFE = { top: 170, right: 160, bottom: 500 };
 const C = { navy: "#0d2251", orange: "#fe6138", mango: "#ffb627", body: "#33405e", verify: "#1b6fe6", white: "#fff" };
 const CARD = { w: 380, photo: 352, tagH: 26, below: 204 };
-const SAMPLE_FRAME = "/creators/sample-frame.jpg";
+const SAMPLE_FRAME = "/groups/repairs.jpg";
 
 type Place = "tl" | "tr" | "ml";
 type Settings = { card: CreatorCard | null; tag: string; size: number; guides: boolean };
@@ -65,7 +65,7 @@ export function OverlayTool() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [card, setCard] = useState<CreatorCard | null>(null);
-  const [tag, setTag] = useState("Win a free session with me");
+  const [tag, setTag] = useState("Win a free booking");
   const [size, setSize] = useState(0.9);
   const [guides, setGuides] = useState(true);
   const [hasVideo, setHasVideo] = useState(false);
@@ -123,19 +123,20 @@ export function OverlayTool() {
     const rw = ctx.measureText(rt).width;
     ctx.fillStyle = C.body; ctx.fillText(rt, w - 18 - rw, ty - 2);
     icon(ctx, PATHS.star, w - 18 - rw - 26, ty - 21, 22, { fill: C.mango, stroke: C.mango });
-    const nameLine = c.service ? `${c.name} · ${c.service}` : c.name;
+    const nameLine = c.service ?? c.name;
     ctx.fillStyle = C.navy; fitText(ctx, nameLine, w - 90 - rw, display(600), 32); ctx.fillText(nameLine, 18, ty);
 
     ty += 34;
+    const byLine = c.service ? `by ${c.name} · ${c.city}` : c.city;
     icon(ctx, PATHS.pin, 16, ty - 18, 20, { stroke: C.orange, width: 2.4 });
     ctx.beginPath(); ctx.arc(26, ty - 18 + (10 * 20) / 24, 2.4, 0, Math.PI * 2); ctx.fillStyle = C.orange; ctx.fill();
-    ctx.fillStyle = C.body; fitText(ctx, c.city, w - 60, sans(700), 20); ctx.fillText(c.city, 42, ty);
+    ctx.fillStyle = C.body; fitText(ctx, byLine, w - 60, sans(700), 20); ctx.fillText(byLine, 42, ty);
 
     ty += 40;
     const price = peso(c.rate);
     ctx.fillStyle = C.navy; ctx.font = sans(900)(30); ctx.fillText(price, 18, ty);
     const pwid = ctx.measureText(price).width;
-    ctx.fillStyle = C.body; ctx.font = sans(800)(17); ctx.fillText("/hr.", 21 + pwid, ty);
+    ctx.fillStyle = C.body; ctx.font = sans(800)(17); ctx.fillText(c.unit === "session" ? " per job" : "/hr.", 21 + pwid, ty);
 
     const by = ty + 20;
     ctx.fillStyle = C.orange; ctx.beginPath(); ctx.roundRect(14, by, w - 28, 54, 27); ctx.fill();
@@ -335,7 +336,7 @@ export function OverlayTool() {
     <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,420px)] lg:gap-x-8">
       <form onSubmit={lookUp} className="rounded-3xl border border-line bg-white p-5 shadow-card sm:p-6 lg:col-start-1">
         <label htmlFor="profile-link" className="font-display text-xl font-semibold text-ink">
-          1. Paste your Phriend profile link
+          1. Paste your Phriend link
         </label>
         <div className="mt-3 flex flex-col gap-2 sm:flex-row">
           <input
@@ -371,7 +372,7 @@ export function OverlayTool() {
             onPointerDown={handlePointerDown}
             onPointerMove={handlePointerMove}
             onPointerUp={() => (drag.current = null)}
-            aria-label="Preview of your video with the Phriend profile card. Drag the card to move it."
+            aria-label="Preview of your video with the Phriend service card. Drag the card to move it."
             className="mx-auto block aspect-[9/16] w-full max-w-[420px] cursor-grab touch-none rounded-3xl bg-navy shadow-float active:cursor-grabbing max-lg:max-w-[300px]"
           />
           <p className="mt-2 text-center text-sm text-muted">{card ? "Drag the card so it doesn't cover your face." : "Your card shows up here."}</p>

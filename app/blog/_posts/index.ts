@@ -1,7 +1,7 @@
 import type { ComponentType } from "react";
 import { photographers } from "./photographers";
 
-/** One article per activity niche: the blog is the funnel that invites people with that skill to become Phriends. */
+/** One article per service niche: the blog is the funnel that invites people with that skill to list their services. */
 export type Post = {
   slug: string;
   title: string;

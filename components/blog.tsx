@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { ArrowRight, type LucideIcon } from "lucide-react";
-import { APP_URL, POST_URL } from "@/lib/site";
+import { APP_URL, PROVIDER_URL } from "@/lib/site";
 
 /** Building blocks for blog articles: figures, phone mockups, callouts, steps and the closing call to action. */
 
@@ -65,32 +65,30 @@ export function Steps({ steps }: { steps: { icon: LucideIcon; title: string; tex
   );
 }
 
-/** Worked earnings examples: what a session is, the rate, and the take-home. Phriend takes no cut, so the take-home is the total. */
-export function RateTable({ rows }: { rows: { session: string; hours: number; rate: number }[] }) {
+/** Worked earnings examples: a service, how it is priced, and the take-home. Phriend takes no cut, so the take-home is the total. */
+export function RateTable({ rows }: { rows: { service: string; pricing: string; total: number }[] }) {
   const peso = (n: number) => `₱${n.toLocaleString("en-PH")}`;
   return (
     <div className="my-10 overflow-hidden rounded-3xl border border-line shadow-card">
       <table className="w-full text-left text-[15px]">
         <thead className="bg-surface text-xs font-extrabold uppercase tracking-wider text-muted">
           <tr>
-            <th className="px-5 py-3">Session</th>
-            <th className="px-5 py-3">Hours</th>
-            <th className="px-5 py-3">Your rate</th>
+            <th className="px-5 py-3">Service</th>
+            <th className="px-5 py-3">Priced</th>
             <th className="px-5 py-3 text-right">You keep</th>
           </tr>
         </thead>
         <tbody className="divide-y divide-line">
           {rows.map((r) => (
-            <tr key={r.session} className="bg-white">
-              <td className="px-5 py-3.5 font-bold text-ink">{r.session}</td>
-              <td className="px-5 py-3.5 text-body">{r.hours}</td>
-              <td className="px-5 py-3.5 text-body">{peso(r.rate)}/hr</td>
-              <td className="px-5 py-3.5 text-right font-display text-lg font-semibold text-brand-text">{peso(r.hours * r.rate)}</td>
+            <tr key={r.service} className="bg-white">
+              <td className="px-5 py-3.5 font-bold text-ink">{r.service}</td>
+              <td className="px-5 py-3.5 text-body">{r.pricing}</td>
+              <td className="px-5 py-3.5 text-right font-display text-lg font-semibold text-brand-text">{peso(r.total)}</td>
             </tr>
           ))}
         </tbody>
       </table>
-      <p className="bg-surface px-5 py-3 text-sm font-semibold text-muted">Cash in person: 50% when you meet, 50% after. Phriend takes no cut.</p>
+      <p className="bg-surface px-5 py-3 text-sm font-semibold text-muted">Paid to you directly, as agreed with the client. Phriend takes no cut.</p>
     </div>
   );
 }
@@ -101,14 +99,14 @@ export function ArticleCta({ category, headline = "Put your camera on Phriend th
       <p className="text-sm font-extrabold uppercase tracking-wider text-brand-light">Ready when you are</p>
       <h2 className="mt-2 font-display text-3xl font-semibold leading-tight sm:text-4xl">{headline}</h2>
       <p className="mt-3 max-w-xl text-white/80">
-        Verify your ID in about two minutes, list your services and rates, and take bookings that fit around your day job. Your profile is reviewed by a person before it goes live.
+        Verify your identity, list your services with their prices and photos, and take bookings that fit around your day job. A person reviews each listing before it goes live.
       </p>
       <div className="mt-6 flex flex-wrap gap-3">
-        <a href={POST_URL} className="btn-primary rounded-full px-6 py-3 font-bold">
-          Become a Phriend <ArrowRight size={18} className="ml-1.5" aria-hidden="true" />
+        <a href={PROVIDER_URL} className="btn-primary rounded-full px-6 py-3 font-bold">
+          List your services <ArrowRight size={18} className="ml-1.5" aria-hidden="true" />
         </a>
         <a href={`${APP_URL}${category.path}`} className="btn-secondary inline-flex items-center rounded-full px-6 py-3 font-bold">
-          See {category.label} Phriends
+          See {category.label} services
         </a>
       </div>
     </div>

@@ -1,22 +1,22 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import { BadgeCheck, Clapperboard, Coffee, Download, Map as MapIcon, MessageCircle, ShoppingBag, Utensils, type LucideIcon } from "lucide-react";
+import { BadgeCheck, Camera, Download, GraduationCap, Map as MapIcon, MessageCircle, PartyPopper, Wrench, type LucideIcon } from "lucide-react";
 import { OverlayTool } from "@/components/overlay-tool";
-import { breadcrumbJsonLd, cdn, pageMeta, POST_URL } from "@/lib/site";
+import { breadcrumbJsonLd, cdn, pageMeta, PROVIDER_URL } from "@/lib/site";
 import { ButtonLink, Container } from "@/components/ui";
 
-const TITLE = "Be the creator people book";
+const TITLE = "Show your service, get it booked";
 const DESCRIPTION =
-  "For TikTok and Facebook Reels creators in the Philippines: join Phriend, post one video with your Phriend profile card, and give one follower a free session, a photo shoot or a guided tour. Make your profile overlay here.";
-const SHARE_TITLE = "Be the creator people book. One follower wins a free session.";
-const SHARE_DESCRIPTION = "Post one video with your Phriend profile card. Your followers comment for a week and the best comment wins a free session with you: a photo shoot, a guided tour, whatever you offer. #BeMyPhriend";
+  "For TikTok and Facebook Reels creators in the Philippines who offer a service: list it on Phriend, post one video of your work with your Phriend service card, and give one follower a free booking. Make your overlay here.";
+const SHARE_TITLE = "Show your service, get it booked. One follower wins a free booking.";
+const SHARE_DESCRIPTION = "Post one video of your work with your Phriend service card. Your followers comment for a week and the best comment wins a free booking of your service: a photo shoot, a lesson, a cleaning, whatever you offer. #BookOnPhriend";
 // pageMeta sets the site-wide share image; this page has its own (app/creators/opengraph-image.tsx)
-const OG = { url: "/creators/opengraph-image", width: 1200, height: 630, alt: "Be the creator people book: Phriend creator collab" };
+const OG = { url: "/creators/opengraph-image", width: 1200, height: 630, alt: "Show your service, get it booked: Phriend creator collab" };
 
 const base = pageMeta({ title: TITLE, description: DESCRIPTION, path: "/creators" });
 export const metadata: Metadata = {
   ...base,
-  keywords: ["content creator Philippines", "TikTok creator collab", "Facebook Reels creator", "creator side income", "BeMyPhriend", "Phriend creators"],
+  keywords: ["content creator Philippines", "TikTok creator collab", "Facebook Reels creator", "creator side income", "BookOnPhriend", "Phriend creators"],
   openGraph: { ...base.openGraph, title: SHARE_TITLE, description: SHARE_DESCRIPTION, images: [OG] },
   twitter: { card: "summary_large_image", title: SHARE_TITLE, description: SHARE_DESCRIPTION, images: [OG.url] },
 };
@@ -25,18 +25,18 @@ const KIT_PDF = cdn("/creators/Phriend-Creator-Collab-Kit.pdf");
 const MESSENGER = "https://m.me/phriendapp";
 
 const STEPS = [
-  { title: "Become a verified Phriend", text: "Sign up, verify your ID in about two minutes, and set a username so your link reads web.phriend.app/@yourname." },
-  { title: "Post one video", text: "A TikTok or Reel with your Phriend profile card on screen. Make the card below in a few seconds." },
+  { title: "List your service", text: "At provider.phriend.app, verify your identity, list your service with its price and photos, and set a username so your link reads web.phriend.app/@yourname." },
+  { title: "Post one video of your work", text: "A TikTok or Reel showing the service, with your Phriend service card on screen. Make the card below in a few seconds." },
   { title: "Followers comment for 7 days", text: "They follow you and Phriend, like the video, and comment which of your services they'd book." },
-  { title: "Best comment wins a free session", text: "You pick the winner on day 8. They book you on Phriend, free for them, and Phriend pays your rate." },
+  { title: "Best comment wins a free booking", text: "You pick the winner on day 8. They book your service on Phriend, free for them, and Phriend pays your price." },
 ];
 
 const TOP_BOOKINGS: { icon: LucideIcon; title: string; text: string }[] = [
-  { icon: Clapperboard, title: "Content Creator", text: "Vlog, TikTok, photoshoot" },
-  { icon: Utensils, title: "Eat & Travel", text: "Food trip, street food, cafe hopping" },
+  { icon: Camera, title: "Photo & Video", text: "Portraits, product shots, event coverage" },
+  { icon: Wrench, title: "Repairs & Cleaning", text: "Aircon cleaning, appliance check-ups, before and after" },
+  { icon: GraduationCap, title: "Tutoring & Lessons", text: "Math, languages, music, a sample lesson" },
   { icon: MapIcon, title: "Tour Guide", text: "City tour, food tour, heritage tour" },
-  { icon: Coffee, title: "Cafe", text: "Coffee chat, dessert run, board games" },
-  { icon: ShoppingBag, title: "Shopping", text: "Mall, ukay-ukay, Divisoria run" },
+  { icon: PartyPopper, title: "Events", text: "Hosting, coordination, hair and makeup" },
 ];
 
 const eyebrow = "text-sm font-extrabold uppercase tracking-wider text-brand-text";
@@ -50,14 +50,14 @@ export default function CreatorsPage() {
       <section className="overflow-hidden bg-navy-gradient text-white">
         <Container className="grid items-center gap-12 pb-16 pt-14 sm:pt-20 lg:grid-cols-[1.15fr_0.85fr] lg:pb-20">
           <div>
-          <p className="text-sm font-extrabold uppercase tracking-wider text-mango">#BeMyPhriend · Creator collab</p>
+          <p className="text-sm font-extrabold uppercase tracking-wider text-mango">#BookOnPhriend · Creator collab</p>
           <h1 className="mt-3 font-display text-[44px] font-semibold leading-[1.02] tracking-tight sm:text-6xl">
-            Be the creator <br className="hidden sm:block" />
-            <span className="text-brand-light">people book.</span>
+            Show your service, <br className="hidden sm:block" />
+            <span className="text-brand-light">get it booked.</span>
           </h1>
           <p className="mt-6 max-w-2xl text-lg leading-relaxed text-white/85">
-            Post one video with your Phriend profile card on screen. For a week your followers comment for a chance to book you, and
-            the best comment wins a free session: a photo shoot, a guided tour, whatever you offer.
+            Post one video of your work with your Phriend service card on screen. For a week your followers comment for a chance to
+            book it, and the best comment wins a free booking: a photo shoot, a lesson, a cleaning, whatever you offer.
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <ButtonLink href="#overlay" className="text-lg">
@@ -73,8 +73,8 @@ export default function CreatorsPage() {
           </div>
           </div>
 
-          {/* AI-generated creator and the sample overlay card, not a real member */}
-          <div className="relative mx-auto w-full max-w-[420px] pl-10 sm:pl-16 lg:max-w-none">
+          {/* AI-generated creator, not a real member */}
+          <div className="relative mx-auto w-full max-w-[420px] lg:max-w-none">
             <Image
               src={cdn("/creators/hero.jpg")}
               alt="A creator filming vertical video of herself on a phone in a ring light at a street food stall"
@@ -83,14 +83,6 @@ export default function CreatorsPage() {
               priority
               sizes="(min-width: 1024px) 420px, 90vw"
               className="aspect-[4/5] w-full rounded-card object-cover shadow-float"
-            />
-            <Image
-              src={cdn("/creators/og-card.png")}
-              alt="Example Phriend profile overlay card with a Win a free session with me tag"
-              width={320}
-              height={547}
-              sizes="(min-width: 1024px) 190px, 40vw"
-              className="absolute bottom-8 left-0 w-[42%] max-w-[190px] -rotate-6 drop-shadow-2xl"
             />
           </div>
         </Container>
@@ -113,11 +105,11 @@ export default function CreatorsPage() {
           </ol>
           <p className="mt-6 flex items-start gap-2.5 text-[15px] font-semibold text-ink">
             <BadgeCheck size={20} className="mt-0.5 shrink-0 text-brand" aria-hidden="true" />
-            Limiting who can win, for example women 18+ only? Say it in your caption before comments open, matching your &quot;Who can book
-            you&quot; setting. Full rules are in the creator kit.
+            The prize is one booking of a service you list, at its listed price. Say where you work in your caption before comments open, so
+            the winner is someone you can serve. Full rules are in the creator kit.
           </p>
-          <ButtonLink href={POST_URL} variant="secondary" className="mt-6">
-            Become a Phriend
+          <ButtonLink href={PROVIDER_URL} variant="secondary" className="mt-6">
+            List your services
           </ButtonLink>
         </Container>
       </section>
@@ -126,9 +118,9 @@ export default function CreatorsPage() {
         <Container className="py-16 sm:py-20">
           <p className={eyebrow}>What followers can book</p>
           <h2 id="bookings-title" className={h2}>
-            Top 5 bookings that make good content.
+            Top 5 services that make good content.
           </h2>
-          <p className="mt-4 max-w-2xl leading-relaxed">List these on your profile. The winner&apos;s session turns into your next video.</p>
+          <p className="mt-4 max-w-2xl leading-relaxed">Work you can show on camera. The winner&apos;s booking turns into your next video.</p>
           <ul className="mt-8 grid grid-cols-2 gap-4 md:grid-cols-5">
             {TOP_BOOKINGS.map((b) => (
               <li key={b.title} className="rounded-card border border-line bg-white p-5 text-center">
@@ -145,10 +137,10 @@ export default function CreatorsPage() {
         <Container className="py-16 sm:py-20">
           <p className={eyebrow}>Overlay tool</p>
           <h2 id="overlay-title" className={h2}>
-            Your Phriend card, ready for your video.
+            Your service card, ready for your video.
           </h2>
           <p className="mt-4 mb-8 max-w-2xl leading-relaxed">
-            Paste your profile link and download a transparent overlay for CapCut, or upload your clip and export the video with the card on it.
+            Paste your Phriend link and download a transparent overlay for CapCut, or upload your clip and export the video with the card on it.
             Your video never leaves your device.
           </p>
           <OverlayTool />

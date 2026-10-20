@@ -5,7 +5,7 @@ import { notFound } from "next/navigation";
 import { Check } from "lucide-react";
 import { activityPath, appCategoryUrl, getCategories } from "@/lib/landing";
 import { findOccasion, OCCASION_IMAGE, OCCASIONS, occasionImage } from "@/lib/occasions";
-import { APP_URL, pageMeta, POST_URL, SITE_URL } from "@/lib/site";
+import { APP_URL, pageMeta, PROVIDER_URL, SITE_URL } from "@/lib/site";
 import { ButtonLink, Container } from "@/components/ui";
 
 export const revalidate = 600;
@@ -44,7 +44,7 @@ export default async function OccasionPage({ params }: { params: Promise<{ occas
       { "@type": "FAQPage", mainEntity: o.faq.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })) },
       {
         "@type": "ItemList",
-        name: `Pros to book for a ${o.name.toLowerCase()}`,
+        name: `Services to book for a ${o.name.toLowerCase()}`,
         itemListElement: book.map((c, i) => ({ "@type": "ListItem", position: i + 1, name: c.label, url: `${SITE_URL}${activityPath(c)}` })),
       },
     ],
@@ -91,7 +91,7 @@ export default async function OccasionPage({ params }: { params: Promise<{ occas
               {c.activities.length > 0 && <p className="mt-2 flex-1 text-[15px] leading-relaxed">{c.activities.slice(0, 5).join(", ")}</p>}
               <div className="mt-4 flex flex-wrap gap-x-4 gap-y-1 text-sm font-bold">
                 <a href={appCategoryUrl(c)} className="text-brand-text hover:underline">
-                  See who is available
+                  See the services
                 </a>
                 <Link href={activityPath(c)} className="text-muted hover:text-ink">
                   About {c.label.toLowerCase()}
@@ -116,7 +116,7 @@ export default async function OccasionPage({ params }: { params: Promise<{ occas
             ))}
             <li className="flex gap-3 text-[16px] leading-relaxed">
               <Check size={20} aria-hidden="true" className="mt-0.5 shrink-0 text-brand" />
-              Pay in person: on a first booking, at most 50% in cash when you meet and the rest after. Phriend never holds the money.
+              Pay the provider directly, as you agree with them in the chat. Phriend never holds the money.
             </li>
           </ul>
         </div>
@@ -154,7 +154,7 @@ export default async function OccasionPage({ params }: { params: Promise<{ occas
           Hosts, makeup artists, photographers and coordinators can list their services on Phriend for free and get booked for occasions like this one.
         </p>
         <div className="mt-6 flex flex-wrap gap-3">
-          <ButtonLink href={POST_URL}>Become a Phriend</ButtonLink>
+          <ButtonLink href={PROVIDER_URL}>List your services</ButtonLink>
           <ButtonLink href={APP_URL} variant="secondary">
             Open the app
           </ButtonLink>

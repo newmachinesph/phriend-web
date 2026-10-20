@@ -27,7 +27,7 @@ export function TeamTile({ team: t }: { team: TeamCard }) {
         )}
       </div>
       <div className="p-4 pt-8">
-        <p className="flex items-center justify-between gap-2 font-display text-lg font-semibold text-ink">
+        <p className="flex items-center justify-between gap-2 font-display text-h3 font-bold text-ink">
           <span className="line-clamp-2 min-w-0">{t.name}</span>
           {t.rating !== null && (
             <span className="inline-flex shrink-0 items-center gap-1 text-sm font-bold text-body">

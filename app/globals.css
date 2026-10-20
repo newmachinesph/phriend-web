@@ -3,22 +3,42 @@
 @import "./phriend-ui.css";
 
 /*
- * One fluid type scale (owner rule: responsive type, 320-1440). Headings are Plus Jakarta Sans 700-800 with slight
- * negative tracking; body is Inter at 1rem. Generates text-display, text-h1, text-h2 and text-h3.
+ * The type scale (AGENT-RULES "TYPE SCALE", the same numbers as the apps). Phones (< 640px): page h1 22/28, headline
+ * 20/26, section and card titles 16/22, body 15/21, secondary 13/18, captions 12/16. From 640px the headings grow with
+ * clamp() to h1 32/38 (the home hero to 44/50) and body is 16/24, secondary 14/20. Headings are Plus Jakarta Sans 700
+ * with slight negative tracking; everything else is Inter.
  */
 @theme {
-  --text-display: clamp(2.25rem, 1.35rem + 3.8vw, 4rem);
-  --text-display--line-height: 1.05;
-  --text-display--letter-spacing: -0.025em;
-  --text-h1: clamp(1.75rem, 1.2rem + 2.4vw, 2.75rem);
-  --text-h1--line-height: 1.15;
-  --text-h1--letter-spacing: -0.02em;
-  --text-h2: clamp(1.5rem, 1.15rem + 1.5vw, 2.25rem);
-  --text-h2--line-height: 1.2;
-  --text-h2--letter-spacing: -0.015em;
-  --text-h3: clamp(1.1875rem, 1.05rem + 0.4vw, 1.375rem);
-  --text-h3--line-height: 1.3;
-  --text-h3--letter-spacing: -0.01em;
+  --text-display: clamp(1.75rem, 1.05rem + 2.6vw, 2.75rem);
+  --text-display--line-height: 1.17;
+  --text-display--letter-spacing: -0.02em;
+  --text-h1: clamp(1.375rem, 0.9rem + 1.6vw, 2rem);
+  --text-h1--line-height: 1.22;
+  --text-h1--letter-spacing: -0.015em;
+  --text-h2: clamp(1.25rem, 0.95rem + 1vw, 1.625rem);
+  --text-h2--line-height: 1.25;
+  --text-h2--letter-spacing: -0.01em;
+  --text-h3: clamp(1rem, 0.9rem + 0.4vw, 1.125rem);
+  --text-h3--line-height: 1.36;
+}
+@media (width < 40rem) {
+  :root {
+    --text-base: 0.9375rem;
+    --text-base--line-height: 1.3125rem;
+    --text-sm: 0.8125rem;
+    --text-sm--line-height: 1.125rem;
+    --text-lg: 1rem;
+    --text-lg--line-height: 1.5rem;
+    --text-xl: 1.125rem;
+    --text-xl--line-height: 1.625rem;
+    --leading-relaxed: 1.47;
+  }
+  /* inputs stay at 16px on phones so iOS does not zoom into them */
+  input:not([type="checkbox"], [type="radio"], [type="range"], [type="file"]),
+  select,
+  textarea {
+    font-size: 1rem;
+  }
 }
 
 html {
@@ -35,6 +55,8 @@ body {
   background: #fff;
   color: var(--color-body);
   font-family: var(--font-sans);
+  font-size: var(--text-base);
+  line-height: var(--text-base--line-height);
   -webkit-tap-highlight-color: transparent;
   /* Long names, titles, emails and URLs from the API wrap instead of widening a card, a flex row or the page. */
   overflow-wrap: anywhere;
@@ -59,16 +81,15 @@ body {
 /* Long-form legal pages. Plain nested selectors instead of a typography plugin. */
 
 .legal {
-  font-size: 1rem;
-  line-height: 1.6;
+  font-size: var(--text-base);
+  line-height: var(--text-base--line-height);
 }
 .legal h2 {
   margin: 2.5rem 0 0.75rem;
   font-family: var(--font-display);
-  font-size: clamp(1.25rem, 1.1rem + 0.6vw, 1.5rem);
+  font-size: var(--text-h3);
   font-weight: 700;
-  letter-spacing: -0.01em;
-  line-height: 1.25;
+  line-height: var(--text-h3--line-height);
   color: var(--color-ink);
 }
 .legal h3 {

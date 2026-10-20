@@ -105,7 +105,7 @@ export function ServiceTile({ item, icon }: { item: ServiceItem; icon?: IconNode
         {item.visitType && <span className="absolute left-2 top-2 rounded-full bg-white/90 px-2 py-0.5 text-xs font-bold text-ink">{VISIT[item.visitType]}</span>}
       </div>
       <div className="flex min-w-0 flex-1 flex-col p-4">
-        <p className="line-clamp-2 font-display text-lg font-semibold leading-snug text-ink wrap-anywhere">{item.title}</p>
+        <p className="line-clamp-2 font-display text-h3 font-bold text-ink wrap-anywhere">{item.title}</p>
         {/* up to ₱1,000,000: the amount never breaks, the unit drops to the next line when the tile is narrow */}
         <p className="mt-1 font-bold text-ink">
           <span className="whitespace-nowrap">{peso(item.price)}</span>

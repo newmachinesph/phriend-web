@@ -44,9 +44,15 @@ function icon(ctx: CanvasRenderingContext2D, d: string, x: number, y: number, si
   if (o.stroke) { ctx.strokeStyle = o.stroke; ctx.stroke(p); }
   ctx.restore();
 }
+/** Shrinks the font until the text fits maxW (down to 14px), then cuts it with an ellipsis; returns the text to draw. */
 function fitText(ctx: CanvasRenderingContext2D, text: string, maxW: number, font: (px: number) => string, size: number) {
+  const min = Math.min(14, size);
   do ctx.font = font(size);
-  while (ctx.measureText(text).width > maxW && --size > 8);
+  while (ctx.measureText(text).width > maxW && --size > min);
+  if (ctx.measureText(text).width <= maxW) return text;
+  const chars = [...text];
+  while (chars.length > 1 && ctx.measureText(`${chars.join("").trimEnd()}…`).width > maxW) chars.pop();
+  return `${chars.join("").trimEnd()}…`;
 }
 function cover(ctx: CanvasRenderingContext2D, img: HTMLImageElement | HTMLVideoElement, x: number, y: number, w: number, h: number) {
   const iw = img instanceof HTMLVideoElement ? img.videoWidth : img.naturalWidth;
@@ -124,13 +130,13 @@ export function OverlayTool() {
     ctx.fillStyle = C.body; ctx.fillText(rt, w - 18 - rw, ty - 2);
     icon(ctx, PATHS.star, w - 18 - rw - 26, ty - 21, 22, { fill: C.mango, stroke: C.mango });
     const nameLine = c.service ?? c.name;
-    ctx.fillStyle = C.navy; fitText(ctx, nameLine, w - 90 - rw, display(600), 32); ctx.fillText(nameLine, 18, ty);
+    ctx.fillStyle = C.navy; ctx.fillText(fitText(ctx, nameLine, w - 90 - rw, display(600), 32), 18, ty);
 
     ty += 34;
     const byLine = c.service ? `by ${c.name} · ${c.city}` : c.city;
     icon(ctx, PATHS.pin, 16, ty - 18, 20, { stroke: C.orange, width: 2.4 });
     ctx.beginPath(); ctx.arc(26, ty - 18 + (10 * 20) / 24, 2.4, 0, Math.PI * 2); ctx.fillStyle = C.orange; ctx.fill();
-    ctx.fillStyle = C.body; fitText(ctx, byLine, w - 60, sans(700), 20); ctx.fillText(byLine, 42, ty);
+    ctx.fillStyle = C.body; ctx.fillText(fitText(ctx, byLine, w - 60, sans(700), 20), 42, ty);
 
     ty += 40;
     const price = peso(c.rate);
@@ -143,11 +149,10 @@ export function OverlayTool() {
     ctx.fillStyle = C.white; ctx.beginPath(); ctx.arc(41, by + 27, 20, 0, Math.PI * 2); ctx.fill();
     if (m.logo) { const lh = 28, lw = (lh * 894) / 975; ctx.drawImage(m.logo, 41 - lw / 2, by + 27 - lh / 2, lw, lh); }
     const url = c.profileUrl.replace(/^https:\/\//, "");
-    ctx.fillStyle = C.white; ctx.textBaseline = "middle"; fitText(ctx, url, w - 100, sans(900), 21); ctx.fillText(url, 72, by + 28);
+    ctx.fillStyle = C.white; ctx.textBaseline = "middle"; ctx.fillText(fitText(ctx, url, w - 100, sans(900), 21), 72, by + 28);
 
     if (t) {
-      const label = s.tag.trim();
-      fitText(ctx, label, w - 80, display(700), 22); const tw = ctx.measureText(label).width;
+      const label = fitText(ctx, s.tag.trim(), w - 80, display(700), 22); const tw = ctx.measureText(label).width;
       ctx.fillStyle = C.mango; ctx.beginPath(); ctx.roundRect(24, 0, tw + 36, 42, 21); ctx.fill();
       ctx.fillStyle = C.navy; ctx.textBaseline = "middle"; ctx.fillText(label, 42, 22);
     }

@@ -8,7 +8,7 @@ const peso = (n: number) => `₱${n.toLocaleString("en-PH")}`;
 export function TeamTile({ team: t }: { team: TeamCard }) {
   const roles = [...new Set(t.roles)];
   return (
-    <a href={appTeamUrl(t.slug)} className="group block h-full overflow-hidden rounded-card border border-line bg-white transition-colors hover:border-brand">
+    <a href={appTeamUrl(t.slug)} title={t.name} className="group block h-full min-w-0 overflow-hidden [contain:inline-size] rounded-card border border-line bg-white transition-colors hover:border-brand">
       {/* the avatars sit outside the cover's overflow-hidden box, so the half that hangs below it is not clipped */}
       <div className="relative">
         <div className="relative h-40 overflow-hidden bg-navy-soft">
@@ -28,7 +28,7 @@ export function TeamTile({ team: t }: { team: TeamCard }) {
       </div>
       <div className="p-4 pt-8">
         <p className="flex items-center justify-between gap-2 font-display text-lg font-semibold text-ink">
-          {t.name}
+          <span className="line-clamp-2 min-w-0">{t.name}</span>
           {t.rating !== null && (
             <span className="inline-flex shrink-0 items-center gap-1 text-sm font-bold text-body">
               <Star size={14} className="fill-mango text-mango" aria-hidden="true" /> {t.rating.toFixed(1)}
@@ -36,12 +36,12 @@ export function TeamTile({ team: t }: { team: TeamCard }) {
             </span>
           )}
         </p>
-        <p className="mt-0.5 flex items-center gap-1 text-sm text-muted">
-          <MapPin size={14} className="text-brand" aria-hidden="true" /> {t.city}
+        <p className="mt-0.5 flex min-w-0 items-center gap-1 text-sm text-muted" title={t.city}>
+          <MapPin size={14} className="shrink-0 text-brand" aria-hidden="true" /> <span className="min-w-0 truncate">{t.city}</span>
         </p>
-        {roles.length > 0 && <p className="mt-1 text-sm">{roles.join(", ")}</p>}
+        {roles.length > 0 && <p className="mt-1 line-clamp-2 text-sm">{roles.join(", ")}</p>}
         {t.priceFrom !== null && (
-          <p className="mt-2 font-bold text-ink">
+          <p className="mt-2 whitespace-nowrap font-bold text-ink">
             from {peso(t.priceFrom)}
             <span className="text-xs font-semibold text-muted"> per package</span>
           </p>

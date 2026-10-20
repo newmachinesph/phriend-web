@@ -93,7 +93,7 @@ export function ServiceTile({ item, icon }: { item: ServiceItem; icon?: IconNode
   const avatar = cdnPhoto(item.provider.photo);
   const p = item.provider;
   return (
-    <a href={appServiceUrl(item)} className="group flex h-full flex-col overflow-hidden rounded-card border border-line bg-white transition-colors hover:border-brand">
+    <a href={appServiceUrl(item)} title={item.title} className="group flex h-full min-w-0 flex-col overflow-hidden [contain:inline-size] rounded-card border border-line bg-white transition-colors hover:border-brand">
       <div className="relative aspect-[4/3] overflow-hidden bg-brand-soft">
         {photo ? (
           <Image src={photo} alt={item.title} fill sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw" className="object-cover transition-transform duration-500 group-hover:scale-[1.03]" />
@@ -104,17 +104,17 @@ export function ServiceTile({ item, icon }: { item: ServiceItem; icon?: IconNode
         )}
         {item.visitType && <span className="absolute left-2 top-2 rounded-full bg-white/90 px-2 py-0.5 text-[11px] font-bold text-ink">{VISIT[item.visitType]}</span>}
       </div>
-      <div className="flex flex-1 flex-col p-4">
-        <p className="line-clamp-2 font-display text-lg font-semibold leading-snug text-ink">{item.title}</p>
-        <p className="mt-1 font-bold text-ink">
+      <div className="flex min-w-0 flex-1 flex-col p-4">
+        <p className="line-clamp-2 font-display text-lg font-semibold leading-snug text-ink wrap-anywhere">{item.title}</p>
+        <p className="mt-1 whitespace-nowrap font-bold text-ink">
           {peso(item.price)}
           <span className="text-xs font-semibold text-muted">{item.unit === "hour" ? "/hr" : " per job"}</span>
         </p>
-        <p className="mt-0.5 flex items-center gap-1 text-sm text-muted">
+        <p className="mt-0.5 flex min-w-0 items-center gap-1 text-sm text-muted" title={serviceArea(item)}>
           <MapPin size={14} className="shrink-0 text-brand" aria-hidden="true" />
-          <span className="truncate">{serviceArea(item)}</span>
+          <span className="min-w-0 truncate">{serviceArea(item)}</span>
         </p>
-        <p className="mt-auto flex items-center gap-1.5 pt-3 text-sm">
+        <p className="mt-auto flex min-w-0 items-center gap-1.5 pt-3 text-sm" title={p.workName}>
           {avatar ? (
             <Image src={avatar} alt="" width={24} height={24} className="size-6 shrink-0 rounded-full object-cover" />
           ) : (

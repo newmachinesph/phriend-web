@@ -57,8 +57,8 @@ export default async function BlogIndex() {
                 <div className="relative aspect-[16/9] overflow-hidden rounded-card">
                   <Image src={p.hero.src} alt={p.hero.alt} width={1600} height={900} sizes="(min-width: 1024px) 360px, (min-width: 640px) 50vw, 100vw" className="h-full w-full object-cover" />
                 </div>
-                <p className="mt-4 text-xs font-extrabold uppercase tracking-wider text-brand-text">{p.label}</p>
-                <h2 className="mt-1 font-display text-xl font-semibold leading-tight text-ink">{p.title}</h2>
+                <p className="mt-4 truncate text-xs font-extrabold uppercase tracking-wider text-brand-text">{p.label}</p>
+                <h2 title={p.title} className="mt-1 line-clamp-3 font-display text-xl font-semibold leading-tight text-ink">{p.title}</h2>
                 <p className="mt-auto pt-3 text-sm font-semibold text-muted">
                   {fmt(p.date)} · {p.readingMinutes} min read
                 </p>

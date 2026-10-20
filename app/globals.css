@@ -17,6 +17,8 @@ body {
   color: var(--color-body);
   font-family: var(--font-sans);
   -webkit-tap-highlight-color: transparent;
+  /* Long names, titles, emails and URLs from the API wrap instead of widening a card, a flex row or the page. */
+  overflow-wrap: anywhere;
 }
 
 [id] {

@@ -105,10 +105,15 @@ export async function getServices(q: { category?: string; city?: string }): Prom
 
 const list = (xs: string[]) => (xs.length <= 1 ? xs.join("") : `${xs.slice(0, -1).join(", ")} and ${xs[xs.length - 1]}`);
 
+/** Lowercase a label mid-sentence, keeping acronyms (TV, BIR, DJ), inner capitals (TikTok, K-pop) and proper nouns. */
+const PROPER = /^(Filipino|Christmas|Korean|Mandarin|Japanese|English|Tagalog|Cebuano|Chinese|Spanish)$/;
+const keepCase = (w: string) => /^[A-Z0-9]{2,}$/.test(w) || /[a-z][A-Z]/.test(w) || /^[A-Z]-/.test(w) || PROPER.test(w);
+const inSentence = (label: string) => label.split(" ").map((w) => (keepCase(w) ? w : w.toLowerCase())).join(" ");
+
 /** The page copy: several hundred words specific to the service (and city), not a filter grid. */
 export function landingCopy(c: Category, city?: CityPage, services: ServiceItem[] = []) {
   const where = city ? city.name : "the Philippines";
-  const name = c.label.toLowerCase();
+  const name = inSentence(c.label);
   const acts = c.activities.length ? c.activities : [c.label];
   const prices = services.map((s) => s.price).filter(Boolean);
   const from = prices.length ? `Services listed here currently start at ${peso(Math.min(...prices))}` : "";
@@ -117,9 +122,9 @@ export function landingCopy(c: Category, city?: CityPage, services: ServiceItem[
   return {
     h1: city ? `${c.label} services in ${city.name}` : `${c.label} services in the Philippines`,
     intro: city
-      ? `Need ${name} in ${city.name}? Browse services for ${list(acts.slice(0, 3).map((a) => a.toLowerCase()))} and more from verified providers who work there, plus online services that cover the whole country. ${city.name} is ${city.blurb}. Book the service and chat with the provider in the Phriend app, and pay the provider directly, as you agree with them.`
-      : `Book ${name} services from verified providers: ${list(acts.slice(0, 4).map((a) => a.toLowerCase()))}. Each service shows its own price, photos of the work, whether it is done online, in person or both, and the area it covers. Book it and chat with the provider in the Phriend app, and pay the provider directly, as you agree with them.`,
-    what: `${c.label} on Phriend covers ${list(acts.map((a) => a.toLowerCase()))}. Every service is listed on its own, with a price per job, per hour or per session, up to six photos of the work, a visit type (online, in person or hybrid), its own schedule and its own area: listed areas, a whole city, or nationwide for online work. The provider's profile shows their name, a title, the languages they speak, the Verified badge and the documents our team checked${cities.length ? `. Right now there are ${name} services based in ${list(cities)}` : ""}.`,
+      ? `Need ${name} in ${city.name}? Browse services for ${list(acts.slice(0, 3).map(inSentence))} and more from verified providers who work there, plus online services that cover the whole country. ${city.name} is ${city.blurb}. Book the service and chat with the provider in the Phriend app, and pay the provider directly, as you agree with them.`
+      : `Book ${name} services from verified providers: ${list(acts.slice(0, 4).map(inSentence))}. Each service shows its own price, photos of the work, whether it is done online, in person or both, and the area it covers. Book it and chat with the provider in the Phriend app, and pay the provider directly, as you agree with them.`,
+    what: `${c.label} on Phriend covers ${list(acts.map(inSentence))}. Every service is listed on its own, with a price per job, per hour or per session, up to six photos of the work, a visit type (online, in person or hybrid), its own schedule and its own area: listed areas, a whole city, or nationwide for online work. The provider's profile shows their name, a title, the languages they speak, the Verified badge and the documents our team checked${cities.length ? `. Right now there are ${name} services based in ${list(cities)}` : ""}.`,
     how: [
       `Browse the services below or open the full list in the app. Compare prices, photos, visit type and area, and read the reviews.`,
       `Message the provider in the app. Their FAQ answers reply instantly to the usual questions, like how to pay, the minimum booking and where they work.`,

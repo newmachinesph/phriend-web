@@ -1,5 +1,6 @@
 import type { NextConfig } from "next";
-import { PHASE_PRODUCTION_BUILD } from "next/constants";
+import { PHASE_DEVELOPMENT_SERVER, PHASE_PRODUCTION_BUILD } from "next/constants";
+import { securityHeaders } from "./lib/security-headers";
 
 /** Slugs of articles from the earlier product that search engines may still list: they go to the blog index. */
 const DROPPED_ARTICLES = [
@@ -36,10 +37,18 @@ const nextConfig = (phase: string): NextConfig => {
   if (phase === PHASE_PRODUCTION_BUILD && !process.env.API_URL?.trim()) {
     throw new Error("API_URL is not set. Build with the api2 origin, e.g. API_URL=http://localhost:8040 for a local build.");
   }
-  return config;
+  const security = securityHeaders({ dev: phase === PHASE_DEVELOPMENT_SERVER });
+  return {
+    ...config,
+    async headers() {
+      // CSP, HSTS, framing and the rest on every response (lib/security-headers.ts); long-lived icons on top
+      return [{ source: "/:path*", headers: security }, ...(await config.headers!())];
+    },
+  };
 };
 
 const config: NextConfig = {
+  poweredByHeader: false,
   // Phriend photos on the landing pages come from the app's CDN.
   images: {
     remotePatterns: [{ protocol: "https", hostname: "cdn.phriend.app" }],

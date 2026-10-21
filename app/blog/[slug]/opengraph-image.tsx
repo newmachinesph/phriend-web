@@ -19,14 +19,24 @@ const read = (p: string) => readFileSync(join(process.cwd(), "public", p));
 const jakarta = read("fonts/PlusJakartaSans-Bold.ttf");
 const inter = read("fonts/Inter-SemiBold.ttf");
 const logo = `data:image/png;base64,${read("brand/logo-mark.png").toString("base64")}`;
+/** "/groups/cleaning.jpg" -> a data URI of public/groups/cleaning.jpg; null for any other cover or a missing file. */
+const groupPhotoData = (cover: string) => {
+  if (!/^\/groups\/[a-z0-9-]+\.jpg$/.test(cover)) return null;
+  try {
+    return `data:image/jpeg;base64,${read(cover.slice(1)).toString("base64")}`;
+  } catch {
+    return null;
+  }
+};
 
 /** Share card for an article: the hero photo with a navy wash, the headline, the logo tile and a read prompt, at 1.91:1. */
 export default async function Image({ params }: { params: Promise<{ slug: string }> }) {
   const slug = (await params).slug;
   const post = findPost(slug);
   const db = post ? null : await findDbPost(slug);
-  // Heroes and Ops covers live on the CDN; an Ops cover may still be stored as a path (e.g. /blog/is-phriend-safe.jpg), which cdn() resolves.
-  const photo = post ? post.hero.src : db?.cover ? cdn(db.cover) : null;
+  // Heroes and Ops covers live on the CDN; an Ops cover may still be stored as a path (e.g. /blog/x.jpg), which cdn() resolves.
+  // A service-group photo (/groups/<group>.jpg) is in public/: read from disk, since the card cannot load a relative URL.
+  const photo = post ? post.hero.src : db?.cover ? (groupPhotoData(db.cover) ?? cdn(db.cover)) : null;
   const headline = post?.ogTitle ?? post?.title ?? db?.title ?? "Guides for people who could be earning on Phriend";
   // The kicker and read time mirror the blog index card: static posts carry a category, Ops posts a niche and tags.
   const category = db?.niche ? await findCategory(db.niche) : undefined;

@@ -122,7 +122,8 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
 /** An article written in Ops: markdown body, the niche's call to action when one is set. */
 async function DbArticle({ post }: { post: NonNullable<Awaited<ReturnType<typeof findDbPost>>> }) {
   const url = `${SITE_URL}/blog/${post.slug}`;
-  const cover = cdn(post.cover || "/brand/logo-mark.png");
+  const src = cdn(post.cover || "/brand/logo-mark.png");
+  const cover = src.startsWith("/") ? `${SITE_URL}${src}` : src; // a /groups/ cover is the site's own file: absolute for JSON-LD
   const jsonLd = {
     "@context": "https://schema.org",
     "@graph": [

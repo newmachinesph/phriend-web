@@ -8,8 +8,12 @@ export const API_URL = (process.env.API_URL ?? "https://api.phriend.app").replac
 export const apiHeaders = (): HeadersInit => (process.env.API_SERVER_KEY ? { "x-phriend-app": process.env.API_SERVER_KEY } : {});
 /** Static site images and files live on the CDN under site/ (upload with scripts/upload-to-cdn.mjs). Dynamic OG images and canvas inputs stay in public/. */
 const CDN_URL = "https://cdn.phriend.app/site";
-/** "/blog/x.jpg" -> the CDN copy; full URLs pass through (Ops covers may be either). */
-export const cdn = (path: string) => (/^https?:\/\//.test(path) ? path : `${CDN_URL}${path.startsWith("/") ? "" : "/"}${path}`);
+/**
+ * "/blog/x.jpg" -> the CDN copy; full URLs pass through (Ops covers may be either). The service-group photos stay in
+ * public/groups (phriend.app/groups/*, which the apps load too), so an Ops cover there is served by the site itself.
+ */
+export const cdn = (path: string) =>
+  /^https?:\/\//.test(path) || path.startsWith("/groups/") ? path : `${CDN_URL}${path.startsWith("/") ? "" : "/"}${path}`;
 /** The Android app on Google Play: an extra. The web app (APP_URL) is the default on every phone. */
 const ANDROID_PACKAGE = "app.phriend.mobile";
 export const PLAY_URL = `https://play.google.com/store/apps/details?id=${ANDROID_PACKAGE}`;

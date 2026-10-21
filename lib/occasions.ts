@@ -85,7 +85,7 @@ export const OCCASIONS: Occasion[] = [
     ],
     faq: [
       { q: "Can I book a host for just two hours?", a: "Often, yes. Each service shows whether it is priced per hour or per job, and any minimum booking; pick the time when you book." },
-      { q: "Are the providers verified?", a: "Every provider is verified by our team with a government ID and a selfie, and their services show reviews from past clients." },
+      { q: "Are the providers verified?", a: "Every provider is verified with a government ID and a selfie, and their services show reviews from past clients." },
     ],
   },
   {
@@ -99,7 +99,7 @@ export const OCCASIONS: Occasion[] = [
     tips: [
       "Ask the host which games they run and what they bring; agree on the prizes and who buys them.",
       "Keep the program short: 60 to 90 minutes of games is plenty for young kids.",
-      "A parent or guardian should stay with the children for the whole party.",
+      "Tell the host how many children are coming and their ages, so the games fit the group.",
     ],
     faq: [
       { q: "Do kids' party hosts bring their own games?", a: "Most do. Ask in the chat what is included and what you need to prepare." },
@@ -193,7 +193,6 @@ export const OCCASIONS: Occasion[] = [
     ],
     faq: [
       { q: "Can I book a driver for relatives coming home?", a: "Yes. Book a Driver for airport pickups and trips, or a Tour Guide for a day out." },
-      { q: "Can visitors from abroad book too?", a: "Yes. International visitors can book with their passport; providers who take international clients say so on their profile." },
     ],
   },
 ];

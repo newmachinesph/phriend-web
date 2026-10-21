@@ -3,7 +3,6 @@
 import { useEffect, useRef, useState, type FormEvent, type PointerEvent } from "react";
 import { Download, Film, Loader2, Upload } from "lucide-react";
 import type { CreatorCard } from "@/lib/creator-card";
-import { peso } from "@/lib/price";
 
 const W = 1080;
 const H = 1920;
@@ -125,22 +124,22 @@ export function OverlayTool() {
     ctx.textBaseline = "alphabetic";
     let ty = py + ph + 42;
     ctx.font = sans(800)(20);
-    const rt = c.reviewCount ? c.rating.toFixed(1) : "New";
+    const rt = c.reviewCount > 0 && c.rating !== null ? c.rating.toFixed(1) : "New";
     const rw = ctx.measureText(rt).width;
     ctx.fillStyle = C.body; ctx.fillText(rt, w - 18 - rw, ty - 2);
     icon(ctx, PATHS.star, w - 18 - rw - 26, ty - 21, 22, { fill: C.mango, stroke: C.mango });
-    const nameLine = c.service ?? c.name;
+    const nameLine = c.service;
     ctx.fillStyle = C.navy; ctx.fillText(fitText(ctx, nameLine, w - 90 - rw, display(600), 32), 18, ty);
 
     ty += 34;
-    const byLine = c.service ? `${c.name} · ${c.city}` : c.city;
+    const byLine = c.city ? `${c.name} · ${c.city}` : c.name;
     icon(ctx, PATHS.pin, 16, ty - 18, 20, { stroke: C.orange, width: 2.4 });
     ctx.beginPath(); ctx.arc(26, ty - 18 + (10 * 20) / 24, 2.4, 0, Math.PI * 2); ctx.fillStyle = C.orange; ctx.fill();
     ctx.fillStyle = C.body; ctx.fillText(fitText(ctx, byLine, w - 60, sans(700), 20), 42, ty);
 
     ty += 40;
-    const price = peso(c.rate);
-    const unit = c.unit === "session" ? " per job" : "/hr.";
+    const price = c.price;
+    const unit = c.unit;
     ctx.font = sans(800)(17); const uw = ctx.measureText(unit).width;
     // up to ₱1,000,000: the amount shrinks to fit beside its unit
     ctx.fillStyle = C.navy; const priceText = fitText(ctx, price, w - 39 - uw, sans(900), 30); ctx.fillText(priceText, 18, ty);
@@ -151,7 +150,7 @@ export function OverlayTool() {
     ctx.fillStyle = C.orange; ctx.beginPath(); ctx.roundRect(14, by, w - 28, 54, 27); ctx.fill();
     ctx.fillStyle = C.white; ctx.beginPath(); ctx.arc(41, by + 27, 20, 0, Math.PI * 2); ctx.fill();
     if (m.logo) { const lh = 28, lw = (lh * 894) / 975; ctx.drawImage(m.logo, 41 - lw / 2, by + 27 - lh / 2, lw, lh); }
-    const url = c.profileUrl.replace(/^https:\/\//, "");
+    const url = c.shareUrl.replace(/^https:\/\//, "");
     ctx.fillStyle = C.white; ctx.textBaseline = "middle"; ctx.fillText(fitText(ctx, url, w - 100, sans(900), 21), 72, by + 28);
 
     if (t) {
@@ -274,7 +273,7 @@ export function OverlayTool() {
     }
   }
 
-  const fileBase = () => `phriend-overlay-${card?.username ?? card?.id ?? "profile"}`;
+  const fileBase = () => `phriend-overlay-${card?.key ?? "service"}`;
   function save(blob: Blob | null, name: string) {
     if (!blob) return;
     const a = Object.assign(document.createElement("a"), { href: URL.createObjectURL(blob), download: name });
@@ -352,7 +351,7 @@ export function OverlayTool() {
             type="text"
             inputMode="url"
             autoComplete="url"
-            placeholder="web.phriend.app/@yourname"
+            placeholder="web.phriend.app/p/yourhandle"
             value={link}
             onChange={(e) => setLink(e.target.value)}
             className={input}
@@ -367,7 +366,7 @@ export function OverlayTool() {
           {error}
         </p>
         {card && !card.verified && (
-          <p className="text-sm font-bold text-brand-text">Your profile isn&apos;t verified yet. Verify your ID in the app before you post, so the card shows the Verified badge.</p>
+          <p className="text-sm font-bold text-brand-text">Your profile isn&apos;t verified yet. Verify your ID in the Provider app before you post, so the card shows the Verified badge.</p>
         )}
       </form>
 

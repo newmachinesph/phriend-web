@@ -2,16 +2,12 @@ import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { ImageResponse } from "next/og";
 import { asJpeg } from "@/lib/og-jpeg";
-import { cdn } from "@/lib/site";
-import { findCategory } from "@/lib/landing";
-import { findDbPost, readingMinutes } from "@/lib/blog-db";
 import { POSTS, findPost } from "../_posts";
 
 export const alt = "Phriend blog";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/jpeg"; // a photo card: JPEG is ~10x smaller than the PNG (lib/og-jpeg.ts)
-// A share card was rendered again on every request (1.2 MB, about 0.6 s). Static posts are built once; an Ops post
-// is cached for an hour.
+// Built once per coded post. Ops posts (GET /v1/content/blog, W3) will use their cover through safeImageUrl here.
 export const revalidate = 3600;
 export const generateStaticParams = () => POSTS.map((p) => ({ slug: p.slug }));
 
@@ -19,29 +15,16 @@ const read = (p: string) => readFileSync(join(process.cwd(), "public", p));
 const jakarta = read("fonts/PlusJakartaSans-Bold.ttf");
 const inter = read("fonts/Inter-SemiBold.ttf");
 const logo = `data:image/png;base64,${read("brand/logo-mark.png").toString("base64")}`;
-/** "/groups/cleaning.jpg" -> a data URI of public/groups/cleaning.jpg; null for any other cover or a missing file. */
-const groupPhotoData = (cover: string) => {
-  if (!/^\/groups\/[a-z0-9-]+\.jpg$/.test(cover)) return null;
-  try {
-    return `data:image/jpeg;base64,${read(cover.slice(1)).toString("base64")}`;
-  } catch {
-    return null;
-  }
-};
 
 /** Share card for an article: the hero photo with a navy wash, the headline, the logo tile and a read prompt, at 1.91:1. */
 export default async function Image({ params }: { params: Promise<{ slug: string }> }) {
   const slug = (await params).slug;
   const post = findPost(slug);
-  const db = post ? null : await findDbPost(slug);
-  // Heroes and Ops covers live on the CDN; an Ops cover may still be stored as a path (e.g. /blog/x.jpg), which cdn() resolves.
-  // A service-group photo (/groups/<group>.jpg) is in public/: read from disk, since the card cannot load a relative URL.
-  const photo = post ? post.hero.src : db?.cover ? (groupPhotoData(db.cover) ?? cdn(db.cover)) : null;
-  const headline = post?.ogTitle ?? post?.title ?? db?.title ?? "Guides for people who could be earning on Phriend";
-  // The kicker and read time mirror the blog index card: static posts carry a category, Ops posts a niche and tags.
-  const category = db?.niche ? await findCategory(db.niche) : undefined;
-  const kicker = post ? `${post.category.label} · Side income` : db ? `${category?.label ?? "Phriend"} · ${db.tags[0] ?? "Guide"}` : "For providers · Side income";
-  const minutes = post?.readingMinutes ?? (db ? readingMinutes(db.bodyMd) : null);
+  // a title card (no photo) for anything that is not a coded post
+  const photo = post ? post.hero.src : null;
+  const headline = post?.ogTitle ?? post?.title ?? "Guides for people who could be earning on Phriend";
+  const kicker = post ? `${post.category.label} · Side income` : "For providers · Side income";
+  const minutes = post?.readingMinutes ?? null;
   return asJpeg(new ImageResponse(
     (
       <div style={{ width: "100%", height: "100%", display: "flex", position: "relative", background: "#0d2251", color: "#fff", fontFamily: "Plus Jakarta Sans" }}>

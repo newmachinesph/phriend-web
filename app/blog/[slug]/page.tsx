@@ -4,11 +4,10 @@ import { notFound } from "next/navigation";
 import { ArticleCta, BackToBlog } from "@/components/blog";
 import { ShareBar } from "@/components/share-bar";
 import { cdn, pageMeta, SITE_NAME, SITE_URL } from "@/lib/site";
-import { findCategory } from "@/lib/landing";
-import { findDbPost, readingMinutes, renderMarkdown } from "@/lib/blog-db";
 import { findPost, POSTS } from "../_posts";
 
-export const revalidate = 60; // articles published in Ops appear within a minute (a cached 404 for a draft too)
+// Ops articles (GET /v1/content/blog/{slug}, W3) will render here too, so unknown slugs stay dynamic (a 404 for now).
+export const revalidate = 60;
 export const dynamicParams = true;
 
 export const generateStaticParams = () => POSTS.map((p) => ({ slug: p.slug }));
@@ -16,17 +15,7 @@ export const generateStaticParams = () => POSTS.map((p) => ({ slug: p.slug }));
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const slug = (await params).slug;
   const post = findPost(slug);
-  if (!post) {
-    const db = await findDbPost(slug);
-    if (!db) return { title: "Article not found", robots: { index: false } };
-    const base = pageMeta({ title: db.seoTitle || db.title.slice(0, 60), description: db.description.slice(0, 150), path: `/blog/${db.slug}` });
-    const og = { url: `/blog/${db.slug}/opengraph-image`, width: 1200, height: 630, alt: db.title };
-    return {
-      ...base,
-      openGraph: { ...base.openGraph, type: "article", publishedTime: db.publishedAt, modifiedTime: db.updatedAt, authors: [SITE_NAME], tags: db.tags, images: [og] },
-      twitter: { card: "summary_large_image", title: db.seoTitle || db.title, description: db.description, images: [og.url] },
-    };
-  }
+  if (!post) return { title: "Article not found", robots: { index: false } };
   const base = pageMeta({ title: post.seoTitle, description: post.seoDescription, path: `/blog/${post.slug}` });
   const og = { url: `/blog/${post.slug}/opengraph-image`, width: 1200, height: 630, alt: post.ogTitle ?? post.seoTitle };
   return {
@@ -41,11 +30,7 @@ const fmt = (iso: string) => new Date(`${iso}T00:00:00+08:00`).toLocaleDateStrin
 export default async function ArticlePage({ params }: { params: Promise<{ slug: string }> }) {
   const slug = (await params).slug;
   const post = findPost(slug);
-  if (!post) {
-    const db = await findDbPost(slug);
-    if (!db) notFound();
-    return DbArticle({ post: db });
-  }
+  if (!post) notFound();
   const url = `${SITE_URL}/blog/${post.slug}`;
   const jsonLd = {
     "@context": "https://schema.org",
@@ -119,63 +104,3 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
   );
 }
 
-/** An article written in Ops: markdown body, the niche's call to action when one is set. */
-async function DbArticle({ post }: { post: NonNullable<Awaited<ReturnType<typeof findDbPost>>> }) {
-  const url = `${SITE_URL}/blog/${post.slug}`;
-  const src = cdn(post.cover || "/brand/logo-mark.png");
-  const cover = src.startsWith("/") ? `${SITE_URL}${src}` : src; // a /groups/ cover is the site's own file: absolute for JSON-LD
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "Article",
-        headline: post.title,
-        description: post.description,
-        image: cover,
-        datePublished: post.publishedAt,
-        dateModified: post.updatedAt,
-        author: { "@type": "Organization", name: SITE_NAME, url: SITE_URL },
-        publisher: { "@type": "Organization", name: SITE_NAME, logo: { "@type": "ImageObject", url: cdn("/brand/logo-mark.png") } },
-        mainEntityOfPage: url,
-        keywords: post.tags.join(", "),
-      },
-      {
-        "@type": "BreadcrumbList",
-        itemListElement: [
-          { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
-          { "@type": "ListItem", position: 2, name: "Blog", item: `${SITE_URL}/blog` },
-          { "@type": "ListItem", position: 3, name: post.title, item: url },
-        ],
-      },
-    ],
-  };
-  const category = post.niche ? await findCategory(post.niche) : undefined;
-  return (
-    <main id="main" className="mx-auto w-full max-w-3xl px-5 pb-12 pt-8 sm:px-8 sm:py-16">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }} />
-      <BackToBlog />
-      <header className="mt-6">
-        <p className="text-sm font-extrabold uppercase tracking-wider text-brand-text">{post.tags[0] ?? "Guide"}</p>
-        <h1 className="mt-2 font-display text-h1 font-bold text-ink">{post.title}</h1>
-        {post.description && <p className="mt-4 text-lg leading-relaxed text-body">{post.description}</p>}
-        <p className="mt-4 text-sm font-semibold text-muted">
-          By Phriend · {fmt(post.publishedAt.slice(0, 10))} · {readingMinutes(post.bodyMd)} min read
-        </p>
-        <div className="mt-5">
-          <ShareBar url={url} title={post.title} />
-        </div>
-      </header>
-      {post.cover && (
-        <div className="relative mt-8 aspect-[16/9] overflow-hidden rounded-3xl shadow-card">
-          <Image src={cdn(post.cover)} alt={post.title} width={1600} height={900} sizes="(min-width: 768px) 768px, 100vw" className="h-full w-full object-cover" priority />
-        </div>
-      )}
-      {/* Markdown written by Ops admins, sanitized in renderMarkdown before it reaches the page */}
-      <article className="article mt-10" dangerouslySetInnerHTML={{ __html: renderMarkdown(post.bodyMd) }} />
-      <div className="mt-10 border-t border-line pt-6">
-        <ShareBar url={url} title={post.title} />
-      </div>
-      {category && <ArticleCta category={{ path: `/${post.niche}`, label: category.label }} headline={`Start taking ${category.label} bookings this week.`} />}
-    </main>
-  );
-}

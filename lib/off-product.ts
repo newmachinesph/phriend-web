@@ -1,7 +1,7 @@
 /**
  * Articles written for the earlier product (people as the listing, companions, meetups, a third-party ID check) can stay
  * published in Ops until they are rewritten; the site leaves them out (list, page, sitemap) so it describes only the
- * services marketplace. Kept free of imports so `node --test lib/blog-filter.test.mjs` can load it.
+ * services marketplace. Kept free of imports so `node --test lib/off-product.test.mjs` can load it.
  */
 const PATTERNS = [
   // words that only the earlier product used
@@ -11,9 +11,9 @@ const PATTERNS = [
   // company as in being with someone ("arrange company for your parent", "Company for the trip"), not a business
   // ("a cleaning company for your office"): only after a verb of arranging it or at the start of a sentence
   String.raw`(?:^|[.!?:*]\s*|\b(?:arrange[sd]?|arranging|book(?:s|ed|ing)?|need(?:s|ed)?|want(?:s|ed)?|find|finding|hire[sd]?|hiring|get|getting|send|sending|worth)\s+)company for\b`,
-  // people as the listing: "Phriends", "message the Phriend", "the Phriend's profile"; not "in the Phriend app"
+  // people as the listing: "Phriends", "message the Phriend", "the Phriend's profile"; not "in the Phriend app", "the Phriend Provider app", "the Phriend chat"
   String.raw`\bPhriends\b`,
-  String.raw`\bthe Phriend\b(?![ -](?:apps?|web ?apps?|website|site|team|platform|account|blog|support|help|pwa|store|feed)\b)`,
+  String.raw`\bthe Phriend\b(?![ -](?:apps?|web ?apps?|website|site|team|platform|account|blog|support|help|pwa|store|feed|provider|chat|api|service card|and Phriend)\b)`,
 ];
 export const OFF_PRODUCT = new RegExp(PATTERNS.join("|"), "i");
 

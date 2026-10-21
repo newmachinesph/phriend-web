@@ -1,13 +1,12 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { breadcrumbJsonLd, cdn, pageMeta } from "@/lib/site";
-import { getCategories } from "@/lib/landing";
-import { listDbPosts, readingMinutes } from "@/lib/blog-db";
+import { breadcrumbJsonLd, pageMeta } from "@/lib/site";
 import { POSTS } from "./_posts";
 import { Container } from "@/components/ui";
 
-export const revalidate = 60; // articles published in Ops appear within a minute (a cached 404 for a draft too)
+// Ops articles (GET /v1/content/blog, SPEC 13e §2.2) arrive with W3; until then the blog lists the coded articles.
+export const revalidate = 60;
 
 export const metadata: Metadata = pageMeta({
   title: "Blog: guides for Filipino service providers",
@@ -17,14 +16,8 @@ export const metadata: Metadata = pageMeta({
 
 const fmt = (iso: string) => new Date(`${iso}T00:00:00+08:00`).toLocaleDateString("en-PH", { timeZone: "Asia/Manila", year: "numeric", month: "long", day: "numeric" });
 
-type Card = { slug: string; title: string; description: string; date: string; readingMinutes: number; tag: string; label: string; hero: { src: string; alt: string } };
-const fromStatic = (p: (typeof POSTS)[number]): Card => ({ slug: p.slug, title: p.title, description: p.description, date: p.date, readingMinutes: p.readingMinutes, tag: p.tags[0], label: p.category.label, hero: p.hero });
-
-export default async function BlogIndex() {
-  // the niche is a category slug ("elderly_care"); the card shows its label, as the coded posts do
-  const labels = new Map((await getCategories()).map((c) => [c.slug, c.label]));
-  const db = (await listDbPosts()).map<Card>((p) => ({ slug: p.slug, title: p.title, description: p.description, date: p.publishedAt.slice(0, 10), readingMinutes: readingMinutes(p.bodyMd), tag: p.tags[0] ?? "Guide", label: labels.get(p.niche) ?? "Phriend", hero: { src: cdn(p.cover || "/blog/photographers-hero.jpg"), alt: p.title } }));
-  const [latest, ...rest] = [...POSTS.map(fromStatic), ...db].sort((a, b) => b.date.localeCompare(a.date));
+export default function BlogIndex() {
+  const [latest, ...rest] = [...POSTS].sort((a, b) => b.date.localeCompare(a.date));
   return (
     <Container as="main" id="main" className="pb-14 pt-8 sm:py-20">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: breadcrumbJsonLd("Blog", "/blog") }} />
@@ -32,13 +25,17 @@ export default async function BlogIndex() {
       <h1 className="mt-2 max-w-2xl font-display text-h1 font-bold text-ink">Guides for people who could be earning on Phriend.</h1>
       <p className="mt-4 max-w-2xl text-lg leading-relaxed">What clients book, what it pays, how a booking works, and how to get booked more often.</p>
 
-      {latest && (
+      {!latest ? (
+        <p className="mt-12 max-w-2xl rounded-card border border-line bg-surface p-6 leading-relaxed">No articles yet. New guides are on the way.</p>
+      ) : (
         <Link href={`/blog/${latest.slug}`} className="group mt-12 grid gap-6 rounded-card border border-line bg-white p-4 transition-colors hover:border-brand md:grid-cols-[1.3fr_1fr] md:p-6">
-          <div className="relative aspect-[16/9] overflow-hidden rounded-card">
+          <div className="relative aspect-[16/9] overflow-hidden rounded-card bg-navy-soft">
             <Image src={latest.hero.src} alt={latest.hero.alt} width={1600} height={900} sizes="(min-width: 768px) 640px, 100vw" className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]" priority />
           </div>
-          <div className="flex flex-col justify-center">
-            <p className="text-sm font-extrabold uppercase tracking-wider text-brand-text">{latest.tag} · {latest.label}</p>
+          <div className="flex min-w-0 flex-col justify-center">
+            <p className="text-sm font-extrabold uppercase tracking-wider text-brand-text">
+              {latest.tags[0]} · {latest.category.label}
+            </p>
             <h2 className="mt-2 font-display text-h2 font-bold text-ink">{latest.title}</h2>
             <p className="mt-3 leading-relaxed">{latest.description}</p>
             <p className="mt-4 text-sm font-semibold text-muted">
@@ -52,13 +49,15 @@ export default async function BlogIndex() {
       {rest.length > 0 && (
         <ul className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {rest.map((p) => (
-            <li key={p.slug}>
+            <li key={p.slug} className="min-w-0">
               <Link href={`/blog/${p.slug}`} className="group flex h-full flex-col rounded-card border border-line bg-white p-4 transition-colors hover:border-brand">
-                <div className="relative aspect-[16/9] overflow-hidden rounded-card">
+                <div className="relative aspect-[16/9] overflow-hidden rounded-card bg-navy-soft">
                   <Image src={p.hero.src} alt={p.hero.alt} width={1600} height={900} sizes="(min-width: 1024px) 360px, (min-width: 640px) 50vw, 100vw" className="h-full w-full object-cover" />
                 </div>
-                <p className="mt-4 truncate text-xs font-extrabold uppercase tracking-wider text-brand-text">{p.label}</p>
-                <h2 title={p.title} className="mt-1 line-clamp-3 font-display text-h3 font-bold text-ink">{p.title}</h2>
+                <p className="mt-4 truncate text-xs font-extrabold uppercase tracking-wider text-brand-text">{p.category.label}</p>
+                <h2 title={p.title} className="mt-1 line-clamp-3 font-display text-h3 font-bold text-ink">
+                  {p.title}
+                </h2>
                 <p className="mt-auto pt-3 text-sm font-semibold text-muted">
                   {fmt(p.date)} · {p.readingMinutes} min read
                 </p>

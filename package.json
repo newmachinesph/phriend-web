@@ -4,9 +4,11 @@
   "private": true,
   "scripts": {
     "dev": "next dev -p 3100",
+    "dev:v2": "node scripts/dev-v2.mjs",
     "build": "next build --webpack",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "test": "node --test lib/*.test.mjs"
   },
   "dependencies": {
     "lucide-react": "^1.41.0",
@@ -14,15 +16,14 @@
     "next": "^16.4.2",
     "react": "19.2.8",
     "react-dom": "19.2.8",
-    "sanitize-html": "^2.17.7",
-    "sharp": "^0.35.5"
+    "sharp": "^0.35.5",
+    "zod": "^4.6.7"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "@types/sanitize-html": "^2.16.1",
     "eslint": "^9",
     "eslint-config-next": "^16.4.2",
     "tailwindcss": "^4",

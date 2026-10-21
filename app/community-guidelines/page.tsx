@@ -6,7 +6,7 @@ import { LAST_UPDATED, pageMeta } from "@/lib/site";
 export const metadata: Metadata = pageMeta({
   title: "Community guidelines: what Phriend allows",
   description:
-    "What's allowed on Phriend and what isn't: legitimate local services only. No sexual or romantic services, no dating or escort services, no scams.",
+    "What's allowed on Phriend and what isn't: legitimate local services only. No sexual services, no paid romance or escort services, no scams.",
   path: "/community-guidelines",
 });
 
@@ -17,7 +17,7 @@ export default function CommunityGuidelinesPage() {
       title="Community guidelines"
       path="/community-guidelines"
       updated={LAST_UPDATED}
-      summary="Phriend is for legitimate local services between adults, done online or in person: aircon cleaning and repairs, appliance check-ups, bookkeeping and tax filing, tutoring, photo and video, driving, errands and the like. Any sexual or romantic service, compensated dating, escort services, drugs, scams and impersonation are banned and get an account removed immediately, with a report to the authorities where the law requires it."
+      summary="Phriend is for legitimate local services between adults, done online or in person: aircon cleaning and repairs, appliance check-ups, bookkeeping and tax filing, tutoring, photo and video, driving, errands and the like. Any sexual service, paid romance or intimacy, escort services, drugs, scams and impersonation are banned and get an account removed immediately, with a report to the authorities where the law requires it."
       intro="Phriend is for legitimate local services: work you book from a verified provider, done online or in person, between adults. This page says exactly what that means."
     >
       <h2>1. What Phriend is for</h2>
@@ -54,8 +54,8 @@ export default function CommunityGuidelinesPage() {
           &quot;special&quot;, cuddling, massage, or any physical contact beyond a normal greeting.
         </li>
         <li>
-          <strong>Compensated dating.</strong> Phriend is not a dating service. Any arrangement where romance,
-          affection or intimacy is exchanged for money, gifts or favours is banned.
+          <strong>Paid romance or intimacy.</strong> Any arrangement where romance, affection or intimacy is
+          exchanged for money, gifts or favours is banned.
         </li>
         <li>
           <strong>Escort services</strong> of any kind, including &quot;overnight&quot; bookings, trips with shared
@@ -128,7 +128,7 @@ export default function CommunityGuidelinesPage() {
       <h2>6. Zero tolerance for objectionable content and abusive behaviour</h2>
       <p>
         <strong>Objectionable content and abusive behaviour are not tolerated on Phriend.</strong> Profiles, services,
-        photos, job posts and chat messages pass an automated filter, and a person approves every listing before it goes
+        photos, job posts and chat messages pass automated checks, and anything uncertain goes to a person before it goes
         live. Any member can report a profile, job post, review or message from the report button in the app, or by email to{" "}
         <a href="mailto:support@phriend.app">support@phriend.app</a>, and can block another member instantly from the
         chat. <strong>We review every report within 24 hours</strong>, remove the offending content, and remove the

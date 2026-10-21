@@ -1,8 +1,7 @@
-import Image from "next/image";
 import Link from "next/link";
 import { Logo, navItems } from "@/components/site-header";
-import { AppLink } from "@/components/app-link";
-import { PLAY_URL, PROVIDER_URL } from "@/lib/site";
+import { StoreBadges } from "@/components/store-badges";
+import { APP_URL, PROVIDER_STORE, PROVIDER_URL } from "@/lib/site";
 import { Container } from "@/components/ui";
 
 const LEGAL = [
@@ -24,37 +23,60 @@ const link = "rounded-md text-base font-semibold text-body transition-colors hov
 
 export async function SiteFooter() {
   const nav = await navItems();
+  const providerStores = [PROVIDER_STORE.ios && { href: PROVIDER_STORE.ios, label: "Phriend Provider on the App Store" }, PROVIDER_STORE.android && { href: PROVIDER_STORE.android, label: "Phriend Provider on Google Play" }].filter(
+    (x): x is { href: string; label: string } => Boolean(x),
+  );
   return (
     <footer className="border-t border-line bg-surface">
       <Container className="py-14">
-        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-[1.6fr_1fr_1fr_1fr]">
+        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1fr_1fr]">
           <div className="max-w-xs">
             <Link href="/" aria-label="Phriend home" className="inline-block rounded-md">
               <Logo height={36} />
             </Link>
             <p className="mt-3 text-base leading-relaxed">
-              Local services across the Philippines, from aircon cleaning and tutoring to bookkeeping, photo and video. Verified
-              providers, booked and chatted in the app.
+              Local services across the Philippines, from aircon cleaning and tutoring to bookkeeping, photo and video. Verified providers, booked and chatted in the
+              app.
             </p>
-            {/* Google's badge, used as supplied: keep the proportions, no restyling (Play brand guidelines). -ml-2 cancels the PNG's own 8px transparent margin so the badge lines up with the text. */}
-            <a href={PLAY_URL} className="-ml-2 mt-5 inline-block rounded-md" aria-label="Get it on Google Play">
-              <Image src="/badges/google-play.png" alt="Get it on Google Play" width={646} height={250} className="h-12 w-auto" />
-            </a>
+            <StoreBadges className="mt-5" />
           </div>
 
           <nav aria-labelledby="footer-product" className="flex flex-col gap-2.5">
             <h2 id="footer-product" className="font-extrabold text-ink">
               Product
             </h2>
+            <a href={APP_URL} className={link}>
+              Book a service
+            </a>
             {nav.map((n) => (
               <Link key={n.href} href={n.href} className={link}>
                 {n.label}
               </Link>
             ))}
-            <AppLink className={link} />
+            <Link href="/download" className={link}>
+              Get the app
+            </Link>
+          </nav>
+
+          <nav aria-labelledby="footer-providers" className="flex flex-col gap-2.5">
+            <h2 id="footer-providers" className="font-extrabold text-ink">
+              For providers
+            </h2>
             <a href={PROVIDER_URL} className={link}>
-              List your services
+              provider.phriend.app
             </a>
+            {providerStores.length ? (
+              providerStores.map((s) => (
+                <a key={s.href} href={s.href} className={link}>
+                  {s.label}
+                </a>
+              ))
+            ) : (
+              <p className="text-sm leading-relaxed text-muted">The Phriend Provider app is coming to the app stores.</p>
+            )}
+            <Link href="/creators" className={link}>
+              Creators
+            </Link>
           </nav>
 
           <nav aria-labelledby="footer-legal" className="flex flex-col gap-2.5">
@@ -79,9 +101,6 @@ export async function SiteFooter() {
             ))}
             <Link href="/press" className={link}>
               Press
-            </Link>
-            <Link href="/creators" className={link}>
-              Creators
             </Link>
           </nav>
         </div>

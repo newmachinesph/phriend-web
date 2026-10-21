@@ -5,11 +5,11 @@ import { APP_URL, CONTACT_EMAIL, LAST_UPDATED, PROVIDER_URL, pageMeta } from "@/
 
 export const metadata: Metadata = pageMeta({
   title: "Delete your Phriend account",
-  description:
-    "How to delete your Phriend account and the data that goes with it, in the app or by email, and what we keep afterwards.",
+  description: "How to delete your Phriend account and the data that goes with it, in the app or by email, and what we keep afterwards.",
   path: "/delete-account",
 });
 
+/** Linked from both store listings (SPEC 13e §2.2): where to delete in each app, what is erased and when, and the support email. */
 export default function DeleteAccountPage() {
   return (
     <Legal
@@ -18,94 +18,74 @@ export default function DeleteAccountPage() {
       path="/delete-account"
       updated={LAST_UPDATED}
       intro="You can delete your Phriend account and its data at any time, from the app or by emailing us. This page explains both routes and exactly what is removed."
-      summary={`Open Account → Delete account in the Phriend app, or email ${CONTACT_EMAIL} from your account address. Your name, photos, verification documents, saved addresses and favorites are deleted right away, and your profile, services and job posts are taken down.`}
+      summary={`Open Settings → Delete account in the Phriend app, at web.phriend.app, in the Phriend Provider app or at provider.phriend.app, or email ${CONTACT_EMAIL} from your account address. Your name, photos, saved details and verification documents are deleted, and your profile and services are taken down.`}
     >
       <h2>1. Delete it yourself, in the app</h2>
+      <p>
+        <strong>Clients</strong>, in the Phriend app or at <a href={APP_URL}>web.phriend.app</a>:
+      </p>
       <ol>
-        <li>Open the Phriend app (or <a href={APP_URL}>web.phriend.app</a>) and sign in.</li>
-        <li>Go to the <strong>Account</strong> tab and scroll to the bottom.</li>
-        <li>Tap <strong>Delete account</strong>, choose a reason, type <code>DELETE</code> to confirm.</li>
-        <li>Tap <strong>Delete forever</strong>. You are signed out on every device immediately.</li>
+        <li>Sign in and open the <strong>Account</strong> tab.</li>
+        <li>
+          Open <strong>Settings</strong> and tap <strong>Delete account</strong>.
+        </li>
+        <li>
+          Choose a reason if you like, type <code>DELETE</code> to confirm and tap <strong>Delete forever</strong>. You are signed out on every device.
+        </li>
       </ol>
       <p>
-        Providers follow the same steps in the Phriend Provider app or at <a href={PROVIDER_URL}>provider.phriend.app</a>:{" "}
-        <strong>Account</strong> &rarr; <strong>Delete account</strong>.
+        <strong>Providers</strong>, in the Phriend Provider app or at <a href={PROVIDER_URL}>provider.phriend.app</a>: open <strong>Settings</strong> &rarr;{" "}
+        <strong>Delete account</strong> and confirm the same way.
       </p>
 
       <h2>2. Or ask us to do it</h2>
       <p>
-        If you cannot sign in, email <a href={`mailto:${CONTACT_EMAIL}?subject=Delete my account`}>{CONTACT_EMAIL}</a>{" "}
-        from the address on your account with the subject &ldquo;Delete my account&rdquo;. We verify that the request
-        comes from the account holder and respond within 15 working days, as required by the Data Privacy Act of 2012.
+        If you cannot sign in, email <a href={`mailto:${CONTACT_EMAIL}?subject=Delete my account`}>{CONTACT_EMAIL}</a> from the address on your account with the
+        subject &ldquo;Delete my account&rdquo;. We verify that the request comes from the account holder and respond within 15 working days, as required by the
+        Data Privacy Act of 2012.
       </p>
 
-      <h2>3. Delete only some of your data</h2>
-      <p>You do not have to close your account to remove things. Signed in, you can delete:</p>
+      <h2>3. What happens when you delete</h2>
+      <p>Right away:</p>
       <ul>
-        <li>
-          Your provider profile or any one service, in the Phriend Provider app or at{" "}
-          <a href={PROVIDER_URL}>provider.phriend.app</a>
-        </li>
-        <li>Individual work photos, from the photo grid on each service</li>
-        <li>Saved addresses, from <strong>Account</strong> &rarr; <strong>Saved addresses</strong></li>
-        <li>Messages you sent, by long-pressing them in a chat</li>
-        <li>Job posts you posted, booking notes, favorites and blocked members</li>
-        <li>Your push notification token, by turning notifications off in <strong>Settings</strong></li>
+        <li>You are signed out on every device, and the account cannot be signed into again.</li>
+        <li>Your profile and services are taken down, so no one can see or book them.</li>
+        <li>Open bookings are cancelled, and the other side is told.</li>
+      </ul>
+      <p>Shortly after, by an automated job:</p>
+      <ul>
+        <li>Your name (replaced with &ldquo;Deleted account&rdquo;), photo, email address, phone number, password and Google or Apple sign-in are deleted.</li>
+        <li>Your service photos, review photos and the images you sent in chat are deleted from storage.</li>
+        <li>Your verification documents and their files are deleted from our private storage.</li>
+        <li>Your saved addresses, saved services, gigs, notes, payment details, FAQ answers and devices are deleted.</li>
       </ul>
 
-      <h2>4. What is deleted</h2>
-      <p>Deleted immediately and permanently:</p>
+      <h2>4. What stays, and why</h2>
       <ul>
         <li>
-          Your name (replaced with &ldquo;Deleted account&rdquo;), profile photo, password and Google or Apple sign-in
-          links; every session is signed out
-        </li>
-        <li>Your work photos and the photos you sent in chat</li>
-        <li>Your verification documents, files and records, from our private storage</li>
-        <li>
-          Your saved addresses, favorites, notifications, push notification devices, FAQ answers, auto-reply, saved
-          replies, payment account details and feed preferences
-        </li>
-      </ul>
-      <p>Taken down, so no one can see or book them:</p>
-      <ul>
-        <li>Your provider profile and services, and your job posts</li>
-        <li>Your place on any team; a team you lead is hidden and its members are told</li>
-      </ul>
-
-      <h2>5. What stays, and why</h2>
-      <ul>
-        <li>
-          <strong>Reviews and reports written about you</strong> stay. They belong to the members who wrote them; your
-          name and photo are removed from every one.
+          <strong>Reviews</strong> you wrote, and reviews about you, stay under &ldquo;Deleted account&rdquo;. They are part of the record other members rely on.
         </li>
         <li>
-          <strong>Bookings</strong> stay on record for the member on the other side, shown as &ldquo;Deleted
-          account&rdquo;.
+          <strong>Bookings</strong> stay on record for the member on the other side, shown as &ldquo;Deleted account&rdquo;.
         </li>
         <li>
-          <strong>Chat messages</strong> stay readable for the person on the other side, shown as &ldquo;Deleted
-          account&rdquo;. They are stored by Ably under its message retention.
+          <strong>Chats</strong> stay readable for the other person, under &ldquo;Deleted account&rdquo;.
         </li>
         <li>
-          <strong>Your email address</strong> stays on the closed account, so the account cannot be signed into again.
-        </li>
-        <li>
-          <strong>An ID fingerprint</strong>, only for accounts verified before Phriend&apos;s own document check: a
-          one-way hash of the verified ID stays, so a new account made with the same ID is flagged to our team.
-        </li>
-        <li>
-          <strong>The moderation log</strong> keeps a record of any action taken on the account, so a banned member
-          cannot return under a new one.
+          <strong>The moderation and audit log</strong> keeps a record of any action taken on the account, by id only, so a banned member cannot return under a new
+          one.
         </li>
         <li>
           <strong>Server logs</strong> are kept for up to 90 days, then deleted.
         </li>
       </ul>
 
-      <Callout>
-        Deleting is final: a closed account cannot be reopened. Providers who only want a break can pause their services instead.
-      </Callout>
+      <h2>5. Download your data first</h2>
+      <p>
+        Before you delete, you can download a copy of your data from <strong>Settings</strong> &rarr; <strong>Download my data</strong>, once a day.
+      </p>
+
+      <Callout>Deleting is final: a deleted account cannot be reopened. Providers who only want a break can pause their services instead.</Callout>
 
       <p>
         For everything else we hold and how long we hold it, see the <Link href="/privacy">Privacy Policy</Link>.

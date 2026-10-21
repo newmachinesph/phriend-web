@@ -29,17 +29,15 @@ export default function PrivacyPage() {
       <h2>2. What we collect</h2>
       <ul>
         <li>
-          <strong>Account data</strong>: the name, email address and profile photo of the Google account you sign in
-          with, or the name, email address and password you register with (the password is stored only as a scrypt
-          hash), plus the display name, gender, birth date and avatar you set.
+          <strong>Account data</strong>: the name and email address of the Google or Apple account you sign in with, or
+          the name, email address and password you register with (the password is stored only as a hash), plus the display
+          name and photo you set, and the legal name and birth date from your ID when you verify. None of these private
+          details is shown to other members.
         </li>
         <li>
           <strong>Provider profile and service data</strong>: your name, a face photo, a title, an About me, the
           languages you speak and your base city; for each service, its title, description, price, up to 6 photos, visit
-          type, schedule, area and lockout dates; and the FAQ answers you set for the chat. Profiles created before the
-          current version may also hold an age, gender, activities, non-negotiables, an hourly rate, working hours and up
-          to 8 photos. Age and gender are never shown to other members.
-        </li>
+          type, schedule, area and lockout dates; and the FAQ answers you set for the chat.        </li>
         <li>
           <strong>Saved addresses</strong>: the addresses you save for at-home services (Home, Work and others). An
           address is shared with a provider only for a booking you make at that address.
@@ -51,7 +49,7 @@ export default function PrivacyPage() {
         </li>
         <li>
           <strong>Chat messages</strong>: the messages, images and payment account details you exchange with other
-          members. Chat is delivered through Ably, our real-time messaging provider. A message that contains listed
+          members. Messages are stored by Phriend and delivered live through Ably. A message that contains listed
           offensive words is refused and recorded, with the matched words, for moderation.
         </li>
         <li>
@@ -96,26 +94,32 @@ export default function PrivacyPage() {
       </p>
       <ul>
         <li>
-          <strong>Google</strong>: sign-in. We receive your name, email address and profile photo from your Google
-          account.
+          <strong>Hostinger</strong>: hosting of the Service and its database.
         </li>
         <li>
-          <strong>Ably</strong>: real-time chat delivery.
+          <strong>Upstash</strong>: request rate limiting, short-lived caches and the scheduling of background jobs, keyed by
+          your account or IP address.
         </li>
         <li>
-          <strong>OpenAI</strong>: the automated first-pass review of reports, provider profiles, services and job posts run by our
-          moderators.
-        </li>
-        <li>
-          <strong>Upstash</strong>: request rate limiting, which keeps short-lived counters keyed by your account or IP
-          address.
+          <strong>Ably</strong>: real-time delivery of chat messages and notifications.
         </li>
         <li>
           <strong>Cloudflare R2</strong>: storage of uploaded photos and, in private storage that has no public
           address, of verification documents.
         </li>
         <li>
-          <strong>Neon</strong>: database hosting.
+          <strong>Sentry</strong>: error reports, so we can find and fix faults.
+        </li>
+        <li>
+          <strong>Anthropic</strong> and <strong>OpenAI</strong>: the automated review of photos, documents, services,
+          profiles, reviews and reports; a person reviews the cases the automated review is unsure about.
+        </li>
+        <li>
+          <strong>Google</strong>: sign-in with Google (we receive your name, email address and profile photo), and address
+          search and maps (Google Places) when you pick an address or an area.
+        </li>
+        <li>
+          <strong>Apple</strong>: Sign in with Apple, on iPhone.
         </li>
         <li>
           <strong>Our email provider</strong>: delivery of account and service emails.
@@ -132,26 +136,18 @@ export default function PrivacyPage() {
       <h2>5. How long we keep it</h2>
       <ul>
         <li>
-          <strong>Provider profiles</strong> leave the feed after 90 days (or the period shown on your profile) unless you renew or save them again; the profile stays
-          on your account until you delete it or your account.
-        </li>
-        <li>
-          <strong>Verification documents</strong>: a document our team approved is kept while your account exists, as
+          <strong>Verification documents</strong>: an approved document is kept while your account exists, as
           the record behind your badge. The files of a document that was rejected, or replaced by a newer upload, are
           deleted from our private storage 30 days after that decision or replacement; the record of the decision (the
           kind of document, its status and dates) stays. When you delete your account, all your verification documents,
-          files and records, are deleted. For accounts verified before Phriend&apos;s own document check, a one-way hash
-          of the verified ID stays after the account is deleted, so a new account made with the same ID is flagged to
-          our team.
-        </li>
+          files and records, are deleted.        </li>
         <li>
           <strong>Account data</strong> is kept while your account is active. When you delete your account, your name,
           profile photo, sign-in links, work and chat photos, verification documents, saved addresses, favorites and
           chat settings are deleted right away, and your provider profile, services and job posts are taken down. Reviews
           and reports about you, the record of your bookings, and the messages the other member can still read stay,
           shown as &ldquo;Deleted account&rdquo;, and the moderation log keeps a record of any action taken on the
-          account. Chat messages are delivered and stored by Ably under its message retention; deleting your account
-          does not itself erase them. The details are on the <Link href="/delete-account">Delete your account</Link>{" "}
+          account. The details are on the <Link href="/delete-account">Delete your account</Link>{" "}
           page.
         </li>
         <li>
@@ -185,8 +181,8 @@ export default function PrivacyPage() {
       </ul>
       <p>
         To exercise any of these, email <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a> from the address on your
-        account; we respond within 15 working days. You can also delete your account from your profile screen by
-        typing DELETE.
+        account; we respond within 15 working days. You can also download your data and delete your account yourself,
+        in Settings in the app.
       </p>
 
       <h2 id="cookies" className="scroll-mt-24">7. Cookies</h2>
@@ -207,8 +203,8 @@ export default function PrivacyPage() {
 
       <h2>9. Security</h2>
       <p>
-        Data is encrypted in transit, Google sign-in never gives us a password and email passwords are stored only as
-        scrypt hashes, production access is
+        Data is encrypted in transit, Google and Apple sign-in never give us a password and email passwords are stored
+        only as hashes, production access is
         limited to the people who need it, and verification documents are kept in private storage that only our reviewers
         can open, with every access logged. If a breach affects you we will notify you and the National
         Privacy Commission as the law requires.

@@ -17,16 +17,16 @@ export default function SafetyPage() {
       title="Trust, safety and transaction rules"
       path="/safety"
       updated={LAST_UPDATED}
-      summary="Every provider is verified by our team, and document badges show what else was checked. Agree the price, the time and what is included in the chat and the booking, so both sides have the record. Payment is agreed with the provider and paid to them directly; never pay more upfront than you agreed in the chat, and only to the account the provider gave you there. Late by more than 30 minutes or cancelled late: anything already paid is refunded. Report anything that breaks these rules."
+      summary="Every provider is verified with a government ID and a selfie, and document badges show what else was checked. Agree the price, the time and what is included in the chat and the booking, so both sides have the record. Payment is agreed with the provider and paid to them directly; never pay more upfront than you agreed in the chat, and only to the account the provider gave you there. Late by more than 30 minutes or cancelled late: anything already paid is refunded. Report anything that breaks these rules."
       intro="These rules apply to every member, clients and providers alike. They are short on purpose. Breaking them gets an account removed. Phriend is a platform only: it is not a party to any booking or payment and is not liable for any loss, injury, dispute, unpaid balance or harm between members. You use the service at your own risk."
     >
       <h2>1. Verified providers and document badges</h2>
       <p>
-        Before a provider gets the <strong>Verified</strong> badge, our team checks a government ID and a selfie of them
-        holding it. Providers can also submit an NBI clearance, a police clearance, a barangay certificate, certificates,
-        business documents or proof of address; each one our team approves shows as its own badge on the
+        Before a provider gets the <strong>Verified</strong> badge, a government ID and a selfie of them holding it are
+        checked. Providers can also submit an NBI clearance, a police clearance, a barangay certificate, certificates,
+        business documents or proof of address; each one that is approved shows as its own badge on the
         provider&apos;s profile. Not every provider needs every document, so look for the badges that matter for the job.
-        A person approves every listing before it goes live.
+        Every listing is checked before it goes live, and anything uncertain goes to a person.
       </p>
       <p>
         Verification confirms that a document matched a person on a given day. It is not a guarantee of anyone&apos;s
@@ -93,8 +93,8 @@ export default function SafetyPage() {
           profile. A brand-new provider asking for a large transfer deserves more caution.
         </li>
         <li>
-          <strong>If the provider does not show up,</strong> mark the booking as a no-show. Two no-shows limit an account
-          until Phriend reviews it. Report it as well if you sent money; Phriend can act on the account.
+          <strong>If the provider does not show up,</strong> report it in the app, and say so if you sent money; Phriend can
+          act on the account.
         </li>
       </ul>
 
@@ -106,7 +106,7 @@ export default function SafetyPage() {
         </li>
         <li>
           If the client cancels within 24 hours or does not show, you may keep a deposit that was agreed in the chat, and
-          you mark the no-show in the booking. Two no-shows limit the client&apos;s ability to book.
+          you mark the no-show in the booking.
         </li>
         <li>
           Never ask for more than what was agreed, for a fee on top, or for money outside the chat. Those lines get a

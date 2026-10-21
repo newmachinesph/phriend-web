@@ -3,7 +3,8 @@ import type { ReactNode } from "react";
 import Image from "next/image";
 import { BadgeCheck, Download, FileCheck, Mail, Wallet, type LucideIcon } from "lucide-react";
 import { Logo } from "@/components/site-header";
-import { API_PLATFORM, API_URL, APP_URL, apiHeaders, breadcrumbJsonLd, cdn, CONTACT_EMAIL, pageMeta, PROVIDER_URL, SITE_URL } from "@/lib/site";
+import { getCatalog } from "@/lib/catalogue";
+import { APP_URL, breadcrumbJsonLd, cdn, CONTACT_EMAIL, pageMeta, PROVIDER_URL, SITE_URL } from "@/lib/site";
 import { ButtonLink, Container } from "@/components/ui";
 
 export const metadata: Metadata = pageMeta({
@@ -14,28 +15,28 @@ export const metadata: Metadata = pageMeta({
 });
 
 const BOILERPLATE =
-  "Phriend is a local services marketplace in the Philippines. Clients browse services, not profiles: aircon cleaning and repair, appliance check-ups, bookkeeping and tax filing, tutoring, photography and video, driving, errands and deliveries, moving help, tour guiding, event coordination and more. Each service has its own price per job, per hour or per session, photos of the work, a visit type (online, in person or hybrid), its own schedule and its own area. Clients book and chat with the provider in the app and pay the provider directly, as agreed. Every provider is verified by Phriend's team, with document badges for the clearances and permits checked. Phriend launched in 2026. The client app is Phriend, also on the web at web.phriend.app; providers work in Phriend Provider at provider.phriend.app.";
+  "Phriend is a local services marketplace in the Philippines. Clients browse services, not profiles: aircon cleaning and repair, appliance check-ups, bookkeeping and tax filing, tutoring, photography and video, driving, errands and deliveries, moving help, tour guiding, event coordination and more. Each service has its own price per job, per hour or per session, photos of the work, a visit type (online, in person or hybrid), its own schedule and its own area. Clients book and chat with the provider in the app and pay the provider directly, as agreed. Every provider is verified with a government ID and a selfie, with document badges for the clearances and permits checked. Phriend launched in 2026. The client app is Phriend, also on the web at web.phriend.app; providers work in Phriend Provider at provider.phriend.app.";
 
-const facts = (n: number): { label: string; value: string }[] => [
+const facts = (n: number | null): { label: string; value: string }[] => [
   { label: "Founded", value: "2026" },
   { label: "Based in", value: "Metro Manila, nationwide" },
-  { label: "Service categories", value: `${n}+` },
+  ...(n ? [{ label: "Service categories", value: `${n}` }] : []),
   { label: "Pricing", value: "Per job, per hour or per session" },
   { label: "Visit types", value: "Online, in person or hybrid" },
-  { label: "Verification", value: "Checked by Phriend's team" },
+  { label: "Verification", value: "Government ID and selfie" },
   { label: "Commission", value: "None yet" },
 ];
 
-const product = (n: number) => [
-  `Services: ${n}+ service categories. Each service has its own price per job, per hour or per session, up to 6 photos of the work, a visit type (online, in person or hybrid), its own schedule and its own area: listed areas, a whole city, or nationwide for online work.`,
+const product = (n: number | null) => [
+  `Services: ${n ? `${n} service categories. ` : ""}Each service has its own price per job, per hour or per session, up to 6 photos of the work, a visit type (online, in person or hybrid), its own schedule and its own area: listed areas, a whole city, or nationwide for online work.`,
   "Provider profiles: lean on purpose. One round face photo, a name, a title such as \"Online Bookkeeper\", a short About me without emojis, the languages spoken, the provider's services, a Verified badge and document badges.",
-  "Verification: Phriend's team checks a government ID and a selfie for the Verified badge, and reviews optional documents for their own badges: NBI clearance, police clearance, barangay certificate, certificates, business documents and proof of address.",
+  "Verification: a government ID and a selfie are checked for the Verified badge, and optional documents are checked for their own badges: NBI clearance, police clearance, barangay certificate, certificates, business documents and proof of address.",
   "Bookings: a client picks a time from the service's schedule and, for an at-home service, one of their saved addresses (Home, Work and more); online services need none. The provider accepts or declines; either side can cancel with a reason. Every booking can be added to a calendar.",
   "Chat: client and provider chat in the app, with photos, read receipts, archive and block. Providers set FAQ answers (how to pay, minimum booking, where they work) that reply instantly in the chat.",
   "Reviews: a star rating, text and up to 4 photos after a booking.",
   "Job posts: clients describe what they need with a budget and a date; providers reply in the chat.",
   "Phriend Provider: a separate provider app (coming to the app stores) and provider.phriend.app, where providers list services and manage bookings, earnings and verification.",
-  "Moderation: every listing is approved by a person; reports get an automated first pass, a human review queue and an audit log.",
+  "Moderation: automated checks review every profile photo, service photo and listing text; anything uncertain goes to a human review queue, and every decision is in an audit log.",
   "Payments: none in the app. Payment is agreed with the provider and paid to them directly.",
 ];
 
@@ -92,12 +93,12 @@ const STANCE: { icon: LucideIcon; title: string; text: string }[] = [
   {
     icon: BadgeCheck,
     title: "Verified providers",
-    text: "Phriend's team checks a government ID and a selfie before a provider gets the Verified badge, and a person approves every listing. Phriend is strictly a marketplace for legitimate services; anything sexual or illegal gets an account removed.",
+    text: "A government ID and a selfie are checked before a provider gets the Verified badge, and every listing is checked before it shows. Phriend is strictly a marketplace for legitimate services; anything sexual or illegal gets an account removed.",
   },
   {
     icon: FileCheck,
     title: "Documents, shown as badges",
-    text: "Providers can add an NBI clearance, a police clearance, a barangay certificate, certificates, business documents or proof of address. Each one our team checks shows as its own badge, so clients see exactly what was verified.",
+    text: "Providers can add an NBI clearance, a police clearance, a barangay certificate, certificates, business documents or proof of address. Each one that is checked shows as its own badge, so clients see exactly what was verified.",
   },
   {
     icon: Wallet,
@@ -161,15 +162,10 @@ function Mark({ height }: { height: number }) {
   );
 }
 
-/** Live category count from the app, refreshed hourly, so the numbers never drift from the product. */
+/** Live category count from api2, refreshed hourly, so the numbers never drift from the product (left out when api2 does not answer). */
 async function categoryCount() {
-  try {
-    const res = await fetch(`${API_URL}/api/categories?platform=${API_PLATFORM}`, { headers: apiHeaders(), next: { revalidate: 3600 } });
-    const d = (await res.json()) as { categories?: unknown[] };
-    return d.categories?.length || 60;
-  } catch {
-    return 60;
-  }
+  const catalog = await getCatalog(3600);
+  return catalog.ok && catalog.categories.length > 0 ? catalog.categories.length : null;
 }
 
 export default async function PressPage() {

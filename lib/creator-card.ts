@@ -1,6 +1,7 @@
 import "server-only";
 import { API_PLATFORM, catalogue, safeImageUrl } from "@/lib/api";
 import { parseCreatorLink } from "@/lib/creator-link";
+import { readCapped } from "@/lib/read-capped";
 import { appProviderUrl, appServiceUrl } from "@/lib/links";
 import { formatPeso, PRICING_SUFFIX, type ClientError, type Pricing, type ServiceCard } from "@/lib/phriend2";
 
@@ -28,7 +29,11 @@ export type CreatorCard = {
 type Result = { ok: true; card: CreatorCard } | { ok: false; status: number; error: string };
 
 const CARD_REVALIDATE_S = 120;
-const MAX_PHOTO_BYTES = 4_000_000;
+const PHOTO_TIMEOUT_MS = 8_000;
+/** Service photos are stored at well under this; a larger body is refused before it is buffered whole. */
+export const MAX_PHOTO_BYTES = 1_500_000;
+/** Only raster types the canvas can draw (no SVG). */
+const PHOTO_TYPES = /^image\/(?:jpeg|png|webp|avif|gif)$/;
 const NOT_FOUND = "Nothing live at that link. Check the link, and make sure the service is listed and not hidden.";
 const UNREACHABLE = "We couldn't reach Phriend just now. Try again in a minute.";
 
@@ -37,11 +42,16 @@ async function inlinePhoto(raw: string | null | undefined): Promise<string | nul
   const url = safeImageUrl(raw);
   if (!url) return null;
   try {
-    const res = await fetch(url, { next: { revalidate: 3600 } });
-    const type = res.headers.get("content-type") ?? "";
-    if (!res.ok || !type.startsWith("image/")) return null;
-    const buf = Buffer.from(await res.arrayBuffer());
-    return buf.byteLength > MAX_PHOTO_BYTES ? null : `data:${type.split(";")[0]};base64,${buf.toString("base64")}`;
+    // no-store: Next's data cache would buffer the whole body; the card response itself is cached (route.ts).
+    // redirect "error": an allowed host must not bounce the request elsewhere.
+    const res = await fetch(url, { cache: "no-store", redirect: "error", signal: AbortSignal.timeout(PHOTO_TIMEOUT_MS) });
+    const type = (res.headers.get("content-type") ?? "").split(";")[0].trim().toLowerCase();
+    if (!res.ok || !PHOTO_TYPES.test(type)) {
+      await res.body?.cancel().catch(() => {});
+      return null;
+    }
+    const bytes = await readCapped(res, MAX_PHOTO_BYTES);
+    return bytes && bytes.byteLength > 0 ? `data:${type};base64,${Buffer.from(bytes).toString("base64")}` : null;
   } catch {
     return null;
   }

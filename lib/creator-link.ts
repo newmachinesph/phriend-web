@@ -30,7 +30,13 @@ export function parseCreatorLink(input: string): CreatorLink | null {
   if (!HOSTS.has(url.hostname.toLowerCase())) return null;
   const parts = url.pathname.split("/").filter(Boolean);
   if (parts.length !== 2) return null;
-  const [kind, value] = [parts[0].toLowerCase(), decodeURIComponent(parts[1])];
+  const kind = parts[0].toLowerCase();
+  let value: string;
+  try {
+    value = decodeURIComponent(parts[1]);
+  } catch {
+    return null; // a malformed escape ("%E0%A4%A") is not a link, not a server error
+  }
   if (kind === "services") {
     const code = normaliseCode(value);
     return code ? { kind: "service", code } : null;

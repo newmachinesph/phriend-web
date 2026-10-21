@@ -13,8 +13,11 @@ export const API_URL = RAW_API_URL.replace(/\/+$/, "");
 /** The platform the site asks for: the iOS store policy, so the site lists exactly what the App Store build shows. */
 export const API_PLATFORM: CataloguePlatform = "ios";
 
-/** A local run (API on loopback) also renders photos from the local MinIO bucket api2 writes to. */
-const LOCAL_API = /^http:\/\/(?:localhost|127\.0\.0\.1|\[::1\])(?::\d+)?$/.test(API_URL);
+/**
+ * A local dev run (API on loopback) also renders photos from the local MinIO bucket api2 writes to. Never in a
+ * production build, so a misconfigured server cannot widen the allowed image origins.
+ */
+const LOCAL_API = process.env.NODE_ENV !== "production" && /^http:\/\/(?:localhost|127\.0\.0\.1|\[::1\])(?::\d+)?$/.test(API_URL);
 const CDN_BASE = "https://cdn.phriend.app";
 const LOCAL_MEDIA_BASE = "http://localhost:9000/phriend";
 

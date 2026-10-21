@@ -7,15 +7,21 @@ import { getFeatures, getTeams } from "@/lib/catalogue";
 import { CITY_PAGES, findCity } from "@/lib/cities";
 import { escapeJsonLd } from "@/lib/landing";
 import { appTeamUrl, cityPath } from "@/lib/links";
-import { pageMeta, PROVIDER_URL, SITE_URL } from "@/lib/site";
+import { NOINDEX_FOLLOW, pageMeta, PROVIDER_URL, SITE_URL } from "@/lib/site";
 import { ButtonLink, Container } from "@/components/ui";
 
 // The page reads ?city= and ?cursor=, so it renders per request; the API calls inside are cached for 10 minutes.
-export const metadata: Metadata = pageMeta({
+const META = pageMeta({
   title: "Teams: book several providers as one",
   description: "Services from teams of verified providers for weddings, events, tours and moves: one chat, one price, one booking.",
   path: "/teams",
 });
+
+/** Every variant keeps the canonical /teams; a ?cursor= page (a later page of the same list) is noindex,follow. */
+export async function generateMetadata({ searchParams }: { searchParams: Promise<{ cursor?: string }> }): Promise<Metadata> {
+  const { cursor } = await searchParams;
+  return cursor ? { ...META, robots: NOINDEX_FOLLOW } : META;
+}
 
 const STEPS = [
   { title: "Pick a team", text: "Browse the teams in your city. Each one lists its members and their roles, its services and what each one costs." },

@@ -4,10 +4,22 @@ import type { Category, CategoryGroup, ServiceCard, TeamCard } from "@/lib/phrie
 import { CITY_PAGES, type CityPage } from "@/lib/cities";
 
 /**
- * The catalogue reads behind the landing pages (SPEC 13e §2.2), all public /v1 routes with `platform=ios`. Each read
- * reports whether api2 answered: when it did not, a page renders its lists empty with the "Services are loading" note
- * and the static parts still build (§2.1 "Failure").
+ * The catalogue reads behind the landing pages (SPEC 13e §2.2), all public /v1 routes with `platform=ios`.
+ *
+ * When api2 does not answer:
+ * - during `next build`, a read returns its empty result (`ok: false`): the page renders its lists empty with the
+ *   "Services are loading" note and the static parts still build (§2.1 "Failure");
+ * - at runtime (an ISR revalidation or a first request), a read throws, so ISR keeps serving the last good page instead
+ *   of caching a degraded one for the revalidate period; with no page cached yet, app/error.tsx shows.
  */
+
+const BUILDING = process.env.NEXT_PHASE === "phase-production-build";
+
+/** The empty result during a build; a thrown error at runtime (see above). */
+function degraded<T>(fallback: T, what: string): T {
+  if (!BUILDING) throw new Error(`api2 did not answer (${what}).`);
+  return fallback;
+}
 
 export type Group = CategoryGroup & { categories: Category[] };
 export type Catalog = { ok: boolean; groups: Group[]; categories: Category[] };
@@ -24,7 +36,7 @@ export const TEAMS_PER_PAGE = 12;
 /** Groups (each with its categories, in Ops order; empty groups left out) and categories, as the iOS app shows them. */
 export async function getCatalog(revalidate: number = LANDING_REVALIDATE_S): Promise<Catalog> {
   const r = await catalogue(revalidate).categories(API_PLATFORM);
-  if (!r.ok) return { ok: false, groups: [], categories: [] };
+  if (!r.ok) return degraded({ ok: false, groups: [], categories: [] }, "categories");
   const byPosition = <T extends { position: number }>(a: T, b: T) => a.position - b.position;
   const categories = [...r.data.categories].sort(byPosition);
   const groups = [...r.data.groups]
@@ -42,7 +54,7 @@ export const groupOf = (catalog: Catalog, c: Category) => catalog.groups.find((g
 /** The api2 city id of each curated city page (matched by name; GET /v1/cities has no slugs). */
 export async function getCityIds(): Promise<ReadonlyMap<string, number>> {
   const r = await catalogue(CITIES_REVALIDATE_S).cities();
-  if (!r.ok) return new Map();
+  if (!r.ok) return degraded(new Map(), "cities");
   const ids = new Map<string, number>();
   for (const page of CITY_PAGES) {
     const city = r.data.items.find((c) => c.name.toLowerCase() === page.name.toLowerCase());
@@ -58,17 +70,17 @@ export async function getServices(q: { category?: readonly string[]; group?: str
   let city: number[] | undefined;
   if (q.city) {
     const id = (await getCityIds()).get(q.city.slug);
-    if (id === undefined) return { ok: false, items: [] };
+    if (id === undefined) return { ok: false, items: [] }; // a curated city api2 does not list (by name): the loading note
     city = [id];
   }
   const r = await catalogue(revalidate).feed({ platform: API_PLATFORM, category: q.category, group: q.group, city, limit: SERVICES_SHOWN });
-  return r.ok ? { ok: true, items: r.data.items } : { ok: false, items: [] };
+  return r.ok ? { ok: true, items: r.data.items } : degraded({ ok: false, items: [] }, "services");
 }
 
-/** The switches the client app reads (`features.teams`); off when api2 does not answer, as in the apps. */
+/** The switches the client app reads (`features.teams`); off in a build without api2, as in the apps. */
 export async function getFeatures(): Promise<{ teams: boolean }> {
   const r = await appConfig(LANDING_REVALIDATE_S).get({ platform: API_PLATFORM, app: "client" });
-  return { teams: r.ok && r.data.features.teams };
+  return r.ok ? { teams: r.data.features.teams } : degraded({ teams: false }, "app config");
 }
 
 export type Teams = { ok: boolean; items: TeamCard[]; nextCursor: string | null };
@@ -82,5 +94,8 @@ export async function getTeams(q: { city?: CityPage; cursor?: string | null; lim
     city = [id];
   }
   const r = await catalogue(LANDING_REVALIDATE_S).teams({ platform: API_PLATFORM, city, cursor: q.cursor, limit: q.limit ?? TEAMS_PER_PAGE });
-  return r.ok ? { ok: true, items: r.data.items, nextCursor: r.data.nextCursor } : { ok: false, items: [], nextCursor: null };
+  if (r.ok) return { ok: true, items: r.data.items, nextCursor: r.data.nextCursor };
+  // a cursor api2 refuses (tampered or stale) is not an outage: an empty page, which links back to the first
+  if (r.error.kind === "api" && r.error.status >= 400 && r.error.status < 500) return { ok: true, items: [], nextCursor: null };
+  return degraded({ ok: false, items: [], nextCursor: null }, "teams");
 }

@@ -38,7 +38,7 @@ const NOT_FOUND = "Nothing live at that link. Check the link, and make sure the 
 const UNREACHABLE = "We couldn't reach Phriend just now. Try again in a minute.";
 
 /** Our own stored images only (safeImageUrl); anything else is refused and the card shows the empty tile. */
-async function inlinePhoto(raw: string | null | undefined): Promise<string | null> {
+export async function inlinePhoto(raw: string | null | undefined): Promise<string | null> {
   const url = safeImageUrl(raw);
   if (!url) return null;
   try {

@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 import { LAST_UPDATED, SITE_URL } from "@/lib/site";
-import { POSTS } from "./blog/_posts";
+import { getBlogEntries } from "@/lib/blog";
 import { getCatalog, getFeatures } from "@/lib/catalogue";
 import { CITY_PAGES } from "@/lib/cities";
 import { cityPath, groupPath } from "@/lib/links";
@@ -16,7 +16,7 @@ const lastModified = new Date(LAST_UPDATED);
  * the site no longer counts services with a feed call per page. Left out too: /android (a redirect) and noindex pages.
  */
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const [catalog, features] = await Promise.all([getCatalog(), getFeatures()]);
+  const [catalog, features, posts] = await Promise.all([getCatalog(), getFeatures(), getBlogEntries()]);
   const page = (path: string, changeFrequency: "daily" | "weekly" | "monthly" | "yearly", priority: number, modified = lastModified) => ({ url: `${SITE_URL}${path}`, lastModified: modified, changeFrequency, priority });
   return [
     page("", "weekly", 1),
@@ -26,7 +26,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     page("/occasions", "monthly", 0.8),
     ...OCCASIONS.map((o) => page(`/occasions/${o.slug}`, "monthly", 0.8)),
     page("/blog", "weekly", 0.7),
-    ...POSTS.map((p) => page(`/blog/${p.slug}`, "monthly", 0.7, new Date(p.date))),
+    // each published, on-product article (coded and Ops), lastModified = updatedAt
+    ...posts.map((p) => page(`/blog/${p.slug}`, "monthly", 0.7, new Date(p.updatedAt))),
     // /teams is a 404 while the client app has teams off (v2.0 on iOS), so it is listed only while they are on
     ...(features.teams ? [page("/teams", "daily", 0.7)] : []),
     page("/creators", "monthly", 0.6),

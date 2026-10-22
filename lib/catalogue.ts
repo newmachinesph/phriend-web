@@ -16,7 +16,7 @@ import { CITY_PAGES, type CityPage } from "@/lib/cities";
 const BUILDING = process.env.NEXT_PHASE === "phase-production-build";
 
 /** The empty result during a build; a thrown error at runtime (see above). */
-function degraded<T>(fallback: T, what: string): T {
+export function degraded<T>(fallback: T, what: string): T {
   if (!BUILDING) throw new Error(`api2 did not answer (${what}).`);
   return fallback;
 }

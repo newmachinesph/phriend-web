@@ -1,5 +1,5 @@
 import "server-only";
-import { catalogueApi, appConfigApi, createClient, createSafeImageUrl, type CataloguePlatform } from "@/lib/phriend2";
+import { blogApi, catalogueApi, appConfigApi, createClient, createSafeImageUrl, type CataloguePlatform } from "@/lib/phriend2";
 
 /**
  * The site reads api2's public /v1 routes from the Next server only (SPEC 13e §2.1): no session, no BFF secret, no
@@ -39,3 +39,5 @@ function clientFor(revalidate: number) {
 export const catalogue = (revalidate: number) => catalogueApi(clientFor(revalidate));
 /** GET /v1/app/config, cached for `revalidate` seconds. */
 export const appConfig = (revalidate: number) => appConfigApi(clientFor(revalidate));
+/** The blog reads (GET /v1/content/blog, /blog/{slug}, /sitemap), cached for `revalidate` seconds. */
+export const blog = (revalidate: number) => blogApi(clientFor(revalidate));

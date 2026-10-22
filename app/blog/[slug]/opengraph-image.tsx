@@ -1,30 +1,48 @@
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { ImageResponse } from "next/og";
+import sharp from "sharp";
+import { getArticle, getBlogEntries } from "@/lib/blog";
+import { inlinePhoto } from "@/lib/creator-card";
 import { asJpeg } from "@/lib/og-jpeg";
-import { POSTS, findPost } from "../_posts";
 
 export const alt = "Phriend blog";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/jpeg"; // a photo card: JPEG is ~10x smaller than the PNG (lib/og-jpeg.ts)
-// Built once per coded post. Ops posts (GET /v1/content/blog, W3) will use their cover through safeImageUrl here.
+// Coded posts use their hero; Ops posts their cover (our CDN only, inlined as a JPEG: the card renderer reads no WebP).
 export const revalidate = 3600;
-export const generateStaticParams = () => POSTS.map((p) => ({ slug: p.slug }));
+export async function generateStaticParams() {
+  return (await getBlogEntries()).map((e) => ({ slug: e.slug }));
+}
 
 const read = (p: string) => readFileSync(join(process.cwd(), "public", p));
 const jakarta = read("fonts/PlusJakartaSans-Bold.ttf");
 const inter = read("fonts/Inter-SemiBold.ttf");
 const logo = `data:image/png;base64,${read("brand/logo-mark.png").toString("base64")}`;
 
+/** An Ops cover as a JPEG data URL sized for the card, or null (the card then has no photo). */
+async function coverAsJpeg(url: string): Promise<string | null> {
+  if (url.startsWith("/")) return url;
+  const inlined = await inlinePhoto(url);
+  if (!inlined) return null;
+  try {
+    const jpeg = await sharp(Buffer.from(inlined.slice(inlined.indexOf(",") + 1), "base64")).resize(1200, 630, { fit: "cover" }).jpeg({ quality: 82 }).toBuffer();
+    return `data:image/jpeg;base64,${jpeg.toString("base64")}`;
+  } catch {
+    return null;
+  }
+}
+
 /** Share card for an article: the hero photo with a navy wash, the headline, the logo tile and a read prompt, at 1.91:1. */
 export default async function Image({ params }: { params: Promise<{ slug: string }> }) {
   const slug = (await params).slug;
-  const post = findPost(slug);
-  // a title card (no photo) for anything that is not a coded post
-  const photo = post ? post.hero.src : null;
-  const headline = post?.ogTitle ?? post?.title ?? "Guides for people who could be earning on Phriend";
-  const kicker = post ? `${post.category.label} · Side income` : "For providers · Side income";
-  const minutes = post?.readingMinutes ?? null;
+  const view = await getArticle(slug).catch(() => null);
+  const post = view?.kind === "coded" ? view.post : null;
+  // the cover of an Ops article, else a title card (no photo)
+  const photo = post ? post.hero.src : view?.entry.cover ? await coverAsJpeg(view.entry.cover.src) : null;
+  const headline = post?.ogTitle ?? view?.entry.title ?? "Guides to local services in the Philippines";
+  const kicker = post ? `${post.category.label} · Side income` : (view?.entry.tags[0] ?? "Guides");
+  const minutes = view?.entry.readingMinutes ?? null;
   return asJpeg(new ImageResponse(
     (
       <div style={{ width: "100%", height: "100%", display: "flex", position: "relative", background: "#0d2251", color: "#fff", fontFamily: "Plus Jakarta Sans" }}>

@@ -1,181 +1,127 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import { notFound } from "next/navigation";
-import { ArticleCta, BackToBlog } from "@/components/blog";
+import { ArticleCta, BackToBlog, BlogCover, BookCta, TagLinks } from "@/components/blog";
 import { ShareBar } from "@/components/share-bar";
+import { formatBlogDate, getArticle, getBlogEntries, type ArticleView } from "@/lib/blog";
+import { ArticleBody } from "@/lib/markdown";
 import { cdn, pageMeta, SITE_NAME, SITE_URL } from "@/lib/site";
-import { findCategory } from "@/lib/landing";
-import { findDbPost, readingMinutes, renderMarkdown } from "@/lib/blog-db";
-import { findPost, POSTS } from "../_posts";
 
-export const revalidate = 60; // articles published in Ops appear within a minute (a cached 404 for a draft too)
+// SPEC 13e §2.2: the coded articles and the published Ops articles (GET /v1/content/blog/{slug}), ISR 60 s. A slug
+// published after the build renders on its first request; a draft, unpublished, off-product or unsafe one is a 404.
+export const revalidate = 60;
 export const dynamicParams = true;
 
-export const generateStaticParams = () => POSTS.map((p) => ({ slug: p.slug }));
+export async function generateStaticParams() {
+  return (await getBlogEntries()).map((e) => ({ slug: e.slug }));
+}
+
+const DESCRIPTION_FALLBACK = "A guide from Phriend, the app for booking local services in the Philippines.";
+
+function seo(view: ArticleView) {
+  if (view.kind === "coded") return { title: view.post.seoTitle, description: view.post.seoDescription, ogTitle: view.post.ogTitle ?? view.post.seoTitle };
+  const title = view.seoTitle ?? view.entry.title;
+  return { title, description: view.entry.description ?? DESCRIPTION_FALLBACK, ogTitle: title };
+}
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
-  const slug = (await params).slug;
-  const post = findPost(slug);
-  if (!post) {
-    const db = await findDbPost(slug);
-    if (!db) return { title: "Article not found", robots: { index: false } };
-    const base = pageMeta({ title: db.seoTitle || db.title.slice(0, 60), description: db.description.slice(0, 150), path: `/blog/${db.slug}` });
-    const og = { url: `/blog/${db.slug}/opengraph-image`, width: 1200, height: 630, alt: db.title };
-    return {
-      ...base,
-      openGraph: { ...base.openGraph, type: "article", publishedTime: db.publishedAt, modifiedTime: db.updatedAt, authors: [SITE_NAME], tags: db.tags, images: [og] },
-      twitter: { card: "summary_large_image", title: db.seoTitle || db.title, description: db.description, images: [og.url] },
-    };
-  }
-  const base = pageMeta({ title: post.seoTitle, description: post.seoDescription, path: `/blog/${post.slug}` });
-  const og = { url: `/blog/${post.slug}/opengraph-image`, width: 1200, height: 630, alt: post.ogTitle ?? post.seoTitle };
+  const view = await getArticle((await params).slug);
+  if (!view) return { title: "Article not found", robots: { index: false } };
+  const { entry } = view;
+  const s = seo(view);
+  const base = pageMeta({ title: s.title, description: s.description, path: `/blog/${entry.slug}` });
+  const og = { url: `/blog/${entry.slug}/opengraph-image`, width: 1200, height: 630, alt: s.ogTitle };
   return {
     ...base,
-    openGraph: { ...base.openGraph, type: "article", publishedTime: `${post.date}T09:00:00+08:00`, authors: [SITE_NAME], tags: post.tags, images: [og] },
-    twitter: { card: "summary_large_image", title: post.seoTitle, description: post.seoDescription, images: [og.url] },
+    openGraph: { ...base.openGraph, type: "article", publishedTime: entry.publishedAt, modifiedTime: entry.updatedAt, authors: [SITE_NAME], tags: entry.tags, images: [og] },
+    twitter: { card: "summary_large_image", title: s.title, description: s.description, images: [og.url] },
   };
 }
 
-const fmt = (iso: string) => new Date(`${iso}T00:00:00+08:00`).toLocaleDateString("en-PH", { timeZone: "Asia/Manila", year: "numeric", month: "long", day: "numeric" });
+function jsonLd(view: ArticleView, url: string) {
+  const { entry } = view;
+  const image = entry.cover ? (entry.cover.src.startsWith("/") ? `${SITE_URL}${entry.cover.src}` : entry.cover.src) : `${url}/opengraph-image`;
+  const graph: object[] = [
+    {
+      "@type": "Article",
+      headline: entry.title,
+      description: entry.description ?? undefined,
+      image,
+      datePublished: entry.publishedAt,
+      dateModified: entry.updatedAt,
+      author: { "@type": "Organization", name: SITE_NAME, url: SITE_URL },
+      publisher: { "@type": "Organization", name: SITE_NAME, logo: { "@type": "ImageObject", url: cdn("/brand/logo-mark.png") } },
+      mainEntityOfPage: url,
+      keywords: entry.tags.join(", "),
+    },
+    {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
+        { "@type": "ListItem", position: 2, name: "Blog", item: `${SITE_URL}/blog` },
+        { "@type": "ListItem", position: 3, name: entry.title, item: url },
+      ],
+    },
+  ];
+  if (view.kind === "coded") {
+    graph.push({ "@type": "FAQPage", mainEntity: view.post.faq.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })) });
+  }
+  // `<` escaped so no text in the article can close the script element
+  return JSON.stringify({ "@context": "https://schema.org", "@graph": graph }).replace(/</g, "\\u003c");
+}
 
 export default async function ArticlePage({ params }: { params: Promise<{ slug: string }> }) {
-  const slug = (await params).slug;
-  const post = findPost(slug);
-  if (!post) {
-    const db = await findDbPost(slug);
-    if (!db) notFound();
-    return DbArticle({ post: db });
-  }
-  const url = `${SITE_URL}/blog/${post.slug}`;
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "Article",
-        headline: post.title,
-        description: post.description,
-        image: `${SITE_URL}${post.hero.src}`,
-        datePublished: `${post.date}T09:00:00+08:00`,
-        dateModified: `${post.date}T09:00:00+08:00`,
-        author: { "@type": "Organization", name: SITE_NAME, url: SITE_URL },
-        publisher: { "@type": "Organization", name: SITE_NAME, logo: { "@type": "ImageObject", url: cdn("/brand/logo-mark.png") } },
-        mainEntityOfPage: url,
-        keywords: post.tags.join(", "),
-      },
-      {
-        "@type": "FAQPage",
-        mainEntity: post.faq.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
-      },
-      {
-        "@type": "BreadcrumbList",
-        itemListElement: [
-          { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
-          { "@type": "ListItem", position: 2, name: "Blog", item: `${SITE_URL}/blog` },
-          { "@type": "ListItem", position: 3, name: post.title, item: url },
-        ],
-      },
-    ],
-  };
+  const view = await getArticle((await params).slug);
+  if (!view) notFound();
+  const { entry } = view;
+  const url = `${SITE_URL}/blog/${entry.slug}`;
+  const kicker = view.kind === "coded" ? `${entry.tags[0]} · ${view.post.category.label}` : entry.tags[0];
 
   return (
     <main id="main" className="mx-auto w-full max-w-3xl px-5 pb-12 pt-8 sm:px-8 sm:py-16">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd(view, url) }} />
       <BackToBlog />
       <header className="mt-6">
-        <p className="text-sm font-extrabold uppercase tracking-wider text-brand-text">
-          {post.tags[0]} · {post.category.label}
-        </p>
-        <h1 className="mt-2 font-display text-h1 font-bold text-ink">{post.title}</h1>
-        <p className="mt-4 text-lg leading-relaxed text-body">{post.description}</p>
+        {kicker && <p className="truncate text-sm font-extrabold uppercase tracking-wider text-brand-text">{kicker}</p>}
+        <h1 className="mt-2 break-words font-display text-h1 font-bold text-ink">{entry.title}</h1>
+        {entry.description && <p className="mt-4 break-words text-lg leading-relaxed text-body">{entry.description}</p>}
         <p className="mt-4 text-sm font-semibold text-muted">
-          By Phriend · {fmt(post.date)} · {post.readingMinutes} min read
+          By Phriend · <time dateTime={entry.publishedAt}>{formatBlogDate(entry.publishedAt)}</time>
+          {entry.readingMinutes ? ` · ${entry.readingMinutes} min read` : ""}
         </p>
         <div className="mt-5">
-          <ShareBar url={url} title={post.title} />
+          <ShareBar url={url} title={entry.title} />
         </div>
       </header>
-      <div className="relative mt-8 aspect-[16/9] overflow-hidden rounded-3xl shadow-card">
-        <Image src={post.hero.src} alt={post.hero.alt} width={1600} height={900} sizes="(min-width: 768px) 768px, 100vw" className="h-full w-full object-cover" priority />
-      </div>
+      <BlogCover cover={entry.cover} sizes="(min-width: 768px) 768px, 100vw" priority className="mt-8 rounded-3xl shadow-card" />
 
-      <article className="article mt-10">
-        <post.Body />
-        <h2>Questions photographers ask</h2>
-        <dl>
-          {post.faq.map((f) => (
-            <div key={f.q}>
-              <dt>{f.q}</dt>
-              <dd>{f.a}</dd>
-            </div>
-          ))}
-        </dl>
+      <article className="article mt-10 break-words">
+        {view.kind === "coded" ? (
+          <>
+            <view.post.Body />
+            <h2>Questions photographers ask</h2>
+            <dl>
+              {view.post.faq.map((f) => (
+                <div key={f.q}>
+                  <dt>{f.q}</dt>
+                  <dd>{f.a}</dd>
+                </div>
+              ))}
+            </dl>
+          </>
+        ) : (
+          <ArticleBody markdown={view.body} />
+        )}
       </article>
 
-      <div className="mt-10 border-t border-line pt-6">
-        <ShareBar url={url} title={post.title} />
-      </div>
-      <ArticleCta category={post.category} />
-    </main>
-  );
-}
-
-/** An article written in Ops: markdown body, the niche's call to action when one is set. */
-async function DbArticle({ post }: { post: NonNullable<Awaited<ReturnType<typeof findDbPost>>> }) {
-  const url = `${SITE_URL}/blog/${post.slug}`;
-  const src = cdn(post.cover || "/brand/logo-mark.png");
-  const cover = src.startsWith("/") ? `${SITE_URL}${src}` : src; // a /groups/ cover is the site's own file: absolute for JSON-LD
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "Article",
-        headline: post.title,
-        description: post.description,
-        image: cover,
-        datePublished: post.publishedAt,
-        dateModified: post.updatedAt,
-        author: { "@type": "Organization", name: SITE_NAME, url: SITE_URL },
-        publisher: { "@type": "Organization", name: SITE_NAME, logo: { "@type": "ImageObject", url: cdn("/brand/logo-mark.png") } },
-        mainEntityOfPage: url,
-        keywords: post.tags.join(", "),
-      },
-      {
-        "@type": "BreadcrumbList",
-        itemListElement: [
-          { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
-          { "@type": "ListItem", position: 2, name: "Blog", item: `${SITE_URL}/blog` },
-          { "@type": "ListItem", position: 3, name: post.title, item: url },
-        ],
-      },
-    ],
-  };
-  const category = post.niche ? await findCategory(post.niche) : undefined;
-  return (
-    <main id="main" className="mx-auto w-full max-w-3xl px-5 pb-12 pt-8 sm:px-8 sm:py-16">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }} />
-      <BackToBlog />
-      <header className="mt-6">
-        <p className="text-sm font-extrabold uppercase tracking-wider text-brand-text">{post.tags[0] ?? "Guide"}</p>
-        <h1 className="mt-2 font-display text-h1 font-bold text-ink">{post.title}</h1>
-        {post.description && <p className="mt-4 text-lg leading-relaxed text-body">{post.description}</p>}
-        <p className="mt-4 text-sm font-semibold text-muted">
-          By Phriend · {fmt(post.publishedAt.slice(0, 10))} · {readingMinutes(post.bodyMd)} min read
-        </p>
-        <div className="mt-5">
-          <ShareBar url={url} title={post.title} />
-        </div>
-      </header>
-      {post.cover && (
-        <div className="relative mt-8 aspect-[16/9] overflow-hidden rounded-3xl shadow-card">
-          <Image src={cdn(post.cover)} alt={post.title} width={1600} height={900} sizes="(min-width: 768px) 768px, 100vw" className="h-full w-full object-cover" priority />
+      {view.kind === "api" && entry.tags.length > 0 && (
+        <div className="mt-8">
+          <TagLinks tags={entry.tags} />
         </div>
       )}
-      {/* Markdown written by Ops admins, sanitized in renderMarkdown before it reaches the page */}
-      <article className="article mt-10" dangerouslySetInnerHTML={{ __html: renderMarkdown(post.bodyMd) }} />
       <div className="mt-10 border-t border-line pt-6">
-        <ShareBar url={url} title={post.title} />
+        <ShareBar url={url} title={entry.title} />
       </div>
-      {category && <ArticleCta category={{ path: `/${post.niche}`, label: category.label }} headline={`Start taking ${category.label} bookings this week.`} />}
+      {view.kind === "coded" ? <ArticleCta category={view.post.category} /> : <BookCta />}
     </main>
   );
 }

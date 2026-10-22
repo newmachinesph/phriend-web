@@ -14,7 +14,7 @@ export const photographers: Post = {
   ogTitle: "Turn your free weekends into paid shoots",
   date: "2026-09-08",
   readingMinutes: 6,
-  category: { slug: "photographer", path: "/photographer", label: "Photographer" },
+  category: { slug: "photographer", path: "/services/photographer", label: "Photographer" },
   tags: ["For providers", "Photography", "Videography", "Side income"],
   hero: {
     src: cdn("/blog/photographers-hero.jpg"),
@@ -95,7 +95,7 @@ function Body() {
           {
             icon: BadgeCheck,
             title: "Verify your identity",
-            text: "Sign in at provider.phriend.app with Google or email, then upload a government ID and a selfie. Add an NBI clearance, certificates or business documents to earn a badge for each one our team checks.",
+            text: "Sign in at provider.phriend.app with Google or email, then upload a government ID and a selfie. Add an NBI clearance, certificates or business documents to earn a badge for each one that is approved.",
           },
           {
             icon: Camera,
@@ -115,7 +115,7 @@ function Body() {
 
       <h2>Trust that works for you</h2>
       <p>
-        Clients see your Verified badge and a badge for every document our team checked, so a clearance or a business permit is worth uploading. The price, the hours and what is delivered are agreed in the chat, so both sides have the record, and payment comes to you directly, as you agreed. If anything goes wrong, report and block are one tap away.
+        Clients see your Verified badge and a badge for every approved document, so a clearance or a business permit is worth uploading. The price, the hours and what is delivered are agreed in the chat, so both sides have the record, and payment comes to you directly, as you agreed. If anything goes wrong, report and block are one tap away.
       </p>
       <Callout title="Bring a second shooter">
         For event coverage, list “second shooter” as a service of its own, or start a team with another photographer on Phriend. One booking, twice the angles, and the client sees both names before the day.

@@ -1,6 +1,8 @@
 import type { NextConfig } from "next";
+import { PHASE_DEVELOPMENT_SERVER, PHASE_PRODUCTION_BUILD } from "next/constants";
+import { securityHeaders } from "./lib/security-headers";
 
-/** Slugs of the articles sql/027_blog_service_first.sql unpublished (keep the two lists in step). */
+/** Slugs of articles from the earlier product that search engines may still list: they go to the blog index. */
 const DROPPED_ARTICLES = [
   "how-phriend-bookings-and-payment-work",
   "is-phriend-safe",
@@ -29,7 +31,24 @@ const DROPPED_ARTICLES = [
   "attending-an-event-alone",
 ];
 
-const nextConfig: NextConfig = {
+const nextConfig = (phase: string): NextConfig => {
+  // The site reads api2 at build time and on revalidation, and there is no default API (SPEC 13e §2.1): a build without
+  // API_URL fails here, so a local build can never read production by accident.
+  if (phase === PHASE_PRODUCTION_BUILD && !process.env.API_URL?.trim()) {
+    throw new Error("API_URL is not set. Build with the api2 origin, e.g. API_URL=http://localhost:8040 for a local build.");
+  }
+  const security = securityHeaders({ dev: phase === PHASE_DEVELOPMENT_SERVER });
+  return {
+    ...config,
+    async headers() {
+      // CSP, HSTS, framing and the rest on every response (lib/security-headers.ts); long-lived icons on top
+      return [{ source: "/:path*", headers: security }, ...(await config.headers!())];
+    },
+  };
+};
+
+const config: NextConfig = {
+  poweredByHeader: false,
   // Phriend photos on the landing pages come from the app's CDN.
   images: {
     remotePatterns: [{ protocol: "https", hostname: "cdn.phriend.app" }],
@@ -41,7 +60,6 @@ const nextConfig: NextConfig = {
   // Hostinger counts threads against the account's process limit (shared by every site), and sharp would otherwise
   // start half the server's cores worth of threads per process.
   experimental: { imgOptConcurrency: 1 },
-  // phriend.app/@name is the short form of a Phriend's vanity link; the app serves it.
   // Icons and logos keep their names across deploys: a day in the browser instead of a revalidation on every visit.
   async headers() {
     const headers = [{ key: "Cache-Control", value: "public, max-age=86400, stale-while-revalidate=604800" }];
@@ -49,11 +67,11 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
-      { source: "/@:username", destination: "https://web.phriend.app/@:username", permanent: false },
+      // The Android page is now the download page (old links from the web app).
+      { source: "/android", destination: "/download", permanent: true },
       // The activity landing pages moved to /services when the product became a local-services marketplace.
       { source: "/rent-a-friend/:activity*", destination: "/services/:activity*", permanent: true },
-      // Companionship-era articles unpublished by phriend-api-nestjs sql/027 (rows kept as drafts): to the blog index.
-      // Temporary, so the decision can be undone without browsers holding on to a permanent redirect.
+      // Old articles (not carried into v2): to the blog index. Temporary, so browsers do not hold on to them.
       ...DROPPED_ARTICLES.map((slug) => ({ source: `/blog/${slug}`, destination: "/blog", permanent: false })),
     ];
   },

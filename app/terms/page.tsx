@@ -41,9 +41,9 @@ export default function TermsPage() {
       <p>
         You must be of legal age in the Philippines to use the Service. Republic Act No. 6809 sets the age of majority
         at <strong>18 years</strong>. By using the Service you confirm you are 18 or older. Listing services requires
-        verifying your identity and age: Phriend&apos;s team reviews a government ID and a selfie, stored privately; any
+        verifying your identity and age: a government ID and a selfie are checked and stored privately; any
         member may verify. Providers may also submit optional documents, such as an NBI clearance, certificates or
-        business documents, which show as badges once our team approves them. We
+        business documents, which show as badges once they are approved. We
         may suspend or remove accounts that we reasonably believe belong to a minor.
       </p>
 
@@ -63,7 +63,7 @@ export default function TermsPage() {
           arrangement between members.
         </strong>{" "}
         We do not employ providers, act as anyone&apos;s agent, or vouch for any member. Identity verification confirms
-        that an ID matched a face on a given day, and a document badge confirms that our team checked that document; neither
+        that an ID matched a face on a given day, and a document badge confirms that the document was checked; neither
         is a guarantee of anyone&apos;s work or behaviour.
       </p>
       <p>
@@ -133,9 +133,9 @@ export default function TermsPage() {
       <h2>8. Prohibited uses</h2>
       <p>You may not use the Service to:</p>
       <ul>
-        <li>offer, request or arrange sexual or romantic services, compensated dating or escort services;</li>
+        <li>offer, request or arrange sexual services, paid romance or intimacy, or escort services;</li>
         <li>do anything illegal under the laws of the Republic of the Philippines;</li>
-        <li>list a person&apos;s company rather than a service, or use a service as a pretext for anything else, including hotel-room bookings and overnight stays;</li>
+        <li>list time with a person rather than a defined service, or use a service as a pretext for anything else, including hotel-room bookings and overnight stays;</li>
         <li>request payment outside the rules in section 5, or run any payment scam;</li>
         <li>impersonate any person or organisation, or use another person&apos;s photos or ID;</li>
         <li>post false, misleading or infringing content, fake reviews, or operate multiple accounts;</li>
@@ -146,7 +146,7 @@ export default function TermsPage() {
       <h2>8b. Zero tolerance for objectionable content and abusive behaviour</h2>
       <p>
         <strong>Objectionable content and abusive behaviour are not tolerated on Phriend.</strong> Profiles, services,
-        photos, job posts and chat messages pass an automated filter, and a person approves every listing before it goes
+        photos, job posts and chat messages pass automated checks, and anything uncertain goes to a person before it goes
         live. Any member can report a profile, job post, review or message from the report button in the app, or by email to{" "}
         <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>, and can block another member instantly from the chat.{" "}
         <strong>We review every report within 24 hours</strong>, remove the offending content, and remove the account of

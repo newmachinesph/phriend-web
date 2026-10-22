@@ -2,10 +2,6 @@ import type { Metadata } from "next";
 
 export const SITE_URL = "https://phriend.app";
 export const APP_URL = "https://web.phriend.app";
-/** The Phriend API (data for the landing pages and the blog). Local: http://localhost:8020 (the Nest API). */
-export const API_URL = (process.env.API_URL ?? "https://api.phriend.app").replace(/\/$/, "");
-/** Server-to-server calls carry this so the API's origin gate lets the site's server through (see phriend-api app/security/gate.py). */
-export const apiHeaders = (): HeadersInit => (process.env.API_SERVER_KEY ? { "x-phriend-app": process.env.API_SERVER_KEY } : {});
 /** Static site images and files live on the CDN under site/ (upload with scripts/upload-to-cdn.mjs). Dynamic OG images and canvas inputs stay in public/. */
 const CDN_URL = "https://cdn.phriend.app/site";
 /**
@@ -14,15 +10,16 @@ const CDN_URL = "https://cdn.phriend.app/site";
  */
 export const cdn = (path: string) =>
   /^https?:\/\//.test(path) || path.startsWith("/groups/") ? path : `${CDN_URL}${path.startsWith("/") ? "" : "/"}${path}`;
-/** The Android app on Google Play: an extra. The web app (APP_URL) is the default on every phone. */
-const ANDROID_PACKAGE = "app.phriend.mobile";
-export const PLAY_URL = `https://play.google.com/store/apps/details?id=${ANDROID_PACKAGE}`;
-/** Providers list services, manage bookings, earnings and verification here (the Phriend Provider app is not in the stores yet). */
+/** The client app (app.phriend.mobile) on Google Play. The web app (APP_URL) works on every phone too. */
+export const PLAY_URL = "https://play.google.com/store/apps/details?id=app.phriend.mobile";
+/** The client app on the App Store: null until the owner publishes it (OWNER-STEPS); the header and /download then say it is coming. */
+export const APP_STORE_URL: string | null = null;
+/** Providers list services and manage bookings, earnings and verification here. */
 export const PROVIDER_URL = "https://provider.phriend.app";
-/** The platform the site asks the API for: the iOS store policy, so the site lists exactly what the App Store build shows. */
-export const API_PLATFORM = "ios";
+/** The Phriend Provider app in the stores: null until the owner publishes it; until then the site says it is coming. */
+export const PROVIDER_STORE: { ios: string | null; android: string | null } = { ios: null, android: null };
 export const CONTACT_EMAIL = "support@phriend.app";
-export const LAST_UPDATED = "2026-10-20";
+export const LAST_UPDATED = "2026-10-21";
 
 export const SITE_NAME = "Phriend";
 export const SITE_TITLE = "Phriend: Book Local Services in the Philippines";

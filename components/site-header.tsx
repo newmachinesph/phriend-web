@@ -3,7 +3,8 @@ import Link from "next/link";
 import { APP_URL, cdn } from "@/lib/site";
 import { ButtonLink, Container } from "@/components/ui";
 import { MobileMenu } from "@/components/mobile-menu";
-import { getFeatures } from "@/lib/features";
+import { StoreBadges } from "@/components/store-badges";
+import { getFeatures } from "@/lib/catalogue";
 
 export const NAV = [
   { href: "/services", label: "Services" },
@@ -16,7 +17,7 @@ export const NAV = [
   { href: "/blog", label: "Blog" },
 ] as const;
 
-/** The nav as the apps would show it: Teams only while Ops has the teams switch on. */
+/** The nav as the iOS app would show it: Teams only while the client app has teams on (off in v2.0 on iOS). */
 export async function navItems() {
   const { teams } = await getFeatures();
   return teams ? NAV : NAV.filter((n) => n.href !== "/teams");
@@ -59,7 +60,8 @@ export async function SiteHeader() {
           <Logo height={32} priority />
         </Link>
 
-        <nav aria-label="Primary" className="hidden items-center gap-5 whitespace-nowrap text-base font-bold text-ink lg:flex xl:gap-7">
+        {/* from xl only: with "Book a service" beside it the full nav does not fit at 1024px, so lg keeps the menu */}
+        <nav aria-label="Primary" className="hidden items-center gap-6 whitespace-nowrap text-base font-bold text-ink xl:flex">
           {nav.map((n) => (
             <Link key={n.href} href={n.href} className="rounded-md py-1 transition-colors hover:text-brand-text">
               {n.label}
@@ -68,8 +70,8 @@ export async function SiteHeader() {
         </nav>
 
         <div className="flex items-center gap-2">
-          <ButtonLink href={APP_URL} size="sm" className="hidden sm:inline-flex">
-            Open the app
+          <ButtonLink href={APP_URL} size="sm" className="hidden h-11 items-center sm:inline-flex">
+            Book a service
           </ButtonLink>
           <MobileMenu>
             {nav.map((n) => (
@@ -77,9 +79,13 @@ export async function SiteHeader() {
                 {n.label}
               </Link>
             ))}
-            <ButtonLink href={APP_URL} size="sm" className="mt-1">
-              Open the app
+            <Link href="/download" className="rounded-control px-3 py-2.5 font-bold text-ink hover:bg-surface">
+              Get the app
+            </Link>
+            <ButtonLink href={APP_URL} size="sm" className="mt-1 inline-flex h-11 items-center justify-center">
+              Book a service
             </ButtonLink>
+            <StoreBadges className="mt-2 px-1" />
           </MobileMenu>
         </div>
       </Container>

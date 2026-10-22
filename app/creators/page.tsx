@@ -24,7 +24,7 @@ export const metadata: Metadata = {
 const MESSENGER = "https://m.me/phriendapp";
 
 const STEPS = [
-  { title: "List your service", text: "At provider.phriend.app, verify your identity, list your service with its price and photos, and set a username so your link reads web.phriend.app/@yourname." },
+  { title: "List your service", text: "At provider.phriend.app, verify your identity, list your service with its price and photos, and copy its link: web.phriend.app/services/YOURCODE, or your profile at web.phriend.app/p/yourhandle." },
   { title: "Post one video of your work", text: "A TikTok or Reel showing the service, with your Phriend service card on screen. Make the card below in a few seconds." },
   { title: "Followers comment for 7 days", text: "They follow you and Phriend, like the video, and comment which of your services they'd book." },
   { title: "Best comment wins a free booking", text: "You pick the winner on day 8. They book your service on Phriend, free for them, and Phriend pays your price." },

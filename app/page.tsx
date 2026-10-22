@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { BadgeCheck, Briefcase, CalendarClock, CalendarDays, ChevronDown, CircleCheck, FileCheck, Flag, Lock, MessageCircle, PenLine, Search, Tag, Users, Wallet, Zap, type LucideIcon } from "lucide-react";
+import { BadgeCheck, Briefcase, CalendarClock, CalendarDays, ChevronDown, CircleCheck, FileCheck, Flag, MessageCircle, PenLine, Search, Tag, Users, Wallet, Zap, type LucideIcon } from "lucide-react";
 import { TeamTile } from "@/components/teams";
-import { ServiceGroups } from "@/components/services";
-import { getGroups, getTeams } from "@/lib/landing";
-import { getFeatures } from "@/lib/features";
-import { APP_URL, cdn, pageMeta, PROVIDER_URL, SITE_DESCRIPTION, SITE_URL } from "@/lib/site";
+import { LOADING_NOTE, ServiceGroups } from "@/components/services";
+import { getCatalog, getFeatures, getTeams } from "@/lib/catalogue";
+import { APP_URL, pageMeta, PROVIDER_URL, SITE_DESCRIPTION, SITE_URL } from "@/lib/site";
 import { ButtonLink, Container } from "@/components/ui";
+
+export const revalidate = 600;
 
 export const metadata: Metadata = pageMeta({ description: SITE_DESCRIPTION, path: "/" });
 
@@ -25,19 +26,18 @@ const CLIENT_STEPS: { icon: LucideIcon; title: string; text: string }[] = [
 ];
 
 const PROVIDER_STEPS: { icon: LucideIcon; title: string; text: string }[] = [
-  { icon: BadgeCheck, title: "Verify", text: "Verify your identity with a government ID and a selfie. Add clearances, certificates or business documents to earn a badge for each one our team checks." },
+  { icon: BadgeCheck, title: "Verify", text: "Verify your identity with a government ID and a selfie. Add clearances, certificates or business documents to earn a badge for each one that is approved." },
   { icon: PenLine, title: "Profile", text: "Keep it lean: one round face photo, your name, a title like \"Online Bookkeeper\", a short About me and the languages you speak." },
   { icon: Briefcase, title: "Services", text: "List each service with its own price per job, hour or session, up to six photos of your work, a visit type, a schedule and an area." },
   { icon: CalendarClock, title: "Bookings", text: "Accept requests, chat with clients and let your FAQ answers reply instantly. Clients pay you directly; your bookings and earnings are tracked in one place." },
 ];
 
 const RULES: { icon: LucideIcon; title: string; text: string }[] = [
-  { icon: BadgeCheck, title: "Verified providers", text: "Our team checks a government ID and a selfie before a provider gets the Verified badge, and a person approves every listing before it shows." },
-  { icon: FileCheck, title: "Document badges", text: "NBI clearance, police clearance, barangay certificate, certificates, business documents and proof of address each earn a badge once our team checks them. Not every provider needs every one." },
+  { icon: BadgeCheck, title: "Verified providers", text: "A provider gets the Verified badge once their government ID and a selfie are checked, and every listing is reviewed before it shows." },
+  { icon: FileCheck, title: "Document badges", text: "NBI clearance, police clearance, barangay certificate, certificates, business documents and proof of address each earn a badge once they are checked. Not every provider needs every one." },
   { icon: MessageCircle, title: "The chat is the record", text: "The price, the time and what is included are agreed in the chat and the booking, so both sides can see what was agreed." },
   { icon: Wallet, title: "Pay the provider, as agreed", text: "Payment is agreed with the provider and paid to them directly. Phriend never holds your money." },
-  { icon: Lock, title: "Only the provider's own account", text: "Paying by e-wallet or bank? Send money only to the account the provider gave you in the Phriend chat. Anything else is a scam." },
-  { icon: Flag, title: "Report and block", text: "Report a profile or a job post, and block anyone from the chat. Every report is reviewed by a person." },
+  { icon: Flag, title: "Report and block", text: "Report a service, a profile, a review or a message, and block anyone from the chat. Every report is reviewed." },
 ];
 
 const FEATURES: { title: string; text: string }[] = [
@@ -47,12 +47,12 @@ const FEATURES: { title: string; text: string }[] = [
   { title: "Bookings", text: "Pick a time from the service's schedule. Accept, decline or cancel with a reason, and add it to your calendar." },
   { title: "Chat", text: "Message the provider in the app, with photos, read receipts and typing indicators. Archive or block anyone." },
   { title: "Instant FAQ answers", text: "Providers set answers to the usual questions, like how to pay, the minimum booking or where they work, and the chat replies with them right away." },
-  { title: "Verified and document badges", text: "Verified means our team checked a government ID and a selfie. Document badges show what else was checked." },
+  { title: "Verified and document badges", text: "Verified means a government ID and a selfie were checked. Document badges show what else was checked." },
   { title: "Reviews", text: "A star rating, a few words and photos, left after a booking." },
   { title: "Post a job", text: "Describe what you need with a budget and a date. Providers reply in the chat." },
   { title: "Phriend Provider", text: "Providers list services and manage bookings, earnings and verification at provider.phriend.app." },
   { title: "Notifications", text: "A bell in the app and an email for every message, booking update and review." },
-  { title: "Your account", text: "Sign in with Google or email. Delete your account yourself at any time, from your profile." },
+  { title: "Your account", text: "Sign in with email or Google, or with Apple on iPhone. Download your data or delete your account yourself, in Settings." },
 ];
 
 const FAQ: { q: string; a: string }[] = [
@@ -78,7 +78,7 @@ const FAQ: { q: string; a: string }[] = [
   },
   {
     q: "What does the Verified badge mean?",
-    a: "Our team checked the provider's government ID and a selfie. Document badges show what else was checked: NBI clearance, police clearance, barangay certificate, certificates, business documents or proof of address. Not every provider has every badge, and each one only shows after our team reviews the document.",
+    a: "The provider's government ID and a selfie were checked. Document badges show what else was checked: NBI clearance, police clearance, barangay certificate, certificates, business documents or proof of address. Not every provider has every badge, and each one shows only after the document is reviewed.",
   },
   {
     q: "What are FAQ answers?",
@@ -90,7 +90,7 @@ const FAQ: { q: string; a: string }[] = [
   },
   {
     q: "How do I offer my services?",
-    a: "Go to provider.phriend.app (the Phriend Provider app is coming to the app stores). Verify your identity, set up a short profile with one face photo, a title, an About me and your languages, then list your services with their prices, photos, schedule and area. A person reviews each listing before it goes live.",
+    a: "Go to provider.phriend.app (the Phriend Provider app is coming to the app stores). Verify your identity, set up a short profile with one face photo, a title, an About me and your languages, then list your services with their prices, photos, schedule and area. Each listing is reviewed before it goes live.",
   },
   {
     q: "What if the provider is late or cancels?",
@@ -98,11 +98,11 @@ const FAQ: { q: string; a: string }[] = [
   },
   {
     q: "Do I need to install anything?",
-    a: "No. Phriend runs in the browser at web.phriend.app on any phone or computer; add it to your home screen and it works like an app. On Android you can also get the Phriend app from Google Play.",
+    a: "No. Phriend runs in the browser at web.phriend.app on any phone or computer; add it to your home screen and it works like an app. You can also get the Phriend app for Android from Google Play; the download page has the links.",
   },
   {
     q: "How do I delete my account?",
-    a: "Open My profile, tap Delete account and type DELETE. Your name, photos, verification documents, saved addresses and favorites are deleted right away, and your provider profile, services and job posts are taken down. Reviews about you and the record of your bookings stay, shown as Deleted account. It cannot be undone; the Delete your account page has the details.",
+    a: "Open Settings in the app, tap Delete account and type DELETE. You are signed out everywhere, your profile and services are taken down, and your name, photos, saved details and verification documents are deleted. Reviews and the record of your bookings stay, shown as Deleted account. It cannot be undone; the Delete your account page has the details.",
   },
 ];
 
@@ -186,8 +186,11 @@ function StepTile({ n, icon: Icon, title, text, className = "" }: { n: number; i
 const h2 = "font-display text-h2 font-bold text-ink";
 
 export default async function Home() {
-  const [{ teams }, groups, features] = await Promise.all([getTeams({ limit: 3 }), getGroups(), getFeatures()]);
-  const serviceCount = groups.reduce((n, g) => n + g.categories.length, 0);
+  const [catalog, features] = await Promise.all([getCatalog(), getFeatures()]);
+  // teams only while the client app has them on (v2.0 keeps them off on iOS)
+  const teams = features.teams ? (await getTeams({ limit: 3 })).items : [];
+  const { groups } = catalog;
+  const serviceCount = catalog.categories.length;
   return (
     <main id="main" className="flex-1">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON_LD }} />
@@ -204,7 +207,7 @@ export default async function Home() {
             </p>
             <div className="mt-6 flex flex-col gap-3 sm:mt-8 sm:flex-row">
               <ButtonLink href={APP_URL} className="h-12 py-0 text-[0.9375rem] leading-5">
-                Find a service
+                Book a service
               </ButtonLink>
               <ButtonLink href={PROVIDER_URL} variant="secondary" className="h-12 py-0 text-[0.9375rem] leading-5">
                 List your services
@@ -232,8 +235,8 @@ export default async function Home() {
                 What do you need done?
               </h2>
               <p className="mt-3 text-base leading-relaxed text-body">
-                {serviceCount} kinds of service in {groups.length} groups, from aircon cleaning and appliance check-ups to bookkeeping, tutoring, photo and
-                video, driving and errands. Pick one to see the services on offer.
+                {serviceCount > 0 ? `${serviceCount} kinds of service in ${groups.length} groups, from` : "From"} aircon cleaning and appliance check-ups to
+                bookkeeping, tutoring, photo and video, driving and errands. Pick one to see the services on offer.
               </p>
             </div>
             <Link href="/services" className="font-bold text-brand-text hover:underline">
@@ -241,7 +244,7 @@ export default async function Home() {
             </Link>
           </div>
           <div className="mt-10">
-            <ServiceGroups groups={groups} limit={9} />
+            {catalog.ok ? <ServiceGroups groups={groups} limit={9} /> : <p className="leading-relaxed">{LOADING_NOTE}</p>}
           </div>
         </Container>
       </section>
@@ -282,10 +285,10 @@ export default async function Home() {
             <li className="flex flex-col justify-between rounded-card bg-brand-soft p-6 md:col-span-2 lg:col-span-2">
               <p className="font-display text-h2 font-bold text-ink">Start with a search.</p>
               <p className="mt-2 text-base leading-relaxed text-body">
-                Every provider is verified by our team, and every service shows its price before you book.
+                Every provider is verified with a government ID and a selfie, and every service shows its price before you book.
               </p>
               <ButtonLink href={APP_URL} className="mt-6 w-fit">
-                Find a service
+                Book a service
               </ButtonLink>
             </li>
           </ol>
@@ -334,8 +337,8 @@ export default async function Home() {
         </Container>
       </section>
 
-      {/* Book a team: renders nothing until Ops turns teams on and the API has live teams (/teams is a 404 until then) */}
-      {features.teams && teams.length > 0 && (
+      {/* Book a team: renders nothing while the client app has teams off and until api2 has live teams (/teams is a 404 while off) */}
+      {teams.length > 0 && (
         <section aria-labelledby="teams-title">
           <Container className="py-16 sm:py-24">
             <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
@@ -344,7 +347,7 @@ export default async function Home() {
                   Book a team.
                 </h2>
                 <p className="mt-3 text-base leading-relaxed text-body">
-                  Weddings, events, tours and moves often need more than one provider. A team sells packages and books as one: one chat, one price, one booking. Every member is a verified provider you can also book on their own.
+                  Weddings, events, tours and moves often need more than one provider. A team lists services and books as one: one chat, one price, one booking. Every member is a verified provider.
                 </p>
               </div>
               <Link href="/teams" className="font-bold text-brand-text hover:underline">
@@ -370,17 +373,17 @@ export default async function Home() {
               <h2 id="safety-title" className={h2}>
                 Trust, built in
               </h2>
-              <p className="mt-4 text-lg leading-relaxed">Providers are checked by our team, what you agree is on record, and anything wrong is one tap from a report.</p>
+              <p className="mt-4 text-lg leading-relaxed">Providers are verified, what you agree is on record, and anything wrong is one tap from a report.</p>
               <ButtonLink href="/safety" variant="secondary" className="mt-6">
                 Read the safety rules
               </ButtonLink>
               {/* decorative: left out on phones, where it pushed the rules a full screen down */}
               <div className="relative mt-8 hidden aspect-[4/5] max-w-sm overflow-hidden rounded-card sm:block">
                 <Image
-                  src={cdn("/photos/life-verified.jpg")}
-                  alt="A smiling woman in a cafe holding her phone and giving a thumbs up"
-                  width={1024}
-                  height={1536}
+                  src="/groups/cleaning.jpg"
+                  alt="A cleaner wiping a glass dining table in a sunny apartment, a caddy of cleaning supplies beside her"
+                  width={1280}
+                  height={720}
                   sizes="(min-width: 640px) 384px, 100vw"
                   className="h-full w-full object-cover"
                 />
@@ -420,10 +423,10 @@ export default async function Home() {
                   "Online, in person or hybrid, with its own schedule",
                   "Listed areas, a whole city, or nationwide for online work",
                   "FAQ answers that reply to clients instantly in the chat",
-                  "A Verified badge and a badge for every document our team checks",
+                  "A Verified badge and a badge for every approved document",
                   "Bookings, earnings and verification in one place",
                   "Clients pay you directly, and Phriend takes no cut",
-                  "The Phriend Provider app is coming to the stores; until then, use provider.phriend.app",
+                  "The Phriend Provider app is coming to the app stores; until then, use provider.phriend.app",
                 ].map((t) => (
                   <li key={t} className="flex items-start gap-2.5">
                     <BadgeCheck size={20} className="mt-0.5 shrink-0 text-brand" aria-hidden="true" />
@@ -478,7 +481,7 @@ export default async function Home() {
           <p id="what-is-phriend" className="mb-10 max-w-4xl rounded-card border border-line bg-white p-5 text-lg leading-relaxed sm:p-6">
             <strong className="text-ink">What is Phriend?</strong> Phriend is a marketplace for local services in the Philippines.
             Clients browse services, each with its own price, photos, visit type, schedule and area, then book and chat with the
-            provider in the app and pay the provider directly. Every provider is verified by our team.
+            provider in the app and pay the provider directly. Every provider is verified with a government ID and a selfie.
           </p>
           <div className="grid gap-10 lg:grid-cols-[0.7fr_1.3fr]">
             <div>
@@ -516,11 +519,11 @@ export default async function Home() {
               Ready to get it done?
             </h2>
             <p className="mx-auto mt-4 max-w-xl text-lg text-white/85">
-              Open the app, search for the service you need and message the provider. Browsing is free, and so is listing your services.
+              Search for the service you need, message the provider and book. Browsing is free, and so is listing your services.
             </p>
             <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
               <ButtonLink href={APP_URL} className="text-lg">
-                Open the app
+                Book a service
               </ButtonLink>
               <ButtonLink href={PROVIDER_URL} variant="secondary" className="text-lg">
                 List your services

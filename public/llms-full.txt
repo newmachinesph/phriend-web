@@ -23,13 +23,13 @@ Chat: message the provider in the app, with photos, read receipts and typing ind
 
 Instant FAQ answers: providers set answers to the usual questions, like how to pay, the minimum booking or where they work, and the chat replies with them right away.
 
-Verified and document badges: Verified means our team checked a government ID and a selfie. Document badges show what else was checked.
+Verified and document badges: Verified means a government ID and a selfie were checked. Document badges show what else was checked.
 
 Reviews: a star rating, a few words and photos, left after a booking.
 
 Post a job: describe what you need with a budget and a date. Providers reply in the chat.
 
-Teams: a few verified providers who offer a service together, with one team page, packages and one group chat. Each member keeps their own profile and services. Browse teams by city at https://phriend.app/teams.
+Teams: a few verified providers who offer a service together, with one team page, packages and one group chat. Each member keeps their own profile and services. Teams are in the app where they are available.
 
 Phriend Provider: providers list services and manage bookings, earnings and verification at https://provider.phriend.app.
 
@@ -58,7 +58,7 @@ Q: Does Phriend take a commission?
 A: Not yet. Providers keep everything clients pay them. If this changes we will announce it well ahead of time.
 
 Q: What does the Verified badge mean?
-A: Our team checked the provider's government ID and a selfie. Document badges show what else was checked: NBI clearance, police clearance, barangay certificate, certificates, business documents or proof of address. Not every provider has every badge, and each one only shows after our team reviews the document.
+A: The provider's government ID and a selfie were checked. Document badges show what else was checked: NBI clearance, police clearance, barangay certificate, certificates, business documents or proof of address. Not every provider has every badge, and each one only shows after the document is approved.
 
 Q: What are FAQ answers?
 A: Answers a provider writes to the questions clients ask most, such as how to pay, the minimum booking or where they work. Ask in the chat and the answer arrives instantly; the provider can follow up from there.
@@ -70,7 +70,7 @@ Q: How do I offer my services?
 A: Go to provider.phriend.app (the Phriend Provider app is coming to the app stores). Verify your identity, set up a short profile with one face photo, a title, an About me and your languages, then list your services with their prices, photos, schedule and area. A person reviews each listing before it goes live.
 
 Q: What is a team?
-A: A few verified providers who offer a service together, for example a photographer, a videographer and a host for one event. A team has one page, packages with a price, and one group chat. You send one booking request and the team lead accepts or declines for everyone. Payment is agreed with the team lead and paid to the team directly. Teams are listed at https://phriend.app/teams.
+A: A few verified providers who offer a service together, for example a photographer, a videographer and a host for one event. A team has one page, packages with a price, and one group chat. You send one booking request and the team lead accepts or declines for everyone. Payment is agreed with the team lead and paid to the team directly.
 
 Q: What if the provider is late or cancels?
 A: You may cancel if the other side is more than 30 minutes late without notice, and anything already paid to a provider who is late or cancels late is refunded in full. Cancel at least 24 hours ahead. The full rules are on the safety page.
@@ -89,10 +89,10 @@ https://phriend.app/safety
 
 These rules apply to every member, clients and providers alike. They are short on purpose. Breaking them gets an account removed. Phriend is a platform only: it is not a party to any booking or payment and is not liable for any loss, injury, dispute, unpaid balance or harm between members. You use the service at your own risk.
 
-In short: Every provider is verified by our team, and document badges show what else was checked. Agree the price, the time and what is included in the chat and the booking, so both sides have the record. Payment is agreed with the provider and paid to them directly; never pay more upfront than you agreed in the chat, and only to the account the provider gave you there. Late by more than 30 minutes or cancelled late: anything already paid is refunded. Report anything that breaks these rules.
+In short: Every provider is verified with a government ID and a selfie, and document badges show what else was checked. Agree the price, the time and what is included in the chat and the booking, so both sides have the record. Payment is agreed with the provider and paid to them directly; never pay more upfront than you agreed in the chat, and only to the account the provider gave you there. Late by more than 30 minutes or cancelled late: anything already paid is refunded. Report anything that breaks these rules.
 
 1. Verified providers and document badges
-Before a provider gets the Verified badge, our team checks a government ID and a selfie of them holding it. Providers can also submit an NBI clearance, a police clearance, a barangay certificate, certificates, business documents or proof of address; each one our team approves shows as its own badge on the provider's profile. Not every provider needs every document, so look for the badges that matter for the job. A person approves every listing before it goes live.
+Before a provider gets the Verified badge, a government ID and a selfie of them holding it are checked. Providers can also submit an NBI clearance, a police clearance, a barangay certificate, certificates, business documents or proof of address; each one that is approved shows as its own badge on the provider's profile. Not every provider needs every document, so look for the badges that matter for the job. Every listing is checked before it goes live, and anything uncertain goes to a person.
 Verification confirms that a document matched a person on a given day. It is not a guarantee of anyone's work or behaviour, which is why reviews and the rules below matter too.
 
 2. Where services happen
@@ -158,7 +158,7 @@ https://phriend.app/community-guidelines
 
 Phriend is for legitimate local services: work you book from a verified provider, done online or in person, between adults. This page says exactly what that means.
 
-In short: Phriend is for legitimate local services between adults, done online or in person: aircon cleaning and repairs, appliance check-ups, bookkeeping and tax filing, tutoring, photo and video, driving, errands and the like. Any sexual or romantic service, compensated dating, escort services, drugs, scams and impersonation are banned and get an account removed immediately, with a report to the authorities where the law requires it.
+In short: Phriend is for legitimate local services between adults, done online or in person: aircon cleaning and repairs, appliance check-ups, bookkeeping and tax filing, tutoring, photo and video, driving, errands and the like. Any sexual service, paid romance or intimacy, escort services, drugs, scams and impersonation are banned and get an account removed immediately, with a report to the authorities where the law requires it.
 
 1. What Phriend is for
 A service on Phriend is work you book from a provider: a repair, a cleaning, a lesson, a shoot, a tax filing, a drive, an errand. The relationship is professional. If you would not do it in front of your parents or a police officer, it does not belong on Phriend.
@@ -180,7 +180,7 @@ If your service is not on the list but is a legal, professional service, it is p
 3. Prohibited
 The following are banned. Offering, requesting or hinting at any of them gets an account removed.
 - Any sexual or romantic service. This includes anything "intimate", "private", "special", cuddling, massage, or any physical contact beyond a normal greeting.
-- Compensated dating. Phriend is not a dating service. Any arrangement where romance, affection or intimacy is exchanged for money, gifts or favours is banned.
+- Paid romance or intimacy. Any arrangement where romance, affection or intimacy is exchanged for money, gifts or favours is banned.
 - Escort services of any kind, including "overnight" bookings, trips with shared rooms, or hotel-room bookings.
 - Drugs: buying, selling, using or being under the influence during a booking.
 - Alcohol with minors. Phriend is 18+, and any listing built around drinking that targets or involves anyone under 18 is banned. Drinking is never the point of a booking, and a member who is drunk may be asked to leave.
@@ -205,7 +205,7 @@ A team is a few verified providers who offer a service together, for example a p
 - Either side can cancel as with any booking. If a member cannot make it, the team lead cancels or rebooks.
 
 6. Zero tolerance for objectionable content and abusive behaviour
-Objectionable content and abusive behaviour are not tolerated on Phriend. Profiles, services, photos, job posts and chat messages pass an automated filter, and a person approves every listing before it goes live. Any member can report a profile, job post, review or message from the report button in the app, or by email to support@phriend.app, and can block another member instantly from the chat. We review every report within 24 hours, remove the offending content, and remove the account of any member who breaks these rules. There is no warning for the items in section 3.
+Objectionable content and abusive behaviour are not tolerated on Phriend. Profiles, services, photos, job posts and chat messages pass automated checks, and anything uncertain goes to a person before it goes live. Any member can report a profile, job post, review or message from the report button in the app, or by email to support@phriend.app, and can block another member instantly from the chat. We review every report within 24 hours, remove the offending content, and remove the account of any member who breaks these rules. There is no warning for the items in section 3.
 
 7. Consequences
 Breaking these guidelines leads to immediate removal of the account and any related accounts. Where the law requires it, or where someone's safety is at risk, we report to the authorities and cooperate fully with investigations.

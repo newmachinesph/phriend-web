@@ -3,10 +3,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Check } from "lucide-react";
-import { activityPath, appCategoryUrl, getCategories } from "@/lib/landing";
+import { CatalogIcon, LOADING_NOTE, ServiceGrid } from "@/components/services";
+import { getCatalog, getFeatures, getServices, groupOf } from "@/lib/catalogue";
+import { escapeJsonLd, itemListJsonLd } from "@/lib/landing";
+import { appCategoryUrl, categoryPath } from "@/lib/links";
 import { findOccasion, OCCASION_IMAGE, OCCASIONS, occasionImage } from "@/lib/occasions";
 import { APP_URL, pageMeta, PROVIDER_URL, SITE_URL } from "@/lib/site";
-import { getFeatures } from "@/lib/features";
 import { ButtonLink, Container } from "@/components/ui";
 
 export const revalidate = 600;
@@ -25,31 +27,32 @@ export async function generateMetadata({ params }: { params: Promise<{ occasion:
 export default async function OccasionPage({ params }: { params: Promise<{ occasion: string }> }) {
   const o = findOccasion((await params).occasion);
   if (!o) notFound();
-  const [categories, { teams: teamsOn }] = await Promise.all([getCategories(), getFeatures()]);
-  const book = o.book.map((slug) => categories.find((c) => c.slug === slug)).filter((c) => c !== undefined); // a category Ops removed drops off
+  const [catalog, { teams: teamsOn }] = await Promise.all([getCatalog(), getFeatures()]);
+  // a category Ops removed, renamed or hid on iOS drops off
+  const book = o.book.map((slug) => catalog.categories.find((c) => c.slug === slug)).filter((c) => c !== undefined);
+  const services = book.length > 0 ? await getServices({ category: book.map((c) => c.slug) }) : { ok: catalog.ok, items: [] };
+  const iconOf = new Map(catalog.categories.map((c) => [c.id, c.icon]));
   const others = OCCASIONS.filter((x) => x.slug !== o.slug);
   const path = `/occasions/${o.slug}`;
 
-  const jsonLd = JSON.stringify({
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "BreadcrumbList",
-        itemListElement: [
-          { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
-          { "@type": "ListItem", position: 2, name: "Occasions", item: `${SITE_URL}/occasions` },
-          { "@type": "ListItem", position: 3, name: o.name, item: `${SITE_URL}${path}` },
-        ],
-      },
-      { "@type": "ImageObject", contentUrl: occasionImage(o.slug), ...OCCASION_IMAGE, caption: `${o.name} in the Philippines` },
-      { "@type": "FAQPage", mainEntity: o.faq.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })) },
-      {
-        "@type": "ItemList",
-        name: `Services to book for a ${o.name.toLowerCase()}`,
-        itemListElement: book.map((c, i) => ({ "@type": "ListItem", position: i + 1, name: c.label, url: `${SITE_URL}${activityPath(c)}` })),
-      },
-    ],
-  }).replace(/</g, "\\u003c"); // category labels come from the API
+  const jsonLd = escapeJsonLd(
+    JSON.stringify({
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
+            { "@type": "ListItem", position: 2, name: "Occasions", item: `${SITE_URL}/occasions` },
+            { "@type": "ListItem", position: 3, name: o.name, item: `${SITE_URL}${path}` },
+          ],
+        },
+        { "@type": "ImageObject", contentUrl: occasionImage(o.slug), ...OCCASION_IMAGE, caption: `${o.name} in the Philippines` },
+        { "@type": "FAQPage", mainEntity: o.faq.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })) },
+        ...(services.items.length > 0 ? [itemListJsonLd(`Services to book for a ${o.name.toLowerCase()}`, services.items)] : []),
+      ],
+    }),
+  ); // category labels and service titles come from the API
 
   return (
     <Container as="main" id="main" className="pb-14 pt-8 sm:py-20">
@@ -83,27 +86,49 @@ export default async function OccasionPage({ params }: { params: Promise<{ occas
         <h2 id="book-title" className="font-display text-h2 font-bold text-ink">
           Who to book for a {o.name.toLowerCase()}
         </h2>
-        <ul className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {book.map((c) => (
-            <li key={c.slug} className="flex flex-col rounded-card border border-line bg-white p-6">
-              <h3 className="font-display text-h3 font-bold text-ink">
-                <Link href={activityPath(c)} className="hover:text-brand-text">
-                  {c.label}
-                </Link>
-              </h3>
-              {c.activities.length > 0 && <p className="mt-2 flex-1 text-base leading-relaxed">{c.activities.slice(0, 5).join(", ")}</p>}
-              <div className="mt-4 flex flex-wrap gap-x-4 gap-y-1 text-sm font-bold">
-                <a href={appCategoryUrl(c)} className="text-brand-text hover:underline">
-                  See the services
-                </a>
-                <Link href={activityPath(c)} className="text-muted hover:text-ink">
-                  About {c.label.toLowerCase()}
-                </Link>
-              </div>
-            </li>
-          ))}
-        </ul>
+        {!catalog.ok ? (
+          <p className="mt-3 max-w-2xl leading-relaxed">{LOADING_NOTE}</p>
+        ) : (
+          <ul className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {book.map((c) => {
+              const group = groupOf(catalog, c);
+              return (
+                <li key={c.slug} className="flex min-w-0 items-start gap-4 rounded-card border border-line bg-white p-5">
+                  <span className="flex size-11 shrink-0 items-center justify-center rounded-control bg-brand-soft text-brand-text">
+                    <CatalogIcon name={c.icon ?? group?.icon} size={22} aria-hidden="true" />
+                  </span>
+                  <div className="min-w-0">
+                    <h3 className="font-display text-h3 font-bold text-ink">
+                      <Link href={categoryPath(c)} className="hover:text-brand-text">
+                        {c.label}
+                      </Link>
+                    </h3>
+                    {group && (
+                      <a href={appCategoryUrl(group, c)} className="mt-1 inline-block text-sm font-bold text-brand-text hover:underline">
+                        See the services
+                      </a>
+                    )}
+                  </div>
+                </li>
+              );
+            })}
+          </ul>
+        )}
       </section>
+
+      {book.length > 0 && (
+        <section aria-labelledby="services-title" className="mt-14">
+          <h2 id="services-title" className="font-display text-h2 font-bold text-ink">
+            Services for a {o.name.toLowerCase()}
+          </h2>
+          <ServiceGrid
+            services={services.items}
+            ok={services.ok}
+            iconFor={(s) => iconOf.get(s.categoryId)}
+            empty={<p>No services listed for this occasion yet. New providers join every week; check back soon.</p>}
+          />
+        </section>
+      )}
 
       <section aria-labelledby="tips-title" className="mt-14 grid gap-8 lg:grid-cols-2">
         <div>
@@ -159,7 +184,7 @@ export default async function OccasionPage({ params }: { params: Promise<{ occas
         <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
           <ButtonLink href={PROVIDER_URL}>List your services</ButtonLink>
           <ButtonLink href={APP_URL} variant="secondary">
-            Open the app
+            Book a service
           </ButtonLink>
         </div>
       </section>

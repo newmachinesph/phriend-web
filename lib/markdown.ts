@@ -7,13 +7,15 @@ import Markdown, { type Components } from "react-markdown";
  * - no raw HTML: HTML in the Markdown is dropped (`skipHtml`), and only the element list below survives;
  * - links: https, http, mailto or a path on this site; anything else keeps its text and loses the link;
  *   links off phriend.app get `rel="noopener nofollow"`;
- * - images: https from the CDN only (the site's CSP `img-src`); anything else shows its alt text.
+ * - images: https from the CDN's blog media only (the site's CSP `img-src`); anything else shows its alt text.
  *
  * Kept free of `@/` and relative imports so `node --test lib/markdown.test.mjs` can load it (no JSX for the same reason).
  */
 
 const SITE_HOSTS = new Set(["phriend.app", "www.phriend.app"]);
 const IMAGE_HOSTS = new Set(["cdn.phriend.app"]);
+/** Blog images are Ops uploads (api2 `blog_cover` media); other stored objects (members' media) are not embeddable. */
+const IMAGE_PATH_PREFIX = "/v2/blog_cover/";
 const LINK_SCHEMES = new Set(["https", "http", "mailto"]);
 const SCHEME = /^([a-z][a-z0-9+.-]*):/i;
 
@@ -41,7 +43,7 @@ export function safeImageSrc(raw: string): string | undefined {
   if (hasHiddenParts(url) || !/^https:\/\//i.test(url)) return undefined;
   try {
     const u = new URL(url);
-    return u.protocol === "https:" && IMAGE_HOSTS.has(u.hostname) && u.username === "" && u.password === "" ? u.href : undefined;
+    return u.protocol === "https:" && IMAGE_HOSTS.has(u.hostname) && u.port === "" && u.pathname.startsWith(IMAGE_PATH_PREFIX) && u.username === "" && u.password === "" ? u.href : undefined;
   } catch {
     return undefined;
   }

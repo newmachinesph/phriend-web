@@ -26,7 +26,7 @@ async function coverAsJpeg(url: string): Promise<string | null> {
   const inlined = await inlinePhoto(url);
   if (!inlined) return null;
   try {
-    const jpeg = await sharp(Buffer.from(inlined.slice(inlined.indexOf(",") + 1), "base64")).resize(1200, 630, { fit: "cover" }).jpeg({ quality: 82 }).toBuffer();
+    const jpeg = await sharp(Buffer.from(inlined.slice(inlined.indexOf(",") + 1), "base64"), { limitInputPixels: 25_000_000, failOn: "error" }).resize(1200, 630, { fit: "cover" }).jpeg({ quality: 82 }).toBuffer();
     return `data:image/jpeg;base64,${jpeg.toString("base64")}`;
   } catch {
     return null;

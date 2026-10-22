@@ -3,7 +3,7 @@ import { findPost, POSTS, type Post } from "@/app/blog/_posts";
 import { blog, isCdnImage, safeImageUrl } from "@/lib/api";
 import { degraded } from "@/lib/catalogue";
 import { readingMinutes } from "@/lib/markdown";
-import { blogBodyProblem, blogSlugSchema, isOnProductText, PAGE, type BlogArticle, type BlogCard } from "@/lib/phriend2";
+import { BLOG_LIMITS, blogBodyProblem, blogSlugSchema, isOnProductText, PAGE, type BlogArticle, type BlogCard } from "@/lib/phriend2";
 
 /**
  * The blog (SPEC 13e §2.2): the coded articles in `app/blog/_posts` plus Ops articles from `GET /v1/content/blog`.
@@ -97,7 +97,9 @@ export async function getBlogEntries(): Promise<BlogEntry[]> {
   return [...coded, ...fromApi].sort(newestFirst);
 }
 
+/** The contracts text rule, the body rule and the body limit (a longer body is refused by api2 and never parsed here). */
 const articleIsSafe = (a: BlogArticle) =>
+  a.body.length <= BLOG_LIMITS.body.max &&
   isOnProductText([a.title, a.description ?? "", a.seoTitle ?? "", a.tags.join(" "), a.body].join("\n")) && blogBodyProblem(a.body) === null;
 
 /** One article, or null for an unknown, unpublished, off-product or unsafe slug (the page answers 404). */

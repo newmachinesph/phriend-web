@@ -118,7 +118,6 @@ export const PUBLISH_CHECKLIST = [
   { key: "identity", label: "Profile photo, name and title", link: "/profile", codes: ["avatar", "display_name", "title"] },
   { key: "place", label: "Languages and base city", link: "/profile", codes: ["languages", "base_city", "birthdate"] },
   { key: "service", label: "At least one service ready", link: "/services", codes: ["service"] },
-  { key: "verification", label: "Verified: government ID and selfie", link: "/verification", codes: ["verification"] },
   { key: "about", label: "About me (optional)", link: "/profile", codes: [] },
 ] as const satisfies readonly { key: string; label: string; link: string; codes: readonly ProfileMissing[] }[];
 
@@ -151,10 +150,16 @@ export const providerProfileSchema = z.object({
   languages: z.array(z.string()),
   /** the share link is `<clientWebUrl>/p/<handle>` */
   handle: z.string().nullable(),
+  /** the provider's last own handle change (null: none since sign-up) */
+  handleChangedAt: iso.nullable(),
+  /** when the handle may change again (null: now; one change per 30 days, HANDLE_POLICY) */
+  handleChangeAllowedAt: iso.nullable(),
   avatar: providerAvatarSchema,
   status: z.enum(PROVIDER_STATUSES),
   /** set while paused */
   pausedReason: z.enum(PROFILE_PAUSE_REASONS).nullable(),
+  /** while hidden or suspended by Phriend: why ("Taken down by Phriend · <reason>"); null otherwise */
+  statusReason: z.string().nullable(),
   publishedAt: iso.nullable(),
   lastActiveAt: iso.nullable(),
   /** while live: the Manila day the inactivity pause is due (moves with every app use) */

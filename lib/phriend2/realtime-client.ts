@@ -18,7 +18,8 @@
  *
  * Typing channels are peer to peer (each member publishes on their own): the kit delivers only a well-formed
  * `typing { on }` event from them and drops anything else, so nothing unmoderated reaches the app.
- * A token answer of 401 (signed out) stops the retries; `reconnect()` after signing in starts again.
+ * A token answer of 401 (signed out) stops the retries and calls `onUnauthorized` (the app signs out at once);
+ * `reconnect()` after signing in starts again.
  */
 import type { Client } from "./client";
 import { parseChannel, type RealtimeMessage, type RealtimeToken, realtimeTokenSchema, typingChannel, typingEventSchema } from "./realtime";
@@ -41,6 +42,13 @@ export interface RealtimeClient {
   setOnline(online: boolean): void;
   /** reconnect now (the app came back to the foreground) */
   reconnect(): void;
+  /**
+   * True when the current token covers `channel` (null before the first token). A conversation created or joined after
+   * the token was issued is not in it: call `reauthorize()` (the chat kit does it when it subscribes).
+   */
+  covers(channel: string): boolean | null;
+  /** fetches a fresh token now and moves the connection onto it (new conversations join the capability) */
+  reauthorize(): Promise<void>;
   close(): void;
 }
 
@@ -49,6 +57,8 @@ export interface RealtimeClient {
 /** The part of `ably`'s Realtime client the kit uses. */
 export interface AblyRealtimeLike {
   connection: { state: string; on(fn: (change: { current: string; previous?: string }) => void): void; connect(): void; close(): void };
+  /** `auth.authorize()` upgrades a live connection to a fresh token (Ably RTC8) */
+  auth?: { authorize(): Promise<unknown> };
   channels: { get(name: string): { subscribe(fn: (m: { id?: string; name?: string; data?: unknown }) => void): unknown; unsubscribe(): void; publish(name: string, data: unknown): Promise<unknown>; detach?(): unknown } };
   close(): void;
 }
@@ -80,6 +90,13 @@ export interface RealtimeClientOptions {
   EventSource?: EventSourceCtor;
   /** reconnect delays of the local transport, in ms */
   backoffMs?: number[];
+  /** called each time the token route answers 401: the session is gone, so the app signs the member out */
+  onUnauthorized?: () => void;
+  /**
+   * Where tokens come from (default: `POST /v1/realtime/token` on every call). The chat kit passes a shared source
+   * that keeps a local token until it nearly expires and joins concurrent requests (api-gaps 20).
+   */
+  getToken?: (opts: { fresh: boolean }) => Promise<RealtimeToken>;
 }
 
 const BACKOFF = [1000, 2000, 5000, 10_000, 30_000];
@@ -90,17 +107,50 @@ interface Transport {
   watch(channel: string): void;
   unwatch(channel: string): void;
   publishTyping(channel: string, on: boolean): Promise<void>;
+  reauthorize(): Promise<void>;
 }
 
 interface TransportEvents {
   state(s: ConnectionState): void;
   message(m: RealtimeMessage): void;
+  /** the token route answered 401 */
+  unauthorized(): void;
+  /** a token was fetched (its capability is what `covers` checks) */
+  token(t: RealtimeToken): void;
+  /** the token source (the app's, or the default route) */
+  getToken?: () => Promise<RealtimeToken>;
 }
 
-async function fetchToken(api: Client): Promise<RealtimeToken> {
+/** `POST /v1/realtime/token`; a failure carries the api error (`signedOut` reads it). */
+export async function requestRealtimeToken(api: Client): Promise<RealtimeToken> {
   const r = await api.post("/v1/realtime/token", undefined, { schema: realtimeTokenSchema });
   if (!r.ok) throw Object.assign(new Error(r.error.message), { error: r.error });
   return r.data;
+}
+
+async function fetchToken(api: Client, ev: Pick<TransportEvents, "unauthorized" | "token" | "getToken">): Promise<RealtimeToken> {
+  try {
+    const t = await (ev.getToken ? ev.getToken() : requestRealtimeToken(api));
+    ev.token(t);
+    return t;
+  } catch (e) {
+    if (signedOut(e)) ev.unauthorized();
+    throw e;
+  }
+}
+
+/** The channels a token lets its holder subscribe to. */
+export function tokenChannels(t: RealtimeToken): Set<string> {
+  let cap: Record<string, string[]> = {};
+  if (t.driver === "local") cap = t.capability;
+  else {
+    try {
+      cap = JSON.parse(t.tokenRequest.capability) as Record<string, string[]>;
+    } catch {
+      cap = {};
+    }
+  }
+  return new Set(Object.keys(cap).filter((c) => (cap[c] ?? []).includes("subscribe")));
 }
 
 /** The token route answered 401: the member is signed out, and retrying cannot help. */
@@ -125,7 +175,7 @@ function ablyTransport(Realtime: AblyRealtimeCtor, api: Client, ev: TransportEve
         echoMessages: false,
         closeOnUnload: true,
         authCallback: (_params, cb) => {
-          fetchToken(api).then(
+          fetchToken(api, ev).then(
             (t) => (t.driver === "ably" ? cb(null, t.tokenRequest) : cb(new Error("api2 is not on the Ably driver"), null)),
             // a 403 from authCallback is fatal to Ably (RSA4d): signed out, it stops retrying
             (e: unknown) => cb(signedOut(e) ? Object.assign(new Error("signed out"), { statusCode: 403, code: 40300 }) : e, null),
@@ -155,6 +205,15 @@ function ablyTransport(Realtime: AblyRealtimeCtor, api: Client, ev: TransportEve
     async publishTyping(channel, on) {
       if (!client) throw new Error("not connected");
       await client.channels.get(channel).publish("typing", { on });
+    },
+    async reauthorize() {
+      if (!client?.auth) return;
+      await client.auth.authorize();
+      // channels refused under the old token attach again with the new capability
+      for (const name of watched) {
+        client.channels.get(name).unsubscribe();
+        attach(name);
+      }
     },
   };
 }
@@ -191,7 +250,7 @@ function localTransport(ES: EventSourceCtor, api: Client, baseUrl: string, ev: T
     if (closed || g !== gen) return;
     try {
       if (!fresh(token)) {
-        const t = await fetchToken(api);
+        const t = await fetchToken(api, ev);
         if (t.driver !== "local") throw new Error("api2 is not on the local driver");
         token = t;
       }
@@ -258,8 +317,16 @@ function localTransport(ES: EventSourceCtor, api: Client, baseUrl: string, ev: T
     },
     watch() {},
     unwatch() {},
+    async reauthorize() {
+      token = null;
+      if (closed) return;
+      gen++;
+      if (timer) clearTimeout(timer);
+      timer = null;
+      await connect(gen);
+    },
     async publishTyping(channel, on) {
-      if (!fresh(token)) token = (await fetchToken(api)) as typeof token;
+      if (!fresh(token)) token = (await fetchToken(api, ev)) as typeof token;
       if (!token || token.driver !== "local") throw new Error("api2 is not on the local driver");
       const r = await api.post(token.publishPath, { token: token.token, channel, name: "typing", data: { on } });
       if (!r.ok) throw Object.assign(new Error(r.error.message), { error: r.error });
@@ -287,6 +354,17 @@ export function createRealtimeClient(opts: RealtimeClientOptions): RealtimeClien
   const resumeFns = new Set<() => void>();
   /** ids seen recently per channel: a re-published event arrives once */
   const seen = new Map<string, string[]>();
+  /** the subscribable channels of the newest token */
+  let covered: Set<string> | null = null;
+  /** the next token must be a new one (reauthorize), not a shared cached one */
+  let forceFresh = false;
+  const getToken = opts.getToken
+    ? () => {
+        const fresh = forceFresh;
+        forceFresh = false;
+        return opts.getToken!({ fresh });
+      }
+    : undefined;
 
   const setState = (s: ConnectionState) => {
     // while the device is offline every transport state reads as offline; only close() ends in closed
@@ -313,7 +391,15 @@ export function createRealtimeClient(opts: RealtimeClientOptions): RealtimeClien
     for (const fn of fns) fn(m);
   };
 
-  const events: TransportEvents = { state: setState, message: deliver };
+  const events: TransportEvents = {
+    state: setState,
+    message: deliver,
+    unauthorized: () => opts.onUnauthorized?.(),
+    token: (t) => {
+      covered = tokenChannels(t);
+    },
+    getToken,
+  };
 
   const start = (): Promise<void> => {
     if (transport || starting || closed) return starting ?? Promise.resolve();
@@ -325,7 +411,7 @@ export function createRealtimeClient(opts: RealtimeClientOptions): RealtimeClien
       for (let i = 0; !first; i++) {
         if (closed) return;
         try {
-          first = await fetchToken(opts.api);
+          first = await fetchToken(opts.api, events);
         } catch (e) {
           if (signedOut(e) || closed) throw e;
           setState("reconnecting");
@@ -402,6 +488,15 @@ export function createRealtimeClient(opts: RealtimeClientOptions): RealtimeClien
       } else if (transport) {
         transport.open();
       } else void start().catch(() => setState("closed"));
+    },
+    covers(channel) {
+      return covered ? covered.has(channel) : null;
+    },
+    async reauthorize() {
+      if (closed) return;
+      forceFresh = true;
+      if (!transport) return start();
+      await transport.reauthorize();
     },
     reconnect() {
       if (!online || closed) return;

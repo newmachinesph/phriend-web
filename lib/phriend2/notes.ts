@@ -17,6 +17,8 @@ export const noteSchema = z.object({
   title: z.string().nullable(),
   body: z.string(),
   bookingId: z.string().nullable(),
+  /** the booking the note is about (title and start), or null */
+  booking: z.object({ serviceTitle: z.string(), startsAt: iso }).nullable(),
   version: z.number().int(),
   createdAt: iso,
   updatedAt: iso,

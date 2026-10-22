@@ -34,7 +34,7 @@ export function parseChannel(name: string): ParsedChannel | null {
 
 export const CONV_EVENTS = ["message.new", "message.deleted", "reaction", "read", "booking.updated"] as const;
 export const TYPING_EVENTS = ["typing"] as const;
-export const ACCOUNT_EVENTS = ["inbox.updated", "counts", "notification.new", "session.revoked"] as const;
+export const ACCOUNT_EVENTS = ["inbox.updated", "counts", "notification.new", "session.revoked", "booking.updated"] as const;
 export type ConvEvent = (typeof CONV_EVENTS)[number];
 export type AccountEvent = (typeof ACCOUNT_EVENTS)[number];
 export type RealtimeEventName = ConvEvent | AccountEvent | "typing";

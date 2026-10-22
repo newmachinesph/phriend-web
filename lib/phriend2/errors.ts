@@ -41,6 +41,20 @@ export const ERROR_STATUS = {
   invalid_credentials: 401,
   /** a transition the resource's state does not allow (W1 supply: resume a draft, pause a draft service) */
   invalid_state: 409,
+  /** W2 bookings: the client and the provider blocked each other (either way) */
+  blocked: 403,
+  /** W2 bookings: the address is outside the area the service covers (`fields.addressId`) */
+  out_of_area: 422,
+  /** W3 content: an article with words of the earlier product (off-product.ts) cannot go live (SPEC 13e G8) */
+  off_product: 422,
+  /** chat (W3): the sender is muted (strikes or Ops) until a time the message names */
+  muted: 403,
+  /** chat (W3): the message broke the offensive-word list; a strike was recorded (the strike line is in `fields.body`) */
+  moderated: 422,
+  /** gigs: the gig is closed (or past) and takes no new applicants */
+  gig_closed: 409,
+  /** gigs: the provider's own profile is not live, so they cannot apply */
+  profile_not_live: 409,
 } as const;
 
 export type ErrorCode = keyof typeof ERROR_STATUS;
@@ -104,6 +118,13 @@ export const DEFAULT_MESSAGES: Record<ErrorCode, string> = {
   closed: "This account was closed.",
   invalid_credentials: "Wrong email or password.",
   invalid_state: "This can't be done right now.",
+  blocked: "You can't book this provider.",
+  out_of_area: "This address is outside the area this service covers. Pick another address.",
+  off_product: "This article uses words Phriend no longer uses. Edit the marked text, then publish.",
+  muted: "You can't send messages right now.",
+  moderated: "Please keep it respectful. Your message was not sent.",
+  gig_closed: "This gig is closed to new applicants.",
+  profile_not_live: "Publish your profile to apply to gigs.",
 };
 
 export function isErrorCode(v: unknown): v is ErrorCode {

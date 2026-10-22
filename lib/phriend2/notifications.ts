@@ -8,6 +8,7 @@
  * "service"; people are named by their display name.
  */
 import { z } from "zod";
+import type { ApiResult, Client } from "./client";
 import { uuidSchema } from "./ids";
 import type { NotificationCategory } from "./me";
 import { formatDate, formatDateTime, formatTime } from "./time";
@@ -118,7 +119,7 @@ export const NOTIFICATION_KINDS = {
   // ---- messages ----
   message: kind({
     sides: ["client", "provider"], group: "messages", category: "messages", bell: false, push: true, email: false,
-    data: z.strictObject({ conversationId: uuidSchema, messageId: uuidSchema, name, preview: z.string().max(500) }),
+    data: z.strictObject({ conversationId: uuidSchema, messageId: z.string().regex(/^[1-9][0-9]{0,19}$/), name, preview: z.string().max(500) }),
     text: (d) => ({ title: d.name, body: d.preview ? d.preview : "Sent you a photo." }),
     href: (d) => `/chat/${d.conversationId}`,
   }),
@@ -158,23 +159,49 @@ export const NOTIFICATION_KINDS = {
   service_photo_removed: kind({
     sides: ["provider"], group: "account", category: null, bell: true, push: true, email: true,
     data: z.strictObject({ serviceId: uuidSchema, serviceTitle: title, reason }),
-    text: (d) => ({ title: "Photo removed", body: `A photo of ${d.serviceTitle} was removed: ${d.reason}` }),
+    text: (d) => ({ title: "Photo removed", body: `A photo of ${d.serviceTitle} was removed. ${d.reason}` }),
     href: (d) => `/services/${d.serviceId}`,
   }),
   avatar_removed: kind({
     sides: ["client", "provider"], group: "account", category: null, bell: true, push: true, email: true, data: z.strictObject({ reason }),
-    text: (d) => ({ title: "Profile photo removed", body: `Your profile photo was removed: ${d.reason}` }),
+    text: (d) => ({ title: "Profile photo removed", body: `Your profile photo was removed. ${d.reason}` }),
     href: (_d, side) => (side === "provider" ? "/profile" : "/account/profile"),
   }),
   listing_text_hidden: kind({
     sides: ["provider"], group: "account", category: null, bell: true, push: true, email: true,
     data: z.strictObject({ subject: z.enum(["profile", "service", "faq"]), serviceId: uuidSchema.optional(), label: z.string().min(1).max(60), reason }),
-    text: (d) => ({ title: "Some text was hidden", body: `Your ${d.label} was hidden: ${d.reason}` }),
+    // SPEC 13d §4.3: contact details found for sure were replaced by [removed]; the text stays live (W1 api2-autopilot)
+    text: (d) => ({ title: "Contact details removed", body: `We removed contact details from your ${d.label}. ${d.reason}` }),
     href: (d) => (d.subject === "service" && d.serviceId ? `/services/${d.serviceId}` : d.subject === "faq" ? "/chat-settings/faq" : "/profile"),
+  }),
+  // W1 api2-autopilot: the photos the image checks remove besides avatars and service photos
+  team_logo_removed: kind({
+    sides: ["provider"], group: "account", category: null, bell: true, push: true, email: true,
+    data: z.strictObject({ teamId: uuidSchema, teamName: name, reason }),
+    text: (d) => ({ title: "Team logo removed", body: `The logo of ${d.teamName} was removed. ${d.reason}` }),
+    href: (d) => `/teams/${d.teamId}`,
+  }),
+  review_photo_removed: kind({
+    sides: ["client", "provider"], group: "reviews", category: null, bell: true, push: true, email: false,
+    data: z.strictObject({ reviewId: uuidSchema, serviceTitle: title, reason }),
+    text: (d) => ({ title: "Photo removed", body: `A photo in your review of ${d.serviceTitle} was removed. ${d.reason}` }),
+    href: (_d, side) => (side === "provider" ? "/reviews" : "/account/reviews"),
+  }),
+  payment_qr_removed: kind({
+    sides: ["provider"], group: "account", category: null, bell: true, push: true, email: true,
+    data: z.strictObject({ methodId: uuidSchema, reason }),
+    text: (d) => ({ title: "QR code removed", body: `The QR code of a payment method was removed. ${d.reason}` }),
+    href: () => "/chat-settings/payment",
   }),
   inactivity_warning: kind({
     sides: ["provider"], group: "account", category: null, bell: true, push: true, email: true, data: z.strictObject({ pauseOn: day }),
     text: (d) => ({ title: "Your services pause soon", body: `Open Phriend before ${formatDate(d.pauseOn)} to keep your services listed.` }),
+    href: () => "/services",
+  }),
+  /** the 60-day pause happened (W3 inactivity job); opening the app and resuming lists the services again */
+  inactivity_paused: kind({
+    sides: ["provider"], group: "account", category: null, bell: true, push: true, email: true, data: z.strictObject({ pausedOn: day }),
+    text: () => ({ title: "Your services are paused", body: "You have not opened Phriend in 60 days, so your services left the search. Resume them in Services." }),
     href: () => "/services",
   }),
   verification_document: kind({
@@ -207,6 +234,12 @@ export const NOTIFICATION_KINDS = {
     data: z.strictObject({ subject: z.enum(["profile", "service", "team", "gig", "review"]), label: z.string().min(1).max(80), reason }),
     text: (d) => ({ title: "Hidden by our team", body: `${d.label} was hidden: ${d.reason}` }),
     href: () => "/notifications",
+  }),
+  // W2 api2-ops: `POST /ops/providers/{id}/request-changes { message }` (the provider twin of `team_changes`)
+  profile_changes: kind({
+    sides: ["provider"], group: "account", category: null, bell: true, push: true, email: true, data: z.strictObject({ note: reason }),
+    text: (d) => ({ title: "A few changes to your profile", body: d.note }),
+    href: () => "/profile",
   }),
 
   // ---- gigs (client) ----
@@ -348,6 +381,7 @@ export const markReadSchema = z.union([
 export type MarkRead = z.infer<typeof markReadSchema>;
 
 export const markReadResultSchema = z.object({ updated: z.number().int().nonnegative(), unreadNotifications: z.number().int().nonnegative() });
+export type MarkReadResult = z.infer<typeof markReadResultSchema>;
 
 /** `POST /v1/me/devices/test` result (SPEC 13c C24 maps `error` to copy). */
 export const PUSH_TEST_ERRORS = ["DeviceNotRegistered", "InvalidCredentials", "MessageTooBig", "MessageRateExceeded", "MismatchSenderId", "WebPushNotConfigured", "DeliveryFailed"] as const;
@@ -358,3 +392,24 @@ export const pushTestResultSchema = z.object({
   results: z.array(z.object({ kind: z.enum(["expo", "web"]), ok: z.boolean(), error: z.enum(PUSH_TEST_ERRORS).optional() })),
 });
 export type PushTestResult = z.infer<typeof pushTestResultSchema>;
+
+// ---- typed client ----
+
+/** `?cursor=&limit=` of the bell list. */
+export interface NotificationListQuery {
+  cursor?: string | null;
+  limit?: number;
+}
+
+/** The bell (SPEC 13b §3, both sides) and the test banner of the device settings (SPEC 13c C24b, 13d). */
+export function notificationsApi(api: Client) {
+  return {
+    /** Newest first; `nextCursor` pages on. */
+    list: (q: NotificationListQuery = {}): Promise<ApiResult<NotificationPage>> => api.get("/v1/me/notifications", { query: { cursor: q.cursor, limit: q.limit }, schema: notificationPageSchema }),
+    /** Marks these as read (at most 100 ids) and answers the new unread count. */
+    markRead: (ids: string[]): Promise<ApiResult<MarkReadResult>> => api.post("/v1/me/notifications/read", { ids }, { schema: markReadResultSchema }),
+    markAllRead: (): Promise<ApiResult<MarkReadResult>> => api.post("/v1/me/notifications/read", { all: true }, { schema: markReadResultSchema }),
+    /** `POST /v1/me/devices/test`: the test banner to every device of the caller (5 an hour); map `results[].error` to copy. */
+    testPush: (): Promise<ApiResult<PushTestResult>> => api.post("/v1/me/devices/test", undefined, { schema: pushTestResultSchema }),
+  };
+}

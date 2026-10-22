@@ -51,6 +51,12 @@ export const MEDIA_KIND_RULES: Record<MediaUploadKind, MediaKindRule> = {
 /** The smallest side api2 accepts, in pixels. */
 export const MEDIA_MIN_SIDE = 100;
 
+/** The refusal of a smaller photo (the upload's message and `fields.file`); the apps may check before uploading. */
+export const MEDIA_TOO_SMALL = `Use a photo at least ${MEDIA_MIN_SIDE} px wide and ${MEDIA_MIN_SIDE} px tall.`;
+
+/** True when a photo of w×h pixels is too small to upload (after the device's own resize, if any). */
+export const mediaTooSmall = (width: number, height: number): boolean => Math.min(width, height) < MEDIA_MIN_SIDE;
+
 /** The file types the pickers should offer (HEIC only where the device cannot convert; api2 decodes it if it can). */
 export const MEDIA_ACCEPT = ["image/jpeg", "image/png", "image/webp", "image/heic", "image/heif"] as const;
 

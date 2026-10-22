@@ -15,6 +15,7 @@ import type { ApiResult, Client } from "./client";
 import { HOURS, PAGE, PRICE } from "./limits";
 import { searchText } from "./places";
 import { codePoints } from "./text";
+import { languagesSchema, type Languages } from "./languages";
 import { isManilaDay } from "./time";
 
 export const CATALOGUE_PLATFORMS = CONFIG_PLATFORMS;
@@ -33,7 +34,21 @@ export type CategoryGroup = z.output<typeof categoryGroupSchema>;
 export type Category = z.output<typeof categorySchema>;
 export type Categories = z.output<typeof categoriesSchema>;
 
-export const citySchema = z.object({ id: z.number().int(), name: z.string(), province: z.string(), lat: z.number(), lng: z.number() });
+/**
+ * A city's URL slug (api-gaps 19): the name without accents, lower case, words joined by "-" ("Las Piñas" ->
+ * "las-pinas", "Naga (Cebu)" -> "naga-cebu"). Stored on `ref_cities` when the city is first seeded and never changed
+ * afterwards, so links stay stable even if a name is corrected.
+ */
+export function citySlug(name: string): string {
+  return name
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
+export const citySchema = z.object({ id: z.number().int(), slug: z.string(), name: z.string(), province: z.string(), lat: z.number(), lng: z.number() });
 export const citiesSchema = z.object({ items: z.array(citySchema) });
 export type City = z.output<typeof citySchema>;
 export type Cities = z.output<typeof citiesSchema>;
@@ -402,6 +417,7 @@ export function catalogueApi(api: Client) {
   return {
     categories: (platform?: CataloguePlatform): Promise<ApiResult<Categories>> => api.get("/v1/categories", { query: { platform }, schema: categoriesSchema }),
     cities: (): Promise<ApiResult<Cities>> => api.get("/v1/cities", { schema: citiesSchema }),
+    languages: (): Promise<ApiResult<Languages>> => api.get("/v1/languages", { schema: languagesSchema }),
     feed: (p: FeedParams = {}): Promise<ApiResult<Feed>> => api.get("/v1/services", { query: feedQuery(p), schema: feedSchema }),
     service: (idOrCode: string, platform?: CataloguePlatform): Promise<ApiResult<PublicService>> => api.get(`/v1/services/${enc(idOrCode)}`, { query: { platform }, schema: publicServiceSchema }),
     serviceReviews: (serviceId: string, q: { cursor?: string | null; limit?: number; platform?: CataloguePlatform } = {}): Promise<ApiResult<PublicReviewList>> =>

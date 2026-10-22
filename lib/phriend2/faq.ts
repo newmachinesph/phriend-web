@@ -27,7 +27,8 @@ export const refuseContactDetails = <S extends z.ZodType<string | null>>(schema:
   });
 
 export const FAQ_MODERATION_STATUSES = ["pending", "approved", "rejected", "review"] as const;
-export const faqModerationSchema = z.object({ status: z.enum(FAQ_MODERATION_STATUSES), reasonCode: z.string().nullable() }).nullable();
+/** `reason`: the user-ready text of `reasonCode` (the preset sentence), null when there is none */
+export const faqModerationSchema = z.object({ status: z.enum(FAQ_MODERATION_STATUSES), reasonCode: z.string().nullable(), reason: z.string().nullable() }).nullable();
 export type FaqModeration = z.output<typeof faqModerationSchema>;
 
 export const faqItemSchema = z.object({

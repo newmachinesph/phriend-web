@@ -17,6 +17,14 @@ const avatarSchema = z.object({ id: z.string(), url: z.string() }).nullable();
 
 export const PROVIDER_PROFILE_STATUSES = ["draft", "live", "paused", "hidden", "suspended"] as const;
 
+/** The reason shown when Phriend took a profile down without one on record (Today: "Taken down by Phriend · <reason>"). */
+export const TAKEDOWN_REASON_FALLBACK = "Contact support for details.";
+
+/** `statusReason` for a status: the stored reason while hidden or suspended (else the fallback), null otherwise. */
+export function takedownReason(status: string | null, stored: string | null): string | null {
+  return status === "hidden" || status === "suspended" ? (stored?.trim() || TAKEDOWN_REASON_FALLBACK) : null;
+}
+
 export const meSchema = z.object({
   account: z.object({ id: z.string(), side: z.enum(["client", "provider"]), email: z.string(), isTest: z.boolean(), createdAt: iso }),
   profile: z.object({
@@ -31,6 +39,8 @@ export const meSchema = z.object({
     /** providers only (null for clients) */
     handle: z.string().nullable(),
     status: z.enum(PROVIDER_PROFILE_STATUSES).nullable(),
+    /** providers, while hidden or suspended by Phriend: why (the Today card); null otherwise */
+    statusReason: z.string().nullable(),
   }),
   /** providers only; null for clients. Filled in by the verification wave. */
   verification: z.object({ status: z.string() }).nullable(),
@@ -95,9 +105,10 @@ export const CLOSE_REASONS = ["found_what_i_needed", "not_enough_services", "not
 export type CloseReason = (typeof CLOSE_REASONS)[number];
 export const CLOSE_NOTE = { min: 0, max: 300 } as const;
 
+/** `reason` is optional (SPEC 13c C24e "Why are you leaving? (optional)"); an unknown one is still refused. */
 export const deleteMeBodySchema = z.strictObject({
   confirm: z.literal("DELETE", { error: "Type DELETE to confirm." }),
-  reason: z.enum(CLOSE_REASONS, { error: "Choose why you're leaving." }),
+  reason: z.enum(CLOSE_REASONS, { error: "Choose one of the reasons." }).nullish(),
   note: optionalText(CLOSE_NOTE, { multiline: true }),
 });
 export type DeleteMeBody = z.output<typeof deleteMeBodySchema>;

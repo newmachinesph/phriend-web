@@ -11,6 +11,7 @@
 import { z } from "zod";
 import { PH_BOUNDS } from "./address";
 import type { ApiResult, Client } from "./client";
+import { MODERATION_STATES } from "./moderation";
 import { type ContactKind, findContacts } from "./contact-detect";
 import { uuidSchema } from "./ids";
 import { CAPS, HOURS, LIMITS, PRICE, type TextLimit } from "./limits";
@@ -59,8 +60,7 @@ export function optionalListingText(limit: TextLimit, opts: TextOptions = {}) {
  * What the owner sees of a moderation verdict on one item (the avatar, a photo, the checked text of a profile or
  * service). `removed` is a rejected verdict; `review` means a moderator holds it (it is not shown to clients).
  */
-export const MODERATION_STATES = ["pending", "review", "approved", "removed"] as const;
-export type ModerationState = (typeof MODERATION_STATES)[number];
+export type ItemModerationStatus = (typeof MODERATION_STATES)[number];
 export const itemModerationSchema = z.object({ status: z.enum(MODERATION_STATES), reasonCode: z.string().nullable(), message: z.string().nullable() });
 export type ItemModeration = z.output<typeof itemModerationSchema>;
 
@@ -143,8 +143,12 @@ export const serviceSchema = z.object({
   listed: z.boolean(),
   /** set while the service is paused, or live but not listed because the profile is paused or taken down */
   pausedReason: z.enum(SERVICE_PAUSED_REASONS).nullable(),
+  /** while Ops hides this service: why (the reason Ops gave, else the takedown fallback); null otherwise */
+  statusReason: z.string().nullable(),
   publishedAt: iso.nullable(),
   categoryId: z.number().int(),
+  /** the category's label, kept while the category is hidden on a platform (the editor shows it) */
+  categoryLabel: z.string().nullable(),
   title: z.string(),
   description: z.string().nullable(),
   pricing: z.enum(PRICINGS),

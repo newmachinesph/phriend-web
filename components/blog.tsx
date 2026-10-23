@@ -76,21 +76,25 @@ export function RateTable({ rows }: { rows: { service: string; pricing: string; 
   );
 }
 
-export function ArticleCta({ category, headline = "Put your camera on Phriend this week." }: { category: { path: string; label: string }; headline?: string }) {
+/** The closing call to action of a coded article: providers are invited to list, clients to book the article's category. */
+export function ArticleCta({ audience, category, headline }: { audience: "client" | "provider"; category: { path: string; label: string }; headline?: string }) {
+  const provider = audience === "provider";
   return (
     <div className="mt-14 rounded-3xl bg-navy-gradient px-6 py-10 text-white sm:px-10">
       <p className="text-sm font-extrabold uppercase tracking-wider text-brand-light">Ready when you are</p>
-      <h2 className="mt-2 font-display text-h2 font-bold">{headline}</h2>
+      <h2 className="mt-2 font-display text-h2 font-bold">{headline ?? (provider ? "List your services on Phriend this week." : "Find the service you need.")}</h2>
       <p className="mt-3 max-w-xl text-white/80">
-        Verify your identity, list your services with their prices and photos, and take bookings that fit around your day job. Each listing is checked before it goes live.
+        {provider
+          ? "Verify your identity, list your services with their prices and photos, and take bookings that fit around your day job. Each listing is checked before it goes live."
+          : "Compare services by price, photos and area, message the provider and book. Every provider is verified before their services go live."}
       </p>
       <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-        <a href={PROVIDER_URL} className="btn-primary rounded-full px-6 py-3 font-bold">
-          List your services <ArrowRight size={18} className="ml-1.5" aria-hidden="true" />
+        <a href={provider ? PROVIDER_URL : APP_URL} className="btn-primary inline-flex items-center justify-center rounded-full px-6 py-3 font-bold">
+          {provider ? "List your services" : "Book a service"} <ArrowRight size={18} className="ml-1.5" aria-hidden="true" />
         </a>
-        <a href={`${APP_URL}${category.path}`} className="btn-secondary inline-flex items-center rounded-full px-6 py-3 font-bold">
+        <Link href={category.path} className="btn-secondary inline-flex items-center justify-center rounded-full px-6 py-3 font-bold">
           See {category.label} services
-        </a>
+        </Link>
       </div>
     </div>
   );

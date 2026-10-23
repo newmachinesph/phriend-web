@@ -39,9 +39,10 @@ export default async function Image({ params }: { params: Promise<{ slug: string
   const view = await getArticle(slug).catch(() => null);
   const post = view?.kind === "coded" ? view.post : null;
   // the cover of an Ops article, else a title card (no photo)
-  const photo = post ? post.hero.src : view?.entry.cover ? await coverAsJpeg(view.entry.cover.src) : null;
+  // a coded hero in public/ is read from disk (the card renderer cannot fetch a relative URL)
+  const photo = post ? (post.hero.src.startsWith("/") ? `data:image/jpeg;base64,${read(post.hero.src).toString("base64")}` : post.hero.src) : view?.entry.cover ? await coverAsJpeg(view.entry.cover.src) : null;
   const headline = post?.ogTitle ?? view?.entry.title ?? "Guides to local services in the Philippines";
-  const kicker = post ? `${post.category.label} · Side income` : (view?.entry.tags[0] ?? "Guides");
+  const kicker = post ? `${post.category.label} · ${post.tags[0]}` : (view?.entry.tags[0] ?? "Guides");
   const minutes = view?.entry.readingMinutes ?? null;
   return asJpeg(new ImageResponse(
     (

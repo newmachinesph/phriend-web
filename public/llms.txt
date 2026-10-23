@@ -64,6 +64,26 @@ Banned: any sexual service, paid romance or escort services, listings that sell 
 - Phriend charges members nothing: no commission, no booking fees, no in-app payments.
 - Each provider prices each service per job, per hour or per session. The price and any minimum booking show on the service before you book.
 
+## Guides
+
+- [Booking a service for someone else: a parent, a partner, a friend or a tenant](https://phriend.app/blog/booking-a-service-for-someone-else): Book a service for a parent, partner, friend or tenant at their address: save it, brief the provider in the chat, say who will be there.
+- [How booking and payment work on Phriend, from your first message to paying the provider](https://phriend.app/blog/how-booking-and-payment-work-on-phriend): Pick a service and a time, agree the details in the chat and pay the provider directly. Phriend takes no commission and never holds your money.
+- [Tour guide prices in Cebu City: how guides charge, and what the price covers](https://phriend.app/blog/tour-guide-prices-in-cebu): Per hour or per tour, what is included, and what is usually extra, like entrance fees and transport. Read a Cebu guide's price before you book.
+- [Learn a sport or a skill with a coach: how to book your first lessons](https://phriend.app/blog/learn-a-sport-or-skill-with-a-coach): Swimming, pickleball, golf, surf, arts and crafts and music lessons: how coaches price a session, what is included and how to book.
+- [Booking a driver for your parent's day out: the market, church, the mall, relatives and a checkup](https://phriend.app/blog/booking-a-driver-for-a-parents-day-out): Plan a parent's day of market, church, mall, relatives and a checkup, book a driver on Phriend and brief them in the chat.
+- [Errands you can book on Phriend: bills, documents, queues, groceries, personal shopping and pasabuy](https://phriend.app/blog/errands-you-can-book-on-phriend): Bills, document queues, groceries, personal shopping and pasabuy: what errand providers do, how they price and how to book one.
+- [Working abroad? How to book practical help for your parents back home](https://phriend.app/blog/booking-help-for-your-parents-from-abroad): OFWs and children far from home can book errands, cleaning, repairs, hospital assistance and senior care help for parents in the Philippines.
+- [Hospital assistance for a checkup: what the helper does from the front door to the last queue](https://phriend.app/blog/hospital-assistance-for-a-checkup): Getting there, queues, forms, carrying things and notes for the family: what a hospital assistance service does on a checkup day.
+- [New to Metro Manila for work? The services that make your first month easier](https://phriend.app/blog/new-to-manila-first-month-services): Moving to Metro Manila for work? Book property viewing, moving help, cleaning, aircon, laundry, tech help and a city tour from verified providers.
+- [Plan a party on short notice with local services: food, cake, a host and the photos](https://phriend.app/blog/plan-a-party-with-local-services): Catering, cakes, a host and emcee, a party entertainer, a photographer and a coordinator: what to book first for a party in two weeks.
+- [Photographers and videographers: turn your free weekends into paid shoots](https://phriend.app/blog/photographers-and-videographers-earn-with-phriend): List portrait, event and content shoots as services with your own price and photos, and keep all of it. A guide for Filipino photographers.
+- [What senior care help covers, and what it does not, while the family is at work](https://phriend.app/blog/what-senior-care-help-covers): Errands, simple meals, light housework, appointments and tech help for an older parent: what non-medical senior care help includes.
+- [Questions to ask in the chat before you book senior care help for a parent](https://phriend.app/blog/questions-to-ask-before-booking-senior-care-help): What to check on the listing, which FAQ answers to tap and what to ask in the chat before booking senior care help for a parent.
+- [Side income for students: services you can offer on Phriend between classes](https://phriend.app/blog/side-income-services-students-can-offer): Tutoring, design, social media, VA work, photography, music lessons and errands: list them free on Phriend, set your price and keep 100%.
+- [How Phriend verifies providers, and what the badges mean when you book](https://phriend.app/blog/how-phriend-verifies-providers): ID and selfie checks, document badges, a person reviewing every listing, two-way reviews, report and block: what each one means for you.
+- [Visiting the Philippines? Book a local tour guide, a driver or a photographer before you land](https://phriend.app/blog/visiting-the-philippines-book-a-local-tour-guide): Tour guides, drivers, travel photographers and interpreters for visitors and balikbayans. Book ahead, agree the price in chat, pay the provider.
+- [Services that free up your work-from-home day: cleaning, laundry, aircon, tech help, errands and a virtual assistant](https://phriend.app/blog/services-that-free-up-your-work-from-home-day): Cleaning, laundry, aircon cleaning, tech help, errands and a virtual assistant: what to book so your work-from-home day stays a workday.
+
 ## Links
 
 - Home: https://phriend.app
@@ -74,6 +94,7 @@ Banned: any sexual service, paid romance or escort services, listings that sell 
 - Privacy Policy: https://phriend.app/privacy
 - Get the app: https://phriend.app/download
 - Press kit: https://phriend.app/press
-- Open the app: https://web.phriend.app
+- Open the app (browse services, providers and reviews): https://web.phriend.app
+- Blog: https://phriend.app/blog
 - List your services: https://provider.phriend.app
 - Facebook: https://facebook.com/phriendapp

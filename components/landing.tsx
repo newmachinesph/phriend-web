@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { guidesFor } from "@/app/blog/_posts";
 import type { Category } from "@/lib/phriend2";
 import type { Group, Services } from "@/lib/catalogue";
 import { CITY_PAGES, type CityPage } from "@/lib/cities";
@@ -17,6 +18,7 @@ const link = "font-bold text-brand-text underline";
 export function Landing({ category, group, city, services, path, others }: { category: Category; group: Group | undefined; city?: CityPage; services: Services; path: string; others: Category[] }) {
   const copy = landingCopy(category, city, services.items);
   const occasions = OCCASIONS.filter((o) => o.book.includes(category.slug));
+  const guides = guidesFor(category.slug, group?.slug);
   return (
     <Container as="main" id="main" className="pb-14 pt-8 sm:py-20">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: landingJsonLd(category, path, services.items, copy, city) }} />
@@ -143,6 +145,23 @@ export function Landing({ category, group, city, services, path, others }: { cat
               <li key={o.slug}>
                 <Link href={`/occasions/${o.slug}`} className={pill}>
                   {o.name}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
+      {guides.length > 0 && (
+        <section aria-labelledby="guides" className="mt-14">
+          <h2 id="guides" className="font-display text-h2 font-bold text-ink">
+            Guides
+          </h2>
+          <ul className="mt-4 grid max-w-3xl gap-3">
+            {guides.map((p) => (
+              <li key={p.slug} className="min-w-0">
+                <Link href={`/blog/${p.slug}`} className={`${link} wrap-anywhere`}>
+                  {p.title}
                 </Link>
               </li>
             ))}

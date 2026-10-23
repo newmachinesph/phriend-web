@@ -30,7 +30,8 @@ export function Callout({ title, children }: { title: string; children: ReactNod
 
 export function Steps({ steps }: { steps: { icon: LucideIcon; title: string; text: string }[] }) {
   return (
-    <ol className="my-10 grid gap-5 sm:grid-cols-3">
+    // one step per row: the article column is too narrow for three (long words such as provider.phriend.app broke)
+    <ol className="my-10 grid gap-5">
       {steps.map((s, i) => (
         <li key={s.title} className="flex flex-col rounded-3xl border border-line bg-white px-7 py-8 shadow-card">
           <div className="flex items-center justify-between">

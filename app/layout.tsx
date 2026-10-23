@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import Script from "next/script";
+import { GoogleAnalytics } from "@next/third-parties/google";
 import { inter, jakarta } from "./fonts";
 import "./globals.css";
 import { SiteFooter } from "@/components/site-footer";
@@ -41,7 +41,7 @@ const JSON_LD = JSON.stringify({
       name: SITE_NAME,
       url: SITE_URL,
       logo: cdn("/brand/logo-mark.png"),
-      sameAs: ["https://facebook.com/phriendapp", "https://instagram.com/phriendapp"],
+      sameAs: ["https://facebook.com/phriendapp"],
       contactPoint: { "@type": "ContactPoint", contactType: "customer support", email: CONTACT_EMAIL, areaServed: "PH" },
     },
     { "@type": "WebSite", name: SITE_NAME, url: SITE_URL },
@@ -77,14 +77,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <SiteHeader />
         {children}
         <SiteFooter />
-        {/* Analytics once the page has loaded and the browser is idle. The default strategy preloaded the 174 KB tag in
-            <head>, where it competed with the CSS, fonts and first paint on a phone. */}
-        {GA_ID && (
-          <>
-            <Script id="ga-init" strategy="lazyOnload">{`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','${GA_ID}');`}</Script>
-            <Script id="ga" src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`} strategy="lazyOnload" />
-          </>
-        )}
+        {/* Google Analytics 4 through Next's own component (loads after hydration); the measurement ID is the host's
+            NEXT_PUBLIC_GA_ID, read at build time, so a build without it (local) loads no analytics */}
+        {GA_ID && <GoogleAnalytics gaId={GA_ID} />}
       </body>
     </html>
   );

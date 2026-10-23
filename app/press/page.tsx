@@ -447,11 +447,6 @@ export default async function PressPage() {
                     facebook.com/phriendapp
                   </a>
                 </li>
-                <li>
-                  <a href="https://instagram.com/phriendapp" rel="noreferrer" className="text-brand-text underline underline-offset-4">
-                    instagram.com/phriendapp
-                  </a>
-                </li>
               </ul>
             </div>
           </div>

@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { Logo, navItems } from "@/components/site-header";
-import { StoreBadges } from "@/components/store-badges";
 import { APP_URL, PROVIDER_STORE, PROVIDER_URL } from "@/lib/site";
 import { Container } from "@/components/ui";
 
@@ -15,7 +14,6 @@ const LEGAL = [
 // Only accounts that exist are rendered; add the TikTok URL here once that page is live.
 const SOCIAL = [
   { href: "https://facebook.com/phriendapp", label: "Facebook" },
-  { href: "https://instagram.com/phriendapp", label: "Instagram" },
   { href: "", label: "TikTok" },
 ] as const;
 
@@ -38,7 +36,6 @@ export async function SiteFooter() {
               Local services across the Philippines, from aircon cleaning and tutoring to bookkeeping, photo and video. Verified providers, booked and chatted in the
               app.
             </p>
-            <StoreBadges className="mt-5" />
           </div>
 
           <nav aria-labelledby="footer-product" className="flex flex-col gap-2.5">

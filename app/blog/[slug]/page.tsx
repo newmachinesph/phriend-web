@@ -98,7 +98,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
         {view.kind === "coded" ? (
           <>
             <view.post.Body />
-            <h2>Questions photographers ask</h2>
+            <h2>{view.post.faqTitle}</h2>
             <dl>
               {view.post.faq.map((f) => (
                 <div key={f.q}>
@@ -121,7 +121,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
       <div className="mt-10 border-t border-line pt-6">
         <ShareBar url={url} title={entry.title} />
       </div>
-      {view.kind === "coded" ? <ArticleCta category={view.post.category} /> : <BookCta />}
+      {view.kind === "coded" ? <ArticleCta audience={view.post.audience} category={view.post.category} headline={view.post.ctaHeadline} /> : <BookCta />}
     </main>
   );
 }

@@ -41,7 +41,7 @@ const JSON_LD = JSON.stringify({
       name: SITE_NAME,
       url: SITE_URL,
       logo: cdn("/brand/logo-mark.png"),
-      sameAs: ["https://facebook.com/phriendapp", "https://instagram.com/phriendapp"],
+      sameAs: ["https://facebook.com/phriendapp"],
       contactPoint: { "@type": "ContactPoint", contactType: "customer support", email: CONTACT_EMAIL, areaServed: "PH" },
     },
     { "@type": "WebSite", name: SITE_NAME, url: SITE_URL },

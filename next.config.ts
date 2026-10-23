@@ -1,5 +1,4 @@
 import type { NextConfig } from "next";
-import { PHASE_DEVELOPMENT_SERVER, PHASE_PRODUCTION_BUILD } from "next/constants";
 import { securityHeaders } from "./lib/security-headers";
 
 /** Slugs of articles from the earlier product that search engines may still list: they go to the blog index. */
@@ -31,21 +30,10 @@ const DROPPED_ARTICLES = [
   "attending-an-event-alone",
 ];
 
-const nextConfig = (phase: string): NextConfig => {
-  // The site reads api2 at build time and on revalidation, and there is no default API (SPEC 13e §2.1): a build without
-  // API_URL fails here, so a local build can never read production by accident.
-  if (phase === PHASE_PRODUCTION_BUILD && !process.env.API_URL?.trim()) {
-    throw new Error("API_URL is not set. Build with the api2 origin, e.g. API_URL=http://localhost:8040 for a local build.");
-  }
-  const security = securityHeaders({ dev: phase === PHASE_DEVELOPMENT_SERVER });
-  return {
-    ...config,
-    async headers() {
-      // CSP, HSTS, framing and the rest on every response (lib/security-headers.ts); long-lived icons on top
-      return [{ source: "/:path*", headers: security }, ...(await config.headers!())];
-    },
-  };
-};
+// A plain object, not a phase function: Hostinger's build replaces a function-form config with its own (standalone
+// output only), which dropped the image hosts, redirects and headers below. There is no default API (SPEC 13e §2.1):
+// lib/api.ts throws when API_URL is unset, so a build without it fails and a local build never reads production.
+const security = securityHeaders({ dev: process.env.NODE_ENV === "development" });
 
 const config: NextConfig = {
   poweredByHeader: false,
@@ -58,12 +46,16 @@ const config: NextConfig = {
     qualities: [60, 75],
   },
   // Hostinger counts threads against the account's process limit (shared by every site), and sharp would otherwise
-  // start half the server's cores worth of threads per process.
-  experimental: { imgOptConcurrency: 1 },
+  // start half the server's cores worth of threads per process; the build's page workers likewise without `cpus`.
+  experimental: { imgOptConcurrency: 1, cpus: 2 },
   // Icons and logos keep their names across deploys: a day in the browser instead of a revalidation on every visit.
   async headers() {
+    // CSP, HSTS, framing and the rest on every response (lib/security-headers.ts); long-lived icons on top
     const headers = [{ key: "Cache-Control", value: "public, max-age=86400, stale-while-revalidate=604800" }];
-    return ["/icon.png", "/icon.svg", "/apple-icon.png", "/brand/:path*"].map((source) => ({ source, headers }));
+    return [
+      { source: "/:path*", headers: security },
+      ...["/icon.png", "/icon.svg", "/apple-icon.png", "/brand/:path*"].map((source) => ({ source, headers })),
+    ];
   },
   async redirects() {
     return [
@@ -77,4 +69,4 @@ const config: NextConfig = {
   },
 };
 
-export default nextConfig;
+export default config;

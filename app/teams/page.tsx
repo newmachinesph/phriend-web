@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { redirect } from "next/navigation";
 import { LOADING_NOTE } from "@/components/services";
 import { TeamTile } from "@/components/teams";
 import { getFeatures, getTeams } from "@/lib/catalogue";
@@ -34,9 +34,10 @@ const pill = "inline-block rounded-full border-2 px-4 py-1.5 text-sm font-bold";
 const CURSOR = /^[\w.~-]{1,300}$/;
 
 export default async function TeamsPage({ searchParams }: { searchParams: Promise<{ city?: string; cursor?: string }> }) {
-  const sp = await searchParams; // first: reading it keeps the page per request, also while it answers 404 below
-  // v2.0 keeps teams off on iOS, and the site follows the iOS build: a 404 (noindex), out of the nav and the sitemap
-  if (!(await getFeatures()).teams) notFound();
+  const sp = await searchParams; // first: reading it keeps the page per request, also while it redirects below
+  // v2.0 keeps teams off on iOS, and the site follows the iOS build: out of the nav and the sitemap, and a temporary
+  // redirect to the services directory (not a 404), so links and search listings of /teams still land somewhere useful
+  if (!(await getFeatures()).teams) redirect("/services");
   const city = typeof sp.city === "string" ? findCity(sp.city) : undefined;
   const cursor = typeof sp.cursor === "string" && CURSOR.test(sp.cursor) ? sp.cursor : null;
   const teams = await getTeams({ city, cursor });

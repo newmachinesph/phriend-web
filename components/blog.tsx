@@ -30,10 +30,11 @@ export function Callout({ title, children }: { title: string; children: ReactNod
 
 export function Steps({ steps }: { steps: { icon: LucideIcon; title: string; text: string }[] }) {
   return (
-    // one step per row: the article column is too narrow for three (long words such as provider.phriend.app broke)
-    <ol className="my-10 grid gap-5">
+    // one step per row: the article column is too narrow for three (long words such as provider.phriend.app broke);
+    // ml-0, list-none and mb-0 undo the article's numbered-list indent, so the cards line up with the text
+    <ol className="my-10 ml-0 grid list-none gap-5">
       {steps.map((s, i) => (
-        <li key={s.title} className="flex flex-col rounded-3xl border border-line bg-white px-7 py-8 shadow-card">
+        <li key={s.title} className="mb-0 flex flex-col rounded-3xl border border-line bg-white px-7 py-8 shadow-card">
           <div className="flex items-center justify-between">
             <span className="grid size-12 place-items-center rounded-2xl bg-brand-soft text-brand-text">
               <s.icon size={24} strokeWidth={2} aria-hidden="true" />
